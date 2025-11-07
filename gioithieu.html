@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giới thiệu quân đoàn TF - TitanForce²</title>
+  <style>
+    /* 🎨 CĂN CHỈNH VÀ HIỆU ỨNG TỔNG THỂ */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a141f;
+      background-size: cover;
+      color: #e0e0e0;
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+      overflow-x: hidden; /* Ngăn thanh cuộn ngang do hiệu ứng hoa rơi hoặc scanning */
+      min-height: 100vh; /* Đảm bảo chiều cao tối thiểu cho hiệu ứng nền */
+    }
+
+    /* 🖼️ HIỆU ỨNG NỀN MỜ (OVERLAY) */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(3px);
+      z-index: -1;
+    }
+
+    /* 🧱 CONTAINER CHO NỘI DUNG */
+    .content-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: rgba(8, 18, 28, 0.98);
+        border-radius: 15px;
+        box-shadow: 0 0 40px rgba(0, 255, 204, 0.7), 0 0 15px rgba(0, 255, 204, 1);
+        border: 2px solid rgba(0, 255, 204, 0.6);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 10;
+    }
+
+    /* HIỆU ỨNG SCANNING */
+    .content-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -120%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.15), transparent);
+        transition: all 0.7s ease-out;
+    }
+
+    /* Tắt hiệu ứng hover trên mobile để tránh lỗi kích hoạt */
+    @media (hover: hover) and (pointer: fine) {
+        .content-container:hover {
+            transform: translateY(-12px) scale(1.015);
+            box-shadow: 0 0 60px rgba(0, 255, 204, 1), 0 0 25px rgba(0, 255, 204, 1.2);
+        }
+        
+        .content-container:hover::after {
+            left: 140%;
+        }
+    }
+
+
+    /* 🔗 ĐỊNH DẠNG LINK */
+    a {
+      color: #00e6e6; 
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+    }
+
+    a:hover {
+      color: #8affd1; 
+      text-decoration: none;
+      text-shadow: 0 0 12px #8affd1;
+    }
+
+    /* 💎 ĐỊNH DẠNG HEADING */
+    h1 {
+      color: #00ffcc;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 3.2em;
+      text-shadow: 0 0 25px rgba(0, 255, 204, 1), 0 0 5px rgba(0, 255, 204, 0.8);
+      border-bottom: 3px solid rgba(0, 255, 204, 0.6);
+      padding-bottom: 15px;
+      animation: neonGlow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonGlow {
+        from {
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.8), 0 0 20px rgba(0, 255, 204, 0.7), 0 0 30px rgba(0, 255, 204, 0.6);
+        }
+        to {
+            text-shadow: 0 0 25px rgba(0, 255, 204, 1), 0 0 35px rgba(0, 255, 204, 0.9), 0 0 45px rgba(0, 255, 204, 0.8);
+        }
+    }
+
+    /* 📝 ĐỊNH DẠNG ĐOẠN VĂN BẢN */
+    p {
+        margin-bottom: 20px;
+        padding: 12px 18px;
+        border-left: 6px solid #00ffcc; 
+        padding-left: 20px;
+        background-color: rgba(25, 35, 45, 0.85);
+        border-radius: 10px;
+        border: 1px solid rgba(0, 255, 204, 0.4);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Hiệu ứng khi di chuột vào đoạn văn (Chỉ áp dụng cho PC/Laptop) */
+    @media (hover: hover) and (pointer: fine) {
+        p:hover {
+            background-color: rgba(0, 255, 204, 0.2);
+            transform: scale(1.025) translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.6), 0 5px 15px rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ffcc;
+        }
+    }
+
+    /* 🌟 HIỆU ỨNG NHẤN MẠNH (Không đổi) */
+    strong {
+        color: #ffda47;
+        font-weight: 800;
+        text-shadow: 0 0 10px rgba(255, 218, 71, 1);
+    }
+
+    p:nth-child(2) strong { 
+        color: #e0e0e0;
+        text-shadow: 0 0 8px rgba(224, 224, 224, 0.9);
+    }
+
+    p:nth-child(3) strong { 
+        color: #ffb84d;
+        text-shadow: 0 0 10px rgba(255, 184, 77, 1);
+    }
+
+    em {
+        color: #ff99e6;
+        font-style: normal;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(255, 153, 230, 1);
+    }
+    
+    /* Hiệu ứng cho link quay lại (Tương thích) */
+    .back-link-container a {
+        display: inline-block;
+        padding: 10px 25px;
+        margin-top: 25px;
+        border: 2px solid #00ffcc;
+        border-radius: 50px;
+        background-color: rgba(0, 255, 204, 0.15);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: bold;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    .back-link-container a:hover {
+        background-color: #00ffcc;
+        color: #050a10;
+        transform: scale(1.15) translateY(-5px);
+        box-shadow: 0 0 20px #00ffcc, 0 8px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    /* --- MEDIA QUERIES: ĐIỀU CHỈNH KHI MÀN HÌNH NHỎ HƠN 600PX (MOBILE) --- */
+    @media (max-width: 600px) {
+        body {
+            padding: 20px 10px; /* Giảm padding trên mobile */
+        }
+        
+        .content-container {
+            padding: 20px 15px; /* Giảm padding trong container */
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5); /* Giảm độ sáng trên mobile */
+        }
+        
+        h1 {
+            font-size: 2.2em; /* Giảm kích thước tiêu đề */
+            margin-bottom: 20px;
+        }
+
+        /* Giảm padding và viền cho đoạn văn trên mobile */
+        p {
+            padding: 10px 10px;
+            border-left: 4px solid #00ffcc;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .back-link-container a {
+            padding: 8px 20px; /* Giảm kích thước nút quay lại */
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        /* Tắt hiệu ứng Neon Glow cho h1 trên mobile để tối ưu hiệu suất */
+        h1 {
+            animation: none;
+            text-shadow: 0 0 15px rgba(0, 255, 204, 1);
+        }
+    }
+
+    /* --- HIỆU ỨNG HOA RƠI (Không đổi) --- */
+    .flower {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      animation: fall linear infinite;
+      z-index: 1;
+      background: linear-gradient(45deg, var(--flower-color-start), var(--flower-color-end));
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="content-container">
+        <h1>Giới thiệu Quân đoàn TitanForce²</h1>
+        <p><strong>Chỉ huy:</strong> Anh Sang (**TF.liopc**) — Sinh viên đại học nghành Y, sinh năm 2004.</p>
+        <p><strong>Chủ quân đoàn:</strong> Trung (**TF.Kuronami**) — sinh viên cao đẳng CNNT, sinh năm 2006.</p>
+        <p>
+            Quân đoàn **TitanForce²** được thành lập với mục tiêu tạo nên một cộng đồng game thủ vui vẻ, đoàn kết,
+            và cùng nhau phát triển trong thế giới <em>Free Fire</em>.
+        </p>
+        <p>
+            Chúng tôi luôn chào đón những thành viên nhiệt huyết, thân thiện và có tinh thần đồng đội cao.
+        </p>
+
+        <p class="back-link-container" style="text-align: center;"><a href="home.html">⬅️ Quay lại trang chủ</a></p>
+    </div>
+
+    <script>
+        // Cấu hình hiệu ứng hoa rơi (Không đổi)
+        const numberOfFlowers = 40; 
+        const flowerColorPalette = [
+            ['#FFDAB9', '#FFC0CB'],
+            ['#E6E6FA', '#DDA0DD'],
+            ['#F0F8FF', '#ADD8E6'],
+            ['#FFE4E1', '#FFB6C1']
+        ];
+        const minSize = 6;
+        const maxSize = 18;
+        const minDuration = 4;
+        const maxDuration = 10;
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            
+            const size = Math.random() * (maxSize - minSize) + minSize;
+            flower.style.width = `${size}px`;
+            flower.style.height = `${size}px`;
+            
+            flower.style.left = `${Math.random() * 100}vw`;
+            flower.style.top = `-${Math.random() * 20}vh`; 
+            
+            const randomColorPair = flowerColorPalette[Math.floor(Math.random() * flowerColorPalette.length)];
+            flower.style.setProperty('--flower-color-start', randomColorPair[0]);
+            flower.style.setProperty('--flower-color-end', randomColorPair[1]);
+
+            const duration = Math.random() * (maxDuration - minDuration) + minDuration;
+            flower.style.animationDuration = `${duration}s`;
+            
+            flower.style.animationDelay = `${Math.random() * (maxDuration * 0.8)}s`;
+
+            // Thêm hiệu ứng xoay ngẫu nhiên
+            flower.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+            document.body.appendChild(flower);
+
+            flower.addEventListener('animationend', () => {
+                flower.remove();
+                createFlower(); 
+            });
+        }
+
+        for (let i = 0; i < numberOfFlowers; i++) {
+            createFlower();
+        }
+    </script>
+</body>
+</html>
