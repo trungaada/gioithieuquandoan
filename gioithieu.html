@@ -8,14 +8,16 @@
         /* 🎨 CĂN CHỈNH VÀ HIỆU ỨNG TỔNG THỂ */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a141f; /* Màu nền cơ bản */
+            background: #0a141f;
             color: #e0e0e0;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px 10px; 
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            /* Đảm bảo hiệu ứng nền có thể được tùy chỉnh dễ dàng (vd: thêm ảnh nền) */
+            display: flex; 
+            justify-content: center;
+            align-items: center; 
         }
 
         /* 🖼️ HIỆU ỨNG NỀN MỜ (OVERLAY) */
@@ -33,18 +35,17 @@
 
         /* 🧱 CONTAINER CHO NỘI DUNG */
         .content-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
+            max-width: 650px; 
+            width: 95%; 
+            margin: 0; 
+            padding: 30px 25px; 
             background-color: rgba(8, 18, 28, 0.98);
             border-radius: 15px;
-            /* Đổi box-shadow để tương thích và dễ nhìn hơn trên mọi màn hình */
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.6), 0 0 10px rgba(0, 255, 204, 0.8);
-            border: 2px solid rgba(0, 255, 204, 0.5);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.7), 0 0 8px rgba(0, 255, 204, 0.9);
+            border: 2px solid rgba(0, 255, 204, 0.6);
             position: relative;
             overflow: hidden;
-            /* Giảm độ phức tạp của transition để tối ưu hóa hiệu suất */
-            transition: all 0.5s ease-in-out; 
+            transition: all 0.5s ease-in-out;
             z-index: 10;
         }
 
@@ -63,10 +64,10 @@
         /* 💻 HIỆU ỨNG HOVER CHỈ CHO PC/LAPTOP */
         @media (hover: hover) and (pointer: fine) {
             .content-container:hover {
-                transform: translateY(-8px) scale(1.005); /* Giảm hiệu ứng scale để không bị lẹm */
-                box-shadow: 0 0 50px rgba(0, 255, 204, 0.9), 0 0 20px rgba(0, 255, 204, 1.1);
+                transform: translateY(-8px) scale(1.005);
+                box-shadow: 0 0 40px rgba(0, 255, 204, 1.0), 0 0 15px rgba(0, 255, 204, 1.2);
             }
-            
+
             .content-container:hover::after {
                 left: 140%;
             }
@@ -75,13 +76,13 @@
 
         /* 🔗 ĐỊNH DẠNG LINK */
         a {
-            color: #00e6e6; 
+            color: #00e6e6;
             text-decoration: none;
             transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
         }
 
         a:hover {
-            color: #8affd1; 
+            color: #8affd1;
             text-decoration: none;
             text-shadow: 0 0 8px #8affd1;
         }
@@ -90,43 +91,99 @@
         h1 {
             color: #00ffcc;
             text-align: center;
-            margin-bottom: 30px;
-            font-size: clamp(2.0em, 4vw, 3.2em); /* Kích thước linh hoạt hơn */
-            text-shadow: 0 0 20px rgba(0, 255, 204, 1), 0 0 5px rgba(0, 255, 204, 0.8);
+            margin-bottom: 25px; 
+            font-size: clamp(2.0em, 4vw, 2.8em); 
+            text-shadow: 0 0 18px rgba(0, 255, 204, 1), 0 0 5px rgba(0, 255, 204, 0.8);
             border-bottom: 3px solid rgba(0, 255, 204, 0.6);
-            padding-bottom: 15px;
-            /* Giữ lại animation nhưng có thể tắt bằng media query */
-            animation: neonGlow 1.5s ease-in-out infinite alternate; 
+            padding-bottom: 12px;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            animation: typing-h1 3s steps(30, end) forwards;
+        }
+        
+        @keyframes typing-h1 {
+            from { width: 0 }
+            to { width: 100% }
         }
 
-        @keyframes neonGlow {
-            from {
-                text-shadow: 0 0 10px rgba(0, 255, 204, 0.7), 0 0 15px rgba(0, 255, 204, 0.6);
-            }
-            to {
-                text-shadow: 0 0 20px rgba(0, 255, 204, 1), 0 0 30px rgba(0, 255, 204, 0.8);
-            }
+        /* KHẮC PHỤC LỖI TRÀN CHỮ H1 SAU KHI GÕ */
+        h1.finished {
+            width: auto; 
+            white-space: normal; 
+            overflow: visible; 
         }
 
-        /* 📝 ĐỊNH DẠNG ĐOẠN VĂN BẢN */
+        /* 📝 ĐỊNH DẠNG ĐOẠN VĂN BẢN (CONTAINER) */
         p {
-            margin-bottom: 20px;
-            padding: 12px 18px;
-            border-left: 6px solid #00ffcc; 
-            padding-left: 20px;
+            margin-bottom: 18px; 
+            padding: 10px 15px;
+            border-left: 5px solid #00ffcc; 
+            padding-left: 18px;
             background-color: rgba(25, 35, 45, 0.85);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 204, 0.4);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease-in-out; /* Giảm độ phức tạp của cubic-bezier */
+            border-radius: 8px; 
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+            opacity: 0; 
+            font-size: 1.05em; 
+            position: relative; 
+            /* THÊM HIỆU ỨNG DI CHUYỂN */
+            transform: translateY(20px); 
         }
 
-        /* 💻 Hiệu ứng khi di chuột vào đoạn văn (Chỉ áp dụng cho PC/Laptop) */
+        /* HIỆU ỨNG CHO ĐOẠN VĂN */
+        p.fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+
+        /* Lớp chứa nội dung chữ chạy */
+        .typewriter-text {
+            display: inline; 
+            opacity: 1;
+            width: 100%; 
+        }
+        
+        /* Container cho hiệu ứng gõ chữ thực tế */
+        .typewriter-container {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap; /* Tắt ngắt dòng trong khi gõ */
+            max-width: 100%;
+            border-right: .05em solid #00ffcc;
+            vertical-align: top;
+            animation: none;
+            min-height: 1.6em; 
+        }
+
+        /* Khi gõ xong, cho phép ngắt dòng và bỏ con trỏ */
+        .typewriter-container.finished {
+            white-space: normal; /* Cho phép ngắt dòng */
+            border-right: none !important;
+            width: auto; 
+            min-height: 0; 
+        }
+
+        /* Keyframes cho hiệu ứng gõ chữ thực tế (chỉ di chuyển) */
+        @keyframes typing-text {
+            to { width: 100%; }
+        }
+        
+        /* Keyframes cho hiệu ứng nhấp nháy con trỏ */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ffcc; }
+        }
+
+        /* 💻 Hiệu ứng khi di chuột vào đoạn văn (Chỉ áp dụng cho PC/LAPTOP) */
         @media (hover: hover) and (pointer: fine) {
             p:hover {
                 background-color: rgba(0, 255, 204, 0.2);
-                transform: scale(1.01) translateY(-2px); /* Giảm nhẹ hiệu ứng để mượt hơn */
-                box-shadow: 0 0 15px rgba(0, 255, 204, 0.5), 0 4px 10px rgba(0, 0, 0, 0.5);
+                transform: scale(1.005) translateY(-1px);
+                box-shadow: 0 0 12px rgba(0, 255, 204, 0.5), 0 3px 8px rgba(0, 0, 0, 0.5);
                 border: 1px solid #00ffcc;
             }
         }
@@ -135,93 +192,114 @@
         strong {
             color: #ffda47;
             font-weight: 800;
-            text-shadow: 0 0 10px rgba(255, 218, 71, 1);
+            text-shadow: 0 0 8px rgba(255, 218, 71, 1);
         }
 
-        p:nth-child(2) strong { 
+        p:nth-child(2) strong {
             color: #e0e0e0;
-            text-shadow: 0 0 8px rgba(224, 224, 224, 0.9);
+            text-shadow: 0 0 6px rgba(224, 224, 224, 0.9);
         }
 
-        p:nth-child(3) strong { 
+        p:nth-child(3) strong {
             color: #ffb84d;
-            text-shadow: 0 0 10px rgba(255, 184, 77, 1);
+            text-shadow: 0 0 8px rgba(255, 184, 77, 1);
         }
 
         em {
             color: #ff99e6;
             font-style: normal;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 153, 230, 1);
+            text-shadow: 0 0 8px rgba(255, 153, 230, 1);
         }
-        
-        /* Hiệu ứng cho link quay lại (Tương thích tốt hơn) */
+
+        /* Hiệu ứng cho link quay lại */
         .back-link-container {
             text-align: center;
+            opacity: 0; 
+            transition: opacity 0.5s ease 0.2s; 
+            margin-bottom: 0; 
         }
-        
+
+        .back-link-container.show {
+            opacity: 1;
+        }
+
         .back-link-container a {
             display: inline-block;
-            padding: 10px 25px;
-            margin-top: 25px;
+            padding: 9px 22px; 
+            margin-top: 20px;
             border: 2px solid #00ffcc;
             border-radius: 50px;
             background-color: rgba(0, 255, 204, 0.15);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             font-weight: bold;
+            font-size: 0.9em;
             transition: all 0.4s ease-in-out;
-            transform: translateZ(0); /* Kích hoạt tăng tốc phần cứng */
+            transform: translateZ(0);
         }
-        
+
         .back-link-container a:hover {
             background-color: #00ffcc;
             color: #050a10;
-            transform: scale(1.1) translateY(-4px); /* Giảm nhẹ hiệu ứng hover cho mobile */
-            box-shadow: 0 0 15px #00ffcc, 0 6px 15px rgba(0, 0, 0, 0.7);
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 0 12px #00ffcc, 0 5px 12px rgba(0, 0, 0, 0.7);
         }
 
         /* --- MEDIA QUERIES: TỐI ƯU HÓA CHO MOBILE (MÀN HÌNH NHỎ) --- */
         @media (max-width: 768px) {
             body {
-                padding: 20px 10px; 
+                padding: 15px 5px; 
+                align-items: flex-start; 
             }
-            
+
             .content-container {
-                padding: 20px 15px; 
-                border-radius: 10px;
-                box-shadow: 0 0 20px rgba(0, 255, 204, 0.5); 
-                /* Vô hiệu hóa hover trên màn hình nhỏ để tránh lỗi kích hoạt khi chạm */
-                transform: none !important; 
+                padding: 18px 15px; 
+                border-radius: 12px;
+                box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+                transform: none !important;
             }
-            
+
             h1 {
                 font-size: 2.0em; 
-                margin-bottom: 20px;
-                /* Tắt hiệu ứng Neon Glow cho h1 trên mobile để tối ưu hiệu suất */
+                margin-bottom: 15px;
                 animation: none;
-                text-shadow: 0 0 10px rgba(0, 255, 204, 1);
+                width: auto;
+                text-shadow: 0 0 8px rgba(0, 255, 204, 1);
+                white-space: normal; 
+                overflow: visible;
             }
 
             p {
-                padding: 10px 10px;
-                border-left: 4px solid #00ffcc;
-                padding-left: 15px;
-                margin-bottom: 15px;
-                transform: none !important; /* Vô hiệu hóa hiệu ứng hover */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Giảm shadow tĩnh */
-                background-color: rgba(25, 35, 45, 0.9); /* Làm nền đậm hơn một chút */
+                opacity: 1 !important;
+                padding: 8px 8px;
+                border-left: 3px solid #00ffcc;
+                padding-left: 12px;
+                margin-bottom: 12px;
+                transform: none !important;
+                box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+                background-color: rgba(25, 35, 45, 0.9);
+                font-size: 1em;
             }
 
-            .back-link-container a {
-                padding: 8px 20px; 
-                font-size: 0.9em;
-                letter-spacing: 1px;
-                transform: none !important; /* Vô hiệu hóa hiệu ứng hover */
+            .typewriter-text .typewriter-container {
+                animation: none !important;
+                white-space: normal !important;
+                border-right: none !important;
+                width: auto !important;
+                min-height: 0;
+            }
+
+            .back-link-container {
+                opacity: 1; 
+                margin-top: 15px;
             }
             
-            .back-link-container a:active { /* Thêm hiệu ứng active cho mobile thay vì hover */
-                transform: scale(0.95);
+            .back-link-container a {
+                padding: 7px 18px;
+                font-size: 0.85em;
+                letter-spacing: 1px;
+                transform: none !important;
             }
         }
 
@@ -234,8 +312,7 @@
             animation: fall linear infinite;
             z-index: 1;
             background: linear-gradient(45deg, var(--flower-color-start), var(--flower-color-end));
-            /* Thêm blur nhẹ cho hoa rơi để nhìn mềm mại hơn */
-            filter: blur(0.5px); 
+            filter: blur(0.5px);
         }
 
         @keyframes fall {
@@ -244,7 +321,7 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.7; /* Giảm nhẹ opacity để tối ưu */
+                opacity: 0.7;
             }
             100% {
                 transform: translateY(100vh) rotate(720deg) scale(1.2);
@@ -255,23 +332,129 @@
 </head>
 <body>
     <div class="content-container">
+
         <h1>Giới thiệu Quân đoàn TitanForce²</h1>
-        <p><strong>Chỉ huy:</strong> Anh Sang (**TF.liopc**) — Sinh viên đại học nghành Y, sinh năm 2004.</p>
-        <p><strong>Chủ quân đoàn:</strong> Trung (**TF.Kuronami**) — sinh viên cao đẳng CNNT, sinh năm 2006.</p>
+
+        <p><span class="typewriter-text" data-text="<strong>Chỉ huy:</strong> Anh Sang (<strong>TF.liopc</strong>) — Sinh viên đại học nghành Y, sinh năm 2004."></span></p>
+        <p><span class="typewriter-text" data-text="<strong>Chủ quân đoàn:</strong> Trung (<strong>TF.Kuronami</strong>) — sinh viên cao đẳng CNNT, sinh năm 2006."></span></p>
         <p>
-            Quân đoàn **TitanForce²** được thành lập với mục tiêu tạo nên một cộng đồng game thủ vui vẻ, đoàn kết,
-            và cùng nhau phát triển trong thế giới <em>Free Fire</em>.
+            <span class="typewriter-text" data-text="Quân đoàn <strong>TitanForce²</strong> được thành lập với mục tiêu tạo nên một cộng đồng game thủ vui vẻ, đoàn kết, và cùng nhau phát triển trong thế giới <em>Free Fire</em>."></span>
         </p>
         <p>
-            Chúng tôi luôn chào đón những thành viên nhiệt huyết, thân thiện và có tinh thần đồng đội cao.
+            <span class="typewriter-text" data-text="Chúng tôi luôn chào đón những thành viên nhiệt huyết, thân thiện và có tinh thần đồng đội cao."></span>
         </p>
 
         <p class="back-link-container"><a href="index.html">⬅️ Quay lại trang chủ</a></p>
     </div>
 
     <script>
-        // Cấu hình hiệu ứng hoa rơi (Giữ nguyên)
-        const numberOfFlowers = 30; // Giảm bớt số lượng hoa để tối ưu hiệu suất trên mobile
+        // --- HIỆU ỨNG CHỮ CHẠY CHO TẤT CẢ CÁC DÒNG (DÙNG JS ĐỂ TÍNH THỜI GIAN) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const heading = document.querySelector('h1');
+            const paragraphs = document.querySelectorAll('p:not(.back-link-container)');
+            const backLinkContainer = document.querySelector('.back-link-container');
+            const typingSpeed = 50; // Tốc độ gõ chữ (ms/ký tự)
+            let delayTime = 0; // Thời gian trễ ban đầu
+
+            // Chức năng để loại bỏ thẻ HTML và đếm ký tự
+            const countVisibleCharacters = (htmlString) => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = htmlString;
+                return tempDiv.textContent.length;
+            };
+
+            // Hàm kích hoạt hiệu ứng gõ chữ
+            const activateTypewriter = (spanElement, delay) => {
+                const rawHtml = spanElement.getAttribute('data-text');
+                const textLength = countVisibleCharacters(rawHtml);
+                
+                // **THÊM:** Kích hoạt hiệu ứng Fade-in Up cho đoạn văn P
+                setTimeout(() => {
+                    spanElement.closest('p').classList.add('fade-in-up');
+                }, delay);
+
+                // 1. Tạo container mới để giữ nội dung
+                const container = document.createElement('span');
+                container.classList.add('typewriter-container');
+                container.innerHTML = rawHtml;
+                
+                // 2. Thay thế nội dung cũ bằng container mới
+                spanElement.textContent = ''; // Xóa nội dung cũ
+                spanElement.appendChild(container); // Chèn container mới
+
+                // 3. Tính toán thời gian animation
+                const steps = textLength + 1; 
+                const duration = textLength * typingSpeed; // tổng thời gian (ms)
+                const durationSeconds = duration / 1000;
+                const delaySeconds = delay / 1000;
+
+                // 4. Áp dụng animation lên container
+                container.style.width = '0'; // Thiết lập width ban đầu
+                container.style.animation = `typing-text ${durationSeconds}s steps(${steps}, end) forwards, blink-caret .75s step-end infinite`;
+                container.style.animationDelay = `${delaySeconds}s`;
+                
+                // 5. Khi animation kết thúc, tắt con trỏ nhấp nháy và cho phép ngắt dòng
+                container.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'typing-text') {
+                        container.classList.add('finished');
+                        // Kích hoạt animation của link quay lại nếu là dòng cuối cùng
+                        if (spanElement === paragraphs[paragraphs.length - 1].querySelector('.typewriter-text')) {
+                            backLinkContainer.classList.add('show');
+                        }
+                    }
+                }, { once: true });
+                
+                return duration; 
+            };
+
+            // --- XỬ LÝ CHO PC/LAPTOP (CÓ HIỆU ỨNG) ---
+            if (window.innerWidth > 768) {
+                
+                // Xử lý H1: Đợi H1 hoàn thành animation width
+                heading.addEventListener('animationend', () => {
+                    // Thêm class 'finished' để H1 hiển thị trọn vẹn và căn giữa
+                    heading.classList.add('finished'); 
+                    heading.textContent = 'Giới thiệu Quân đoàn TitanForce²'; // Gán lại nội dung
+                    
+                    delayTime = 500; // Trễ 0.5s sau H1
+
+                    paragraphs.forEach( (p) => {
+                        const span = p.querySelector('.typewriter-text');
+                        if (span) {
+                            // **LOẠI BỎ:** Lệnh setTimeout cũ để dùng hiệu ứng fade-in-up mới
+                            // setTimeout(() => { p.style.opacity = '1'; }, delayTime);
+
+                            const duration = activateTypewriter(span, delayTime);
+                            delayTime += duration + 500; // Cộng thêm 0.5s nghỉ giữa các dòng
+                        }
+                    });
+                }, { once: true });
+
+
+            } 
+            // --- XỬ LÝ CHO MOBILE (KHÔNG HIỆU ỨNG GÕ CHỮ TỪNG KÝ TỰ) ---
+            else {
+                // Đảm bảo nội dung hiển thị ngay lập tức
+                heading.style.animation = 'none';
+                heading.classList.add('finished'); 
+                heading.textContent = 'Giới thiệu Quân đoàn TitanForce²';
+                
+                paragraphs.forEach(p => {
+                    p.style.opacity = '1';
+                    p.style.transform = 'translateY(0)'; // Đảm bảo không bị dịch chuyển
+                    const span = p.querySelector('.typewriter-text');
+                    if(span) {
+                        const rawHtml = span.getAttribute('data-text');
+                        span.innerHTML = rawHtml; 
+                    }
+                });
+                backLinkContainer.classList.add('show');
+            }
+        });
+
+
+        // --- HIỆU ỨNG HOA RƠI (Giữ nguyên) ---
+        const numberOfFlowers = 30;
         const flowerColorPalette = [
             ['#FFDAB9', '#FFC0CB'],
             ['#E6E6FA', '#DDA0DD'],
@@ -279,28 +462,28 @@
             ['#FFE4E1', '#FFB6C1']
         ];
         const minSize = 6;
-        const maxSize = 16; // Giảm nhẹ kích thước tối đa
-        const minDuration = 5; // Tăng nhẹ thời gian rơi
+        const maxSize = 16;
+        const minDuration = 5;
         const maxDuration = 12;
 
         function createFlower() {
             const flower = document.createElement('div');
             flower.classList.add('flower');
-            
+
             const size = Math.random() * (maxSize - minSize) + minSize;
             flower.style.width = `${size}px`;
             flower.style.height = `${size}px`;
-            
+
             flower.style.left = `${Math.random() * 100}vw`;
-            flower.style.top = `-${Math.random() * 20}vh`; 
-            
+            flower.style.top = `-${Math.random() * 20}vh`;
+
             const randomColorPair = flowerColorPalette[Math.floor(Math.random() * flowerColorPalette.length)];
             flower.style.setProperty('--flower-color-start', randomColorPair[0]);
             flower.style.setProperty('--flower-color-end', randomColorPair[1]);
 
             const duration = Math.random() * (maxDuration - minDuration) + minDuration;
             flower.style.animationDuration = `${duration}s`;
-            
+
             flower.style.animationDelay = `${Math.random() * (maxDuration * 0.8)}s`;
 
             flower.style.transform = `rotate(${Math.random() * 360}deg)`;
@@ -309,11 +492,10 @@
 
             flower.addEventListener('animationend', () => {
                 flower.remove();
-                createFlower(); 
+                createFlower();
             });
         }
 
-        // Chỉ tạo hoa khi không phải là màn hình quá nhỏ để tối ưu hiệu suất
         if (window.innerWidth > 600) {
             for (let i = 0; i < numberOfFlowers; i++) {
                 createFlower();
