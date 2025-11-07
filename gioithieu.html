@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giới thiệu quân đoàn TF - TitanForce²</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* 🎨 CĂN CHỈNH VÀ HIỆU ỨNG TỔNG THỂ */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* CẬP NHẬT FONT CHỮ CHÍNH */
+            font-family: 'Poppins', sans-serif;
             background: #0a141f;
             color: #e0e0e0;
             margin: 0;
             padding: 20px 10px; 
-            line-height: 1.6;
+            line-height: 1.65; /* Tăng nhẹ chiều cao dòng cho dễ đọc */
             overflow-x: hidden;
             min-height: 100vh;
             display: flex; 
@@ -89,11 +91,15 @@
 
         /* 💎 ĐỊNH DẠNG HEADING */
         h1 {
+            /* CẬP NHẬT FONT CHỮ TIÊU ĐỀ */
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800; /* Độ đậm cao */
             color: #00ffcc;
             text-align: center;
             margin-bottom: 25px; 
             font-size: clamp(2.0em, 4vw, 2.8em); 
-            text-shadow: 0 0 18px rgba(0, 255, 204, 1), 0 0 5px rgba(0, 255, 204, 0.8);
+            /* Tăng độ sáng cho tiêu đề */
+            text-shadow: 0 0 20px rgba(0, 255, 204, 1), 0 0 8px rgba(0, 255, 204, 0.9);
             border-bottom: 3px solid rgba(0, 255, 204, 0.6);
             padding-bottom: 12px;
             overflow: hidden;
@@ -116,6 +122,7 @@
 
         /* 📝 ĐỊNH DẠNG ĐOẠN VĂN BẢN (CONTAINER) */
         p {
+            font-weight: 400; /* Tăng độ đậm lên 400 để rõ hơn */
             margin-bottom: 18px; 
             padding: 10px 15px;
             border-left: 5px solid #00ffcc; 
@@ -188,28 +195,30 @@
             }
         }
 
-        /* 🌟 HIỆU ỨNG NHẤN MẠNH (Giữ nguyên) */
+        /* 🌟 HIỆU ỨNG NHẤN MẠNH */
         strong {
             color: #ffda47;
-            font-weight: 800;
-            text-shadow: 0 0 8px rgba(255, 218, 71, 1);
+            font-weight: 700; 
+            /* Tăng độ sắc nét và bóng cho chữ in đậm */
+            text-shadow: 0 0 10px rgba(255, 218, 71, 1), 0 0 2px rgba(255, 218, 71, 0.8);
         }
 
         p:nth-child(2) strong {
             color: #e0e0e0;
-            text-shadow: 0 0 6px rgba(224, 224, 224, 0.9);
+            text-shadow: 0 0 8px rgba(224, 224, 224, 0.9), 0 0 1px rgba(224, 224, 224, 0.7);
         }
 
         p:nth-child(3) strong {
             color: #ffb84d;
-            text-shadow: 0 0 8px rgba(255, 184, 77, 1);
+            text-shadow: 0 0 10px rgba(255, 184, 77, 1), 0 0 2px rgba(255, 184, 77, 0.8);
         }
 
         em {
             color: #ff99e6;
             font-style: normal;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 153, 230, 1);
+            font-weight: 600; 
+            /* Tăng độ sắc nét và bóng cho chữ nghiêng */
+            text-shadow: 0 0 10px rgba(255, 153, 230, 1), 0 0 2px rgba(255, 153, 230, 0.8);
         }
 
         /* Hiệu ứng cho link quay lại */
@@ -232,8 +241,8 @@
             border-radius: 50px;
             background-color: rgba(0, 255, 204, 0.15);
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            font-weight: bold;
+            letter-spacing: 1.5px; /* Tăng khoảng cách chữ cho dễ đọc */
+            font-weight: 700; 
             font-size: 0.9em;
             transition: all 0.4s ease-in-out;
             transform: translateZ(0);
@@ -251,6 +260,7 @@
             body {
                 padding: 15px 5px; 
                 align-items: flex-start; 
+                line-height: 1.6;
             }
 
             .content-container {
@@ -265,7 +275,7 @@
                 margin-bottom: 15px;
                 animation: none;
                 width: auto;
-                text-shadow: 0 0 8px rgba(0, 255, 204, 1);
+                text-shadow: 0 0 12px rgba(0, 255, 204, 1);
                 white-space: normal; 
                 overflow: visible;
             }
@@ -280,6 +290,7 @@
                 box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
                 background-color: rgba(25, 35, 45, 0.9);
                 font-size: 1em;
+                font-weight: 400; /* Đảm bảo font weight ổn định */
             }
 
             .typewriter-text .typewriter-container {
@@ -368,7 +379,7 @@
                 const rawHtml = spanElement.getAttribute('data-text');
                 const textLength = countVisibleCharacters(rawHtml);
                 
-                // **THÊM:** Kích hoạt hiệu ứng Fade-in Up cho đoạn văn P
+                // Kích hoạt hiệu ứng Fade-in Up cho đoạn văn P
                 setTimeout(() => {
                     spanElement.closest('p').classList.add('fade-in-up');
                 }, delay);
@@ -421,9 +432,6 @@
                     paragraphs.forEach( (p) => {
                         const span = p.querySelector('.typewriter-text');
                         if (span) {
-                            // **LOẠI BỎ:** Lệnh setTimeout cũ để dùng hiệu ứng fade-in-up mới
-                            // setTimeout(() => { p.style.opacity = '1'; }, delayTime);
-
                             const duration = activateTypewriter(span, delayTime);
                             delayTime += duration + 500; // Cộng thêm 0.5s nghỉ giữa các dòng
                         }
