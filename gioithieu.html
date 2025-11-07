@@ -14,8 +14,7 @@
       --accent-shadow: rgba(110, 231, 183, 0.4);
       --muted: #9aa4b2;
       --glass: rgba(255, 255, 255, 0.04);
-      --radius: 20px; /* Đã tăng bo tròn lên 20px */
-      /* Thêm màu thứ cấp cho hiệu ứng đổi màu viền */
+      --radius: 20px;
       --color-secondary: #3b82f6; /* Xanh dương */
       --color-tertiary: #a855f7; /* Tím */
       
@@ -61,6 +60,26 @@
         transform: translateY(0);
       }
     }
+
+    /* HIỆU ỨNG NHẤP NHÁY CHO TIÊU ĐỀ H1 */
+    @keyframes textFlicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+          0 0 4px var(--accent),
+          0 0 11px var(--accent),
+          0 0 19px var(--accent),
+          0 0 40px var(--accent-shadow),
+          0 0 80px var(--accent-shadow),
+          0 0 90px var(--accent-shadow),
+          0 0 100px var(--accent-shadow),
+          0 0 150px var(--accent-shadow);
+        color: var(--accent);
+      }
+      20%, 24%, 55% {       
+        text-shadow: none;
+        color: var(--muted);
+      }
+    }
     
     body {
       margin: 0;
@@ -73,7 +92,8 @@
       justify-content: center;
       padding: 40px 24px;
       position: relative;
-      overflow-x: hidden;
+      /* XÓA CUỘN TRANG NGANG */
+      overflow-x: hidden; 
     }
 
     /* HIỆU ỨNG NỀN SÁNG LẬP LÒE */
@@ -109,13 +129,17 @@
       font-size: clamp(28px, 5vw, 40px);
       margin: 0;
       color: var(--accent);
-      text-shadow: 0 0 10px var(--accent-shadow), 0 0 20px rgba(110, 231, 183, 0.2);
+      /* Áp dụng hiệu ứng nhấp nháy */
+      animation: textFlicker 3s linear infinite alternate; 
     }
 
     p.lead {
       margin: 8px 0 0;
       color: var(--muted);
       font-size: 1.1rem;
+      /* Animation cho p.lead */
+      animation: fadeInSlide 0.8s ease-out 0.2s forwards;
+      opacity: 0; /* Bắt đầu ẩn */
     }
 
     /* Thẻ thành viên */
@@ -133,6 +157,7 @@
       padding: 25px;
       text-align: center;
       
+      /* Áp dụng borderShift cho khung thẻ */
       border: 3px solid var(--accent);
       animation-name: fadeInSlide, borderShift;
       animation-duration: 0.8s, 6s;
@@ -141,26 +166,25 @@
       animation-fill-mode: forwards, none;
       animation-iteration-count: 1, infinite;
       
-      transition: transform .3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow .3s cubic-bezier(0.25, 0.8, 0.25, 1), background .3s ease; /* Thêm background transition */
+      transition: transform .3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow .3s cubic-bezier(0.25, 0.8, 0.25, 1), background .3s ease;
     }
 
-    /* Tạo độ trễ animation xuất hiện */
+    /* Tạo độ trễ animation xuất hiện (Đã cập nhật để bao gồm thẻ thứ 3 mới) */
     .card:nth-child(1) { --delay: 0.2s; }
     .card:nth-child(2) { --delay: 0.4s; }
-    .card:nth-child(3) { --delay: 0.6s; }
+    .card:nth-child(3) { --delay: 0.6s; } /* Thẻ Viên mới */
     .card:nth-child(4) { --delay: 0.8s; }
     .card:nth-child(5) { --delay: 1.0s; }
 
     .card:hover {
       transform: translateY(-8px);
-      /* HIỆU ỨNG GLOW MỚI: Thêm bóng mờ bên trong (inset) */
       box-shadow: 
-        0 0 20px var(--accent-shadow),  /* Bóng ngoài */
-        inset 0 0 15px rgba(110, 231, 183, 0.5); /* Bóng mờ bên trong */
-      background: rgba(255, 255, 255, 0.1); /* Tăng độ sáng nền khi hover */
+        0 0 20px var(--accent-shadow),
+        inset 0 0 15px rgba(110, 231, 183, 0.5);
+      background: rgba(255, 255, 255, 0.1);
     }
 
-    /* HIỆU ỨNG GÓC TINH THỂ - ĐIỀU CHỈNH VỊ TRÍ */
+    /* HIỆU ỨNG GÓC TINH THỂ */
     .card::before, .card::after {
       content: '';
       position: absolute;
@@ -169,7 +193,7 @@
       border: 2px solid var(--accent); 
       opacity: 0.7;
       transition: opacity 0.3s ease;
-      animation: borderShift 6s linear infinite reverse;
+      animation: borderShift 6s linear infinite reverse; /* Đảm bảo góc cũng đổi màu */
     }
 
     .card::before {
@@ -185,13 +209,11 @@
       border-left: none;
       border-top: none;
     }
-    /* Thêm bo tròn cho các góc tinh thể */
     .card::before { border-top-left-radius: 4px; }
     .card::after { border-bottom-right-radius: 4px; }
 
     .card:hover::before, .card:hover::after {
         opacity: 1;
-        /* Giữ hiệu ứng đổi màu */
     }
 
     /* Avatar */
@@ -215,6 +237,16 @@
       margin: 6px 0 4px;
       font-size: 22px;
       font-weight: 600;
+      color: #e6eef6; /* Đặt màu mặc định */
+      transition: text-shadow 0.2s ease, color 0.2s ease; /* Thêm transition cho hover */
+    }
+
+    /* HIỆU ỨNG NỔI BẬT TỨC THÌ CHO H2 KHI HOVER */
+    .card:hover h2 {
+      color: var(--accent);
+      text-shadow: 
+        0 0 5px var(--accent),
+        0 0 15px var(--accent-shadow);
     }
 
     p.role {
@@ -222,7 +254,17 @@
       font-size: 15px;
       margin: 0 0 15px 0;
       font-weight: 400;
+      /* Animation cho p.role */
+      opacity: 0; /* Bắt đầu ẩn */
+      animation: fadeInSlide 0.8s ease-out forwards var(--delay-role, 0s);
     }
+    /* Tạo độ trễ animation cho vai trò (Đã cập nhật) */
+    .card:nth-child(1) p.role { --delay-role: 0.4s; }
+    .card:nth-child(2) p.role { --delay-role: 0.6s; }
+    .card:nth-child(3) p.role { --delay-role: 0.8s; } /* Thẻ Viên mới */
+    .card:nth-child(4) p.role { --delay-role: 1.0s; }
+    .card:nth-child(5) p.role { --delay-role: 1.2s; }
+
 
     /* Badge */
     .badge {
@@ -236,7 +278,33 @@
       border: 1px solid var(--accent);
       font-weight: 600;
       transition: background .2s ease, transform .2s ease;
+      /* Animation cho badge */
+      opacity: 0; /* Bắt đầu ẩn */
+      animation: fadeInSlide 0.8s ease-out forwards var(--delay-badge, 0s);
     }
+    /* Tạo độ trễ animation cho badge (Đã cập nhật) */
+    /* Trung */
+    .card:nth-child(1) .badge:nth-of-type(1) { --delay-badge: 0.6s; }
+    .card:nth-child(1) .badge:nth-of-type(2) { --delay-badge: 0.7s; }
+    .card:nth-child(1) .badge:nth-of-type(3) { --delay-badge: 0.8s; }
+
+    /* Anh Sang */
+    .card:nth-child(2) .badge:nth-of-type(1) { --delay-badge: 0.8s; }
+    .card:nth-child(2) .badge:nth-of-type(2) { --delay-badge: 0.9s; }
+    .card:nth-child(2) .badge:nth-of-type(3) { --delay-badge: 1.0s; }
+    
+    /* Viên (MỚI) */
+    .card:nth-child(3) .badge:nth-of-type(1) { --delay-badge: 1.0s; }
+    .card:nth-child(3) .badge:nth-of-type(2) { --delay-badge: 1.1s; }
+
+    /* Thẻ 4 */
+    .card:nth-child(4) .badge:nth-of-type(1) { --delay-badge: 1.2s; }
+    .card:nth-child(4) .badge:nth-of-type(2) { --delay-badge: 1.3s; }
+
+    /* Thẻ 5 */
+    .card:nth-child(5) .badge:nth-of-type(1) { --delay-badge: 1.4s; }
+    .card:nth-child(5) .badge:nth-of-type(2) { --delay-badge: 1.5s; }
+
 
     .card:hover .badge {
       background: var(--accent);
@@ -250,6 +318,9 @@
       margin-top: 24px;
       color: var(--muted);
       font-size: 13px;
+      /* Animation cho footer */
+      animation: fadeInSlide 0.8s ease-out 1.2s forwards;
+      opacity: 0; /* Bắt đầu ẩn */
     }
 
     a {
@@ -262,6 +333,9 @@
       border: 1px solid var(--accent);
       border-radius: 6px;
       transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+      /* Animation cho link */
+      animation: fadeInSlide 0.8s ease-out 1.4s forwards;
+      opacity: 0; /* Bắt đầu ẩn */
     }
 
     a:hover {
@@ -280,8 +354,8 @@
 
     <section class="members">
       <div class="card">
-        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Trung');"></div>
-        <h2>Trung (TF.Kuronami 2k6)</h2>
+        <div class="avatar" style="background-image:url('trung.jpg');"></div>
+        <h2>Trung (Kuronami 2k6)</h2>
         <p class="role">Chủ quân đoàn</p>
         <span class="badge">Lãnh đạo</span>
         <span class="badge">Chiến thuật</span>
@@ -289,21 +363,17 @@
       </div>
 
       <div class="card">
-        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Anh+Sang');"></div>
-        <h2>Anh Sang (TF.Liopc 2k4)</h2>
+        <div class="avatar" style="background-image:url('sang.jpg');"></div>
+        <h2>Anh Sang (Liopc 2k4)</h2>
         <p class="role">Chỉ huy</p>
         <span class="badge">Dẫn dắt</span>
         <span class="badge">Huấn luyện</span>
         <span class="badge">Phân tích</span>
       </div>
       
-      
+     
 
-    </section>
-
-    <footer>
-      © <span id="year"></span> Quân đoàn TF — TitanForce²
-    </footer>
+    
   </div>
 
   <a href="index.html">⬅️ Quay lại trang chủ</a>
