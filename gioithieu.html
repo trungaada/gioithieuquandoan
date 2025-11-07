@@ -1,422 +1,600 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Giới thiệu thành viên — Quân đoàn TF</title>
-  <meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b1020;
-      --card: #0f1724;
-      --accent: #6ee7b7; /* Xanh ngọc */
-      --accent-shadow: rgba(110, 231, 183, 0.4);
-      --muted: #9aa4b2;
-      --glass: rgba(255, 255, 255, 0.04);
-      --radius: 20px;
-      --color-secondary: #3b82f6; /* Xanh dương */
-      --color-tertiary: #a855f7; /* Tím */
-      
-      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giới thiệu thành viên — Quân đoàn TF</title>
+    <meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b1020;
+            --card: #0f1724;
+            --accent: #6ee7b7; /* Xanh ngọc (Giữ cho thẻ) */
+            --accent-shadow: rgba(110, 231, 183, 0.4);
+            --muted: #9aa4b2;
+            --glass: rgba(255, 255, 255, 0.04);
+            --radius: 20px;
+            --color-secondary: #3b82f6; /* Xanh dương */
+            --color-tertiary: #a855f7; /* Tím */
+            
+            /* 🔥 MÀU NEON MỚI CHO TIÊU ĐỀ */
+            --color-neon-pink: #ec4899; 
+            --neon-pink-shadow: rgba(236, 72, 153, 0.6); 
+            
+            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
 
-    /* Đặt lại CSS cơ bản */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      /* Sửa lỗi cuộn ngang */
-      max-width: 100%; 
-    }
+        /* Đặt lại CSS cơ bản */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            max-width: 100%; 
+        }
 
-    /* 1. KEYFRAMES CHO CÁC HIỆU ỨNG */
-    
-    @keyframes borderShift {
-      0% { border-color: var(--accent); }
-      33% { border-color: var(--color-secondary); }
-      66% { border-color: var(--color-tertiary); }
-      100% { border-color: var(--accent); }
-    }
+        /* 1. KEYFRAMES CHO CÁC HIỆU ỨNG */
+        
+        @keyframes borderShift {
+            0% { border-color: var(--accent); }
+            33% { border-color: var(--color-secondary); }
+            66% { border-color: var(--color-tertiary); }
+            100% { border-color: var(--accent); }
+        }
 
-    @keyframes neonPulse {
-      0% {
-        opacity: 0.6;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.8;
-        transform: scale(1.05);
-      }
-      100% {
-        opacity: 0.6;
-        transform: scale(1);
-      }
-    }
+        @keyframes neonBorderPulse {
+            0% { box-shadow: 0 0 5px var(--accent-shadow), inset 0 0 5px var(--accent-shadow); opacity: 0.7; }
+            50% { box-shadow: 0 0 15px var(--color-secondary), inset 0 0 15px var(--color-secondary); opacity: 1; }
+            100% { box-shadow: 0 0 5px var(--color-tertiary), inset 0 0 5px var(--color-tertiary); opacity: 0.7; }
+        }
 
-    @keyframes fadeInSlide {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        @keyframes neonPulse {
+            0% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+        }
 
-    /* HIỆU ỨNG GLITCH */
-    @keyframes glitch {
-      0% { text-shadow: 0.05em 0 0 var(--color-tertiary), -0.05em -0.025em 0 var(--color-secondary); }
-      14% { text-shadow: -0.05em -0.025em 0 var(--color-tertiary), 0.025em 0.05em 0 var(--color-secondary); }
-      25% { text-shadow: 0.025em 0.05em 0 var(--color-tertiary), -0.025em 0 0 var(--color-secondary); }
-      45% { text-shadow: -0.05em 0 0 var(--color-tertiary), 0.05em 0.05em 0 var(--color-secondary); }
-      60% { text-shadow: 0.05em 0.025em 0 var(--color-tertiary), -0.05em 0 0 var(--color-secondary); }
-      75% { text-shadow: 0 0.05em 0 var(--color-tertiary), 0.05em -0.025em 0 var(--color-secondary); }
-      100% { text-shadow: -0.025em 0.05em 0 var(--color-tertiary), 0.05em 0 0 var(--color-secondary); }
-    }
+        @keyframes fadeInSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* HIỆU ỨNG NHẤP NHÁY CHO TIÊU ĐỀ H1 */
-    @keyframes textFlicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        text-shadow: 
-          0 0 4px var(--accent),
-          0 0 11px var(--accent),
-          0 0 19px var(--accent),
-          0 0 40px var(--accent-shadow),
-          0 0 80px var(--accent-shadow),
-          0 0 90px var(--accent-shadow),
-          0 0 100px var(--accent-shadow),
-          0 0 150px var(--accent-shadow);
-        color: var(--accent);
-      }
-      20%, 24%, 55% {        
-        text-shadow: none;
-        color: var(--muted);
-      }
-    }
-    
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #051025 0%, #071428 60%);
-      color: #e6eef6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 24px;
-      position: relative;
-      
-      /* 🔥 XÓA CẢ CUỘN NGANG VÀ CUỘN DỌC */
-      overflow: hidden; 
-      
-      perspective: 1000px;
-    }
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 var(--color-tertiary), -0.05em -0.025em 0 var(--color-secondary); }
+            14% { text-shadow: -0.05em -0.025em 0 var(--color-tertiary), 0.025em 0.05em 0 var(--color-secondary); }
+            25% { text-shadow: 0.025em 0.05em 0 var(--color-tertiary), -0.025em 0 0 var(--color-secondary); }
+            45% { text-shadow: -0.05em 0 0 var(--color-tertiary), 0.05em 0.05em 0 var(--color-secondary); }
+            60% { text-shadow: 0.05em 0.025em 0 var(--color-tertiary), -0.05em 0 0 var(--color-secondary); }
+            75% { text-shadow: 0 0.05em 0 var(--color-tertiary), 0.05em -0.025em 0 var(--color-secondary); }
+            100% { text-shadow: -0.025em 0.05em 0 var(--color-tertiary), 0.05em 0 0 var(--color-secondary); }
+        }
 
-    /* HIỆU ỨNG NỀN SÁNG LẬP LÒE */
-    body::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80vh;
-      height: 80vh;
-      background: radial-gradient(circle, var(--accent-shadow) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: -1;
-      animation: neonPulse 5s ease-in-out infinite alternate;
-    }
+        /* 🔥 CẬP NHẬT MÀU HỒNG NEON cho Title */
+        @keyframes textFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 
+                    0 0 4px var(--color-neon-pink),
+                    0 0 11px var(--color-neon-pink),
+                    0 0 19px var(--color-neon-pink),
+                    0 0 40px var(--neon-pink-shadow),
+                    0 0 80px var(--neon-pink-shadow),
+                    0 0 90px var(--neon-pink-shadow),
+                    0 0 100px var(--neon-pink-shadow),
+                    0 0 150px var(--neon-pink-shadow);
+                color: var(--color-neon-pink);
+            }
+            20%, 24%, 55% {          
+                text-shadow: none;
+                color: var(--muted);
+            }
+        }
 
-    .wrap {
-      width: 100%;
-      max-width: 900px;  
-      margin-bottom: 20px;
-      z-index: 1;
-    }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) skewX(-30deg); }
+            100% { transform: translateX(200%) skewX(-30deg); }
+        }
 
-    /* Header */
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-      animation: fadeInSlide 0.8s ease-out;
-    }
+        @keyframes moveStar {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
 
-    h1 {
-      font-size: clamp(28px, 5vw, 40px);
-      margin: 0;
-      color: var(--accent);
-      animation: textFlicker 3s linear infinite alternate;  
-      position: relative;
-    }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) translateX(var(--random-x-start)) rotateZ(0deg);
+                opacity: var(--random-opacity);
+            }
+            100% {
+                transform: translateY(100vh) translateX(var(--random-x-end)) rotateZ(360deg);
+                opacity: 0;
+            }
+        }
+        
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #051025 0%, #071428 60%);
+            color: #e6eef6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            position: relative;
+            overflow: hidden; 
+            perspective: 1000px;
+        }
 
-    /* HIỆU ỨNG GLITCH BẰNG LỚP GIẢ */
-    h1::before, h1::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transition: opacity 0.3s ease;
-      opacity: 0;
-    }
+        /* Thêm will-change để tối ưu hóa */
+        .card, .avatar, h1, .snowflake, .star {
+            will-change: transform, opacity, box-shadow, filter; 
+        }
 
-    /* Hiển thị Glitch khi hover */
-    header:hover h1::before {
-      opacity: 1;
-      left: 2px;
-      text-shadow: -1px 0 var(--color-tertiary);
-      clip: rect(44px, 450px, 56px, 0);  
-      animation: glitch 0.7s infinite alternate-reverse;
-    }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80vh;
+            height: 80vh;
+            background: radial-gradient(circle, var(--accent-shadow) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: neonPulse 5s ease-in-out infinite alternate;
+        }
 
-    header:hover h1::after {
-      opacity: 1;
-      left: -2px;
-      text-shadow: -1px 0 var(--color-secondary);
-      clip: rect(64px, 450px, 86px, 0);  
-      animation: glitch 1s infinite alternate-reverse;
-    }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden; 
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: moveStar 10s linear infinite;
+        }
+        /* ... (Phần CSS cho stars và snow-container giữ nguyên) ... */
+        .star:nth-child(1) { width: 2px; height: 2px; left: 10%; animation-delay: 0s; }
+        .star:nth-child(2) { width: 3px; height: 3px; left: 25%; animation-delay: 1.5s; }
+        .star:nth-child(3) { width: 1px; height: 1px; left: 40%; animation-delay: 3s; }
+        .star:nth-child(4) { width: 2px; height: 2px; left: 55%; animation-delay: 4.5s; }
+        .star:nth-child(5) { width: 3px; height: 3px; left: 70%; animation-delay: 6s; }
+        .star:nth-child(6) { width: 1px; height: 1px; left: 85%; animation-delay: 7.5s; }
+        .star:nth-child(7) { width: 2px; height: 2px; left: 5%; animation-delay: 9s; }
 
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 99; 
+        }
 
-    p.lead {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 1.1rem;
-      animation: fadeInSlide 0.8s ease-out 0.2s forwards;
-      opacity: 0;
-    }
+        .snowflake {
+            position: absolute;
+            background: #e6eef6; 
+            border-radius: 50%;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
 
-    /* Thẻ thành viên */
-    .members {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-      gap: 25px;
-      justify-content: center;
-    }
+        .wrap {
+            width: 100%;
+            max-width: 900px;  
+            margin-bottom: 20px;
+            z-index: 100; 
+        }
 
-    .card {
-      position: relative;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      padding: 25px;
-      text-align: center;
-      transform-style: preserve-3d;
-      
-      border: 3px solid var(--accent);
-      animation-name: fadeInSlide, borderShift;
-      animation-duration: 0.8s, 6s;
-      animation-timing-function: ease-out, linear;
-      animation-delay: var(--delay, 0s), 0s;
-      animation-fill-mode: forwards, none;
-      animation-iteration-count: 1, infinite;
-      
-      transition: transform .3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow .3s cubic-bezier(0.25, 0.8, 0.25, 1), background .3s ease;
-    }
-    
-    /* Cập nhật lại độ trễ animation cho 2 thẻ còn lại */
-    .card:nth-child(1) { --delay: 0.2s; }
-    .card:nth-child(2) { --delay: 0.4s; }
-    .card:nth-child(3), .card:nth-child(4), .card:nth-child(5) { --delay: 0s; }
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInSlide 0.8s ease-out;
+        }
 
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 
-        0 0 20px var(--accent-shadow),
-        inset 0 0 15px rgba(110, 231, 183, 0.5);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* HIỆU ỨNG GÓC TINH THỂ */
-    .card::before, .card::after {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 2px solid var(--accent);  
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
-      animation: borderShift 6s linear infinite reverse;  
-    }
-
-    .card::before {
-      top: 5px;
-      left: 5px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .card::after {
-      bottom: 5px;
-      right: 5px;
-      border-left: none;
-      border-top: none;
-    }
-    .card::before { border-top-left-radius: 4px; }
-    .card::after { border-bottom-right-radius: 4px; }
-
-    .card:hover::before, .card:hover::after {
-        opacity: 1;
-    }
-
-    /* Avatar */
-    .avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      margin: 0 auto 15px;
-      background-size: cover;
-      background-position: center;
-      border: none;
-      box-shadow: 0 0 10px rgba(110, 231, 183, 0.1);
-      transition: box-shadow .3s ease, transform .3s ease;
-    }
-
-    .card:hover .avatar {
-      box-shadow: 0 0 0 4px rgba(110, 231, 183, 0.3), 0 0 20px var(--accent);
-      /* HIỆU ỨNG MỚI: Xoay 3D nhẹ */
-      transform: rotateY(10deg) scale(1.05);
-    }
-
-    h2 {
-      margin: 6px 0 4px;
-      font-size: 22px;
-      font-weight: 600;
-      color: #e6eef6;
-      transition: text-shadow 0.2s ease, color 0.2s ease;
-    }
-
-    /* HIỆU ỨNG NỔI BẬT TỨC THÌ CHO H2 KHI HOVER */
-    .card:hover h2 {
-      color: var(--accent);
-      text-shadow: 
-        0 0 5px var(--accent),
-        0 0 15px var(--accent-shadow);
-    }
-
-    p.role {
-      color: var(--accent);
-      font-size: 15px;
-      margin: 0 0 15px 0;
-      font-weight: 400;
-      /* Animation cho p.role */
-      opacity: 0;
-      animation: fadeInSlide 0.8s ease-out forwards var(--delay-role, 0s);
-    }
-    /* Cập nhật lại độ trễ animation cho vai trò */
-    .card:nth-child(1) p.role { --delay-role: 0.4s; }
-    .card:nth-child(2) p.role { --delay-role: 0.6s; }
-    .card:nth-child(3) p.role, .card:nth-child(4) p.role, .card:nth-child(5) p.role { --delay-role: 0s; }
+        h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            margin: 0;
+            /* 🔥 SỬ DỤNG MÀU HỒNG NEON */
+            color: var(--color-neon-pink); 
+            animation: textFlicker 3s linear infinite alternate;  
+            position: relative;
+        }
+        
+        /* Cần cập nhật h1::before và h1::after để màu hồng vẫn nhấp nháy/glitch */
+        h1::before, h1::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--color-neon-pink); /* Giữ màu hồng */
+            overflow: hidden;
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+        }
 
 
-    /* Badge */
-    .badge {
-      display: inline-block;
-      margin: 4px 4px 0;
-      padding: 6px 12px;
-      font-size: 12px;
-      border-radius: 999px;
-      background: rgba(110, 231, 183, 0.1);
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      font-weight: 600;
-      transition: background .2s ease, transform .2s ease;
-      opacity: 0;
-      animation: fadeInSlide 0.8s ease-out forwards var(--delay-badge, 0s);
-    }
-    
-    /* Cập nhật lại độ trễ animation cho badge */
-    /* Trung (Thẻ 1) */
-    .card:nth-child(1) .badge:nth-of-type(1) { --delay-badge: 0.6s; }
-    .card:nth-child(1) .badge:nth-of-type(2) { --delay-badge: 0.7s; }
-    .card:nth-child(1) .badge:nth-of-type(3) { --delay-badge: 0.8s; }
+        /* Hiển thị Glitch khi hover */
+        header:hover h1::before {
+            opacity: 1;
+            left: 2px;
+            clip: rect(calc(var(--rand-top, 0px) * 1px), 450px, calc(var(--rand-bottom, 0px) * 1px), 0);
+            animation: glitch 0.6s infinite alternate-reverse; 
+        }
 
-    /* Anh Sang (Thẻ 2) */
-    .card:nth-child(2) .badge:nth-of-type(1) { --delay-badge: 0.8s; }
-    .card:nth-child(2) .badge:nth-of-type(2) { --delay-badge: 0.9s; }
-    .card:nth-child(2) .badge:nth-of-type(3) { --delay-badge: 1.0s; }
-    
-    /* Xóa các delay thừa của thẻ 3, 4, 5 */
-    .card:nth-child(3) .badge:nth-of-type(1), .card:nth-child(3) .badge:nth-of-type(2), 
-    .card:nth-child(4) .badge:nth-of-type(1), .card:nth-child(4) .badge:nth-of-type(2),
-    .card:nth-child(5) .badge:nth-of-type(1), .card:nth-child(5) .badge:nth-of-type(2) { --delay-badge: 0s; }
+        header:hover h1::after {
+            opacity: 1;
+            left: -2px;
+            clip: rect(calc(var(--rand-top-2, 0px) * 1px), 450px, calc(var(--rand-bottom-2, 0px) * 1px), 0);
+            animation: glitch 0.8s infinite alternate-reverse; 
+        }
 
-    .card:hover .badge {
-      background: var(--accent);
-      color: var(--bg);
-      transform: scale(1.05);
-    }
+        /* ... (Các phần CSS khác không liên quan đến h1 được giữ nguyên) ... */
+        p.lead {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 1.1rem;
+            animation: fadeInSlide 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
 
-    /* Footer & Link */
-    footer {
-      text-align: center;
-      margin-top: 24px;
-      color: var(--muted);
-      font-size: 13px;
-      animation: fadeInSlide 0.8s ease-out 1.2s forwards;
-      opacity: 0;
-    }
+        .members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 25px;
+            justify-content: center;
+            transition: transform 0.5s ease-out;
+        }
+        
+        .card {
+            position: relative;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+            transform-style: preserve-3d;
+            
+            border: 3px solid var(--accent);
+            animation-name: fadeInSlide, borderShift;
+            animation-duration: 0.8s, 6s;
+            animation-timing-function: ease-out, linear;
+            animation-delay: var(--delay, 0s), 0s;
+            animation-fill-mode: forwards, none;
+            animation-iteration-count: 1, infinite;
+            
+            transform: translateZ(0); 
+            transition: transform .4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow .4s cubic-bezier(0.25, 0.8, 0.25, 1), background .4s ease;
+            overflow: hidden; 
+            z-index: 10; 
+        }
+        
+        /* Cập nhật lại độ trễ animation cho 2 thẻ còn lại */
+        .card:nth-child(1) { --delay: 0.2s; }
+        .card:nth-child(2) { --delay: 0.4s; }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      margin-top: 15px;
-      display: inline-block;
-      font-size: 1rem;
-      padding: 8px 15px;
-      border: 1px solid var(--accent);
-      border-radius: 6px;
-      transition: background .2s ease, color .2s ease, box-shadow .2s ease;
-      animation: fadeInSlide 0.8s ease-out 1.4s forwards;
-      opacity: 0;
-    }
 
-    a:hover {
-      background: var(--accent);
-      color: var(--bg);
-      box-shadow: 0 0 10px var(--accent-shadow);
-    }
-  </style>
+        .card:hover {
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.4), 
+                0 0 15px var(--accent-shadow); 
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -5px; 
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: calc(var(--radius) + 5px); 
+            pointer-events: none;
+            z-index: -1; 
+            opacity: 0; 
+            transition: opacity 0.4s ease, box-shadow 0.4s ease;
+            animation: neonBorderPulse 6s ease-in-out infinite alternate; 
+        }
+
+        .card:hover::before {
+            opacity: 1; 
+            box-shadow: 
+                0 0 10px var(--accent), 
+                0 0 20px var(--color-secondary); 
+        }
+
+        .card .corner-top-left, .card .corner-bottom-right {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--accent);  
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            animation: borderShift 6s linear infinite reverse;  
+            z-index: 1; 
+        }
+        .card .corner-top-left {
+            top: 5px;
+            left: 5px;
+            border-right: none;
+            border-bottom: none;
+            border-top-left-radius: 4px;
+        }
+        .card .corner-bottom-right {
+            bottom: 5px;
+            right: 5px;
+            border-left: none;
+            border-top: none;
+            border-bottom-right-radius: 4px;
+        }
+        /* ... (Tiếp tục với các phần CSS khác) ... */
+
+        /* Avatar */
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-position: center;
+            border: none;
+            box-shadow: 0 0 10px rgba(110, 231, 183, 0.1);
+            transition: box-shadow .3s ease, transform .3s ease;
+            transform: translateZ(10px); 
+        }
+
+        .card:hover .avatar {
+            box-shadow: 0 0 0 4px rgba(110, 231, 183, 0.3), 0 0 15px var(--accent);
+            transform: scale(1.05) translateZ(10px); 
+        }
+
+        h2 {
+            margin: 6px 0 4px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #e6eef6;
+            transition: text-shadow 0.2s ease, color 0.2s ease;
+            transform: translateZ(5px);
+        }
+
+        .card:hover h2 {
+            color: var(--accent);
+            text-shadow: 
+                0 0 5px var(--accent),
+                0 0 15px var(--accent-shadow);
+        }
+
+        p.role {
+            color: var(--accent);
+            font-size: 15px;
+            margin: 0 0 15px 0;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInSlide 0.8s ease-out forwards var(--delay-role, 0s);
+            transform: translateZ(5px);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            margin: 4px 4px 0;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 999px;
+            background: rgba(110, 231, 183, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            font-weight: 600;
+            transition: background .2s ease, transform .2s ease;
+            opacity: 0;
+            animation: fadeInSlide 0.8s ease-out forwards var(--delay-badge, 0s);
+            transform: translateZ(3px);
+        }
+        
+        /* Cập nhật lại độ trễ animation cho badge */
+        .card:nth-child(1) .badge:nth-of-type(1) { --delay-badge: 0.6s; }
+        .card:nth-child(1) .badge:nth-of-type(2) { --delay-badge: 0.7s; }
+        .card:nth-child(1) .badge:nth-of-type(3) { --delay-badge: 0.8s; }
+
+        .card:nth-child(2) .badge:nth-of-type(1) { --delay-badge: 0.8s; }
+        .card:nth-child(2) .badge:nth-of-type(2) { --delay-badge: 0.9s; }
+        .card:nth-child(2) .badge:nth-of-type(3) { --delay-badge: 1.0s; }
+        
+
+        .card:hover .badge {
+            background: var(--accent);
+            color: var(--bg);
+            transform: scale(1.08) translateZ(8px);
+        }
+
+        /* Footer & Link */
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 13px;
+            animation: fadeInSlide 0.8s ease-out 1.2s forwards;
+            opacity: 0;
+            z-index: 100;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 15px;
+            display: inline-block;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+            animation: fadeInSlide 0.8s ease-out 1.4s forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        a:hover {
+            background: var(--accent);
+            color: var(--bg);
+            box-shadow: 0 0 10px var(--accent-shadow);
+        }
+        
+        a .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            animation: ripple 0.6s linear;
+            transform: scale(0);
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1 data-text="Đội ngũ thành viên Quân đoàn TF">Đội ngũ thành viên Quân đoàn TF</h1>
-      <p class="lead">Danh sách những người dẫn đầu và hỗ trợ duy trì hoạt động của quân đoàn TitanForce²</p>
-    </header>
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
 
-    <section class="members">
-      <div class="card">
-        <div class="avatar" style="background-image:url('trung.jpg');"></div>
-        <h2>Trung (Kuronami 2k6)</h2>
-        <p class="role">Chủ quân đoàn</p>
-        <span class="badge">Lãnh đạo</span>
-        <span class="badge">Chiến thuật</span>
-        <span class="badge">Tuyển quân</span>
-      </div>
+    <div class="snow-container" id="snowContainer"></div>
 
-      <div class="card">
-        <div class="avatar" style="background-image:url('sang.jpg');"></div>
-        <h2>Anh Sang (Liopc 2k4)</h2>
-        <p class="role">Chỉ huy</p>
-        <span class="badge">Dẫn dắt</span>
-        <span class="badge">Huấn luyện</span>
-        <span class="badge">Phân tích</span>
-      </div>
-      
-      </section>
+    <div class="wrap">
+        <header>
+            <h1 data-text="Đội ngũ thành viên Quân đoàn TF">Đội ngũ thành viên Quân đoàn TF</h1>
+            <p class="lead">Danh sách những người dẫn đầu và hỗ trợ duy trì hoạt động của quân đoàn TitanForce²</p>
+        </header>
 
-    <footer>
-      © <span id="year"></span> Quân đoàn TF — TitanForce²
-    </footer>
-  </div>
+        <section class="members">
+            <div class="card">
+                <div class="corner-top-left"></div> 
+                <div class="avatar" style="background-image:url('trung.jpg');"></div>
+                <h2>Trung (Kuronami 2k6)</h2>
+                <p class="role">Chủ quân đoàn</p>
+                <span class="badge">Lãnh đạo</span>
+                <span class="badge">Chiến thuật</span>
+                <span class="badge">Tuyển quân</span>
+                <div class="corner-bottom-right"></div>
+                <div class="shimmer-effect"></div> </div>
 
-  <a href="index.html">⬅️ Quay lại trang chủ</a>
+            <div class="card">
+                <div class="corner-top-left"></div>
+                <div class="avatar" style="background-image:url('sang.jpg');"></div>
+                <h2>Anh Sang (Liopc 2k4)</h2>
+                <p class="role">Chỉ huy</p>
+                <span class="badge">Dẫn dắt</span>
+                <span class="badge">Huấn luyện</span>
+                <span class="badge">Phân tích</span>
+                <div class="corner-bottom-right"></div>
+                <div class="shimmer-effect"></div>
+            </div>
+        </section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+        <footer>
+            © <span id="year"></span> Quân đoàn TF — TitanForce²
+        </footer>
+    </div>
+
+    <a id="backButton" href="index.html">⬅️ Quay lại trang chủ</a>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Hiệu ứng Ripple cho nút
+        const backButton = document.getElementById('backButton');
+        backButton.addEventListener('click', function (e) {
+            const x = e.clientX - e.target.offsetLeft;
+            const y = e.clientY - e.target.offsetTop;
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            this.appendChild(ripple);
+
+            ripple.addEventListener('animationend', function () {
+                this.remove();
+            });
+        });
+
+        // Hiệu ứng Glitch ngẫu nhiên cho H1 khi hover (Javascript)
+        const h1Element = document.querySelector('h1');
+        h1Element.addEventListener('mouseover', () => {
+            h1Element.style.setProperty('--rand-top', Math.floor(Math.random() * 80));
+            h1Element.style.setProperty('--rand-bottom', Math.floor(Math.random() * 80) + 20);
+            h1Element.style.setProperty('--rand-top-2', Math.floor(Math.random() * 80));
+            h1Element.style.setProperty('--rand-bottom-2', Math.floor(Math.random() * 80) + 20);
+        });
+
+        /* JAVASCRIPT ĐÃ ĐƯỢC TỐI ƯU HÓA: TẮT HIỆU ỨNG TUYẾT RƠI TRÊN MOBILE */
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const snowContainer = document.getElementById('snowContainer');
+        const starsContainer = document.querySelector('.stars');
+
+        if (isMobile) {
+            // Tắt các hiệu ứng nền nặng nề trên Mobile
+            if (snowContainer) snowContainer.style.display = 'none';
+            if (starsContainer) starsContainer.style.display = 'none';
+        } else {
+            // Chạy hiệu ứng tuyết rơi trên Desktop/Màn hình lớn
+            const numSnowflakes = 30; // Giảm số lượng bông tuyết từ 50 xuống 30
+
+            for (let i = 0; i < numSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowContainer.appendChild(snowflake);
+
+                // Randomize properties
+                const size = Math.random() * 3 + 1; // Kích thước từ 1px đến 4px
+                const left = Math.random() * 100; // Vị trí ngang
+                const duration = Math.random() * 15 + 10; // Thời gian rơi từ 10s đến 25s
+                const delay = Math.random() * 10; // Độ trễ animation
+                const opacity = Math.random() * 0.5 + 0.5; // Độ mờ từ 50% đến 100%
+                const translateXStart = Math.random() * 50 - 25; // Dịch chuyển ngang ngẫu nhiên
+                const translateXEnd = Math.random() * 50 - 25; // Dịch chuyển ngang ngẫu nhiên
+
+                snowflake.style.width = size + 'px';
+                snowflake.style.height = size + 'px';
+                snowflake.style.left = left + '%';
+                snowflake.style.animationDuration = duration + 's';
+                snowflake.style.animationDelay = delay + 's';
+                snowflake.style.setProperty('--random-x-start', translateXStart + 'px');
+                snowflake.style.setProperty('--random-x-end', translateXEnd + 'px');
+                snowflake.style.setProperty('--random-opacity', opacity);
+            }
+        }
+    </script>
 </body>
 </html>
