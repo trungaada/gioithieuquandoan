@@ -1,375 +1,98 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giới thiệu quân đoàn TF - TitanForce²</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giới thiệu thành viên — Quân đoàn TF</title>
+  <meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
   <style>
-    /* === GIAO DIỆN CHUNG === */
-    body {
-      font-family: "Poppins", sans-serif;
-      background: #0a141f;
-      color: #e0e0e0;
-      margin: 0;
-      padding: 20px 10px;
-      overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    :root {
+      --bg: #0b1020;
+      --card: #0f1724;
+      --accent: #6ee7b7;
+      --muted: #9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 14px;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;background:linear-gradient(180deg,#051025 0%, #071428 60%);color:#e6eef6;display:flex;align-items:center;justify-content:center;padding:24px;
+    }
+    .wrap{width:100%;max-width:1100px}
+    header{text-align:center;margin-bottom:30px}
+    h1{font-size:32px;margin:0;color:var(--accent)}
+    p.lead{margin:8px 0 0;color:var(--muted)}
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(3px);
-      z-index: -1;
-    }
+    .members{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .card{background:var(--glass);backdrop-filter:blur(8px);border-radius:var(--radius);padding:18px;text-align:center;transition:transform .2s ease, box-shadow .2s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 6px 18px rgba(0,0,0,0.4)}
 
-    .content-container {
-      max-width: 650px;
-      width: 95%;
-      padding: 30px 25px;
-      background-color: rgba(8, 18, 28, 0.98);
-      border-radius: 15px;
-      border: 2px solid rgba(0, 255, 204, 0.6);
-      box-shadow: 0 0 25px rgba(0, 255, 204, 0.7),
-        0 0 8px rgba(0, 255, 204, 0.9);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
+    .avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 12px;background-size:cover;background-position:center;border:2px solid var(--accent)}
+    h2{margin:6px 0 4px;font-size:20px}
+    p.role{color:var(--muted);font-size:14px;margin:0 0 10px 0}
+    .badge{display:inline-block;margin:4px 4px 0;padding:6px 10px;font-size:13px;border-radius:999px;background:var(--glass);color:var(--muted)}
 
-    .content-container::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -120%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 255, 204, 0.15),
-        transparent
-      );
-      transition: all 0.7s ease-out;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .content-container:hover {
-        transform: translateY(-8px) scale(1.005);
-        box-shadow: 0 0 40px rgba(0, 255, 204, 1),
-          0 0 15px rgba(0, 255, 204, 1.2);
-      }
-      .content-container:hover::after {
-        left: 140%;
-      }
-    }
-
-    /* === TIÊU ĐỀ === */
-    h1 {
-      font-family: "Orbitron", sans-serif;
-      color: #00ffcc;
-      text-align: center;
-      font-size: clamp(2em, 4vw, 2.8em);
-      font-weight: 800;
-      margin-bottom: 25px;
-      text-shadow: 0 0 20px #00ffcc;
-      border-bottom: 3px solid rgba(0, 255, 204, 0.6);
-      padding-bottom: 12px;
-      overflow: hidden;
-      white-space: nowrap;
-      width: 0;
-      animation: typing-h1 3s steps(30, end) forwards;
-    }
-    @keyframes typing-h1 {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
-    }
-    h1.finished {
-      width: auto;
-      white-space: normal;
-    }
-
-    /* === ĐOẠN VĂN === */
-    p {
-      margin-bottom: 18px;
-      padding: 10px 15px;
-      border-left: 5px solid #00ffcc;
-      border-radius: 8px;
-      background: rgba(25, 35, 45, 0.85);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
-
-    p.fade-in-up {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .typewriter-text {
-      display: inline;
-    }
-
-    .typewriter-container {
-      display: inline-block;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 0.05em solid #00ffcc;
-      animation: none;
-      vertical-align: top;
-    }
-
-    .typewriter-container.finished {
-      white-space: normal;
-      border-right: none;
-    }
-
-    @keyframes typing-text {
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes blink-caret {
-      50% {
-        border-color: transparent;
-      }
-    }
-
-    /* === LINK QUAY LẠI === */
-    .back-link-container {
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .back-link-container.show {
-      opacity: 1;
-    }
-    .back-link-container a {
-      display: inline-block;
-      padding: 9px 22px;
-      border: 2px solid #00ffcc;
-      border-radius: 50px;
-      background: rgba(0, 255, 204, 0.15);
-      color: #00e6e6;
-      text-decoration: none;
-      font-weight: 700;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-    }
-    .back-link-container a:hover {
-      background: #00ffcc;
-      color: #050a10;
-      box-shadow: 0 0 12px #00ffcc;
-    }
-
-    /* === MOBILE === */
-    @media (max-width: 768px) {
-      h1 {
-        animation: none;
-        width: auto;
-        white-space: normal;
-        text-shadow: 0 0 12px #00ffcc;
-      }
-      p {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .typewriter-container {
-        animation: none !important;
-        border-right: none !important;
-        white-space: normal !important;
-      }
-      .back-link-container {
-        opacity: 1;
-      }
-    }
-
-    /* === HOA RƠI === */
-    .flower {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0;
-      animation: fall linear infinite;
-      z-index: 1;
-      background: linear-gradient(
-        45deg,
-        var(--flower-color-start),
-        var(--flower-color-end)
-      );
-      filter: blur(0.5px);
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg) scale(0.8);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(100vh) rotate(720deg) scale(1.2);
-        opacity: 0;
-      }
-    }
+    footer{text-align:center;margin-top:24px;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
-  <div class="content-container">
-    <h1>Giới thiệu Quân đoàn TitanForce²</h1>
+  <div class="wrap">
+    <header>
+      <h1>Đội ngũ thành viên Quân đoàn TF</h1>
+      <p class="lead">Danh sách những người dẫn đầu và hỗ trợ duy trì hoạt động của quân đoàn TitanForce²</p>
+    </header>
 
-    <p>
-      <span
-        class="typewriter-text"
-        data-text="<strong>Chỉ huy:</strong> Anh Sang (<strong>TF.liopc</strong>) — Sinh viên đại học ngành Y, sinh năm 2004."
-      ></span>
-    </p>
-    <p>
-      <span
-        class="typewriter-text"
-        data-text="<strong>Chủ quân đoàn:</strong> Trung (<strong>TF.Kuronami</strong>) — sinh viên cao đẳng CNNT, sinh năm 2006."
-      ></span>
-    </p>
-    <p>
-      <span
-        class="typewriter-text"
-        data-text="Quân đoàn <strong>TitanForce²</strong> được thành lập với mục tiêu tạo nên một cộng đồng game thủ vui vẻ, đoàn kết, và cùng nhau phát triển trong thế giới <em>Free Fire</em>."
-      ></span>
-    </p>
-    <p>
-      <span
-        class="typewriter-text"
-        data-text="Chúng tôi luôn chào đón những thành viên nhiệt huyết, thân thiện và có tinh thần đồng đội cao."
-      ></span>
-    </p>
+    <section class="members">
+      <div class="card">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Trung');"></div>
+        <h2>Trung (Kuronami 2k6)</h2>
+        <p class="role">Chủ quân đoàn</p>
+        <span class="badge">Lãnh đạo</span>
+        <span class="badge">Chiến thuật</span>
+        <span class="badge">Tuyển quân</span>
+      </div>
 
-    <p class="back-link-container">
-      <a href="index.html">⬅️ Quay lại trang chủ</a>
-    </p>
+      <div class="card">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Anh+Sang');"></div>
+        <h2>Anh Sang (Liopc 2k4)</h2>
+        <p class="role">Chỉ huy</p>
+        <span class="badge">Dẫn dắt</span>
+        <span class="badge">Huấn luyện</span>
+      </div>
+
+      <div class="card">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Hana');"></div>
+        <h2>Hana</h2>
+        <p class="role">Thành viên nữ</p>
+        <span class="badge">Hỗ trợ</span>
+        <span class="badge">Thi đấu</span>
+      </div>
+
+      <div class="card">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Ken');"></div>
+        <h2>Ken</h2>
+        <p class="role">Cựu thành viên</p>
+        <span class="badge">Cống hiến</span>
+        <span class="badge">Xây dựng</span>
+      </div>
+
+      <div class="card">
+        <div class="avatar" style="background-image:url('https://via.placeholder.com/200x200?text=Miko');"></div>
+        <h2>Miko</h2>
+        <p class="role">Thành viên mới</p>
+        <span class="badge">Học hỏi</span>
+        <span class="badge">Hỗ trợ nhóm</span>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Quân đoàn TF — TitanForce²
+    </footer>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const heading = document.querySelector("h1");
-      const paragraphs = document.querySelectorAll("p:not(.back-link-container)");
-      const backLinkContainer = document.querySelector(".back-link-container");
-      const typingSpeed = 50;
-      let delayTime = 0;
-
-      const countVisibleCharacters = (htmlString) => {
-        const temp = document.createElement("div");
-        temp.innerHTML = htmlString;
-        return temp.textContent.length;
-      };
-
-      const activateTypewriter = (span, delay) => {
-        const raw = span.getAttribute("data-text");
-        const length = countVisibleCharacters(raw);
-
-        setTimeout(() => span.closest("p").classList.add("fade-in-up"), delay);
-
-        const container = document.createElement("span");
-        container.classList.add("typewriter-container");
-        container.innerHTML = raw;
-        span.textContent = "";
-        span.appendChild(container);
-
-        const duration = length * typingSpeed;
-        const seconds = duration / 1000;
-        const delaySec = delay / 1000;
-
-        container.style.width = "0";
-        container.style.animation = `typing-text ${seconds}s steps(${length + 1}, end) forwards, blink-caret .75s step-end infinite`;
-        container.style.animationDelay = `${delaySec}s`;
-
-        container.addEventListener(
-          "animationend",
-          (e) => {
-            if (e.animationName === "typing-text") {
-              container.classList.add("finished");
-              if (
-                span ===
-                paragraphs[paragraphs.length - 1].querySelector(".typewriter-text")
-              ) {
-                backLinkContainer.classList.add("show");
-              }
-            }
-          },
-          { once: true }
-        );
-        return duration;
-      };
-
-      function startTypingEffect() {
-        if (heading.classList.contains("finished")) return;
-        heading.classList.add("finished");
-        delayTime = 500;
-        paragraphs.forEach((p) => {
-          const span = p.querySelector(".typewriter-text");
-          if (span) {
-            const dur = activateTypewriter(span, delayTime);
-            delayTime += dur + 500;
-          }
-        });
-      }
-
-      heading.addEventListener("animationend", startTypingEffect, { once: true });
-      setTimeout(() => {
-        if (!heading.classList.contains("finished")) startTypingEffect();
-      }, 3000);
-    });
-
-    // --- HOA RƠI ---
-    const numberOfFlowers = 30;
-    const palette = [
-      ["#FFDAB9", "#FFC0CB"],
-      ["#E6E6FA", "#DDA0DD"],
-      ["#F0F8FF", "#ADD8E6"],
-      ["#FFE4E1", "#FFB6C1"],
-    ];
-    const minS = 6,
-      maxS = 16,
-      minD = 5,
-      maxD = 12;
-
-    function createFlower() {
-      const f = document.createElement("div");
-      f.classList.add("flower");
-      const size = Math.random() * (maxS - minS) + minS;
-      f.style.width = `${size}px`;
-      f.style.height = `${size}px`;
-      f.style.left = `${Math.random() * 100}vw`;
-      f.style.top = `-${Math.random() * 20}vh`;
-      const [c1, c2] = palette[Math.floor(Math.random() * palette.length)];
-      f.style.setProperty("--flower-color-start", c1);
-      f.style.setProperty("--flower-color-end", c2);
-      const dur = Math.random() * (maxD - minD) + minD;
-      f.style.animationDuration = `${dur}s`;
-      f.style.animationDelay = `${Math.random() * (maxD * 0.8)}s`;
-      document.body.appendChild(f);
-      f.addEventListener("animationend", () => {
-        f.remove();
-        createFlower();
-      });
-    }
-
-    if (window.innerWidth > 600) {
-      for (let i = 0; i < numberOfFlowers; i++) createFlower();
-    }
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
