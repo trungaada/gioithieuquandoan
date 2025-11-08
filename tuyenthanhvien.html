@@ -1,264 +1,304 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tuyển Thành Viên — Clan Free Fire</title>
-  <style>
-    /* Biến CSS */
-    :root {
-        --accent: #00e676; /* Màu xanh lá neon nổi bật */
-        --accent-dark: #00c853;
-        --bg: #0f1724;
-        --card: #161e2f; /* Nền tối hơn cho phần nội dung */
-        --muted: #9aa4b2;
-        --glow: 0 0 10px rgba(0, 230, 118, 0.6), 0 0 20px rgba(0, 230, 118, 0.4); /* Hiệu ứng phát sáng */
-    }
-
-    /* Thiết lập chung */
-    * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        font-family: 'Montserrat', Poppins, Arial, sans-serif; /* Thêm font mạnh mẽ hơn */
-        background: radial-gradient(circle at top, #1a2a47 0%, #071027 100%); /* Nền gradient Radial */
-        color: #e6eef8;
-        min-height: 100vh;
-        text-align: center;
-        padding-bottom: 50px; /* Thêm padding cuối trang */
-    }
-
-    /* Tiêu đề */
-    header {
-        padding: 40px 24px 20px;
-    }
-    header h1 {
-        margin: 0;
-        font-size: 32px;
-        color: var(--accent);
-        text-shadow: var(--glow); /* Hiệu ứng Neon cho tiêu đề */
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-    header p {
-        color: var(--muted);
-        margin-top: 8px;
-        font-size: 16px;
-    }
-
-    /* Nút chọn nhóm */
-    .buttons {
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        margin: 40px 0;
-        flex-wrap: wrap;
-        padding: 0 15px;
-    }
-    button.btn {
-        background: var(--accent);
-        color: #0b1220;
-        border: 3px solid var(--accent); /* Viền mỏng */
-        padding: 16px 32px;
-        border-radius: 10px;
-        font-size: 19px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 15px rgba(0, 230, 118, 0.5); /* Đổ bóng mạnh */
-        text-transform: uppercase;
-    }
-    button.btn:hover {
-        background: var(--accent-dark);
-        color: #fff;
-        box-shadow: 0 0 25px rgba(0, 230, 118, 0.8), 0 0 50px rgba(0, 230, 118, 0.3); /* Phát sáng mạnh hơn khi hover */
-        transform: translateY(-3px);
-    }
-
-    /* Nội dung chi tiết */
-    .content {
-        max-width: 850px;
-        margin: 0 auto;
-        text-align: left;
-        background: var(--card); /* Nền tối của card */
-        border-radius: 15px;
-        border: 1px solid rgba(0, 230, 118, 0.2); /* Viền accent tinh tế */
-        padding: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Đổ bóng sâu */
-        display: none;
-        animation: fadeIn 0.5s ease;
-    }
-    .content.active {
-        display: block;
-    }
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(20px);}
-        to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* Tiêu đề nội dung */
-    h2 {
-        color: var(--accent);
-        margin-top: 0;
-        font-size: 24px;
-        border-bottom: 2px solid rgba(0, 230, 118, 0.3);
-        padding-bottom: 10px;
-        text-shadow: 0 0 5px rgba(0, 230, 118, 0.5);
-    }
-    ul {
-        color: #c9d5e3; /* Màu chữ sáng hơn */
-        line-height: 1.8;
-        list-style: none; /* Bỏ bullet mặc định */
-        padding-left: 0;
-    }
-    ul li {
-        position: relative;
-        padding-left: 25px;
-        margin-bottom: 10px;
-    }
-    ul li::before {
-        content: '»'; /* Thêm ký tự bullet kiểu gaming */
-        color: var(--accent);
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        margin-left: -1em;
-        position: absolute;
-        left: 0;
-    }
-
-    /* Nút Liên hệ */
-    .links {
-        margin-top: 25px;
-    }
-    .links a {
-        display: inline-block;
-        margin-right: 15px;
-        padding: 12px 20px;
-        border-radius: 8px;
-        background: var(--accent);
-        color: #0b1220;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0, 230, 118, 0.4);
-    }
-    .links a:hover { 
-        opacity: 0.9; 
-        transform: scale(1.05); 
-        box-shadow: 0 0 15px var(--accent);
-    }
-
-    /* Nút Quay lại */
-    .back-btn {
-        display: inline-block;
-        margin-top: 30px;
-        padding: 10px 20px;
-        border-radius: 8px;
-        background: #1d2a3a;
-        color: var(--muted);
-        text-decoration: none;
-        font-weight: 600;
-        transition: background 0.3s ease, color 0.3s ease;
-    }
-    .back-btn:hover {
-        background: #273a52;
-        color: #fff;
-    }
-
-    /* Footer */
-    footer {
-        text-align: center;
-        padding: 18px;
-        color: var(--muted);
-        font-size: 14px;
-        margin-top: 40px;
-    }
-    
-    /* Responsive */
-    @media (max-width: 600px) {
-        header h1 {
-            font-size: 28px;
-        }
-        .buttons button.btn {
-            font-size: 16px;
-            padding: 12px 20px;
-        }
-        .content {
-            margin: 0 15px;
-            padding: 20px;
-        }
-        .links a {
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tuyển Thành Viên — Clan Free Fire</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@400;600;700&family=Bebas+Neue&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --accent: #ff3d00;
+    --accent-dark: #ff1744;
+    --bg: #0f1724;
+    --card: #161e2f;
+    --muted: #9aa4b2;
+    --glow: 0 0 10px rgba(255, 61, 0, 0.8), 0 0 20px rgba(255, 23, 68, 0.6);
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Montserrat', Poppins, Arial, sans-serif;
+    color: #e6eef8;
+    min-height: 100vh;
+    text-align: center;
+    padding-bottom: 50px;
+    background: var(--bg);
+    position: relative;
+    overflow-x: hidden;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('logo.jpg') center/cover no-repeat fixed;
+    opacity: 0.1;
+    z-index: -1;
+}
+header {
+    position: relative;
+    padding: 40px 24px 10px;
+}
+header h1 {
+    margin: 0;
+    font-size: 38px;
+    color: var(--accent);
+    text-shadow: var(--glow);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+}
+.clan-name {
+    font-family: 'Caveat', cursive;
+    font-size: 48px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 5px;
+}
+header p {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.home-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    background: #1d2a3a;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: 3px solid var(--accent);
+    letter-spacing: 1px;
+}
+.home-btn:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 61, 0, 0.6);
+    transform: scale(1.05);
+}
+.logo-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    background: url('logo.jpg') no-repeat center/contain;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px 0;
+    flex-wrap: wrap;
+    padding: 0 15px;
+}
+button.btn {
+    background: var(--accent);
+    color: #0b1220;
+    border: 4px solid var(--accent);
+    padding: 18px 35px;
+    border-radius: 12px;
+    font-size: 21px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 61, 0, 0.7);
+    text-transform: uppercase;
+    flex-grow: 1;
+    max-width: 320px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+}
+button.btn:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    box-shadow: 0 0 30px rgba(255, 61, 0, 1), 0 0 60px rgba(255, 61, 0, 0.4);
+    transform: translateY(-5px);
+}
+.content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    background: rgba(22, 30, 47, 0.95);
+    border-radius: 20px;
+    border: 2px solid var(--accent);
+    padding: 40px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 61, 0, 0.5), inset 0 0 15px rgba(255, 61, 0, 0.3);
+    display: none;
+    animation: fadeIn 0.6s ease;
+}
+.content.active { display: block; }
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+h2 {
+    color: var(--accent);
+    margin-top: 0;
+    font-size: 30px;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 15px;
+    text-shadow: 0 0 8px rgba(255, 61, 0, 0.8);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+ul {
+    color: #e6eef8;
+    line-height: 2;
+    list-style: none;
+    padding-left: 0;
+    font-size: 17px;
+    font-weight: 500;
+}
+ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+}
+ul li::before {
+    content: '⭐';
+    color: var(--accent);
+    font-weight: bold;
+    display: inline-block;
+    width: 1.2em;
+    margin-left: -1.2em;
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+    top: -2px;
+}
+.links {
+    margin-top: 35px;
+    text-align: center;
+}
+.links a {
+    display: inline-block;
+    margin: 0 15px 15px;
+    padding: 14px 25px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #0b1220;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 61, 0, 0.6);
+    text-transform: uppercase;
+}
+.links a:hover {
+    opacity: 0.9;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px var(--accent);
+}
+.back-btn {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: #1d2a3a;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease, color 0.3s ease;
+    border: 1px solid var(--muted);
+}
+.back-btn:hover {
+    background: #273a52;
+    color: #fff;
+    border-color: #fff;
+}
+footer {
+    text-align: center;
+    padding: 18px;
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255, 61, 0, 0.1);
+}
+@media (max-width: 600px) {
+    header h1 { font-size: 32px; letter-spacing: 2px;}
+    .clan-name { font-size: 40px; }
+    .buttons { gap: 20px; }
+    .buttons button.btn { font-size: 19px; padding: 16px 25px; max-width: none; }
+    .content { margin: 0 15px; padding: 30px; }
+    .links a { display: block; margin: 0 auto 15px; width: 90%; max-width: 300px; }
+    ul li { font-size: 16px; }
+    h2 { font-size: 26px; }
+}
 </style>
 </head>
 <body>
 
-  <header>
-    <h1>Clan TF — Tuyển Thành Viên Free Fire</h1>
-    <p>Chọn nhóm bạn muốn xem thông tin chi tiết</p>
-  </header>
+<header>
+<div class="logo-header"></div>
+<h1><span class="clan-name">Clan TF</span> — Tuyển Thành Viên Free Fire</h1>
+<p>Chọn nhóm bạn muốn xem thông tin chi tiết và gia nhập</p>
+<a href="index.html" class="home-btn">⬅ Về trang chủ</a>
+</header>
 
-  <div class="buttons">
-    <button class="btn" onclick="showContent('sinh-ton')">1️⃣ Sinh tồn</button>
-    <button class="btn" onclick="showContent('solo')">2️⃣ Solo Tử Chiến</button>
-  </div>
+<div class="buttons">
+<button class="btn" onclick="showContent('sinh-ton')">1️⃣ Đội Hình Sinh Tồn</button>
+<button class="btn" onclick="showContent('solo')">2️⃣ Vị Trí Solo Tử Chiến</button>
+</div>
 
-  <div id="sinh-ton" class="content">
-    <h2>Nhóm Sinh tồn (Squad)</h2>
-    <ul>
-      <li>Tối đa 4 người — Ưu tiên người chơi phối hợp tốt.</li>
-      <li>Rank yêu cầu: Gold trở lên.</li>
-      <li>Biết vai trò (rush, cover, medic,...).</li>
-      <li>Tham gia luyện tập ít nhất 2 buổi/tuần.</li>
-    </ul>
-    <div class="links">
-      <a href="https://www.facebook.com/yourclanpage" target="_blank">Liên hệ Facebook</a>
-      <a href="https://zalo.me/yourzalolink" target="_blank">Liên hệ Zalo</a>
-    </div>
-    <div style="text-align:center">
-      <a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
-    </div>
-  </div>
+<div id="sinh-ton" class="content">
+<h2>🔥 Yêu Cầu Nhóm Sinh Tồn (Squad)</h2>
+<ul>
+<li>Đội hình 4 người — Ưu tiên người chơi <b>phối hợp đội hình</b> và có <b>micro</b> giao tiếp tốt.</li>
+<li>Rank tối thiểu: <b>GOLD III</b> trở lên.</li>
+<li><b>Thành thạo một vai trò cụ thể</b> (Rush, Cover, Hỗ trợ, Sniper) và tuân thủ chiến thuật.</li>
+<li>Tham gia <b>luyện tập bắt buộc</b> ít nhất <b>2 buổi/tuần</b>.</li>
+</ul>
+<div class="links">
+<a href="https://www.facebook.com/yourclanpage" target="_blank">💬 Liên hệ Fanpage Facebook</a>
+<a href="https://zalo.me/yourzalolink" target="_blank">📞 Liên hệ qua Zalo (Ưu tiên)</a>
+</div>
+<div style="text-align:center">
+<a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
+</div>
+</div>
 
-  <div id="solo" class="content">
-    <h2>Nhóm Solo Tử Chiến</h2>
-    <ul>
-      <li>Dành cho người chơi solo kỹ năng cao.</li>
-      <li>Rank yêu cầu: Platinum trở lên.</li>
-      <li>Phản xạ nhanh, aim tốt, kinh nghiệm đấu 1vs1.</li>
-      <li>Tham gia giải đấu nội bộ khi được mời.</li>
-    </ul>
-    <div class="links">
-      <a href="https://www.facebook.com/yourclanpage" target="_blank">Liên hệ Facebook</a>
-      <a href="https://zalo.me/yourzalolink" target="_blank">Liên hệ Zalo</a>
-    </div>
-    <div style="text-align:center">
-      <a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
-    </div>
-  </div>
+<div id="solo" class="content">
+<h2>⚡️ Yêu Cầu Nhóm Solo Tử Chiến</h2>
+<ul>
+<li>Dành cho người chơi <b>Solo kỹ năng cá nhân CỰC CAO</b>, tự tin đấu 1vs1.</li>
+<li>Rank tối thiểu: <b>PLATINUM I</b> trở lên và có KDA cao.</li>
+<li><b>Phản xạ chớp nhoáng</b>, Aim chuẩn, và có kinh nghiệm trong các kèo Solo thách đấu.</li>
+<li>Sẵn sàng tham gia các <b>Giải đấu nội bộ</b> và <b>Đấu giao hữu</b> với các Clan khác.</li>
+</ul>
+<div class="links">
+<a href="https://www.facebook.com/yourclanpage" target="_blank">💬 Liên hệ Fanpage Facebook</a>
+<a href="https://zalo.me/yourzalolink" target="_blank">📞 Liên hệ qua Zalo (Ưu tiên)</a>
+</div>
+<div style="text-align:center">
+<a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
+</div>
+</div>
 
-  <footer>
-    © <span id="year"></span> Clan TF — Free Fire. Kết nối cùng chiến thắng!
-  </footer>
+<footer>
+© <span id="year"></span> Clan TF — Free Fire. Kết nối cùng chiến thắng!
+</footer>
 
-  <script>
-    const sinhTon = document.getElementById('sinh-ton');
-    const solo = document.getElementById('solo');
-    function showContent(id) {
-      sinhTon.classList.remove('active');
-      solo.classList.remove('active');
-      document.getElementById(id).classList.add('active');
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-    function hideContent() {
-      sinhTon.classList.remove('active');
-      solo.classList.remove('active');
-    }
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<script>
+const sinhTon = document.getElementById('sinh-ton');
+const solo = document.getElementById('solo');
+function showContent(id) {
+sinhTon.classList.remove('active');
+solo.classList.remove('active');
+document.getElementById(id).classList.add('active');
+window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function hideContent() {
+sinhTon.classList.remove('active');
+solo.classList.remove('active');
+window.scrollTo({top: 0, behavior: 'smooth'}); 
+}
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
