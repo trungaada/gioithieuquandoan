@@ -6,6 +6,7 @@
 <title>Tuyển Thành Viên — Clan Free Fire</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@400;600;700&family=Bebas+Neue&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
+/* --- 1. BIẾN VÀ CẤU TRÚC CHUNG --- */
 :root {
     --accent: #ff3d00;
     --accent-dark: #ff1744;
@@ -42,6 +43,16 @@ header {
     opacity: 0;
     animation: fadeInScale 0.8s ease-out forwards;
     animation-delay: 0.2s;
+}
+.clan-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid var(--accent);
+    box-shadow: var(--glow);
+    animation: fadeInScale 0.8s ease-out forwards;
 }
 header h1 {
     margin: 0;
@@ -195,8 +206,11 @@ ul li::before {
 .links {
     margin-top: 25px;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-.links a {
+.links a, .links button {
     display: inline-block;
     margin: 0 15px 15px;
     padding: 12px 22px;
@@ -211,11 +225,23 @@ ul li::before {
     text-transform: uppercase;
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
 }
 .links a:hover {
     opacity: 0.9;
     transform: scale(1.05);
     box-shadow: 0 0 15px var(--accent);
+}
+.copy-btn {
+    background: #4CAF50 !important;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.6) !important;
+    color: #fff !important;
+}
+.copy-btn:hover {
+    background: #45a049 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #4CAF50 !important;
 }
 .back-btn {
     display: inline-block;
@@ -249,18 +275,19 @@ footer {
     .buttons { gap: 15px; }
     .buttons button.btn { font-size: 14px; padding: 12px 20px; max-width: none; }
     .content { margin: 0 10px; padding: 20px; max-width: none; }
-    .links a { display: block; margin: 0 auto 10px; width: 85%; max-width: 250px; font-size: 13px; }
+    .links a, .links button { display: block; margin: 0 auto 10px; width: 85%; max-width: 250px; font-size: 13px; }
     ul li { font-size: 12px; }
     h2 { font-size: 18px; }
 }
+
 </style>
 </head>
 <body>
 
 <header>
-<div class="logo-header"></div>
+<img src="logo.jpg" alt="Clan TF Logo" class="clan-logo">
 <h1><span class="clan-name">Clan TF</span> — Tuyển Thành Viên Free Fire</h1>
-<p>Chọn nhóm bạn muốn xem thông tin chi tiết và gia nhập</p>
+<p>ID Clan: <strong id="clan-id">1234567890</strong></p> <p>Chọn nhóm bạn muốn xem thông tin chi tiết và gia nhập</p>
 <a href="index.html" class="home-btn">⬅ Về trang chủ</a>
 </header>
 
@@ -282,7 +309,7 @@ footer {
 </ul>
 <div class="links">
 <a href="https://www.facebook.com/nguyen.manh.long.806663" target="_blank">💬 Liên hệ Fanpage Facebook</a>
-
+<button class="copy-btn" onclick="copyText('8412096596')">📋 Chép ID Game để kb </button>
 </div>
 <div style="text-align:center">
 <a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
@@ -302,6 +329,7 @@ footer {
 <div class="links">
 <a href="https://www.facebook.com/nguyen.manh.long.806663" target="_blank">💬 Liên hệ Fanpage Facebook</a>
 <a href="https://www.facebook.com/share/16dJQajrpb/" target="_blank">💬 Liên hệ Fanpage Facebook</a>
+<button class="copy-btn" onclick="copyText('69836174')">📋 Chép ID Game để kb </button>
 </div>
 <div style="text-align:center">
 <a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
@@ -313,18 +341,36 @@ footer {
 </footer>
 
 <script>
+// Chức năng Sao chép ID MỚI
+function copyText(textToCopy) {
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Đã chép ID Clan: " + textToCopy);
+    }).catch(err => {
+        console.error('Không thể chép ID: ', err);
+        // Fallback cho trình duyệt cũ hơn
+        const tempInput = document.createElement('textarea');
+        tempInput.value = textToCopy;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert("Đã chép ID Clan: " + textToCopy + " (Fallback)");
+    });
+}
+
+
 const sinhTon = document.getElementById('sinh-ton');
 const solo = document.getElementById('solo');
 function showContent(id) {
-    sinhTon.classList.remove('active');
-    solo.classList.remove('active');
-    document.getElementById(id).classList.add('active');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    sinhTon.classList.remove('active');
+    solo.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 function hideContent() {
-    sinhTon.classList.remove('active');
-    solo.classList.remove('active');
-    window.scrollTo({top: 0, behavior: 'smooth'}); 
+    sinhTon.classList.remove('active');
+    solo.classList.remove('active');
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
 }
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
