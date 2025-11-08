@@ -77,7 +77,7 @@ h1#typing-title {
     color: var(--color-primary);
     text-shadow: 0 0 8px var(--neon-blue-shadow);
     font-weight: 700;
-    display: inline-block;
+    display: inline-block; 
     white-space: nowrap;
     overflow: hidden;
     border-right: .15em solid var(--color-primary);
@@ -88,7 +88,12 @@ h1#typing-title {
     50% { text-shadow: 0 0 5px var(--color-primary); }
 }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--color-primary); } }
-p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15px; }
+p.lead {
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 6px;
+    font-size: 15px;
+}
 .marquee-container {
     margin: 25px auto;
     padding: 8px 0;
@@ -117,6 +122,9 @@ p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15
     margin-top: 30px; 
 }
 .card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: float 6s ease-in-out infinite;
     background: var(--glass);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -128,8 +136,11 @@ p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     position: relative;
     overflow: hidden;
-    animation: float 6s ease-in-out infinite; 
 }
+@keyframes slideUpFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+.card-enter { animation: slideUpFadeIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
 .card::before {
     content: '';
     position: absolute;
@@ -152,10 +163,7 @@ p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15
     opacity: 0;
     transition: opacity 0.4s ease;
 }
-.card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow);
-}
+.card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow); }
 .card:hover::before { opacity: 0.6; filter: blur(18px); }
 .card:hover::after { opacity: 0.2; }
 .avatar {
@@ -170,11 +178,7 @@ p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15
     transition: all 0.35s ease; 
     position: relative;
 }
-.card:hover .avatar {
-    border-color: rgba(173, 216, 230, 0.5);
-    box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset;
-    transform: scale(1.05);
-}
+.card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
 h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
 p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
 h2 span, p.role span, h1#typing-title { display: inline-block; white-space: nowrap; overflow: hidden; }
@@ -231,90 +235,20 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <a id="backButton" href="index.html"> Quay lại trang chủ</a>
 </main>
 <script>
-const textToType = "Quản Trị Quân Đoàn";
-const memberData = [
-  { id: 'name-trung', text: 'Trung (TF.Kuronami 2k6)', speed: 80 },
-  { id: 'role-trung', text: '👑 Chủ quân đoàn', speed: 60 },
-  { id: 'name-sang', text: ' Sang (TF.Liopc 2k4)', speed: 80 },
-  { id: 'role-sang', text: '👑  Chỉ huy', speed: 60 }
+const textToType="Quản Trị Quân Đoàn";
+const memberData=[
+{id:'name-trung',text:'Trung (TF.Kuronami 2k6)',speed:80},
+{id:'role-trung',text:'👑 Chủ quân đoàn',speed:60},
+{id:'name-sang',text:' Sang (TF.Liopc 2k4)',speed:80},
+{id:'role-sang',text:'👑 Chỉ huy',speed:60}
 ];
-function typeWriterEffect(elementId, text, speed) {
-    return new Promise(resolve => {
-        const element = document.getElementById(elementId);
-        element.classList.add('typing-member'); 
-        if (!element) return resolve();
-        let i = 0;
-        element.textContent = '';
-        function type() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                element.classList.remove('typing-member');
-                element.classList.add('typing-done');
-                resolve();
-            }
-        }
-        type();
-    });
+function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
+async function runMemberLoop(){while(!0){for(const e of memberData)await typeWriterEffect(e.id,e.text,e.speed),await typeWriterEffect(e.id.replace('name','role'),memberData.find(a=>a.id===e.id.replace('name','role')).text,memberData.find(a=>a.id===e.id.replace('name','role')).speed);for(const e of memberData)document.getElementById(e.id).textContent='',document.getElementById(e.id.replace('name','role')).textContent=''}
 }
-async function runMemberLoop() {
-    while (true) {
-        for (const data of memberData) {
-            await typeWriterEffect(data.id, data.text, data.speed);
-            await typeWriterEffect(data.id.replace('name','role'), memberData.find(d=>d.id===data.id.replace('name','role')).text, memberData.find(d=>d.id===data.id.replace('name','role')).speed);
-        }
-        for (const data of memberData) {
-            document.getElementById(data.id).textContent = '';
-            document.getElementById(data.id.replace('name','role')).textContent = '';
-        }
-    }
-}
-window.onload = async function() {
-    await typeWriterEffect('typing-title', textToType, 100);
-    runMemberLoop();
-    startStarfallEffect();
-}
-const stars = [];
-const numStars = 60;
-function initStarfall() {
-    const container = document.getElementById('starfall-container');
-    const minSize = 2;
-    const maxSize = 5;
-    for (let i = 0; i < numStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('falling-star');
-        container.appendChild(star);
-        const size = Math.random() * (maxSize - minSize) + minSize;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        const speed = Math.random() * 0.5 + 0.5;
-        const xDrift = (Math.random() - 0.5) * 0.2;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        stars.push({ element: star, x, y, size, speed, xDrift, opacity: Math.random() * 0.5 + 0.5 });
-        star.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        star.style.opacity = stars[i].opacity;
-    }
-}
-function updateStarfall() {
-    for (let i = 0; i < numStars; i++) {
-        const star = stars[i];
-        star.y += star.speed;
-        star.x += star.xDrift;
-        if (star.y > window.innerHeight) {
-            star.y = -star.size;
-            star.x = Math.random() * window.innerWidth;
-            star.speed = Math.random() * 0.5 + 0.5;
-        }
-        star.element.style.transform = `translate3d(${star.x}px, ${star.y}px, 0)`;
-        star.element.style.opacity = star.opacity * (1 + Math.sin(star.y * 0.05 + star.x * 0.01) * 0.1);
-    }
-    requestAnimationFrame(updateStarfall);
-}
-function startStarfallEffect() { initStarfall(); updateStarfall(); }
+function animateCards(){document.querySelectorAll('.card').forEach((e,t)=>{e.style.animationDelay=`${t*0.15+0.5}s`,e.classList.add('card-enter')})}
+window.onload=async function(){await typeWriterEffect('typing-title',textToType,100),runMemberLoop(),startStarfallEffect(),animateCards()};
+const stars=[],numStars=60;
+function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}function startStarfallEffect(){initStarfall(),updateStarfall()}
 </script>
 </body>
 </html>
-
