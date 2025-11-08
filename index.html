@@ -6,30 +6,26 @@
 <title>Trang chủ Quân đoàn TF</title>
 <style>
 * { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:Arial,sans-serif; background:url("logo.jpg") no-repeat center center; background-size:cover; color:#fff; font-size:16px; min-height:100vh; }
-
+body { font-family:Arial,sans-serif; background:url("logo.jpg") no-repeat center center; background-size:cover; color:#fff; font-size:15px; min-height:100vh; }
 nav {
   position:fixed; top:0; left:0; width:100%;
   display:flex; align-items:center; justify-content:space-between;
-  padding:6px 15px; z-index:100;
+  padding:5px 12px; z-index:100;
   background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
   background-size:400% 100%; animation:rainbow-gradient 15s ease infinite;
   box-shadow:0 2px 8px rgba(204,0,0,0.7);
 }
 @keyframes rainbow-gradient { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
-
-.logo { height:40px; max-width:70px; border-radius:50%; box-shadow:0 0 8px rgba(255,60,0,0.8); transition:0.3s ease; }
+.logo { height:35px; max-width:60px; border-radius:50%; box-shadow:0 0 8px rgba(255,60,0,0.8); transition:0.3s ease; }
 .logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
-
 .menu-toggle {
   display:flex;
   flex-direction:column;
-  justify-content: space-around; /* thay space-between thành space-around */
+  justify-content: space-around;
   width:28px;
   height:25px;
   cursor:pointer;
 }
-
 .menu-toggle span {
   display:block;
   height:3px;
@@ -37,20 +33,18 @@ nav {
   border-radius:2px;
   transition:all 0.3s ease;
 }
-
-
 .nav-links {
-  display:flex; gap:8px;
+  display:flex;
+  gap:6px;
 }
 nav a {
-  padding:7px 12px; font-size:15px; font-weight:bold; text-decoration:none; border-radius:6px;
+  padding:6px 10px; font-size:14px; font-weight:bold; text-decoration:none; border-radius:6px;
   color:white; background:linear-gradient(135deg,#CC0000,#400000); transition:all 0.3s ease;
 }
 nav a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scale(1.05); box-shadow:0 0 10px #FF3C00; }
-
 @media (max-width: 1024px) {
   .nav-links {
-    position:absolute; top:55px; right:0;
+    position:absolute; top:45px; right:0;
     background-color: rgba(0,0,0,0.85);
     flex-direction:column;
     width:200px;
@@ -63,11 +57,10 @@ nav a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scal
   .nav-links.active { display:flex; }
   .menu-toggle { display:flex; }
 }
-
 @media (min-width: 1025px) {
   .menu-toggle { display:flex; }
   .nav-links {
-    position:absolute; top:55px; right:15px;
+    position:absolute; top:45px; right:12px;
     background-color: rgba(0,0,0,0.85);
     flex-direction:column;
     gap:0;
@@ -78,23 +71,40 @@ nav a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scal
   .nav-links a { padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); }
   .nav-links.active { display:flex; }
 }
-
 main {
-  text-align:center; padding:25px 20px; margin:110px auto 40px auto; max-width:650px;
+  text-align:center; 
+  padding:20px 15px; margin:70px auto 40px auto; max-width:650px;
   background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8);
   backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: all 0.4s ease-in-out;
 }
 main:hover { transform:scale(1.01); box-shadow:0 0 30px rgba(204,0,0,1); }
-h1 { font-size:32px; color:#FF3C00; margin-bottom:15px; text-shadow:0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
-h2 { font-size:22px; color:#FFCC00; margin:20px 0 10px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:3px; text-shadow:0 0 4px rgba(255,204,0,0.7);}
-p { font-size:16px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:15px; }
+h1 { font-size:28px; color:#FF3C00; margin-bottom:15px; text-shadow:0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
+h2 { font-size:20px; color:#FFCC00; margin:20px 0 10px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:3px; text-shadow:0 0 4px rgba(255,204,0,0.7);}
+p { font-size:15px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:15px; }
 ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
 ul li { padding:8px 0; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:15px; color:#fff; }
 ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
-
 .cta-button { display:inline-block; padding:10px 20px; margin-top:15px; background:linear-gradient(90deg,#CC0000,#FFCC00); color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px; text-transform:uppercase; transition: all 0.3s ease; box-shadow:0 3px 10px rgba(204,0,0,0.8); border:1px solid #fff; }
 .cta-button:hover { background: linear-gradient(90deg,#FFCC00,#CC0000); transform: translateY(-2px) scale(1.03); box-shadow:0 4px 15px rgba(255,60,0,1); }
-
+footer {
+  text-align:center;
+  padding:15px 10px;
+  margin-top:30px;
+  background-color: rgba(0,0,0,0.7);
+  color:#ccc;
+  font-size:13px;
+  border-top:1px solid rgba(255,60,0,0.5);
+}
+footer a {
+  color:#FFCC00;
+  text-decoration:none;
+  font-weight:bold;
+  transition:color 0.3s ease;
+}
+footer a:hover {
+  color:#FF3C00;
+  text-decoration:underline;
+}
 </style>
 </head>
 <body>
@@ -104,12 +114,12 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
     <span></span><span></span><span></span>
   </div>
   <div class="nav-links" id="nav-links">
-    <a href="gioithieu.html">📜 Giới thiệu quân đoàn</a>
-    <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
+    <a href="gioithieu.html">📜 Quản Trị quân đoàn</a>
     <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
+    <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
+    <a href="luat.html">⚔️ Luật quân đoàn</a>
     <a href="sukien.html">🗓️ Sự kiện</a>
     <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
-    <a href="luat.html">⚔️ Luật quân đoàn</a>
   </div>
 </nav>
 
@@ -133,6 +143,16 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
     <li>Tuyển chọn thành viên mới tiềm năng và phát triển cộng đồng bền vững.</li>
   </ul>
 </main>
+
+<footer style="position: relative; z-index: 200; text-align:center; padding:15px 10px; margin-top:30px; background-color: rgba(0,0,0,0.7); color:#ccc; font-size:13px; border-top:1px solid rgba(255,60,0,0.5);">
+  <p>
+    Trang web được code và thiết kế bởi 
+    <a target="_blank" style="color:#FFCC00; font-weight:bold; text-decoration:none;">TF.Kuronami</a>.
+    © 2025 Quân đoàn TF.
+  </p>
+</footer>
+
+</footer>
 
 <script>
 const menuToggle = document.getElementById('mobile-menu');
