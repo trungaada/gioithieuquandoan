@@ -8,7 +8,6 @@
 /* --- 1. Reset và Thiết lập Chung --- */
 * { 
     box-sizing:border-box; margin:0; padding:0; 
-    /* Đảm bảo cuộn mượt và phản hồi tốt hơn trên iOS/Android */
     -webkit-tap-highlight-color: transparent; 
     -webkit-overflow-scrolling: touch; 
 }
@@ -99,7 +98,6 @@ main {
     text-align:center; 
     padding:20px 15px; margin:70px auto 40px auto; max-width:650px;
     background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8);
-    /* Tối ưu Backdrop Filter cho WebKit (iOS/Safari) */
     backdrop-filter: blur(5px); 
     -webkit-backdrop-filter: blur(5px); 
     transition: all 0.4s ease-in-out;
@@ -111,6 +109,30 @@ p { font-size:15px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); ma
 ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
 ul li { padding:8px 0; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:15px; color:#fff; }
 ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
+
+/* --- CSS ĐẶC BIỆT cho Hiệu ứng Chữ Chạy (Typing Effect) --- */
+.slogan { 
+    font-size: 16px; 
+    margin-top: -5px; 
+    margin-bottom: 20px;
+}
+.typing-text {
+    border-right: 3px solid #FFCC00; /* Hiệu ứng con trỏ nhấp nháy */
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap; /* Ngăn không cho chữ xuống dòng */
+    overflow: hidden; /* Ẩn chữ cho đến khi được viết ra */
+    animation: 
+        blink-caret 0.75s step-end infinite; /* Kích hoạt con trỏ nhấp nháy */
+}
+
+/* Keyframes cho hiệu ứng nhấp nháy */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #FFCC00; }
+}
+/* --- Kết thúc CSS Chữ Chạy --- */
+
 .cta-button { display:inline-block; padding:10px 20px; margin-top:15px; background:linear-gradient(90deg,#CC0000,#FFCC00); color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px; text-transform:uppercase; transition: all 0.3s ease; box-shadow:0 3px 10px rgba(204,0,0,0.8); border:1px solid #fff; }
 .cta-button:hover { background: linear-gradient(90deg,#FFCC00,#CC0000); transform: translateY(-2px) scale(1.03); box-shadow:0 4px 15px rgba(255,60,0,1); }
 
@@ -131,10 +153,32 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
+    /* Đảm bảo hiệu ứng nhấp nháy không bị ẩn */
+    display: inline-block; 
 }
 .main-footer a:hover {
     color: #FF3C00;
     text-decoration: underline;
+}
+
+/* --- Hiệu ứng nhấp nháy cho chủ nhân trang web --- */
+.pulsating-author {
+    animation: glow-pulse 2s infinite alternate; /* 2s cho mỗi chu kỳ, lặp vô hạn, đi tới đi lui */
+}
+
+@keyframes glow-pulse {
+    0% {
+        text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5);
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 10px rgba(255,204,0,0.9), 0 0 20px rgba(255,100,0,0.7);
+        transform: scale(1.05); /* Hiệu ứng phình to nhẹ */
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5);
+        transform: scale(1);
+    }
 }
 </style>
 </head>
@@ -155,10 +199,16 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 </nav>
 
 <main>
-    <h1>Quân đoàn TF — TitanForce²</h1>
+    <h1>Quân đoàn TF — TitanForce</h1>
+    <p class="slogan">
+        <span id="typed-slogan" class="typing-text"></span> 
+    </p>
     <p>
-        Quân đoàn TF là một cộng đồng game thủ <strong>năng động, đoàn kết</strong> và luôn hướng tới sự phát triển bền vững.
-        Chúng tôi tập trung vào việc <strong>rèn luyện kỹ năng</strong>, tham gia các giải đấu và hỗ trợ lẫn nhau trong mọi trận chiến.
+        Quân đoàn TF là một cộng đồng game thủ <strong>năng động, đoàn kết</strong> và luôn hướng tới sự phát triển bền vững. 
+        Chúng tôi tin rằng <strong>đam mê phải đi đôi với sự chuyên nghiệp</strong>.
+        Chúng tôi tập trung vào việc <strong>rèn luyện kỹ năng</strong>, tham gia các giải đấu và hỗ trợ lẫn nhau trong mọi trận chiến. 
+        <br>
+        <strong>Bạn đã sẵn sàng để khẳng định bản thân và cùng chúng tôi chinh phục những đỉnh cao mới?</strong>
     </p>
 
     <h2>Sứ mệnh</h2>
@@ -167,12 +217,15 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
     </p>
 
     <h2>Hoạt động chính</h2>
-    <ul>
-        <li>Huấn luyện kỹ năng chiến đấu và phối hợp nhóm chuyên sâu.</li>
-        <li>Tổ chức các giải đấu nội bộ định kỳ và tham gia các giải đấu lớn bên ngoài.</li>
-        <li>Chia sẻ kinh nghiệm, mẹo chơi, và xây dựng chiến thuật hiệu quả.</li>
-        <li>Tuyển chọn thành viên mới tiềm năng và phát triển cộng đồng bền vững.</li>
-    </ul>
+<ul>
+    <li>**Huấn luyện chuyên sâu Battle Royale:** Nắm vững kỹ năng sinh tồn, kiểm soát khu vực, và di chuyển chiến lược trong bản đồ lớn.</li>
+    <li>**Tổ chức Luyện tập Đấu đội 4v4:** Nâng cao khả năng phối hợp nhóm, xử lý tình huống và xây dựng đội hình chuẩn mực.</li>
+    <li>**Thi đấu Solo 1vs1/2vs2:** Rèn luyện kỹ năng cá nhân, phản xạ nhanh và tư duy chiến thuật độc lập.</li>
+    <li>Tổ chức các giải đấu nội bộ định kỳ và tham gia các giải đấu lớn bên ngoài.</li>
+    <li>Chia sẻ kinh nghiệm, mẹo chơi, và xây dựng chiến thuật hiệu quả.</li>
+    <li>Tuyển chọn thành viên mới tiềm năng và phát triển cộng đồng bền vững.</li>
+    <li>Xây dựng nội dung (livestream, video) chất lượng, quảng bá hình ảnh của Quân đoàn.</li>
+</ul>
     
     <a href="tuyenthanhvien.html" class="cta-button">Gia Nhập Quân đoàn Ngay!</a>
 </main>
@@ -180,23 +233,56 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 <footer class="main-footer">
     <p>
         Trang web được code và thiết kế bởi 
-        <a target="_blank" href="#">TF.Kuronami</a>. 
+        <a target="_blank" href="#" class="pulsating-author">TF.Kuronami</a>. 
         © 2025 Quân đoàn TF.
     </p>
 </footer>
 
 <script>
-const menuToggle = document.getElementById('mobile-menu');
-const navLinks = document.getElementById('nav-links');
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+// Hàm tạo hiệu ứng chữ chạy (Typing Effect)
+function typeWriter(text, i, fnCallback) {
+    const element = document.getElementById("typed-slogan");
+    if (!element) return; // Bảo vệ nếu phần tử không tồn tại
 
-window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1025 && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
+    if (i < text.length) {
+        // Thêm ký tự hiện tại
+        element.innerHTML = text.substring(0, i + 1);
+
+        // Đợi 100ms trước khi thêm ký tự tiếp theo
+        setTimeout(function() {
+            typeWriter(text, i + 1, fnCallback)
+        }, 80); // Tốc độ gõ chữ: 80ms/ký tự (nhanh hơn 100ms)
+    } else if (typeof fnCallback == 'function') {
+        // Sau khi hoàn thành, gọi hàm callback (nếu có)
+        fnCallback();
     }
-});
+}
+
+// Khởi chạy tất cả các hàm
+window.onload = function() {
+    // 1. Khởi tạo hiệu ứng Menu Mobile
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1025 && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+
+    // 2. Kích hoạt hiệu ứng Chữ Chạy cho Slogan
+    const sloganText = "TitanForce: Chiến Thắng Bằng Sức Mạnh Đồng Đội Và Kỷ Luật Thép!";
+    typeWriter(sloganText, 0, function() {
+        // Sau khi hoàn thành, xóa hiệu ứng con trỏ (blink-caret) để chữ đứng yên
+        const element = document.getElementById("typed-slogan");
+        if (element) {
+            element.style.borderRight = 'none';
+        }
+    });
+};
 </script>
 </body>
 </html>
