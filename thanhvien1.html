@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Giới thiệu thành viên — Quân đoàn TF</title>
+<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #030a18;
+    --card: #0f1724;
+    --accent: #6ee7b7;
+    --accent-shadow: rgba(110, 231, 183, 0.5);
+    --muted: #9aa4b2;
+    --glass: rgba(255, 255, 255, 0.06);
+    --radius: 18px;
+    --color-primary: #00FFFF;
+    --color-secondary: #3b82f6;
+    --neon-blue-shadow: rgba(0, 255, 255, 0.8);
+    --member-name-color: #FF0000;
+    --member-name-shadow: rgba(255, 0, 0, 0.8);
+    --member-role-color: #FFD700;
+    font-family: 'Poppins', system-ui, sans-serif;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: url('logo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e6eef6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 20px 80px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
+    background-size: 30px 30px;
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+}
+body {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.2s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes float {
+    0% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
+    50% { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
+    100% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
+}
+main {
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+header { margin-bottom: 30px; }
+h1#typing-title {
+    font-size: clamp(28px, 6vw, 46px);
+    color: var(--color-primary);
+    text-shadow: 0 0 8px var(--neon-blue-shadow);
+    font-weight: 700;
+    display: inline-block; 
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid var(--color-primary);
+    animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite; 
+}
+h1#typing-title.typing-done {
+    border-right: none;
+    animation: flicker 3s infinite alternate; 
+}
+@keyframes flicker {
+    0%, 100% { text-shadow: 0 0 10px var(--neon-blue-shadow), 0 0 20px rgba(0, 255, 255, 0.4); }
+    50% { text-shadow: 0 0 5px var(--color-primary); }
+}
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--color-primary); } }
+p.lead {
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 6px;
+    font-size: 15px;
+}
+.marquee-container {
+    margin: 25px auto;
+    padding: 8px 0;
+    width: 100%;
+    background: var(--glass);
+    border-top: 1px solid rgba(110, 231, 183, 0.2);
+    border-bottom: 1px solid rgba(110, 231, 183, 0.2);
+    box-shadow: 0 0 10px rgba(110, 231, 183, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+.marquee-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px var(--accent-shadow);
+    white-space: nowrap;
+}
+.members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 25px;
+    width: 100%;
+    margin-top: 30px; 
+}
+.card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: float 6s ease-in-out infinite;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+@keyframes slideUpFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+.card-enter { animation: slideUpFadeIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    background: linear-gradient(60deg, var(--color-primary) 0%, var(--accent) 100%);
+    opacity: 0;
+    z-index: -2;
+    filter: blur(15px);
+    transition: opacity 0.4s ease, filter 0.4s ease;
+}
+.card::after {
+    content: "";
+    position: absolute;
+    inset: -5px; 
+    border-radius: var(--radius);
+    background: inherit;
+    z-index: -3;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow); }
+.card:hover::before { opacity: 0.6; filter: blur(18px); }
+.card:hover::after { opacity: 0.2; }
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto 12px;
+    border: 3px solid rgba(255, 100, 100, 0.8);
+    box-shadow: 0 0 15px rgba(255, 100, 100, 0.5), 0 0 25px rgba(255, 100, 100, 0.3) inset;
+    transition: all 0.35s ease; 
+    position: relative;
+}
+.card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
+h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
+p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
+h2 span, p.role span { display: inline-block; white-space: nowrap; overflow: hidden; }
+.typing-member { border-right: .15em solid currentColor !important; animation: blink-caret-member .75s step-end infinite !important; }
+.typing-done { border-right: none !important; animation: none !important; }
+@keyframes blink-caret-member { from, to { border-color: transparent } 50% { border-color: currentColor; } }
+.badge { display: inline-block; margin: 3px; padding: 5px 10px; font-size: 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: rgba(110,231,183,0.08); transition: 0.3s; }
+.card:hover .badge { background: var(--accent); color: var(--bg); box-shadow: 0 0 8px var(--accent-shadow); }
+@keyframes neon-pulse { 0% { box-shadow: 0 0 10px rgba(110, 231, 183, 0.5), 0 0 20px rgba(110, 231, 183, 0.3) inset; transform: scale(1); } 100% { box-shadow: 0 0 20px rgba(110, 231, 183, 0.8), 0 0 35px rgba(110, 231, 183, 0.5) inset; transform: scale(1.02); } }
+@keyframes neon-flicker { 0%,100%{ box-shadow:0 0 5px var(--neon-blue-shadow),0 0 10px var(--neon-blue-shadow),0 0 15px var(--neon-blue-shadow); border-color: var(--color-primary); text-shadow:0 0 5px rgba(0,255,255,0.7);}50%{box-shadow:0 0 2px var(--color-primary),0 0 4px var(--color-primary); border-color:rgba(0,255,255,0.5); text-shadow:none;} }
+a#backButton { display: inline-block; margin-top: 35px; color: var(--color-primary); text-decoration: none; border: 1px solid var(--color-primary); border-radius: 10px; padding: 10px 18px; font-weight: 600; background: rgba(0, 255, 255, 0.05); transition: 0.3s; animation: neon-flicker 2s ease-in-out infinite alternate; }
+a#backButton:hover { background: var(--color-primary); color: var(--bg); box-shadow: 0 0 15px var(--neon-blue-shadow), 0 0 30px rgba(0, 255, 255, 0.4); animation: none; text-shadow: none; }
+@media (min-width: 1024px) { 
+    .members { 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 30px; 
+    } 
+}
+@media (max-width: 1023px) and (min-width: 768px) { 
+    .members { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px;
+    }
+}
+@media (max-width: 767px) { 
+    body { padding: 30px 10px 50px; } 
+    h1#typing-title { font-size: clamp(24px, 8vw, 36px); } 
+    p.lead { font-size: 14px; }
+    .marquee-text { font-size: 12px; }
+    .members { gap: 15px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } 
+    .card { padding: 15px; border-radius: 12px; }
+    .avatar { width: 70px; height: 70px; margin-bottom: 8px; } 
+    h2 { font-size: 16px; }
+    p.role { font-size: 11px; margin-bottom: 8px; }
+    .badge { padding: 3px 8px; font-size: 10px; }
+    a#backButton { padding: 8px 15px; font-size: 14px; }
+}
+.falling-star { position: absolute; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; will-change: transform, opacity; transition: none; }
+</style>
+</head>
+<body>
+<div id="starfall-container" style="position: fixed; inset: 0; overflow: hidden; z-index: 1;"></div>
+<main>
+<header>
+<h1 id="typing-title"></h1>
+<p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
+</header>
+<div class="marquee-container">
+<marquee class="marquee-text" direction="left" scrollamount="6">
+⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay! | Sức mạnh đến từ kỷ luật và đoàn kết.
+</marquee>
+</div>
+<section class="members">
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('bich.jpg');"></div>
+<h2><span id="name-tv3"></span></h2>
+<p class="role"><span id="role-tv3"></span></p>
+<div class="badges">
+<span class="badge">Bắn hay</span>
+<span class="badge">Hay cọc</span>
+<span class="badge">Hòa đồng</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('p.duy.jpg');"></div>
+<h2><span id="name-tv4"></span></h2>
+<p class="role"><span id="role-tv4"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Hòa đồng</span>
+</div>
+</div>
+
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('tuan.jpg');"></div>
+<h2><span id="name-tv5"></span></h2>
+<p class="role"><span id="role-tv5"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Hòa đồng</span>
+<span class="badge">Trùm mõm</span>
+</div>
+</div>
+
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('anh.jpg');"></div>
+<h2><span id="name-tv6"></span></h2>
+<p class="role"><span id="role-tv6"></span></p>
+<div class="badges">
+<span class="badge">Bắn hay</span>
+<span class="badge">Kiêm tón</span>
+<span class="badge">Hòa đồng</span>
+<span class="badge">Vui tính</span>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('hong.jpg');"></div>
+<h2><span id="name-tv7"></span></h2>
+<p class="role"><span id="role-tv7"></span></p>
+<div class="badges">
+<span class="badge">Dễ thương</span>
+<span class="badge">Hay trêu</span>
+<span class="badge">Hòa đồng</span>
+<span class="badge">Vui tính</span>
+</div>
+</div>
+
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('long.jpg');"></div>
+<h2><span id="name-tv8"></span></h2>
+<p class="role"><span id="role-tv8"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Tính hòa đồng</span>
+</div>
+</div>
+
+<div class="card">
+<div class="avatar" style="background-image:url('giahuy.jpg');"></div>
+<h2><span id="name-tv9"></span></h2>
+<p class="role"><span id="role-tv9"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Biết tư duy</span>
+<span class="badge">Hòa đồng</span>
+</div>
+
+
+</section>
+<a id="backButton" href="index.html"> Quay lại trang chủ</a>
+</main>
+<script>
+const textToType = "Giới thiệu thành viên TF1 ";
+const memberData = [
+     {id:'name-tv3',text:' (TF.Ntiến)',speed:75},
+    {id:'role-tv3',text:'Thành viên',speed:55},
+    {id:'name-tv4',text:' (TF.PHÚC DUY)',speed:75},
+    {id:'role-tv4',text:'Thành viên',speed:55},
+    {id:'name-tv5',text:' (TF.Tuấn)',speed:75},
+    {id:'role-tv5',text:'Thành viên',speed:55},
+    {id:'name-tv6',text:'(TF. Quốc Anh)',speed:75},
+    {id:'role-tv6',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv7',text:'  (TF.Trúc Hồng)',speed:75},
+    {id:'role-tv7',text:'Thành viên',speed:55},
+    {id:'name-tv8',text:'  (TF.Long)',speed:75},
+    {id:'role-tv8',text:' Thành viên kì cựu',speed:55},
+
+    {id:'name-tv9',text:'(TF. Gia Huy)',speed:75},
+    {id:'role-tv9',text:'Thành viên ',speed:55},
+];
+function typeWriterEffect(elementId, text, speed) {
+    return new Promise(resolve => {
+        const element = document.getElementById(elementId);
+        if (!element) return resolve();
+        element.classList.remove('typing-done');
+        element.classList.add('typing-member');
+        let i = 0;
+        element.textContent = '';
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                element.classList.remove('typing-member');
+                element.classList.add('typing-done');
+                resolve();
+            }
+        }
+        type();
+    });
+}
+async function runMemberTypingOnce() {
+    for (const member of memberData) {
+        if (member.id.startsWith('name-')) {
+            const roleId = member.id.replace('name', 'role');
+            const roleItem = memberData.find(item => item.id === roleId);
+            document.getElementById(member.id).textContent = '';
+            document.getElementById(roleId).textContent = '';
+            await typeWriterEffect(member.id, member.text, member.speed);
+            if (roleItem) { await typeWriterEffect(roleItem.id, roleItem.text, roleItem.speed); }
+        }
+    }
+}
+function animateCards() {
+    document.querySelectorAll('.card').forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.15 + 0.5}s`;
+        card.classList.add('card-enter');
+    });
+}
+window.onload = async function() {
+    await typeWriterEffect('typing-title', textToType, 100);
+    document.getElementById('typing-title').classList.add('typing-done');
+    runMemberTypingOnce();
+    animateCards();
+    startStarfallEffect();
+};
+const stars = [];
+const numStars = 60;
+function initStarfall() {
+    const container = document.getElementById('starfall-container');
+    const minSize = 2;
+    const maxSize = 5;
+    for(let i = 0; i < numStars; i++){
+        const star = document.createElement('div');
+        star.classList.add('falling-star');
+        container.appendChild(star);
+        const size = Math.random() * (maxSize - minSize) + minSize;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const speed = Math.random() * .5 + .5;
+        const xDrift = (Math.random() - .5) * .2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        stars.push({element:star, x:x, y:y, size:size, speed:speed, xDrift:xDrift, opacity:Math.random()*.5+.5});
+        star.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        star.style.opacity = stars[i].opacity;
+    }
+}
+function updateStarfall() {
+    for(let i = 0; i < numStars; i++){
+        const star = stars[i];
+        star.y += star.speed;
+        star.x += star.xDrift;
+        if (star.y > window.innerHeight) {
+            star.y = -star.size;
+            star.x = Math.random() * window.innerWidth;
+            star.speed = Math.random() * .5 + .5;
+        }
+        star.element.style.transform = `translate3d(${star.x}px, ${star.y}px, 0)`;
+        star.element.style.opacity = star.opacity * (1 + Math.sin(star.y * .05 + star.x * .01) * .1);
+    }
+    requestAnimationFrame(updateStarfall);
+}
+function startStarfallEffect() { initStarfall(); updateStarfall(); }
+window.addEventListener('resize', () => {});
+</script>
+</body>
+</html>
+
