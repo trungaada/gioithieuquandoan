@@ -194,9 +194,31 @@ h2 span, p.role span { display: inline-block; white-space: nowrap; overflow: hid
 @keyframes neon-flicker { 0%,100%{ box-shadow:0 0 5px var(--neon-blue-shadow),0 0 10px var(--neon-blue-shadow),0 0 15px var(--neon-blue-shadow); border-color: var(--color-primary); text-shadow:0 0 5px rgba(0,255,255,0.7);}50%{box-shadow:0 0 2px var(--color-primary),0 0 4px var(--color-primary); border-color:rgba(0,255,255,0.5); text-shadow:none;} }
 a#backButton { display: inline-block; margin-top: 35px; color: var(--color-primary); text-decoration: none; border: 1px solid var(--color-primary); border-radius: 10px; padding: 10px 18px; font-weight: 600; background: rgba(0, 255, 255, 0.05); transition: 0.3s; animation: neon-flicker 2s ease-in-out infinite alternate; }
 a#backButton:hover { background: var(--color-primary); color: var(--bg); box-shadow: 0 0 15px var(--neon-blue-shadow), 0 0 30px rgba(0, 255, 255, 0.4); animation: none; text-shadow: none; }
-@media (min-width: 1024px) { .members { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 1023px) and (min-width: 768px) { .members { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 767px) { body { padding: 40px 15px; } .avatar { width: 80px; height: 80px; } h1#typing-title { font-size: clamp(24px, 8vw, 36px); } .members { gap: 15px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } .card { padding: 20px; } }
+@media (min-width: 1024px) { 
+    .members { 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 30px; 
+    } 
+}
+@media (max-width: 1023px) and (min-width: 768px) { 
+    .members { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px;
+    }
+}
+@media (max-width: 767px) { 
+    body { padding: 30px 10px 50px; } 
+    h1#typing-title { font-size: clamp(24px, 8vw, 36px); } 
+    p.lead { font-size: 14px; }
+    .marquee-text { font-size: 12px; }
+    .members { gap: 15px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } 
+    .card { padding: 15px; border-radius: 12px; }
+    .avatar { width: 70px; height: 70px; margin-bottom: 8px; } 
+    h2 { font-size: 16px; }
+    p.role { font-size: 11px; margin-bottom: 8px; }
+    .badge { padding: 3px 8px; font-size: 10px; }
+    a#backButton { padding: 8px 15px; font-size: 14px; }
+}
 .falling-star { position: absolute; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; will-change: transform, opacity; transition: none; }
 </style>
 </head>
@@ -213,28 +235,14 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 </marquee>
 </div>
 <section class="members">
-<div class="card">
-<div class="avatar" style="background-image:url('trung.jpg');"></div>
-<h2><span id="name-trung"></span></h2>
-<p class="role"><span id="role-trung"></span></p>
-<div class="badges">
-<span class="badge">Lãnh đạo</span>
-<span class="badge">Chiến thuật</span>
-<span class="badge">Tuyển quân</span>
+
+</div>
+</div>
+
 </div>
 </div>
 <div class="card">
-<div class="avatar" style="background-image:url('sang.jpg');"></div>
-<h2><span id="name-sang"></span></h2>
-<p class="role"><span id="role-sang"></span></p>
-<div class="badges">
-<span class="badge">Dẫn dắt</span>
-<span class="badge">Huấn luyện</span>
-<span class="badge">Phân tích</span>
-</div>
-</div>
-<div class="card">
-<div class="avatar" style="background-image:url('avatar-3.jpg');"></div>
+<div class="avatar" style="background-image:url('duong.jpg');"></div>
 <h2><span id="name-tv3"></span></h2>
 <p class="role"><span id="role-tv3"></span></p>
 <div class="badges">
@@ -244,7 +252,7 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 </div>
 </div>
 <div class="card">
-<div class="avatar" style="background-image:url('avatar-4.jpg');"></div>
+<div class="avatar" style="background-image:url('huy.jpg');"></div>
 <h2><span id="name-tv4"></span></h2>
 <p class="role"><span id="role-tv4"></span></p>
 <div class="badges">
@@ -268,8 +276,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv6"></span></h2>
 <p class="role"><span id="role-tv6"></span></p>
 <div class="badges">
-<span class="badge">Chiến thuật</span>
-<span class="badge">Điều hành</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -277,8 +285,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv7"></span></h2>
 <p class="role"><span id="role-tv7"></span></p>
 <div class="badges">
-<span class="badge">Hậu cần</span>
-<span class="badge">Tổ chức</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -286,8 +294,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv8"></span></h2>
 <p class="role"><span id="role-tv8"></span></p>
 <div class="badges">
-<span class="badge">Truyền thông</span>
-<span class="badge">Sáng tạo</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -295,8 +303,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv9"></span></h2>
 <p class="role"><span id="role-tv9"></span></p>
 <div class="badges">
-<span class="badge">Tân binh</span>
-<span class="badge">Nhiệt huyết</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -304,8 +312,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv10"></span></h2>
 <p class="role"><span id="role-tv10"></span></p>
 <div class="badges">
-<span class="badge">Cố vấn</span>
-<span class="badge">Kinh nghiệm</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -313,8 +321,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv11"></span></h2>
 <p class="role"><span id="role-tv11"></span></p>
 <div class="badges">
-<span class="badge">Cận vệ</span>
-<span class="badge">Bảo vệ</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -322,8 +330,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv12"></span></h2>
 <p class="role"><span id="role-tv12"></span></p>
 <div class="badges">
-<span class="badge">Phân tích</span>
-<span class="badge">Nghiên cứu</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -331,8 +339,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv13"></span></h2>
 <p class="role"><span id="role-tv13"></span></p>
 <div class="badges">
-<span class="badge">Sự kiện</span>
-<span class="badge">Cộng đồng</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 <div class="card">
@@ -340,8 +348,8 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <h2><span id="name-tv14"></span></h2>
 <p class="role"><span id="role-tv14"></span></p>
 <div class="badges">
-<span class="badge">Giám sát</span>
-<span class="badge">Đánh giá</span>
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
 </div>
 </div>
 </section>
@@ -350,34 +358,29 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <script>
 const textToType = "Giới thiệu thành viên Quân đoàn";
 const memberData = [
-    {id:'name-trung',text:'Trung (TF.Kuronami 2k6)',speed:80},
-    {id:'role-trung',text:'👑 Chủ quân đoàn',speed:60},
-    {id:'name-sang',text:' Sang (TF.Liopc 2k4)',speed:80},
-    {id:'role-sang',text:'👑 Chỉ huy',speed:60},
-    {id:'name-tv3',text:'Thành Viên 3 (TF.Hunter)',speed:75},
-    {id:'role-tv3',text:'Phó Chỉ Huy',speed:55},
-    {id:'name-tv4',text:'Thành Viên 4 (TF.Viper)',speed:75},
-    {id:'role-tv4',text:'Đội trưởng Đột Kích',speed:55},
-    {id:'name-tv5',text:'Thành Viên 5 (TF.Shadow)',speed:75},
-    {id:'role-tv5',text:'Chuyên Viên Chiến Thuật',speed:55},
-    {id:'name-tv6',text:'Thành Viên 6 (TF.Ghost)',speed:75},
-    {id:'role-tv6',text:'Quản Lý Nội Bộ',speed:55},
-    {id:'name-tv7',text:'Thành Viên 7 (TF.Phoenix)',speed:75},
-    {id:'role-tv7',text:'Trưởng Ban Hậu Cần',speed:55},
-    {id:'name-tv8',text:'Thành Viên 8 (TF.Raptor)',speed:75},
-    {id:'role-tv8',text:'Phụ Trách Truyền Thông',speed:55},
-    {id:'name-tv9',text:'Thành Viên 9 (TF.Blaze)',speed:75},
-    {id:'role-tv9',text:'Thành viên nòng cốt',speed:55},
-    {id:'name-tv10',text:'Thành Viên 10 (TF.Legend)',speed:75},
-    {id:'role-tv10',text:'Thành viên nòng cốt',speed:55},
-    {id:'name-tv11',text:'Thành Viên 11 (TF.Sentinel)',speed:75},
-    {id:'role-tv11',text:'Thành viên nòng cốt',speed:55},
-    {id:'name-tv12',text:'Thành Viên 12 (TF.Alpha)',speed:75},
-    {id:'role-tv12',text:'Thành viên nòng cốt',speed:55},
-    {id:'name-tv13',text:'Thành Viên 13 (TF.Nova)',speed:75},
-    {id:'role-tv13',text:'Thành viên nòng cốt',speed:55},
-    {id:'name-tv14',text:'Thành Viên 14 (TF.Zeta)',speed:75},
-    {id:'role-tv14',text:'Thành viên nòng cốt',speed:55}
+    
+    {id:'name-tv3',text:' (TF.Dương)',speed:75},
+    {id:'role-tv3',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv4',text:' (TF.Huy)',speed:75},
+    {id:'role-tv4',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv5',text:'(TF.Bích)',speed:75},
+    {id:'role-tv5',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv6',text:' (TF.Duy)',speed:75},
+    {id:'role-tv6',text:'Thành viên',speed:55},
+    {id:'name-tv7',text:' (TF.Bảo)',speed:75},
+    {id:'role-tv7',text:'Thành viên',speed:55},
+    {id:'name-tv8',text:' (TF.Tuấn)',speed:75},
+    {id:'role-tv8',text:'Thành viên',speed:55},
+    {id:'name-tv9',text:' (TF.Cường)',speed:75},
+    {id:'role-tv9',text:'Thành viên',speed:55},
+    {id:'name-tv10',text:'(TF. Quốc Anh)',speed:75},
+    {id:'role-tv10',text:'',speed:55},
+    {id:'name-tv11',text:' (TF.Thắngl)',speed:75},
+    {id:'role-tv11',text:'Thành viên',speed:55},
+    {id:'name-tv12',text:'  (TF.Trúc Hồng)',speed:75},
+    {id:'role-tv12',text:'Thành viên',speed:55},
+    {id:'name-tv13',text:'  (TF.Đức)',speed:75},
+    {id:'role-tv13',text:' Thành viên',speed:55},
 ];
 function typeWriterEffect(elementId, text, speed) {
     return new Promise(resolve => {
