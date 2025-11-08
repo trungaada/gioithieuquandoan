@@ -4,20 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang chủ Quân đoàn TF</title>
-  <style>
+ <style>
   * {
     box-sizing: border-box;
   }
 
   body {
-    /* Tăng font-size cơ bản từ 15px lên 17px */
     font-family: Arial, sans-serif;
     background: url("logo.jpg") no-repeat center center;
     background-size: cover;
     color: #fff;
     margin: 0;
     min-height: 100vh;
-    font-size: 17px; /* ĐÃ TĂNG */
+    font-size: 16px; /* Điều chỉnh: Từ 17px xuống 16px */
   }
 
   /* NAVIGATION */
@@ -30,8 +29,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 15px 10px; /* Tăng padding */
+    gap: 15px; /* Giảm gap */
+    padding: 10px; /* Giảm padding một chút */
     z-index: 100;
     background-image: linear-gradient(
       to right,
@@ -58,9 +57,9 @@
   }
 
   .logo {
-    height: 50px; /* Tăng kích thước logo */
+    height: 45px; /* Điều chỉnh: Từ 50px xuống 45px */
     width: auto;
-    max-width: 100px; /* Tăng max-width logo */
+    max-width: 90px;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255,60,0,0.8);
     transition: all 0.3s ease;
@@ -75,7 +74,7 @@
   .nav-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px; /* Tăng khoảng cách giữa các link */
+    gap: 6px; /* Giảm gap */
     justify-content: center;
     width: 100%;
     margin-bottom: 5px;
@@ -84,11 +83,11 @@
 
   nav a {
     display: inline-block;
-    padding: 10px 15px; /* Tăng padding link */
-    font-size: 16px; /* Tăng font-size link từ 14px lên 16px */
+    padding: 8px 12px; /* Điều chỉnh: Giảm padding để gọn hơn */
+    font-size: 15px; /* Điều chỉnh: Từ 16px xuống 15px */
     font-weight: bold;
     text-decoration: none;
-    border-radius: 8px; /* Bo góc lớn hơn */
+    border-radius: 6px;
     color: white;
     background: linear-gradient(135deg, #CC0000, #400000);
     transition: all 0.3s ease;
@@ -102,14 +101,14 @@
   /* MAIN CONTENT */
   main {
     text-align: center;
-    padding: 40px 20px; /* Tăng padding main */
-    margin-top: 120px; /* Tăng margin-top để tránh thanh nav */
+    padding: 30px 15px;
+    margin-top: 100px; /* Điều chỉnh: Giảm margin-top */
     background-color: rgba(10,10,10,0.8);
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 0 20px rgba(255,60,0,0.8);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    max-width: 700px; /* Tăng max-width */
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     transition: all 0.5s ease-in-out;
@@ -120,58 +119,58 @@
   }
 
   h1 {
-    font-size: 36px; /* Tăng font-size H1 từ 30px lên 36px */
+    font-size: 32px; /* Điều chỉnh: Từ 36px xuống 32px */
     color: #FF3C00;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-shadow: 0 0 8px #FF3C00, 0 0 15px rgba(255,60,0,0.5);
     letter-spacing: 1px;
   }
   h2 {
-    font-size: 24px; /* Tăng font-size H2 từ 20px lên 24px */
+    font-size: 22px; /* Điều chỉnh: Từ 24px xuống 22px */
     color: #FFCC00;
-    margin-top: 25px;
+    margin-top: 20px;
     border-bottom: 2px solid #FFCC00;
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
     text-shadow: 0 0 4px rgba(255,204,0,0.7);
   }
   p {
-    font-size: 17px; /* Tăng font-size P từ 15px lên 17px */
-    line-height: 1.6; /* Tăng line-height cho dễ đọc */
+    font-size: 16px; /* Điều chỉnh: Từ 17px xuống 16px */
+    line-height: 1.5;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   ul {
     list-style: none;
     padding: 0;
     text-align: left;
-    max-width: 600px; /* Tăng max-width UL */
-    margin: 20px auto;
+    max-width: 500px;
+    margin: 15px auto;
   }
   ul li {
-    padding: 10px 0; /* Tăng padding LI */
-    margin-bottom: 8px;
+    padding: 8px 0;
+    margin-bottom: 5px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-size: 16px; /* Tăng font-size LI từ 14px lên 16px */
+    font-size: 15px; /* Điều chỉnh: Từ 16px xuống 15px */
     color: #fff;
   }
   ul li::before {
     content: "🚀";
-    margin-right: 10px;
+    margin-right: 8px;
     color: #FF3C00;
     font-weight: bold;
   }
 
   .cta-button {
     display: inline-block;
-    padding: 12px 25px; /* Tăng padding nút CTA */
-    margin-top: 20px;
+    padding: 10px 20px;
+    margin-top: 15px;
     background: linear-gradient(90deg, #CC0000, #FFCC00);
     color: white;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
-    font-size: 18px; /* Tăng font-size nút CTA từ 16px lên 18px */
+    font-size: 16px; /* Điều chỉnh: Từ 18px xuống 16px */
     text-transform: uppercase;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(204,0,0,0.8);
@@ -183,17 +182,16 @@
     box-shadow: 0 4px 15px rgba(255,60,0,1);
   }
 
-  /* MEDIA QUERY DESKTOP (Điều chỉnh nhỏ lại nếu cần cho desktop) */
+  /* MEDIA QUERY DESKTOP */
   @media (min-width: 768px) {
     nav {
       flex-wrap: nowrap;
       gap: 30px;
       padding: 10px 20px;
     }
-    .logo { height: 60px; margin-bottom: 0; } /* Logo lớn hơn trên Desktop */
-    .nav-links { flex-wrap: nowrap; gap: 15px; width: auto; margin-bottom: 0; }
-    nav a { padding: 10px 18px; font-size: 15px; } /* Giữ font-size vừa phải trên Desktop */
-    main { max-width: 800px; } /* Main rộng hơn trên Desktop */
+    .logo { height: 50px; margin-bottom: 0; }
+    .nav-links { flex-wrap: nowrap; gap: 10px; width: auto; margin-bottom: 0; }
+    nav a { padding: 8px 15px; font-size: 14px; }
   }
 </style>
 </head>
