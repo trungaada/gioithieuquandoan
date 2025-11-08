@@ -16,13 +16,13 @@
       min-height: 100vh;
       font-size: 14px;
     }
-    /* --- NAV BAR: GIỮ HIỆU ỨNG CẦU VỒNG, NHƯNG LÀM MỜ NỀN ĐỎ */
+    
+    /* === CĂN CHỈNH CHO THIẾT BỊ DI ĐỘNG (MOBILE-FRIENDLY) === */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      /* Giữ nguyên hiệu ứng gradient cầu vồng */
       background-image: linear-gradient(
         to right,
         #ff0000, 
@@ -37,12 +37,15 @@
       animation: rainbow-gradient 15s ease infinite;
       
       display: flex; 
+      /* THAY ĐỔI: Cho phép các mục tự động xuống hàng */
+      flex-wrap: wrap; 
+      /* THAY ĐỔI: Căn giữa theo chiều ngang */
       justify-content: center; 
       align-items: center; 
-      gap: 30px; 
-      padding: 10px 20px; 
+      /* Giảm gap giữa logo và menu một chút */
+      gap: 20px; 
+      padding: 10px 10px; /* Giảm padding hai bên */
       z-index: 100;
-      /* ĐỔI SHADOW SANG ĐỎ */
       box-shadow: 0 2px 10px rgba(204, 0, 0, 0.7); 
     }
 
@@ -65,64 +68,90 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* ĐỔI LỚP PHỦ SANG MÀU ĐEN ĐẬM HƠN */
       background-color: rgba(0, 0, 0, 0.6); 
       z-index: -1;
     }
     
     .logo {
-      height: 40px; 
+      /* THAY ĐỔI: Giảm chiều cao logo cho mobile */
+      height: 35px; 
       width: auto;
       border-radius: 50%;
-      /* ĐỔI SHADOW CỦA LOGO SANG MÀU MẠNH MẼ */
       box-shadow: 0 0 10px rgba(255, 60, 0, 0.8);
       transition: all 0.3s ease;
       position: relative;
       z-index: 1;
+      /* THAY ĐỔI: Thêm margin dưới để cách nhóm liên kết khi xuống hàng */
+      margin-bottom: 5px; 
     }
     .logo:hover {
       transform: scale(1.1);
-      /* ĐỔI HOVER SHADOW SANG MÀU VÀNG KIM */
       box-shadow: 0 0 15px #FFCC00;
     }
 
     .nav-links {
         display: flex;
-        gap: 10px; 
+        /* THAY ĐỔI: Cho phép các nút tự động xuống hàng */
+        flex-wrap: wrap; 
+        /* THAY ĐỔI: Giảm khoảng cách giữa các nút */
+        gap: 5px; 
         margin: 0;
         position: relative;
         z-index: 1;
+        /* Đảm bảo nhóm liên kết được căn giữa khi xuống hàng */
+        justify-content: center;
+        width: 100%; /* Giúp nó chiếm hết chiều rộng để căn giữa khi xuống hàng */
+        margin-bottom: 5px; /* Thêm khoảng cách dưới cho nhóm liên kết */
     }
 
     nav a {
       display: inline-block;
-      padding: 8px 15px;
-      /* ĐỔI GRADIENT NÚT SANG ĐỎ LỬA/ĐEN */
+      /* THAY ĐỔI: Giảm padding và cỡ chữ cho mobile */
+      padding: 6px 10px; 
+      font-size: 13px; 
       background: linear-gradient(135deg, #CC0000, #400000); 
       color: white;
       text-decoration: none;
       border-radius: 6px;
       font-weight: bold;
       transition: all 0.3s ease;
-      font-size: 14px;
     }
     nav a:hover {
-      /* ĐỔI HOVER GRADIENT SANG ĐỎ SÁNG/CAM */
       background: linear-gradient(135deg, #FF3C00, #FF7F00);
       transform: scale(1.05);
-      /* ĐỔI HOVER SHADOW SANG ĐỎ SÁNG */
       box-shadow: 0 0 10px #FF3C00;
     }
 
-    /* --- MAIN CONTENT KHUNG MẠNH MẼ */
+    /* === MEDIA QUERY: TỐI ƯU HƠN CHO MÀN HÌNH MÁY TÍNH BẢNG/MÁY TÍNH LỚN === */
+    @media (min-width: 768px) {
+        nav {
+            flex-wrap: nowrap; /* Tắt xuống hàng trên desktop */
+            gap: 30px; /* Tăng khoảng cách lại */
+            padding: 10px 20px;
+        }
+        .logo {
+            height: 40px; /* Kích thước logo lớn hơn */
+            margin-bottom: 0;
+        }
+        .nav-links {
+            flex-wrap: nowrap;
+            gap: 10px;
+            width: auto;
+            margin-bottom: 0;
+        }
+        nav a {
+            padding: 8px 15px; /* Tăng padding */
+            font-size: 14px; /* Tăng cỡ chữ */
+        }
+    }
+
+    /* Các phần còn lại của CSS không đổi */
     main {
       text-align: center;
       padding: 30px 15px;
       margin-top: 80px;
-      /* ĐỔI MÀU NỀN KHUNG SANG ĐEN HƠI TRONG */
       background-color: rgba(10, 10, 10, 0.8);
       border-radius: 10px;
-      /* ĐỔI SHADOW KHUNG SANG ĐỎ LỬA */
       box-shadow: 0 0 20px rgba(255, 60, 0, 0.8); 
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
@@ -133,26 +162,19 @@
     }
     main:hover {
       transform: scale(1.01);
-      /* ĐỔI HOVER SHADOW KHUNG SANG ĐỎ ĐẬM */
       box-shadow: 0 0 30px rgba(204, 0, 0, 1);
     }
-
-    /* --- TEXT MẠNH MẼ */
     h1 {
       font-size: 30px;
-      /* ĐỔI MÀU TEXT CHÍNH SANG ĐỎ LỬA */
       color: #FF3C00; 
       margin-bottom: 15px;
-      /* ĐỔI TEXT SHADOW SANG ĐỎ LỬA */
       text-shadow: 0 0 8px #FF3C00, 0 0 15px rgba(255, 60, 0, 0.5);
       letter-spacing: 1px;
     }
     h2 {
       font-size: 20px;
-      /* GIỮ MÀU VÀNG KIM LÀM MÀU NHẤN */
       color: #FFCC00; 
       margin-top: 20px;
-      /* ĐỔI BORDER SANG VÀNG KIM */
       border-bottom: 2px solid #FFCC00; 
       display: inline-block;
       padding-bottom: 3px;
@@ -181,17 +203,13 @@
     ul li::before {
       content: "🚀";
       margin-right: 8px;
-      /* ĐỔI MÀU ICON LIST SANG ĐỎ LỬA */
       color: #FF3C00; 
       font-weight: bold;
     }
-
-    /* --- CTA BUTTON MẠNH MẼ */
     .cta-button {
       display: inline-block;
       padding: 10px 20px;
       margin-top: 15px;
-      /* ĐỔI GRADIENT NÚT SANG ĐỎ-VÀNG */
       background: linear-gradient(90deg, #CC0000, #FFCC00); 
       color: white;
       text-decoration: none;
@@ -200,15 +218,12 @@
       font-size: 16px;
       text-transform: uppercase;
       transition: all 0.3s ease;
-      /* ĐỔI SHADOW SANG ĐỎ ĐẬM */
       box-shadow: 0 3px 10px rgba(204, 0, 0, 0.8); 
       border: 1px solid #ffffff;
     }
     .cta-button:hover {
-      /* ĐỔI HOVER GRADIENT SANG ĐỎ SÁNG/VÀNG */
       background: linear-gradient(90deg, #FFCC00, #CC0000); 
       transform: translateY(-2px) scale(1.03);
-      /* ĐỔI HOVER SHADOW SANG ĐỎ SÁNG */
       box-shadow: 0 4px 15px rgba(255, 60, 0, 1);
     }
   </style>
@@ -218,11 +233,11 @@
     <img src="logo.jpg" alt="Logo Quân đoàn TF" class="logo">
     
     <div class="nav-links">
-        <a href="gioithieu.html">📜QUản trị quân đoàn</a>
+        <a href="gioithieu.html">📜 Giới thiệu quân đoàn</a>
         <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
         <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
         <a href="sukien.html">🗓️ Sự kiện</a>
-        <a href="tuyenthanhvien.html">🔥 Tuyển dụng</a>
+        <a href="tuyenthanhvien.html.html">🔥 Tuyển Thành viên</a>
         <a href="luat.html">⚔️ Luật quân đoàn</a>
     </div>
   </nav>
@@ -247,7 +262,7 @@
       <li>Tuyển chọn thành viên mới tiềm năng và phát triển cộng đồng bền vững.</li>
     </ul>
 
-
+  
   </main>
 </body>
 </html>
