@@ -83,6 +83,10 @@ h1#typing-title {
     border-right: .15em solid var(--color-primary);
     animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite; 
 }
+h1#typing-title.typing-done {
+    border-right: none;
+    animation: flicker 3s infinite alternate; 
+}
 @keyframes flicker {
     0%, 100% { text-shadow: 0 0 10px var(--neon-blue-shadow), 0 0 20px rgba(0, 255, 255, 0.4); }
     50% { text-shadow: 0 0 5px var(--color-primary); }
@@ -159,7 +163,6 @@ p.lead {
     border-radius: var(--radius);
     background: inherit;
     z-index: -3;
-    filter: blur(15px);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -181,21 +184,42 @@ p.lead {
 .card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
 h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
 p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
-h2 span, p.role span, h1#typing-title { display: inline-block; white-space: nowrap; overflow: hidden; }
-h1#typing-title { border-right: .15em solid var(--color-primary); }
-h2 span, p.role span { border-right: none; animation: none; }
-.typing-member { border-right: .15em solid var(--color-primary); animation: blink-caret-member .75s step-end infinite; }
-p.role .typing-member { border-right: .15em solid var(--member-role-color); }
-@keyframes blink-caret-member { from, to { border-color: transparent } 50% { border-color: currentColor; } }
+h2 span, p.role span { display: inline-block; white-space: nowrap; overflow: hidden; }
+.typing-member { border-right: .15em solid currentColor !important; animation: blink-caret-member .75s step-end infinite !important; }
 .typing-done { border-right: none !important; animation: none !important; }
+@keyframes blink-caret-member { from, to { border-color: transparent } 50% { border-color: currentColor; } }
 .badge { display: inline-block; margin: 3px; padding: 5px 10px; font-size: 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: rgba(110,231,183,0.08); transition: 0.3s; }
 .card:hover .badge { background: var(--accent); color: var(--bg); box-shadow: 0 0 8px var(--accent-shadow); }
 @keyframes neon-pulse { 0% { box-shadow: 0 0 10px rgba(110, 231, 183, 0.5), 0 0 20px rgba(110, 231, 183, 0.3) inset; transform: scale(1); } 100% { box-shadow: 0 0 20px rgba(110, 231, 183, 0.8), 0 0 35px rgba(110, 231, 183, 0.5) inset; transform: scale(1.02); } }
 @keyframes neon-flicker { 0%,100%{ box-shadow:0 0 5px var(--neon-blue-shadow),0 0 10px var(--neon-blue-shadow),0 0 15px var(--neon-blue-shadow); border-color: var(--color-primary); text-shadow:0 0 5px rgba(0,255,255,0.7);}50%{box-shadow:0 0 2px var(--color-primary),0 0 4px var(--color-primary); border-color:rgba(0,255,255,0.5); text-shadow:none;} }
 a#backButton { display: inline-block; margin-top: 35px; color: var(--color-primary); text-decoration: none; border: 1px solid var(--color-primary); border-radius: 10px; padding: 10px 18px; font-weight: 600; background: rgba(0, 255, 255, 0.05); transition: 0.3s; animation: neon-flicker 2s ease-in-out infinite alternate; }
 a#backButton:hover { background: var(--color-primary); color: var(--bg); box-shadow: 0 0 15px var(--neon-blue-shadow), 0 0 30px rgba(0, 255, 255, 0.4); animation: none; text-shadow: none; }
-@media (max-width: 600px) { body { padding: 40px 15px; } .avatar { width: 80px; height: 80px; } h1 { font-size: 26px; } .members { gap: 15px; } .card { padding: 20px; } }
-.falling-star { position: absolute; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.4); will-change: transform, opacity; transition: none; }
+@media (min-width: 1024px) { 
+    .members { 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 30px; 
+    } 
+}
+@media (max-width: 1023px) and (min-width: 768px) { 
+    .members { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px;
+    }
+}
+@media (max-width: 767px) { 
+    body { padding: 30px 10px 50px; } 
+    h1#typing-title { font-size: clamp(24px, 8vw, 36px); } 
+    p.lead { font-size: 14px; }
+    .marquee-text { font-size: 12px; }
+    .members { gap: 15px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } 
+    .card { padding: 15px; border-radius: 12px; }
+    .avatar { width: 70px; height: 70px; margin-bottom: 8px; } 
+    h2 { font-size: 16px; }
+    p.role { font-size: 11px; margin-bottom: 8px; }
+    .badge { padding: 3px 8px; font-size: 10px; }
+    a#backButton { padding: 8px 15px; font-size: 14px; }
+}
+.falling-star { position: absolute; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; will-change: transform, opacity; transition: none; }
 </style>
 </head>
 <body>
@@ -211,45 +235,258 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 </marquee>
 </div>
 <section class="members">
-<div class="card">
-<div class="avatar" style="background-image:url('trung.jpg');"></div>
-<h2><span id="name-trung"></span></h2>
-<p class="role"><span id="role-trung"></span></p>
-<div class="badges">
-<span class="badge">Lãnh đạo</span>
-<span class="badge">Chiến thuật</span>
-<span class="badge">Tuyển quân</span>
+
+</div>
+</div>
+
 </div>
 </div>
 <div class="card">
-<div class="avatar" style="background-image:url('sang.jpg');"></div>
-<h2><span id="name-sang"></span></h2>
-<p class="role"><span id="role-sang"></span></p>
+<div class="avatar" style="background-image:url('duong.jpg');"></div>
+<h2><span id="name-tv3"></span></h2>
+<p class="role"><span id="role-tv3"></span></p>
 <div class="badges">
-<span class="badge">Dẫn dắt</span>
-<span class="badge">Huấn luyện</span>
-<span class="badge">Phân tích</span>
+<span class="badge">Bắn toàn hụt</span>
+<span class="badge">Hay gáy</span>
+<span class="badge">Đẹp zai</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('huy.jpg');"></div>
+<h2><span id="name-tv4"></span></h2>
+<p class="role"><span id="role-tv4"></span></p>
+<div class="badges">
+<span class="badge">Bắn tốt</span>
+<span class="badge">Vui tính</span>
+<span class="badge">Đẹp zai</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('bich.jpg');"></div>
+<h2><span id="name-tv5"></span></h2>
+<p class="role"><span id="role-tv5"></span></p>
+<div class="badges">
+<span class="badge">Bắn hay</span>
+<span class="badge">Hay cọc</span>
+<span class="badge">Dễ thương</span>
+<span class="badge">Hòa đồng</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('duy.jpg');"></div>
+<h2><span id="name-tv6"></span></h2>
+<p class="role"><span id="role-tv6"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Hòa đồng</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('avatar-7.jpg');"></div>
+<h2><span id="name-tv7"></span></h2>
+<p class="role"><span id="role-tv7"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Hòa đồng</span>
+
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('tuan.jpg');"></div>
+<h2><span id="name-tv8"></span></h2>
+<p class="role"><span id="role-tv8"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Hòa đồng</span>
+<span class="badge">Trùm mõm</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('avatar-9.jpg');"></div>
+<h2><span id="name-tv9"></span></h2>
+<p class="role"><span id="role-tv9"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Hòa đồng</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('avatar-10.jpg');"></div>
+<h2><span id="name-tv10"></span></h2>
+<p class="role"><span id="role-tv10"></span></p>
+<div class="badges">
+<span class="badge">Bắn hay</span>
+<span class="badge">Kiêm tón</span>
+<span class="badge">Hòa đồng</span>
+<span class="badge">Vui tính</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('avatar-11.jpg');"></div>
+<h2><span id="name-tv11"></span></h2>
+<p class="role"><span id="role-tv11"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Biết tư duy</span>
+<span class="badge">Hòa đồng</span>
+
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('hong.jpg');"></div>
+<h2><span id="name-tv12"></span></h2>
+<p class="role"><span id="role-tv12"></span></p>
+<div class="badges">
+<span class="badge">Dễ thương</span>
+<span class="badge">Hay trêu</span>
+<span class="badge">Hòa đồng</span>
+<span class="badge">Vui tính</span>
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('avatar-13.jpg');"></div>
+<h2><span id="name-tv13"></span></h2>
+<p class="role"><span id="role-tv13"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Tính hòa đồng</span>
+
+</div>
+</div>
+<div class="card">
+<div class="avatar" style="background-image:url('long.jpg');"></div>
+<h2><span id="name-tv14"></span></h2>
+<p class="role"><span id="role-tv14"></span></p>
+<div class="badges">
+<span class="badge">Tần Binh</span>
+<span class="badge">Bắn Tốt</span>
+<span class="badge">Tính hòa đồng</span>
 </div>
 </div>
 </section>
 <a id="backButton" href="index.html"> Quay lại trang chủ</a>
 </main>
 <script>
-const textToType="Quản Trị Quân Đoàn";
-const memberData=[
-{id:'name-trung',text:'Trung (TF.Kuronami 20 tuổi)',speed:80},
-{id:'role-trung',text:'👑 Chủ quân đoàn',speed:60},
-{id:'name-sang',text:' Sang (TF.Liopc 21 tuổi)',speed:80},
-{id:'role-sang',text:'👑 Chỉ huy',speed:60}
+const textToType = "Giới thiệu thành viên";
+const memberData = [
+    
+    {id:'name-tv3',text:' (TF.Dương)',speed:75},
+    {id:'role-tv3',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv4',text:' (TF.Huy)',speed:75},
+    {id:'role-tv4',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv5',text:'(TF.Bích)',speed:75},
+    {id:'role-tv5',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv6',text:' (TF.Duy)',speed:75},
+    {id:'role-tv6',text:'Thành viên',speed:55},
+    {id:'name-tv7',text:' (TF.Bảo)',speed:75},
+    {id:'role-tv7',text:'Thành viên',speed:55},
+    {id:'name-tv8',text:' (TF.Tuấn)',speed:75},
+    {id:'role-tv8',text:'Thành viên',speed:55},
+    {id:'name-tv9',text:' (TF.Cường)',speed:75},
+    {id:'role-tv9',text:'Thành viên',speed:55},
+    {id:'name-tv10',text:'(TF. Quốc Anh)',speed:75},
+    {id:'role-tv10',text:'Thành viên kì cựu',speed:55},
+    {id:'name-tv11',text:' (TF.Thắngl)',speed:75},
+    {id:'role-tv11',text:'Thành viên',speed:55},
+    {id:'name-tv12',text:'  (TF.Trúc Hồng)',speed:75},
+    {id:'role-tv12',text:'Thành viên',speed:55},
+    {id:'name-tv13',text:'  (TF.Đức)',speed:75},
+    {id:'role-tv13',text:' Thành viên',speed:55},
+    {id:'name-tv14',text:'  (TF.Long)',speed:75},
+    {id:'role-tv14',text:' Thành viên kì cựu',speed:55},
 ];
-function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
-async function runMemberLoop(){while(!0){for(const e of memberData)await typeWriterEffect(e.id,e.text,e.speed),await typeWriterEffect(e.id.replace('name','role'),memberData.find(a=>a.id===e.id.replace('name','role')).text,memberData.find(a=>a.id===e.id.replace('name','role')).speed);for(const e of memberData)document.getElementById(e.id).textContent='',document.getElementById(e.id.replace('name','role')).textContent=''}
+function typeWriterEffect(elementId, text, speed) {
+    return new Promise(resolve => {
+        const element = document.getElementById(elementId);
+        if (!element) return resolve();
+        element.classList.remove('typing-done');
+        element.classList.add('typing-member');
+        let i = 0;
+        element.textContent = '';
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                element.classList.remove('typing-member');
+                element.classList.add('typing-done');
+                resolve();
+            }
+        }
+        type();
+    });
 }
-function animateCards(){document.querySelectorAll('.card').forEach((e,t)=>{e.style.animationDelay=`${t*0.15+0.5}s`,e.classList.add('card-enter')})}
-window.onload=async function(){await typeWriterEffect('typing-title',textToType,100),runMemberLoop(),startStarfallEffect(),animateCards()};
-const stars=[],numStars=60;
-function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}function startStarfallEffect(){initStarfall(),updateStarfall()}
+async function runMemberTypingOnce() {
+    for (const member of memberData) {
+        if (member.id.startsWith('name-')) {
+            const roleId = member.id.replace('name', 'role');
+            const roleItem = memberData.find(item => item.id === roleId);
+            document.getElementById(member.id).textContent = '';
+            document.getElementById(roleId).textContent = '';
+            await typeWriterEffect(member.id, member.text, member.speed);
+            if (roleItem) { await typeWriterEffect(roleItem.id, roleItem.text, roleItem.speed); }
+        }
+    }
+}
+function animateCards() {
+    document.querySelectorAll('.card').forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.15 + 0.5}s`;
+        card.classList.add('card-enter');
+    });
+}
+window.onload = async function() {
+    await typeWriterEffect('typing-title', textToType, 100);
+    document.getElementById('typing-title').classList.add('typing-done');
+    runMemberTypingOnce();
+    animateCards();
+    startStarfallEffect();
+};
+const stars = [];
+const numStars = 60;
+function initStarfall() {
+    const container = document.getElementById('starfall-container');
+    const minSize = 2;
+    const maxSize = 5;
+    for(let i = 0; i < numStars; i++){
+        const star = document.createElement('div');
+        star.classList.add('falling-star');
+        container.appendChild(star);
+        const size = Math.random() * (maxSize - minSize) + minSize;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const speed = Math.random() * .5 + .5;
+        const xDrift = (Math.random() - .5) * .2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        stars.push({element:star, x:x, y:y, size:size, speed:speed, xDrift:xDrift, opacity:Math.random()*.5+.5});
+        star.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        star.style.opacity = stars[i].opacity;
+    }
+}
+function updateStarfall() {
+    for(let i = 0; i < numStars; i++){
+        const star = stars[i];
+        star.y += star.speed;
+        star.x += star.xDrift;
+        if (star.y > window.innerHeight) {
+            star.y = -star.size;
+            star.x = Math.random() * window.innerWidth;
+            star.speed = Math.random() * .5 + .5;
+        }
+        star.element.style.transform = `translate3d(${star.x}px, ${star.y}px, 0)`;
+        star.element.style.opacity = star.opacity * (1 + Math.sin(star.y * .05 + star.x * .01) * .1);
+    }
+    requestAnimationFrame(updateStarfall);
+}
+function startStarfallEffect() { initStarfall(); updateStarfall(); }
+window.addEventListener('resize', () => {});
 </script>
 </body>
 </html>
-
