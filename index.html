@@ -1,232 +1,228 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang chủ Quân đoàn TF</title>
- <style>
-  * {
-    box-sizing: border-box;
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trang chủ Quân đoàn TF</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  body {
-    font-family: Arial, sans-serif;
-    background: url("logo.jpg") no-repeat center center;
-    background-size: cover;
-    color: #fff;
-    margin: 0;
-    min-height: 100vh;
-    font-size: 16px; /* Điều chỉnh: Từ 17px xuống 16px */
-  }
+body {
+  font-family: Arial, sans-serif;
+  background: url("logo.jpg") no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  font-size: 16px;
+  min-height: 100vh;
+}
 
-  /* NAVIGATION */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Giảm gap */
-    padding: 10px; /* Giảm padding một chút */
-    z-index: 100;
-    background-image: linear-gradient(
-      to right,
-      #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3
-    );
-    background-size: 400% 100%;
-    animation: rainbow-gradient 15s ease infinite;
-    box-shadow: 0 2px 10px rgba(204, 0, 0, 0.7);
-  }
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 15px;
+  z-index: 100;
+  background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+  background-size: 400% 100%;
+  animation: rainbow-gradient 15s ease infinite;
+  box-shadow: 0 2px 10px rgba(204,0,0,0.7);
+}
 
-  @keyframes rainbow-gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+@keyframes rainbow-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  nav::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    z-index: -1;
-  }
+nav::before {
+  content: '';
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background-color: rgba(0,0,0,0.6);
+  z-index: -1;
+}
 
-  .logo {
-    height: 45px; /* Điều chỉnh: Từ 50px xuống 45px */
-    width: auto;
-    max-width: 90px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(255,60,0,0.8);
-    transition: all 0.3s ease;
-    z-index: 1;
-    margin-bottom: 5px;
-  }
-  .logo:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px #FFCC00;
-  }
+.logo {
+  height: 45px;
+  width: auto;
+  max-width: 90px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,60,0,0.8);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
 
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px; /* Giảm gap */
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 5px;
-    z-index: 1;
-  }
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #FFCC00;
+}
 
-  nav a {
-    display: inline-block;
-    padding: 8px 12px; /* Điều chỉnh: Giảm padding để gọn hơn */
-    font-size: 15px; /* Điều chỉnh: Từ 16px xuống 15px */
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 6px;
-    color: white;
-    background: linear-gradient(135deg, #CC0000, #400000);
-    transition: all 0.3s ease;
-  }
-  nav a:hover {
-    background: linear-gradient(135deg, #FF3C00, #FF7F00);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #FF3C00;
-  }
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  z-index: 1;
+}
 
-  /* MAIN CONTENT */
-  main {
-    text-align: center;
-    padding: 30px 15px;
-    margin-top: 100px; /* Điều chỉnh: Giảm margin-top */
-    background-color: rgba(10,10,10,0.8);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255,60,0,0.8);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: all 0.5s ease-in-out;
-  }
-  main:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0 30px rgba(204,0,0,1);
-  }
+nav a {
+  padding: 7px 12px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  color: white;
+  background: linear-gradient(135deg, #CC0000, #400000);
+  transition: all 0.3s ease;
+}
 
-  h1 {
-    font-size: 32px; /* Điều chỉnh: Từ 36px xuống 32px */
-    color: #FF3C00;
-    margin-bottom: 15px;
-    text-shadow: 0 0 8px #FF3C00, 0 0 15px rgba(255,60,0,0.5);
-    letter-spacing: 1px;
-  }
-  h2 {
-    font-size: 22px; /* Điều chỉnh: Từ 24px xuống 22px */
-    color: #FFCC00;
-    margin-top: 20px;
-    border-bottom: 2px solid #FFCC00;
-    display: inline-block;
-    padding-bottom: 3px;
-    text-shadow: 0 0 4px rgba(255,204,0,0.7);
-  }
-  p {
-    font-size: 16px; /* Điều chỉnh: Từ 17px xuống 16px */
-    line-height: 1.5;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    margin-bottom: 15px;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-    max-width: 500px;
-    margin: 15px auto;
-  }
-  ul li {
-    padding: 8px 0;
-    margin-bottom: 5px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-size: 15px; /* Điều chỉnh: Từ 16px xuống 15px */
-    color: #fff;
-  }
-  ul li::before {
-    content: "🚀";
-    margin-right: 8px;
-    color: #FF3C00;
-    font-weight: bold;
-  }
+nav a:hover {
+  background: linear-gradient(135deg, #FF3C00, #FF7F00);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #FF3C00;
+}
 
-  .cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 15px;
-    background: linear-gradient(90deg, #CC0000, #FFCC00);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px; /* Điều chỉnh: Từ 18px xuống 16px */
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(204,0,0,0.8);
-    border: 1px solid #fff;
-  }
-  .cta-button:hover {
-    background: linear-gradient(90deg, #FFCC00, #CC0000);
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 4px 15px rgba(255,60,0,1);
-  }
+/* MAIN CONTENT */
+main {
+  text-align: center;
+  padding: 25px 20px;
+  margin: 110px auto 40px auto;
+  max-width: 650px;
+  background-color: rgba(10,10,10,0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,60,0,0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 0.4s ease-in-out;
+}
 
-  /* MEDIA QUERY DESKTOP */
-  @media (min-width: 768px) {
-    nav {
-      flex-wrap: nowrap;
-      gap: 30px;
-      padding: 10px 20px;
-    }
-    .logo { height: 50px; margin-bottom: 0; }
-    .nav-links { flex-wrap: nowrap; gap: 10px; width: auto; margin-bottom: 0; }
-    nav a { padding: 8px 15px; font-size: 14px; }
-  }
+main:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 30px rgba(204,0,0,1);
+}
+
+h1 {
+  font-size: 32px;
+  color: #FF3C00;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #FF3C00, 0 0 15px rgba(255,60,0,0.5);
+}
+
+h2 {
+  font-size: 22px;
+  color: #FFCC00;
+  margin: 20px 0 10px;
+  border-bottom: 2px solid #FFCC00;
+  display: inline-block;
+  padding-bottom: 3px;
+  text-shadow: 0 0 4px rgba(255,204,0,0.7);
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 500px;
+  margin: 15px auto;
+}
+
+ul li {
+  padding: 8px 0;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 15px;
+  color: #fff;
+}
+
+ul li::before {
+  content: "🚀";
+  margin-right: 8px;
+  color: #FF3C00;
+}
+
+/* CTA Button */
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #CC0000, #FFCC00);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(204,0,0,0.8);
+  border: 1px solid #fff;
+}
+
+.cta-button:hover {
+  background: linear-gradient(90deg, #FFCC00, #CC0000);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 15px rgba(255,60,0,1);
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 768px) {
+  nav { flex-wrap: nowrap; gap: 25px; padding: 10px 20px; }
+  .logo { height: 50px; }
+  .nav-links { flex-wrap: nowrap; gap: 12px; }
+  nav a { padding: 8px 15px; font-size: 14px; }
+}
 </style>
 </head>
 <body>
-  <nav>
-    <img src="logo.jpg" alt="Logo Quân đoàn TF" class="logo">
-    <div class="nav-links">
-      <a href="gioithieu.html">📜 Giới thiệu quân đoàn</a>
-      <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
-      <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
-      <a href="sukien.html">🗓️ Sự kiện</a>
-      <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
-      <a href="luat.html">⚔️ Luật quân đoàn</a>
-    </div>
-  </nav>
+<nav>
+  <img src="logo.jpg" alt="Logo Quân đoàn TF" class="logo">
+  <div class="nav-links">
+    <a href="gioithieu.html">📜 Giới thiệu quân đoàn</a>
+    <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
+    <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
+    <a href="sukien.html">🗓️ Sự kiện</a>
+    <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
+    <a href="luat.html">⚔️ Luật quân đoàn</a>
+  </div>
+</nav>
 
-  <main>
-    <h1>Quân đoàn TF — TitanForce²</h1>
-    <p>
-      Quân đoàn TF là một cộng đồng game thủ <strong>năng động, đoàn kết</strong> và luôn hướng tới sự phát triển bền vững.
-      Chúng tôi tập trung vào việc <strong>rèn luyện kỹ năng</strong>, tham gia các giải đấu và hỗ trợ lẫn nhau trong mọi trận chiến.
-    </p>
-    
-    <h2>Sứ mệnh</h2>
-    <p>
-      Nâng cao tinh thần đồng đội, tạo môi trường <strong>vui vẻ và chuyên nghiệp</strong> cho mọi thành viên, đồng thời khẳng định vị thế của TF trong làng game.
-    </p>
-    
-    <h2>Hoạt động chính</h2>
-    <ul>
-      <li>Huấn luyện kỹ năng chiến đấu và phối hợp nhóm chuyên sâu.</li>
-      <li>Tổ chức các giải đấu nội bộ định kỳ và tham gia các giải đấu lớn bên ngoài.</li>
-      <li>Chia sẻ kinh nghiệm, mẹo chơi, và xây dựng chiến thuật hiệu quả.</li>
-      <li>Tuyển chọn thành viên mới tiềm năng và phát triển cộng đồng bền vững.</li>
-    </ul>
-  </main>
+<main>
+  <h1>Quân đoàn TF — TitanForce²</h1>
+  <p>
+    Quân đoàn TF là một cộng đồng game thủ <strong>năng động, đoàn kết</strong> và luôn hướng tới sự phát triển bền vững.
+    Chúng tôi tập trung vào việc <strong>rèn luyện kỹ năng</strong>, tham gia các giải đấu và hỗ trợ lẫn nhau trong mọi trận chiến.
+  </p>
+
+  <h2>Sứ mệnh</h2>
+  <p>
+    Nâng cao tinh thần đồng đội, tạo môi trường <strong>vui vẻ và chuyên nghiệp</strong> cho mọi thành viên, đồng thời khẳng định vị thế của TF trong làng game.
+  </p>
+
+  <h2>Hoạt động chính</h2>
+  <ul>
+    <li>Huấn luyện kỹ năng chiến đấu và phối hợp nhóm chuyên sâu.</li>
+    <li>Tổ chức các giải đấu nội bộ định kỳ và tham gia các giải đấu lớn bên ngoài.</li>
+    <li>Chia sẻ kinh nghiệm, mẹo chơi, và xây dựng chiến thuật hiệu quả.</li>
+    <li>Tuyển chọn thành viên mới tiềm năng và phát triển cộng đồng bền vững.</li>
+  </ul>
+</main>
 </body>
 </html>
