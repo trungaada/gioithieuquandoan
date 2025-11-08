@@ -1,435 +1,234 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Giới thiệu thành viên — Quân đoàn TF</title>
-    <meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0b1020;
-            --card: #0f1724;
-            --accent: #6ee7b7; /* Xanh ngọc (Giữ cho thẻ) */
-            --accent-shadow: rgba(110, 231, 183, 0.4);
-            --muted: #9aa4b2;
-            --glass: rgba(255, 255, 255, 0.04);
-            --radius: 20px;
-            --color-secondary: #3b82f6; /* Xanh dương */
-            --color-tertiary: #a855f7; /* Tím */
-            
-            /* 🔥 MÀU NEON MỚI CHO TIÊU ĐỀ */
-            --color-neon-pink: #ec4899; 
-            --neon-pink-shadow: rgba(236, 72, 153, 0.6); 
-            
-            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Giới thiệu thành viên — Quân đoàn TF</title>
+<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        /* Đặt lại CSS cơ bản */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            max-width: 100%; 
-        }
+<style>
+:root {
+    --bg: #030a18;
+    --card: #0f1724;
+    --accent: #6ee7b7;
+    --accent-shadow: rgba(110, 231, 183, 0.5);
+    --muted: #9aa4b2;
+    --glass: rgba(255, 255, 255, 0.06);
+    --radius: 18px;
+    --color-primary: #ec4899;
+    --color-secondary: #3b82f6;
+    --neon-pink-shadow: rgba(236, 72, 153, 0.8);
+    font-family: 'Poppins', system-ui, sans-serif;
+}
 
-        /* 1. KEYFRAMES CHO CÁC HIỆU ỨNG (Giữ nguyên) */
-        
-        @keyframes borderShift {
-            0% { border-color: var(--accent); }
-            33% { border-color: var(--color-secondary); }
-            66% { border-color: var(--color-tertiary); }
-            100% { border-color: var(--accent); }
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        @keyframes neonBorderPulse {
-            0% { box-shadow: 0 0 5px var(--accent-shadow), inset 0 0 5px var(--accent-shadow); opacity: 0.7; }
-            50% { box-shadow: 0 0 15px var(--color-secondary), inset 0 0 15px var(--color-secondary); opacity: 1; }
-            100% { box-shadow: 0 0 5px var(--color-tertiary), inset 0 0 5px var(--color-tertiary); opacity: 0.7; }
-        }
+/* 📱 Nền có ảnh + lớp phủ */
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: 
+        /*linear-gradient(rgba(3,10,24,0.9), rgba(3,10,24,0.95)),  /* lớp tối phủ lên ảnh */
+        url('logo.jpg') no-repeat center center fixed;      /* ảnh nền */
+    background-size: cover;
+    color: #e6eef6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 20px 80px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
 
-        @keyframes neonPulse {
-            0% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-            100% { opacity: 0.6; transform: scale(1); }
-        }
+/* ⚡ Hiệu ứng grid neon phủ lên nền ảnh */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
+    background-size: 30px 30px;
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+}
 
-        @keyframes fadeInSlide {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+main {
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
 
-        @keyframes glitch {
-            0% { text-shadow: 0.05em 0 0 var(--color-tertiary), -0.05em -0.025em 0 var(--color-secondary); }
-            14% { text-shadow: -0.05em -0.025em 0 var(--color-tertiary), 0.025em 0.05em 0 var(--color-secondary); }
-            25% { text-shadow: 0.025em 0.05em 0 var(--color-tertiary), -0.025em 0 0 var(--color-secondary); }
-            45% { text-shadow: -0.05em 0 0 var(--color-tertiary), 0.05em 0.05em 0 var(--color-secondary); }
-            60% { text-shadow: 0.05em 0.025em 0 var(--color-tertiary), -0.05em 0 0 var(--color-secondary); }
-            75% { text-shadow: 0 0.05em 0 var(--color-tertiary), 0.05em -0.025em 0 var(--color-secondary); }
-            100% { text-shadow: -0.025em 0.05em 0 var(--color-tertiary), 0.05em 0 0 var(--color-secondary); }
-        }
+/* 🌟 Tiêu đề */
+header {
+    margin-bottom: 40px;
+}
+h1 {
+    font-size: clamp(28px, 6vw, 46px);
+    color: var(--color-primary);
+    text-shadow: 0 0 8px var(--neon-pink-shadow);
+    animation: flicker 3s infinite alternate;
+    font-weight: 700;
+}
+p.lead {
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 6px;
+    font-size: 15px;
+}
 
-        @keyframes textFlicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-                text-shadow: 0 0 4px var(--color-neon-pink), 0 0 11px var(--color-neon-pink), 0 0 19px var(--color-neon-pink), 0 0 40px var(--neon-pink-shadow), 0 0 80px var(--neon-pink-shadow), 0 0 90px var(--neon-pink-shadow), 0 0 100px var(--neon-pink-shadow), 0 0 150px var(--neon-pink-shadow);
-                color: var(--color-neon-pink);
-            }
-            20%, 24%, 55% { text-shadow: none; color: var(--muted); }
-        }
+@keyframes flicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-pink-shadow); }
+    50% { opacity: 0.85; text-shadow: 0 0 5px var(--color-primary); }
+}
 
-        @keyframes shimmer { 0% { transform: translateX(-100%) skewX(-30deg); } 100% { transform: translateX(200%) skewX(-30deg); } }
-        @keyframes moveStar { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100vh) scale(0.5); opacity: 0; } }
-        @keyframes fall {
-            0% { transform: translateY(-100px) translateX(var(--random-x-start)) rotateZ(0deg); opacity: var(--random-opacity); }
-            100% { transform: translateY(100vh) translateX(var(--random-x-end)) rotateZ(360deg); opacity: 0; }
-        }
-        
-        body {
-            margin: 0;
-            min-height: 100vh;
-            height: 100vh; /* 🔥 THÊM: Đảm bảo body chiếm trọn viewport */
-            background: linear-gradient(180deg, #051025 0%, #071428 60%);
-            color: #e6eef6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 24px; 
-            position: relative;
-            overflow: hidden; /* 🔥 THÊM: Ngăn chặn cuộn trang */
-            perspective: 1000px;
-        }
-        
-        /* 🔥 MOBILE OPTIMIZATION 1: Giảm padding trên màn hình nhỏ */
-        @media (max-width: 768px) {
-            body {
-                padding: 20px 10px; 
-            }
-        }
+/* 🧑‍🚀 Danh sách thành viên */
+.members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
 
-        /* Hiệu ứng nền (Giữ nguyên) */
-        .card, .avatar, h1, .snowflake, .star { will-change: transform, opacity, box-shadow, filter; }
-        body::before { /* Neon Pulse */
-            content: ''; position: absolute; top: 50%; left: 50%; width: 80vh; height: 80vh; background: radial-gradient(circle, var(--accent-shadow) 0%, transparent 70%); transform: translate(-50%, -50%); pointer-events: none; z-index: -1; animation: neonPulse 5s ease-in-out infinite alternate;
-        }
-        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
-        .star { position: absolute; background: #fff; border-radius: 50%; opacity: 0; animation: moveStar 10s linear infinite; }
-        .star:nth-child(1) { width: 2px; height: 2px; left: 10%; animation-delay: 0s; }
-        .star:nth-child(2) { width: 3px; height: 3px; left: 25%; animation-delay: 1.5s; }
-        .star:nth-child(3) { width: 1px; height: 1px; left: 40%; animation-delay: 3s; }
-        .star:nth-child(4) { width: 2px; height: 2px; left: 55%; animation-delay: 4.5s; }
-        .star:nth-child(5) { width: 3px; height: 3px; left: 70%; animation-delay: 6s; }
-        .star:nth-child(6) { width: 1px; height: 1px; left: 85%; animation-delay: 7.5s; }
-        .star:nth-child(7) { width: 2px; height: 2px; left: 5%; animation-delay: 9s; }
-        .snow-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 99; }
-        .snowflake { position: absolute; background: #e6eef6; border-radius: 50%; animation: fall linear infinite; z-index: 1; }
+/* 🎴 Thẻ thành viên */
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 5px rgba(110, 231, 183, 0.1);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    position: relative;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius);
+    background: linear-gradient(60deg, var(--color-primary) 0%, var(--accent) 100%);
+    opacity: 0;
+    z-index: -1;
+    filter: blur(10px);
+    transition: opacity 0.35s ease, filter 0.35s ease;
+}
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.55), 0 0 15px var(--accent-shadow);
+}
+.card:hover::before {
+    opacity: 0.3;
+    filter: blur(15px);
+}
 
-        .wrap {
-            width: 100%;
-            max-width: 900px;  
-            margin-bottom: 20px;
-            z-index: 100; 
-            /* 🔥 THÊM: Cho phép cuộn nội dung bên trong wrap nếu nó quá dài */
-            max-height: calc(100vh - 80px); /* Giả sử 40px padding top/bottom */
-            overflow-y: auto; /* Cho phép cuộn dọc */
-        }
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto 12px;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent-shadow), 0 0 20px var(--accent-shadow) inset;
+}
 
-        @media (max-width: 768px) {
-            .wrap {
-                max-height: calc(100vh - 40px); /* Giả sử 20px padding top/bottom trên mobile */
-            }
-        }
+h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+p.role {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
 
-        /* Header (Giữ nguyên Glitch, chỉ điều chỉnh font size) */
-        header { text-align: center; margin-bottom: 40px; animation: fadeInSlide 0.8s ease-out; }
+.badge {
+    display: inline-block;
+    margin: 3px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: rgba(110,231,183,0.08);
+    transition: 0.3s;
+}
+.card:hover .badge {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 5px var(--accent-shadow);
+}
 
-        h1 {
-            font-size: clamp(28px, 5vw, 40px); 
-            margin: 0;
-            color: var(--color-neon-pink); 
-            animation: textFlicker 3s linear infinite alternate; 	
-            position: relative;
-        }
-        
-        p.lead {
-            margin: 8px 0 0;
-            color: var(--muted);
-            font-size: 1.1rem;
-            animation: fadeInSlide 0.8s ease-out 0.2s forwards;
-            opacity: 0;
-        }
-        
-        /* 🔥 MOBILE OPTIMIZATION 2: Chuyển bố cục thành 1 cột */
-        .members {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 25px;
-            justify-content: center;
-            transition: transform 0.5s ease-out;
-        }
+a#backButton {
+    display: inline-block;
+    margin-top: 35px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border: 1px solid var(--color-primary);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 600;
+    background: rgba(236,72,153,0.05);
+    transition: 0.3s;
+}
+a#backButton:hover {
+    background: var(--color-primary);
+    color: var(--bg);
+    box-shadow: 0 0 15px var(--neon-pink-shadow);
+}
 
-        @media (max-width: 600px) {
-            .members {
-                grid-template-columns: 1fr; 
-                gap: 15px; 
-            }
-        }
-        
-        .card {
-            position: relative;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius);
-            padding: 25px;
-            text-align: center;
-            transform-style: preserve-3d;
-            border: 3px solid var(--accent);
-            animation-name: fadeInSlide, borderShift;
-            animation-duration: 0.8s, 6s;
-            animation-timing-function: ease-out, linear;
-            animation-delay: var(--delay, 0s), 0s;
-            animation-fill-mode: forwards, none;
-            animation-iteration-count: 1, infinite;
-            transform: translateZ(0); 
-            transition: transform .4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow .4s cubic-bezier(0.25, 0.8, 0.25, 1), background .4s ease;
-            overflow: hidden; 
-            z-index: 10; 
-        }
-        
-        /* Cập nhật độ trễ animation cho các thẻ (Giữ nguyên và bổ sung) */
-        .card:nth-child(1) { --delay: 0.2s; }
-        .card:nth-child(2) { --delay: 0.4s; }
-        .card:nth-child(3) { --delay: 0.6s; } 
-        .card:nth-child(4) { --delay: 0.8s; } /* Thêm độ trễ cho thẻ mới */
-
-        .card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-shadow); background: rgba(255, 255, 255, 0.1); }
-        .card::before { /* Neon Border Pulse (Giữ nguyên) */
-            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: calc(var(--radius) + 5px); pointer-events: none; z-index: -1; opacity: 0; transition: opacity 0.4s ease, box-shadow 0.4s ease; animation: neonBorderPulse 6s ease-in-out infinite alternate; 
-        }
-        .card:hover::before { opacity: 1; box-shadow: 0 0 10px var(--accent), 0 0 20px var(--color-secondary); }
-        .card .corner-top-left, .card .corner-bottom-right { /* Corner (Giữ nguyên) */
-            content: ''; position: absolute; width: 10px; height: 10px; border: 2px solid var(--accent); opacity: 0.7; transition: opacity 0.3s ease; animation: borderShift 6s linear infinite reverse; z-index: 1; 
-        }
-
-        /* 🔥 MOBILE OPTIMIZATION 3: Điều chỉnh Avatar & Tiêu đề nhỏ hơn */
-        .avatar {
-            width: 90px; 
-            height: 90px;
-            margin: 0 auto 10px; 
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            border: none;
-            box-shadow: 0 0 10px rgba(110, 231, 183, 0.1);
-            transition: box-shadow .3s ease, transform .3s ease;
-            transform: translateZ(10px); 
-        }
-
-        h2 {
-            margin: 5px 0 3px; 
-            font-size: 20px; 
-            font-weight: 600;
-            color: #e6eef6;
-            transition: text-shadow 0.2s ease, color 0.2s ease;
-            transform: translateZ(5px);
-        }
-
-        p.role {
-            color: var(--accent);
-            font-size: 14px; 
-            margin: 0 0 12px 0; 
-            font-weight: 400;
-            opacity: 0;
-            animation: fadeInSlide 0.8s ease-out forwards var(--delay-role, 0s);
-            transform: translateZ(5px);
-        }
-
-        /* Badge (Giữ nguyên, kích thước 12px đã là phù hợp) */
-        .badge {
-            display: inline-block;
-            margin: 3px 3px 0; 
-            padding: 5px 10px; 
-            font-size: 12px;
-            border-radius: 999px;
-            background: rgba(110, 231, 183, 0.1);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            font-weight: 600;
-            transition: background .2s ease, transform .2s ease;
-            opacity: 0;
-            animation: fadeInSlide 0.8s ease-out forwards var(--delay-badge, 0s);
-            transform: translateZ(3px);
-        }
-        
-        /* Cập nhật độ trễ animation cho badge (Giữ nguyên và bổ sung cho thẻ thứ 3/4) */
-        .card:nth-child(1) .badge:nth-of-type(1) { --delay-badge: 0.6s; }
-        .card:nth-child(1) .badge:nth-of-type(2) { --delay-badge: 0.7s; }
-        .card:nth-child(1) .badge:nth-of-type(3) { --delay-badge: 0.8s; }
-        
-        .card:nth-child(2) .badge:nth-of-type(1) { --delay-badge: 0.8s; }
-        .card:nth-child(2) .badge:nth-of-type(2) { --delay-badge: 0.9s; }
-        .card:nth-child(2) .badge:nth-of-type(3) { --delay-badge: 1.0s; }
-        
-        .card:nth-child(3) .badge:nth-of-type(1) { --delay-badge: 1.0s; }
-        .card:nth-child(3) .badge:nth-of-type(2) { --delay-badge: 1.1s; }
-        .card:nth-child(3) .badge:nth-of-type(3) { --delay-badge: 1.2s; }
-        
-        /* Thẻ mới thứ 4 */
-        .card:nth-child(4) { --delay: 0.8s; }
-        .card:nth-child(4) .badge:nth-of-type(1) { --delay-badge: 1.2s; }
-        .card:nth-child(4) .badge:nth-of-type(2) { --delay-badge: 1.3s; }
-        .card:nth-child(4) .badge:nth-of-type(3) { --delay-badge: 1.4s; }
-        
-        .card:hover .badge { background: var(--accent); color: var(--bg); transform: scale(1.08) translateZ(8px); }
-
-        /* Footer & Link */
-        footer {
-            text-align: center;
-            margin-top: 20px; 
-            color: var(--muted);
-            font-size: 13px;
-            animation: fadeInSlide 0.8s ease-out 1.2s forwards;
-            opacity: 0;
-            z-index: 100;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            margin-top: 15px;
-            display: inline-block;
-            font-size: 1rem;
-            padding: 8px 15px;
-            border: 1px solid var(--accent);
-            border-radius: 6px;
-            transition: background .2s ease, color .2s ease, box-shadow .2s ease;
-            animation: fadeInSlide 0.8s ease-out 1.4s forwards;
-            opacity: 0;
-            position: relative;
-            overflow: hidden;
-            z-index: 100;
-        }
-
-        a:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 10px var(--accent-shadow); }
-        a .ripple-effect { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.4); animation: ripple 0.6s linear; transform: scale(0); pointer-events: none; }
-    </style>
+@media (max-width: 600px) {
+    body { padding: 40px 15px; }
+    .avatar { width: 80px; height: 80px; }
+    h1 { font-size: 26px; }
+}
+</style>
 </head>
 <body>
-    <div class="stars">
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-    </div>
-
-    <div class="snow-container" id="snowContainer"></div>
-
-    <div class="wrap">
+    <main>
         <header>
-            <h1 data-text="Đội ngũ thành viên Quân đoàn TF">Đội ngũ thành viên Quân đoàn TF</h1>
-            <p class="lead">Danh sách những người dẫn đầu và hỗ trợ duy trì hoạt động của quân đoàn TitanForce²</p>
+            <h1>Đội ngũ thành viên Quân đoàn TF</h1>
+            <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce²</p>
         </header>
 
         <section class="members">
             <div class="card">
-                <div class="corner-top-left"></div> 
                 <div class="avatar" style="background-image:url('trung.jpg');"></div>
                 <h2>Trung (Kuronami 2k6)</h2>
-                <p class="role">Chủ quân đoàn</p>
-                <span class="badge">Lãnh đạo</span>
-                <span class="badge">Chiến thuật</span>
-                <span class="badge">Tuyển quân</span>
-                <div class="corner-bottom-right"></div>
-                <div class="shimmer-effect"></div> 
+                <p class="role">👑 Chủ quân đoàn</p>
+                <div class="badges">
+                    <span class="badge">Lãnh đạo</span>
+                    <span class="badge">Chiến thuật</span>
+                    <span class="badge">Tuyển quân</span>
+                </div>
             </div>
 
             <div class="card">
-                <div class="corner-top-left"></div>
                 <div class="avatar" style="background-image:url('sang.jpg');"></div>
                 <h2>Anh Sang (Liopc 2k4)</h2>
-                <p class="role">Chỉ huy</p>
-                <span class="badge">Dẫn dắt</span>
-                <span class="badge">Huấn luyện</span>
-                <span class="badge">Phân tích</span>
-                <div class="corner-bottom-right"></div>
-                <div class="shimmer-effect"></div>
+                <p class="role">🛡️ Chỉ huy</p>
+                <div class="badges">
+                    <span class="badge">Dẫn dắt</span>
+                    <span class="badge">Huấn luyện</span>
+                    <span class="badge">Phân tích</span>
+                </div>
             </div>
+        </section>
 
-          
-            
-            </section>
-        
-    </div>
-    
-    <a id="backButton" href="index.html">⬅️ Quay lại trang chủ</a>
-
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Hiệu ứng Ripple cho nút
-        const backButton = document.getElementById('backButton');
-        backButton.addEventListener('click', function (e) {
-            const x = e.clientX - e.target.offsetLeft;
-            const y = e.clientY - e.target.offsetTop;
-
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple-effect');
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            this.appendChild(ripple);
-
-            ripple.addEventListener('animationend', function () {
-                this.remove();
-            });
-        });
-
-        // Hiệu ứng Glitch ngẫu nhiên cho H1 khi hover (Javascript)
-        const h1Element = document.querySelector('h1');
-        h1Element.addEventListener('mouseover', () => {
-            h1Element.style.setProperty('--rand-top', Math.floor(Math.random() * 80));
-            h1Element.style.setProperty('--rand-bottom', Math.floor(Math.random() * 80) + 20);
-            h1Element.style.setProperty('--rand-top-2', Math.floor(Math.random() * 80));
-            h1Element.style.setProperty('--rand-bottom-2', Math.floor(Math.random() * 80) + 20);
-        });
-
-        /* JAVASCRIPT ĐÃ ĐƯỢC TỐI ƯU HÓA: TẮT HIỆU ỨNG TUYẾT RƠI TRÊN MOBILE (Giữ nguyên) */
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-        const snowContainer = document.getElementById('snowContainer');
-        const starsContainer = document.querySelector('.stars');
-
-        if (isMobile) {
-            // Tắt các hiệu ứng nền nặng nề trên Mobile
-            if (snowContainer) snowContainer.style.display = 'none';
-            if (starsContainer) starsContainer.style.display = 'none';
-        } else {
-            // Chạy hiệu ứng tuyết rơi trên Desktop/Màn hình lớn
-            const numSnowflakes = 30; 
-
-            for (let i = 0; i < numSnowflakes; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                snowContainer.appendChild(snowflake);
-
-                // Randomize properties
-                const size = Math.random() * 3 + 1; 
-                const left = Math.random() * 100; 
-                const duration = Math.random() * 15 + 10; 
-                const delay = Math.random() * 10; 
-                const opacity = Math.random() * 0.5 + 0.5; 
-                const translateXStart = Math.random() * 50 - 25; 
-                const translateXEnd = Math.random() * 50 - 25; 
-
-                snowflake.style.width = size + 'px';
-                snowflake.style.height = size + 'px';
-                snowflake.style.left = left + '%';
-                snowflake.style.animationDuration = duration + 's';
-                snowflake.style.animationDelay = delay + 's';
-                snowflake.style.setProperty('--random-x-start', translateXStart + 'px');
-                snowflake.style.setProperty('--random-x-end', translateXEnd + 'px');
-                snowflake.style.setProperty('--random-opacity', opacity);
-            }
-        }
-    </script>
+        <a id="backButton" href="index.html">⬅️ Quay lại trang chủ</a>
+    </main>
 </body>
 </html>
