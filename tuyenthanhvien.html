@@ -6,7 +6,6 @@
 <title>Tuyển Thành Viên — Clan Free Fire</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@400;600;700&family=Bebas+Neue&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
-/* --- 1. BIẾN VÀ CẤU TRÚC CHUNG --- */
 :root {
     --accent: #ff3d00;
     --accent-dark: #ff1744;
@@ -243,24 +242,30 @@ ul li::before {
     transform: scale(1.05);
     box-shadow: 0 0 15px #4CAF50 !important;
 }
-.back-btn {
+.main-back-btn {
     display: inline-block;
     margin-top: 30px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    background: #1d2a3a;
-    color: var(--muted);
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #0b1220;
     text-decoration: none;
-    font-weight: 500;
-    transition: background 0.3s ease, color 0.3s ease;
-    border: 1px solid var(--muted);
-    font-size: 12px;
+    font-weight: 800;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(255, 61, 0, 0.7);
 }
-.back-btn:hover {
-    background: #273a52;
+.main-back-btn:hover {
+    background: var(--accent-dark);
     color: #fff;
     border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 61, 0, 1);
+    transform: scale(1.05);
 }
+.back-btn { display: none; } 
 footer {
     text-align: center;
     padding: 15px;
@@ -275,11 +280,10 @@ footer {
     .buttons { gap: 15px; }
     .buttons button.btn { font-size: 14px; padding: 12px 20px; max-width: none; }
     .content { margin: 0 10px; padding: 20px; max-width: none; }
-    .links a, .links button { display: block; margin: 0 auto 10px; width: 85%; max-width: 250px; font-size: 13px; }
+    .links a, .links button, .main-back-btn { display: block; margin: 0 auto 10px; width: 85%; max-width: 250px; font-size: 13px; }
     ul li { font-size: 12px; }
     h2 { font-size: 18px; }
 }
-
 </style>
 </head>
 <body>
@@ -297,7 +301,7 @@ footer {
 </div>
 
 <div id="sinh-ton" class="content">
-<h2>🔥 Yêu Cầu Nhóm Sinh Tồn (Squad)</h2>
+<h2>🔥 Yêu Cầu Nhóm Sinh Tồn </h2>
 <ul>
 <li>Đội hình 4 người — Ưu tiên người chơi <b>phối hợp đội hình</b> và có <b>micro</b> giao tiếp tốt.</li>
 <li>Rank tối thiểu: <b>Cao Thủ</b> trở lên.</li>
@@ -305,25 +309,25 @@ footer {
 <li>Lối bắn tư Duy</li>
 <li>Trong lúc test đọi ngũ chúng tôi sẽ xem xét</li>
 <li><b>Thành thạo một vai trò cụ thể</b> (Rush, Cover, Hỗ trợ, Sniper) .</li>
-
 </ul>
 <div class="links">
 <a href="https://www.facebook.com/nguyen.manh.long.806663" target="_blank">💬 Liên hệ Fanpage Facebook</a>
 <button class="copy-btn" onclick="copyText('8412096596')">📋 Chép ID Game để kb </button>
 </div>
 <div style="text-align:center">
-<a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
+<a href="#" class="main-back-btn" onclick="hideContent()">⬅ QUAY LẠI CHỌN NHÓM</a>
 </div>
 </div>
 
 <div id="solo" class="content">
-<h2>⚡️ Yêu Cầu Nhóm Solo Tử Chiến HS</h2>
+<h2>⚡️ Yêu Cầu Nhóm Solo Tử Chiến Headshot</h2>
 <ul>
 <li>Dành cho người chơi <b>Solo kỹ năng cá nhân CỰC CAO</b>, tự tin đấu 1vs1 và 4vs4.</li>
 <li><b>Phản xạ chớp nhoáng</b>, Aim chuẩn, và có kinh nghiệm trong các kèo Solo .</li>
 <li>Độ tuổi để xin vào quân đoàn nam trên k9, nữ trên k10</li>
 <li>Có ngoại lệ dành cho những bạn dưới k9 (bắn 6/7) sẽ được vào quân đoàn</li>
 <li>Sẽ có đội ngũ test khi bạn xin vào quân đoàn</li>
+<li>Headshot  500 máu, kĩ năng tự do không kairot, không skin</li>
 <li>Dành cho người chơi <b>Tham gia test</b>, tự tin đối với nam 5/7, nữ 3/7.</li>
 <li>Chúc các bạn thành công</li>
 <div class="links">
@@ -332,7 +336,7 @@ footer {
 <button class="copy-btn" onclick="copyText('69836174')">📋 Chép ID Game để kb </button>
 </div>
 <div style="text-align:center">
-<a href="#" class="back-btn" onclick="hideContent()">⬅ Quay lại chọn nhóm</a>
+<a href="#" class="main-back-btn" onclick="hideContent()">⬅ QUAY LẠI CHỌN NHÓM</a>
 </div>
 </div>
 
@@ -341,36 +345,33 @@ footer {
 </footer>
 
 <script>
-// Chức năng Sao chép ID MỚI
 function copyText(textToCopy) {
     navigator.clipboard.writeText(textToCopy).then(() => {
-        alert("Đã chép ID Clan: " + textToCopy);
+        alert("Đã chép ID Game: " + textToCopy);
     }).catch(err => {
         console.error('Không thể chép ID: ', err);
-        // Fallback cho trình duyệt cũ hơn
         const tempInput = document.createElement('textarea');
         tempInput.value = textToCopy;
         document.body.appendChild(tempInput);
         tempInput.select();
         document.execCommand('copy');
         document.body.removeChild(tempInput);
-        alert("Đã chép ID Clan: " + textToCopy + " (Fallback)");
+        alert("Đã chép ID Game: " + textToCopy + " (Fallback)");
     });
 }
-
 
 const sinhTon = document.getElementById('sinh-ton');
 const solo = document.getElementById('solo');
 function showContent(id) {
-    sinhTon.classList.remove('active');
-    solo.classList.remove('active');
-    document.getElementById(id).classList.add('active');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    sinhTon.classList.remove('active');
+    solo.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 function hideContent() {
-    sinhTon.classList.remove('active');
-    solo.classList.remove('active');
-    window.scrollTo({top: 0, behavior: 'smooth'}); 
+    sinhTon.classList.remove('active');
+    solo.classList.remove('active');
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
 }
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
