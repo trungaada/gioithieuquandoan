@@ -29,13 +29,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* 📱 Nền có ảnh + lớp phủ */
 html, body {
     width: 100%;
     min-height: 100vh;
-    background: 
-        /*linear-gradient(rgba(3,10,24,0.9), rgba(3,10,24,0.95)),  /* lớp tối phủ lên ảnh */
-        url('logo.jpg') no-repeat center center fixed;      /* ảnh nền */
+    background: url('logo.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #e6eef6;
     display: flex;
@@ -47,7 +44,6 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ⚡ Hiệu ứng grid neon phủ lên nền ảnh */
 body::before {
     content: '';
     position: fixed;
@@ -61,6 +57,14 @@ body::before {
     pointer-events: none;
 }
 
+body {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.2s forwards;
+}
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
 main {
     z-index: 1;
     max-width: 1200px;
@@ -68,17 +72,29 @@ main {
     text-align: center;
 }
 
-/* 🌟 Tiêu đề */
 header {
-    margin-bottom: 40px;
+    margin-bottom: 30px; 
 }
-h1 {
+h1#typing-title {
     font-size: clamp(28px, 6vw, 46px);
     color: var(--color-primary);
     text-shadow: 0 0 8px var(--neon-pink-shadow);
-    animation: flicker 3s infinite alternate;
     font-weight: 700;
+    display: inline-block; 
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid var(--color-primary);
+    animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite; 
 }
+@keyframes flicker {
+    0%, 100% { text-shadow: 0 0 10px var(--neon-pink-shadow), 0 0 20px rgba(236, 72, 153, 0.4); }
+    50% { text-shadow: 0 0 5px var(--color-primary); }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--color-primary); }
+}
+
 p.lead {
     color: var(--muted);
     font-style: italic;
@@ -86,20 +102,35 @@ p.lead {
     font-size: 15px;
 }
 
-@keyframes flicker {
-    0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-pink-shadow); }
-    50% { opacity: 0.85; text-shadow: 0 0 5px var(--color-primary); }
+.marquee-container {
+    margin: 25px auto;
+    padding: 8px 0;
+    width: 100%;
+    background: var(--glass);
+    border-top: 1px solid rgba(110, 231, 183, 0.2);
+    border-bottom: 1px solid rgba(110, 231, 183, 0.2);
+    box-shadow: 0 0 10px rgba(110, 231, 183, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+.marquee-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px var(--accent-shadow);
+    white-space: nowrap;
 }
 
-/* 🧑‍🚀 Danh sách thành viên */
 .members {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 25px;
     width: 100%;
+    margin-top: 30px; 
 }
 
-/* 🎴 Thẻ thành viên */
 .card {
     background: var(--glass);
     backdrop-filter: blur(10px);
@@ -108,28 +139,44 @@ p.lead {
     padding: 25px;
     text-align: center;
     border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 5px rgba(110, 231, 183, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     position: relative;
+    overflow: hidden;
 }
 .card::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    inset: 0;
     border-radius: var(--radius);
     background: linear-gradient(60deg, var(--color-primary) 0%, var(--accent) 100%);
     opacity: 0;
-    z-index: -1;
-    filter: blur(10px);
-    transition: opacity 0.35s ease, filter 0.35s ease;
+    z-index: -2;
+    filter: blur(15px);
+    transition: opacity 0.4s ease, filter 0.4s ease;
 }
+.card::after {
+    content: "";
+    position: absolute;
+    inset: -5px; 
+    border-radius: var(--radius);
+    background: inherit;
+    z-index: -3;
+    filter: blur(15px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
 .card:hover {
     transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.55), 0 0 15px var(--accent-shadow);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow);
 }
 .card:hover::before {
-    opacity: 0.3;
-    filter: blur(15px);
+    opacity: 0.6;
+    filter: blur(18px);
+}
+.card:hover::after {
+    opacity: 0.2;
 }
 
 .avatar {
@@ -140,7 +187,11 @@ p.lead {
     background-position: center;
     margin: 0 auto 12px;
     border: 3px solid var(--accent);
-    box-shadow: 0 0 10px var(--accent-shadow), 0 0 20px var(--accent-shadow) inset;
+    box-shadow: 0 0 15px var(--accent-shadow), 0 0 25px var(--accent-shadow) inset; 
+    transition: box-shadow 0.35s ease;
+}
+.card:hover .avatar {
+    box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent) inset; 
 }
 
 h2 {
@@ -154,6 +205,28 @@ p.role {
     text-transform: uppercase;
     margin-bottom: 12px;
 }
+
+/* THÊM CSS MỚI CHO HIỆU ỨNG ĐÁNH MÁY */
+h2 span, p.role span, h1#typing-title {
+    display: inline-block; 
+    white-space: nowrap;
+    overflow: hidden;
+    /* Giữ border-right ban đầu */
+    border-right: .15em solid var(--color-primary); 
+    animation: blink-caret .75s step-end infinite; 
+}
+
+p.role span {
+    border-right: .15em solid var(--accent); /* Con trỏ nhấp nháy màu khác cho vai trò */
+}
+
+/* THÊM CSS MỚI để loại bỏ dấu nháy nháy khi hoàn thành */
+.typing-done {
+    border-right: none !important;
+    animation: none !important; 
+}
+/* KẾT THÚC THÊM CSS MỚI */
+
 
 .badge {
     display: inline-block;
@@ -169,7 +242,7 @@ p.role {
 .card:hover .badge {
     background: var(--accent);
     color: var(--bg);
-    box-shadow: 0 0 5px var(--accent-shadow);
+    box-shadow: 0 0 8px var(--accent-shadow);
 }
 
 a#backButton {
@@ -187,7 +260,7 @@ a#backButton {
 a#backButton:hover {
     background: var(--color-primary);
     color: var(--bg);
-    box-shadow: 0 0 15px var(--neon-pink-shadow);
+    box-shadow: 0 0 15px var(--neon-pink-shadow), 0 0 30px rgba(236,72,153,0.4);
 }
 
 @media (max-width: 600px) {
@@ -200,15 +273,21 @@ a#backButton:hover {
 <body>
     <main>
         <header>
-            <h1>Đội ngũ thành viên Quân đoàn TF</h1>
+            <h1 id="typing-title"></h1>
             <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce²</p>
         </header>
 
+        <div class="marquee-container">
+            <marquee class="marquee-text" direction="left" scrollamount="6">
+                ⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay! | Sức mạnh đến từ kỷ luật và đoàn kết.
+            </marquee>
+        </div>
+        
         <section class="members">
             <div class="card">
                 <div class="avatar" style="background-image:url('trung.jpg');"></div>
-                <h2>Trung (Kuronami 2k6)</h2>
-                <p class="role">👑 Chủ quân đoàn</p>
+                <h2><span id="name-trung"></span></h2>
+                <p class="role"><span id="role-trung"></span></p>
                 <div class="badges">
                     <span class="badge">Lãnh đạo</span>
                     <span class="badge">Chiến thuật</span>
@@ -218,8 +297,8 @@ a#backButton:hover {
 
             <div class="card">
                 <div class="avatar" style="background-image:url('sang.jpg');"></div>
-                <h2>Anh Sang (Liopc 2k4)</h2>
-                <p class="role">🛡️ Chỉ huy</p>
+                <h2><span id="name-sang"></span></h2>
+                <p class="role"><span id="role-sang"></span></p>
                 <div class="badges">
                     <span class="badge">Dẫn dắt</span>
                     <span class="badge">Huấn luyện</span>
@@ -230,5 +309,69 @@ a#backButton:hover {
 
         <a id="backButton" href="index.html">⬅️ Quay lại trang chủ</a>
     </main>
+    
+    <script>
+    // Dữ liệu gốc đã có dấu cách (được khôi phục)
+    const textToType = "Đội ngũ thành viên Quân đoàn TF";
+    
+    // Dữ liệu gốc cho các thành viên (được khôi phục)
+    const memberData = [
+        { id: 'name-trung', text: 'Trung (TF.Kuronami 2k6)', speed: 80 },
+        { id: 'role-trung', text: '👑 Chủ quân đoàn', speed: 60 },
+        { id: 'name-sang', text: ' Sang (TF.Liopc 2k4)', speed: 80 },
+        { id: 'role-sang', text: '🛡️ Chỉ huy', speed: 60 }
+        // Thêm các thành viên khác vào đây theo cú pháp tương tự
+    ];
+
+    /**
+     * Hàm xử lý hiệu ứng chữ viết ra cho một phần tử
+     * @param {string} elementId - ID của phần tử DOM (ví dụ: 'name-trung')
+     * @param {string} text - Nội dung chữ cần viết ra
+     * @param {number} speed - Tốc độ viết (miliseconds/ký tự)
+     * @returns {Promise<void>}
+     */
+    function typeWriterEffect(elementId, text, speed) {
+        return new Promise(resolve => {
+            const element = document.getElementById(elementId);
+            if (!element) return resolve(); 
+            
+            let i = 0;
+            element.textContent = ''; 
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Giữ nguyên logic xóa dấu nháy nháy
+                    element.classList.add('typing-done'); 
+                    resolve(); 
+                }
+            }
+            type();
+        });
+    }
+    
+    /**
+     * Chạy tuần tự các hiệu ứng
+     */
+    async function runTypingEffects() {
+        // Tiêu đề sẽ được hiển thị có dấu cách
+        await typeWriterEffect('typing-title', textToType, 100);
+        
+        // Tên và vai trò cũng được hiển thị có dấu cách
+        const memberPromises = memberData.map(data => 
+            typeWriterEffect(data.id, data.text, data.speed)
+        );
+
+        await Promise.all(memberPromises); 
+    }
+
+    // Chờ trang tải hoàn tất sau đó chạy hiệu ứng
+    window.onload = function() {
+        setTimeout(runTypingEffects, 1200); 
+    }
+</script>
 </body>
 </html>
