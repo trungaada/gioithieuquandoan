@@ -12,7 +12,7 @@ body {
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    padding: 30px 10px;
+    padding: 20px 5px;
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -21,62 +21,63 @@ body {
 }
 h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2.8em;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
+    font-size: 2em;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
     color: #00eaff;
-    text-shadow: 0 0 20px #00eaff, 0 0 30px #00eaff;
+    text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
 }
 .controls {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
 }
 select, button {
     background: #00eaff;
     color: #0f2027;
     border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
+    padding: 8px 15px;
+    border-radius: 25px;
     font-weight: 700;
-    margin: 5px;
+    font-size: 0.9em;
+    margin: 3px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+    box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
 }
 select:hover, button:hover {
     background: #00bfff;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.7);
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
 }
 .table-container {
-    max-width: 900px;
+    max-width: 100%;
     margin: auto;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 234, 255, 0.7), 0 0 60px rgba(0, 234, 255, 0.3);
+    border-radius: 15px;
+    overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0, 234, 255, 0.7), 0 0 40px rgba(0, 234, 255, 0.3);
     background: rgba(0, 10, 15, 0.7);
     border: 2px solid #00eaff;
-    padding: 10px;
+    padding: 5px;
 }
 table {
     width: 100%;
     border-collapse: collapse;
     background: rgba(0,0,0,0.3);
-    border-radius: 15px;
 }
 thead {
     background: linear-gradient(90deg, #00bfff, #00eaff);
     color: #0f2027;
     text-transform: uppercase;
-    font-size: 1.1em;
+    font-size: 0.9em;
 }
 th, td {
-    padding: 15px 12px;
+    padding: 8px 6px;
     border-bottom: 1px solid rgba(255,255,255,0.15);
     text-align: center;
+    font-size: 0.85em;
 }
 tbody tr {
     background: rgba(0,0,0,0.2);
@@ -90,24 +91,93 @@ tbody tr:hover {
     cursor: pointer;
 }
 .rank-img {
-    height: 30px;
+    height: 25px;
     vertical-align: middle;
-    margin-right: 5px;
+    margin-right: 3px;
 }
 .rank-st-td, .rank-tc-td {
-    min-width: 120px;
+    min-width: 90px;
 }
 .top-rank-cell {
-    font-size: 1.2em;
-    font-weight: 900;
+    font-size: 1em;
+    font-weight: 700;
 }
 footer {
-    margin-top: 30px;
-    font-size: 1em;
+    margin-top: 20px;
+    font-size: 0.8em;
     color: #bbb;
-    text-shadow: 0 0 5px rgba(255,255,255,0.2);
+    text-shadow: 0 0 3px rgba(255,255,255,0.2);
 }
+
+/* Responsive cho màn hình nhỏ */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    select, button {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+    th, td {
+        padding: 5px 3px;
+        font-size: 0.75em;
+    }
+    .rank-img {
+        height: 20px;
+    }
+    .rank-st-td, .rank-tc-td {
+        min-width: 70px;
+    }
+}
+
+/* Thanh menu */
+.controls {
+    display: flex;
+    flex-wrap: wrap;          /* tự động xuống dòng nếu không đủ chỗ */
+    justify-content: center;  /* căn giữa ngang */
+    align-items: center;      /* căn giữa dọc */
+    gap: 8px;                 /* khoảng cách giữa các nút/select */
+    margin-bottom: 15px;
+}
+
+select, button {
+    flex-shrink: 1;           /* co giãn nếu màn hình nhỏ */
+    min-width: 80px;          /* đảm bảo nút không quá nhỏ */
+    max-width: 160px;         /* giới hạn chiều rộng tối đa */
+    text-align: center;
+    font-size: 0.9em;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-weight: 700;
+    background: #00eaff;
+    color: #0f2027;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+}
+
+select:hover, button:hover {
+    background: #00bfff;
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
+}
+
+/* Responsive cho màn hình nhỏ */
+@media screen and (max-width: 480px) {
+    .controls {
+        flex-direction: column; /* xếp nút theo cột */
+        gap: 6px;
+    }
+    select, button {
+        width: 90%;             /* chiếm gần hết chiều ngang */
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+}
+
 </style>
+
 </head>
 <body>
 
