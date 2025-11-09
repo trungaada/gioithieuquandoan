@@ -36,37 +36,30 @@ h1 {
 }
 @keyframes rainbow { to { filter: hue-rotate(360deg); } }
 @keyframes glowTitle { from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.4); } to { text-shadow: 0 0 15px #00ffff, 0 0 20px #ff00cc; } }
-.logo {
+.logo-container {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    object-fit: cover;
+    overflow: hidden; /* đảm bảo hình tròn thật */
+    display: inline-block; /* giúp căn giữa nếu cần */
     margin-bottom: 40px;
-
+    
     /* Viền neon */
-    border: 3px solid #00ffff; /* màu viền chính */
+    border: 3px solid #00ffff;
     box-shadow: 
-        0 0 15px #00ffff,   /* viền glow bên ngoài */
-        0 0 30px rgba(0,255,255,0.5), /* viền glow mờ hơn */
-        0 0 45px rgba(0,255,255,0.3); /* glow lan rộng */
+        0 0 15px #00ffff,
+        0 0 30px rgba(0,255,255,0.5),
+        0 0 45px rgba(0,255,255,0.3);
 
     animation: fadeIn 2s ease, neonPulse 2s ease-in-out infinite alternate;
 }
 
-/* Hiệu ứng neon nhấp nháy nhẹ */
-@keyframes neonPulse {
-    0% {
-        box-shadow: 
-            0 0 10px #00ffff,
-            0 0 20px rgba(0,255,255,0.5),
-            0 0 30px rgba(0,255,255,0.3);
-    }
-    100% {
-        box-shadow: 
-            0 0 25px #00ffff,
-            0 0 45px rgba(0,255,255,0.7),
-            0 0 60px rgba(0,255,255,0.5);
-    }
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* giữ tỉ lệ ảnh đầy đủ */
+    display: block; /* fix lỗi margin mặc định của img */
+    border-radius: 50%; /* backup nếu overflow chưa đủ */
 }
 
 
@@ -182,7 +175,10 @@ h3 {
 </head>
 <body>
 <h1>Sự kiện Quân Đoàn TitanForce</h1>
-<img src="logo2.jpg" alt="Logo TitanForce" class="logo">
+<div class="logo-container">
+    <img src="logo2.jpg" alt="Logo TitanForce">
+</div>
+
 <div class="event-card">
 <h2><span role="img" aria-label="party popper">🎉</span> Kỷ niệm thành lập TitanForce <span role="img" aria-label="military medal">🎖️</span></h2>
 <p><span class="highlight">Sứ mệnh của TitanForce:</span> Thành lập vào ngày <span class="highlight">9/11/2025</span>, chúng tôi không chỉ là một clan mà là một **gia đình đồng đội** chiến đấu. Mục tiêu của chúng tôi là xây dựng **đội hình chuyên nghiệp** và tạo ra một môi trường gắn kết, **phát triển kỹ năng** cá nhân và tập thể trong mọi đấu trường.</p>
