@@ -71,6 +71,21 @@ main {
     width: 100%;
     text-align: center;
 }
+.logo-container {
+    margin-bottom: 20px;
+}
+.logo {
+    width: clamp(100px, 15vw, 150px);
+    height: auto;
+    border-radius: 50%; /* Bo tròn hoàn toàn */
+    box-shadow: 0 0 15px var(--neon-blue-shadow), 0 0 30px rgba(0, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.5);
+}
 header { margin-bottom: 30px; }
 h1#typing-title {
     font-size: clamp(28px, 6vw, 46px);
@@ -205,6 +220,9 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
         grid-template-columns: repeat(3, 1fr); 
         gap: 20px;
     }
+    .logo {
+        width: clamp(80px, 20vw, 120px);
+    }
 }
 @media (max-width: 767px) { 
     body { padding: 30px 10px 50px; } 
@@ -218,7 +236,10 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
     p.role { font-size: 11px; margin-bottom: 8px; }
     .badge { padding: 3px 8px; font-size: 10px; }
     a#backButton { padding: 8px 15px; font-size: 14px; }
-}
+    .logo {
+        width: clamp(80px, 20vw, 120px);
+    }
+   } 
 .falling-star { position: absolute; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; will-change: transform, opacity; transition: none; }
 </style>
 </head>
@@ -226,8 +247,11 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <div id="starfall-container" style="position: fixed; inset: 0; overflow: hidden; z-index: 1;"></div>
 <main>
 <header>
-<h1 id="typing-title"></h1>
-<p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce²</p>
+    <div class="logo-container">
+        <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
+    </div>
+    <h1 id="typing-title"></h1>
+    <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce²</p>
 </header>
 <div class="marquee-container">
 <marquee class="marquee-text" direction="left" scrollamount="6">
@@ -270,7 +294,7 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 </div>
 <div class="card">
 <div class="avatar" style="background-image:url('tuan.jpg');"></div>
-<h2><span id="name-tv5"></span></h2>
+<h2><span id="name-tv5"></span> </h2>
 <p class="role"><span id="role-tv5"></span></p>
 <div class="badges">
 <span class="badge">Bắn Tốt</span>
@@ -342,112 +366,111 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <script>
 const textToType = "Giới thiệu thành viên 2 ";
 const memberData = [
-     
-    {id:'name-tv1',text:'(TF. Dương)',speed:75},
-    {id:'role-tv1',text:'Thành viên ',speed:55},
-    {id:'name-tv4',text:' (TF.Duy)',speed:75},
-    {id:'role-tv4',text:'Thành viên',speed:55},
-    {id:'name-tv5',text:' (TF.Tuấn)',speed:75},
-    {id:'role-tv5',text:'Thành viên',speed:55},
-    {id:'name-tv6',text:'(TF. Quốc Anh)',speed:75},
-    {id:'role-tv6',text:'Thành viên',speed:55},
-    {id:'name-tv7',text:'  (TF.Trúc Hồng)',speed:75},
-    {id:'role-tv7',text:'Thành viên',speed:55},
-    {id:'name-tv8',text:'  (TF.Long)',speed:75},
-    {id:'role-tv8',text:' Thành viên ',speed:55},
-    {id:'name-tv9',text:'(TF. Gia Huy)',speed:75},
-    {id:'role-tv9',text:'Thành viên ',speed:55},
-    {id:'name-tv10',text:'(TF.Thịnh)',speed:75},
-    {id:'role-tv10',text:'Thành viên ',speed:55},
-    
+     
+    {id:'name-tv1',text:'(TF. Dương)',speed:75},
+    {id:'role-tv1',text:'Thành viên ',speed:55},
+    {id:'name-tv4',text:' (TF.Duy)',speed:75},
+    {id:'role-tv4',text:'Thành viên',speed:55},
+    {id:'name-tv5',text:' (TF.Tuấn)',speed:75},
+    {id:'role-tv5',text:'Thành viên',speed:55},
+    {id:'name-tv6',text:'(TF. Quốc Anh)',speed:75},
+    {id:'role-tv6',text:'Thành viên',speed:55},
+    {id:'name-tv7',text:'  (TF.Trúc Hồng)',speed:75},
+    {id:'role-tv7',text:'Thành viên',speed:55},
+    {id:'name-tv8',text:'  (TF.Long)',speed:75},
+    {id:'role-tv8',text:' Thành viên ',speed:55},
+    {id:'name-tv9',text:'(TF. Gia Huy)',speed:75},
+    {id:'role-tv9',text:'Thành viên ',speed:55},
+    {id:'name-tv10',text:'(TF.Thịnh)',speed:75},
+    {id:'role-tv10',text:'Thành viên ',speed:55},
+    
 ];
 function typeWriterEffect(elementId, text, speed) {
-    return new Promise(resolve => {
-        const element = document.getElementById(elementId);
-        if (!element) return resolve();
-        element.classList.remove('typing-done');
-        element.classList.add('typing-member');
-        let i = 0;
-        element.textContent = '';
-        function type() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                element.classList.remove('typing-member');
-                element.classList.add('typing-done');
-                resolve();
-            }
-        }
-        type();
-    });
+    return new Promise(resolve => {
+        const element = document.getElementById(elementId);
+        if (!element) return resolve();
+        element.classList.remove('typing-done');
+        element.classList.add('typing-member');
+        let i = 0;
+        element.textContent = '';
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                element.classList.remove('typing-member');
+                element.classList.add('typing-done');
+                resolve();
+            }
+        }
+        type();
+    });
 }
 async function runMemberTypingOnce() {
-    for (const member of memberData) {
-        if (member.id.startsWith('name-')) {
-            const roleId = member.id.replace('name', 'role');
-            const roleItem = memberData.find(item => item.id === roleId);
-            document.getElementById(member.id).textContent = '';
-            document.getElementById(roleId).textContent = '';
-            await typeWriterEffect(member.id, member.text, member.speed);
-            if (roleItem) { await typeWriterEffect(roleItem.id, roleItem.text, roleItem.speed); }
-        }
-    }
+    for (const member of memberData) {
+        if (member.id.startsWith('name-')) {
+            const roleId = member.id.replace('name', 'role');
+            const roleItem = memberData.find(item => item.id === roleId);
+            document.getElementById(member.id).textContent = '';
+            document.getElementById(roleId).textContent = '';
+            await typeWriterEffect(member.id, member.text, member.speed);
+            if (roleItem) { await typeWriterEffect(roleItem.id, roleItem.text, roleItem.speed); }
+        }
+    }
 }
 function animateCards() {
-    document.querySelectorAll('.card').forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.15 + 0.5}s`;
-        card.classList.add('card-enter');
-    });
+    document.querySelectorAll('.card').forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.15 + 0.5}s`;
+        card.classList.add('card-enter');
+    });
 }
 window.onload = async function() {
-    await typeWriterEffect('typing-title', textToType, 100);
-    document.getElementById('typing-title').classList.add('typing-done');
-    runMemberTypingOnce();
-    animateCards();
-    startStarfallEffect();
+    await typeWriterEffect('typing-title', textToType, 100);
+    document.getElementById('typing-title').classList.add('typing-done');
+    runMemberTypingOnce();
+    animateCards();
+    startStarfallEffect();
 };
 const stars = [];
 const numStars = 60;
 function initStarfall() {
-    const container = document.getElementById('starfall-container');
-    const minSize = 2;
-    const maxSize = 5;
-    for(let i = 0; i < numStars; i++){
-        const star = document.createElement('div');
-        star.classList.add('falling-star');
-        container.appendChild(star);
-        const size = Math.random() * (maxSize - minSize) + minSize;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        const speed = Math.random() * .5 + .5;
-        const xDrift = (Math.random() - .5) * .2;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        stars.push({element:star, x:x, y:y, size:size, speed:speed, xDrift:xDrift, opacity:Math.random()*.5+.5});
-        star.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        star.style.opacity = stars[i].opacity;
-    }
+    const container = document.getElementById('starfall-container');
+    const minSize = 2;
+    const maxSize = 5;
+    for(let i = 0; i < numStars; i++){
+        const star = document.createElement('div');
+        star.classList.add('falling-star');
+        container.appendChild(star);
+        const size = Math.random() * (maxSize - minSize) + minSize;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const speed = Math.random() * .5 + .5;
+        const xDrift = (Math.random() - .5) * .2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        stars.push({element:star, x:x, y:y, size:size, speed:speed, xDrift:xDrift, opacity:Math.random()*.5+.5});
+        star.style.transform = `translate3d(${star.x}px, ${star.y}px, 0)`;
+        star.style.opacity = stars[i].opacity;
+    }
 }
 function updateStarfall() {
-    for(let i = 0; i < numStars; i++){
-        const star = stars[i];
-        star.y += star.speed;
-        star.x += star.xDrift;
-        if (star.y > window.innerHeight) {
-            star.y = -star.size;
-            star.x = Math.random() * window.innerWidth;
-            star.speed = Math.random() * .5 + .5;
-        }
-        star.element.style.transform = `translate3d(${star.x}px, ${star.y}px, 0)`;
-        star.element.style.opacity = star.opacity * (1 + Math.sin(star.y * .05 + star.x * .01) * .1);
-    }
-    requestAnimationFrame(updateStarfall);
+    for(let i = 0; i < numStars; i++){
+        const star = stars[i];
+        star.y += star.speed;
+        star.x += star.xDrift;
+        if (star.y > window.innerHeight) {
+            star.y = -star.size;
+            star.x = Math.random() * window.innerWidth;
+            star.speed = Math.random() * .5 + .5;
+        }
+        star.element.style.transform = `translate3d(${star.x}px, ${star.y}px, 0)`;
+        star.element.style.opacity = star.opacity * (1 + Math.sin(star.y * .05 + star.x * .01) * .1);
+    }
+    requestAnimationFrame(updateStarfall);
 }
 function startStarfallEffect() { initStarfall(); updateStarfall(); }
 window.addEventListener('resize', () => {});
 </script>
 </body>
 </html>
-
