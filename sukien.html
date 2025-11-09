@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sự kiện — Quân đoàn TitanForce</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbow 4s linear infinite;
+    }
+
+    @keyframes rainbow {
+      to { filter: hue-rotate(360deg); }
+    }
+
+    .event-card {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      padding: 25px;
+      max-width: 700px;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 2s ease;
+      margin-bottom: 30px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: #00ffff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .highlight {
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #fff;
+    }
+
+    /* Nút quay về trang chủ */
+    .back-btn {
+      background: linear-gradient(90deg, #00ff99, #00ccff);
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #ff0099, #ff6600);
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Sự kiện Quân Đoàn TitanForce</h1>
+
+  <div class="event-card">
+    <h2>🎉 Kỷ niệm thành lập TitanForce 🎖️</h2>
+    <p>Ngày <span class="highlight">9/11/2025</span> đánh dấu cột mốc quan trọng — Quân đoàn <span class="highlight">TitanForce²</span> chính thức ra mắt!</p>
+    <p>Với tinh thần <span class="highlight">Đoàn Kết - Kỷ Luật - Bất Bại</span>, chúng tôi đã cùng nhau xây dựng một cộng đồng mạnh mẽ, sẵn sàng chinh phục mọi thử thách trong Free Fire và các tựa game khác.</p>
+    <p>🔥 Sự kiện mở rộng đang diễn ra: <br> Chào đón các thành viên mới gia nhập hàng ngũ TitanForce!</p>
+    <p>Hãy cùng nhau viết tiếp hành trình huyền thoại của chúng ta!</p>
+    <a href="thanhvien.html" class="btn">Tham Gia Ngay</a>
+  </div>
+
+  <a href="index.html" class="btn back-btn">⬅️ Quay về Trang Chủ</a>
+</body>
+</html>
