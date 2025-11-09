@@ -178,6 +178,7 @@ p.lead {
     transition: all 0.35s ease; 
     position: relative;
 }
+
 .card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
 h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
 p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
@@ -252,6 +253,17 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <span class="badge">Chiến thuật</span>
 <span class="badge">Tuyển quân</span>
 </div>
+</div>
+
+<div class="card">
+<div class="avatar" style="background-image:url('bich.jpg');"></div>
+<h2><span id="name-tv3"></span></h2>
+<p class="role"><span id="role-tv3"></span></p>
+<div class="badges">
+<span class="badge">Lãnh đạo</span>
+<span class="badge">Chiến thuật</span>
+<span class="badge">Tuyển quân</span>
+</div>
 
 </section>
 <a id="backButton" href="index.html"> Quay lại trang chủ</a>
@@ -266,7 +278,9 @@ const memberData=[
 {id:'name-tv1',text:' Dương (TF.Tidasick )',speed:80},
 {id:'role-tv1',text:'👑 Chủ quân đoàn N1',speed:60},
 {id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
-{id:'role-tv2',text:'👑 Chỉ huy N1',speed:60}
+{id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
+{id:'name-tv3',text:' Huy (TF.Bích )',speed:80},
+{id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
 
 ];
 function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
@@ -277,5 +291,6 @@ window.onload=async function(){await typeWriterEffect('typing-title',textToType,
 const stars=[],numStars=60;
 function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}function startStarfallEffect(){initStarfall(),updateStarfall()}
 </script>
+
 </body>
 </html>
