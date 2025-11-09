@@ -23,35 +23,7 @@
     --member-role-color: #FFD700;
     font-family: 'Poppins', system-ui, sans-serif;
 }
-.logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#main-logo {
-    width: clamp(100px, 15vw, 150px);
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.4);
-    border: 3px solid var(--color-primary);
-    transition: transform 0.4s ease-in-out;
-}
-#main-logo:hover {
-    transform: rotate(5deg) scale(1.05);
-    box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.6);
-}
-@media (max-width: 600px) {
-    #main-logo {
-        width: 100px;
-    }
-}
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body {
     width: 100%;
     min-height: 100vh;
@@ -70,80 +42,45 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image:
-        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
-        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
+    background-image: linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%), linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
     background-size: 30px 30px;
     opacity: 0.25;
     z-index: 0;
     pointer-events: none;
 }
-body {
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.2s forwards;
-}
+body { opacity: 0; animation: fadeIn 1s ease-out 0.2s forwards; }
 @keyframes fadeIn { to { opacity: 1; } }
-@keyframes float {
-    0% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
-    50% { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
-    100% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
-}
-main {
-    z-index: 1;
-    max-width: 1200px;
-    width: 100%;
-    text-align: center;
-}
+@keyframes float { 0% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); } 50% { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.8); } 100% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); } }
+main { z-index: 1; max-width: 1200px; width: 100%; text-align: center; }
 header { margin-bottom: 30px; }
+.logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; }
+#main-logo {
+    width: clamp(100px, 15vw, 150px);
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.4);
+    border: 3px solid var(--color-primary);
+    transition: transform 0.4s ease-in-out;
+}
+#main-logo:hover { transform: rotate(5deg) scale(1.05); box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.6); }
+@media (max-width: 600px) { #main-logo { width: 100px; } }
 h1#typing-title {
     font-size: clamp(28px, 6vw, 46px);
     color: var(--color-primary);
     text-shadow: 0 0 8px var(--neon-blue-shadow);
     font-weight: 700;
-    display: inline-block; 
+    display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     border-right: .15em solid var(--color-primary);
-    animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite; 
+    animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite;
 }
-@keyframes flicker {
-    0%, 100% { text-shadow: 0 0 10px var(--neon-blue-shadow), 0 0 20px rgba(0, 255, 255, 0.4); }
-    50% { text-shadow: 0 0 5px var(--color-primary); }
-}
+@keyframes flicker { 0%,100% { text-shadow: 0 0 10px var(--neon-blue-shadow), 0 0 20px rgba(0, 255, 255, 0.4); } 50% { text-shadow: 0 0 5px var(--color-primary); } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--color-primary); } }
-p.lead {
-    color: var(--muted);
-    font-style: italic;
-    margin-top: 6px;
-    font-size: 15px;
-}
-.marquee-container {
-    margin: 25px auto;
-    padding: 8px 0;
-    width: 100%;
-    background: var(--glass);
-    border-top: 1px solid rgba(110, 231, 183, 0.2);
-    border-bottom: 1px solid rgba(110, 231, 183, 0.2);
-    box-shadow: 0 0 10px rgba(110, 231, 183, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-.marquee-text {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px var(--accent-shadow);
-    white-space: nowrap;
-}
-.members {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 25px;
-    width: 100%;
-    margin-top: 30px; 
-}
+p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15px; }
+.marquee-container { margin: 25px auto; padding: 8px 0; width: 100%; background: var(--glass); border-top: 1px solid rgba(110, 231, 183, 0.2); border-bottom: 1px solid rgba(110, 231, 183, 0.2); box-shadow: 0 0 10px rgba(110, 231, 183, 0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+.marquee-text { font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 5px var(--accent-shadow); white-space: nowrap; }
+.members { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; width: 100%; margin-top: 30px; }
 .card {
     opacity: 0;
     transform: translateY(20px);
@@ -156,14 +93,14 @@ p.lead {
     text-align: center;
     border: 1px solid rgba(255,255,255,0.05);
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease;
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
-@keyframes slideUpFadeIn {
-    to { opacity: 1; transform: translateY(0); }
-}
-.card-enter { animation: slideUpFadeIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+@keyframes slideUpFadeIn { to { opacity: 1; transform: translateY(0); } }
+.card-enter { animation: slideUpFadeIn 0.8s cubic-bezier(0.165,0.84,0.44,1) forwards; }
 .card::before {
     content: '';
     position: absolute;
@@ -173,21 +110,24 @@ p.lead {
     opacity: 0;
     z-index: -2;
     filter: blur(15px);
-    transition: opacity 0.4s ease, filter 0.4s ease;
+    transition: opacity 0.5s ease, filter 0.5s ease;
 }
-.card::after {
-    content: "";
+.card-border-glow {
     position: absolute;
-    inset: -5px; 
+    inset: -2px;
     border-radius: var(--radius);
-    background: inherit;
-    z-index: -3;
-    filter: blur(15px);
+    background: linear-gradient(45deg, var(--color-primary) 0%, var(--accent) 50%, var(--member-name-color) 100%);
+    background-size: 200% 200%;
+    z-index: -1;
+    filter: blur(8px);
     opacity: 0;
     transition: opacity 0.4s ease;
+    animation: rotate-border 6s linear infinite;
 }
-.card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow); }
-.card:hover::before { opacity: 0.6; filter: blur(18px); }
+.card:hover .card-border-glow { opacity: 1; }
+@keyframes rotate-border { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.card:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow); }
+.card:hover::before { opacity: 0.8; filter: blur(20px); }
 .card:hover::after { opacity: 0.2; }
 .avatar {
     width: 90px;
@@ -198,61 +138,46 @@ p.lead {
     margin: 0 auto 12px;
     border: 3px solid rgba(255, 100, 100, 0.8);
     box-shadow: 0 0 15px rgba(255, 100, 100, 0.5), 0 0 25px rgba(255, 100, 100, 0.3) inset;
-    transition: all 0.35s ease; 
+    transition: all 0.35s ease;
     position: relative;
+    will-change: transform;
+    transform: translateZ(20px);
 }
-/* Nút quay lại trang chủ */
-/* Nút quay lại trang chủ */
-a#backButton {
-    display: inline-block;
-    margin-top: 35px;
-    color: var(--color-primary);
-    text-decoration: none;
-    border: 2px solid var(--color-primary); /* Tăng độ dày viền */
-    border-radius: 12px; /* Bo tròn hơn */
-    padding: 12px 20px; /* Lớn hơn một chút */
-    font-weight: 700; /* In đậm hơn */
-    background: rgba(0, 255, 255, 0.15); /* Nền trong suốt hơn */
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Thêm bóng nhẹ mặc định */
-    transition: 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-    animation: neon-flicker-btn 2.5s ease-in-out infinite alternate; /* Dùng keyframe mới */
+.card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; }
+/* Avatar bình thường */
+.card-4-special .avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto 12px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Hover hiệu ứng neon + scale + gradient */
-a#backButton:hover {
-    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Gradient khi hover */
-    color: var(--bg); /* Màu chữ nền tối */
-    transform: scale(1.1); /* Phóng to rõ ràng hơn */
-    border-color: transparent; /* Ẩn viền khi hover */
-    box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.6);
-    animation: none; /* Tắt flicker khi hover */
-    text-shadow: 0 0 5px #fff, 0 0 10px var(--color-secondary); /* Thêm text shadow */
+/* Viền gradient 7 màu chỉ khi hover */
+.card-4-special:hover .avatar::after {
+    content: "";
+    position: absolute;
+    inset: -5px; /* độ dày viền */
+    border-radius: 50%;
+    background: conic-gradient(
+        #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF, #FF0000
+    );
+    -webkit-mask: radial-gradient(farthest-side, #000 90%, transparent 100%) center/100% 100% no-repeat;
+    mask: radial-gradient(farthest-side, #000 90%, transparent 100%) center/100% 100% no-repeat;
+    animation: spin 3s linear infinite;
+    z-index: -1;
 }
 
-/* Neon nhấp nháy mặc định */
-@keyframes neon-flicker-btn {
-    0%, 100% {
-        box-shadow: 0 0 8px var(--neon-blue-shadow), 0 0 15px rgba(0, 255, 255, 0.4);
-        border-color: var(--color-primary);
-    }
-    50% {
-        box-shadow: 0 0 4px rgba(0, 255, 255, 0.6), 0 0 8px rgba(0, 255, 255, 0.2);
-        border-color: rgba(0, 255, 255, 0.7);
-    }
+/* Quay viền gradient */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-
-
-
-
-
-
-
-
-
-
-.card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
-h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
+h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255,0,0,0.4); }
 p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
 h2 span, p.role span, h1#typing-title { display: inline-block; white-space: nowrap; overflow: hidden; }
 h1#typing-title { border-right: .15em solid var(--color-primary); }
@@ -263,12 +188,11 @@ p.role .typing-member { border-right: .15em solid var(--member-role-color); }
 .typing-done { border-right: none !important; animation: none !important; }
 .badge { display: inline-block; margin: 3px; padding: 5px 10px; font-size: 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: rgba(110,231,183,0.08); transition: 0.3s; }
 .card:hover .badge { background: var(--accent); color: var(--bg); box-shadow: 0 0 8px var(--accent-shadow); }
-@keyframes neon-pulse { 0% { box-shadow: 0 0 10px rgba(110, 231, 183, 0.5), 0 0 20px rgba(110, 231, 183, 0.3) inset; transform: scale(1); } 100% { box-shadow: 0 0 20px rgba(110, 231, 183, 0.8), 0 0 35px rgba(110, 231, 183, 0.5) inset; transform: scale(1.02); } }
-@keyframes neon-flicker { 0%,100%{ box-shadow:0 0 5px var(--neon-blue-shadow),0 0 10px var(--neon-blue-shadow),0 0 15px var(--neon-blue-shadow); border-color: var(--color-primary); text-shadow:0 0 5px rgba(0,255,255,0.7);}50%{box-shadow:0 0 2px var(--color-primary),0 0 4px var(--color-primary); border-color:rgba(0,255,255,0.5); text-shadow:none;} }
-a#backButton { display: inline-block; margin-top: 35px; color: var(--color-primary); text-decoration: none; border: 1px solid var(--color-primary); border-radius: 10px; padding: 10px 18px; font-weight: 600; background: rgba(0, 255, 255, 0.05); transition: 0.3s; animation: neon-flicker 2s ease-in-out infinite alternate; }
-a#backButton:hover { background: var(--color-primary); color: var(--bg); box-shadow: 0 0 15px var(--neon-blue-shadow), 0 0 30px rgba(0, 255, 255, 0.4); animation: none; text-shadow: none; }
+@keyframes neon-flicker-btn { 0%,100%{ box-shadow: 0 0 8px var(--neon-blue-shadow),0 0 15px rgba(0,255,255,0.4); border-color: var(--color-primary);} 50%{ box-shadow: 0 0 4px rgba(0,255,255,0.6),0 0 8px rgba(0,255,255,0.2); border-color: rgba(0,255,255,0.7);} }
+a#backButton { display: inline-block; margin-top: 35px; color: var(--color-primary); text-decoration: none; border: 2px solid var(--color-primary); border-radius: 12px; padding: 12px 20px; font-weight: 700; background: rgba(0,255,255,0.15); box-shadow: 0 0 10px rgba(0,255,255,0.5); transition: 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; animation: neon-flicker-btn 2.5s ease-in-out infinite alternate; }
+a#backButton:hover { background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); color: var(--bg); transform: scale(1.1); border-color: transparent; box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0,255,255,0.6); animation: none; text-shadow: 0 0 5px #fff, 0 0 10px var(--color-secondary); }
 @media (max-width: 600px) { body { padding: 40px 15px; } .avatar { width: 80px; height: 80px; } h1 { font-size: 26px; } .members { gap: 15px; } .card { padding: 20px; } }
-.falling-star { position: absolute; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.4); will-change: transform, opacity; transition: none; }
+.falling-star { position: absolute; background-color: rgba(255,255,255,0.8); border-radius: 50%; pointer-events: none; box-shadow: 0 0 5px 2px rgba(255,255,255,0.4); will-change: transform, opacity; transition: none; }
 </style>
 </head>
 <body>
@@ -279,7 +203,7 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
         <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF - TitanForce²">
     </div>
     <h1 id="typing-title"></h1>
-<p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
+    <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
 </header>
 <div class="marquee-container">
 <marquee class="marquee-text" direction="left" scrollamount="6">
@@ -288,43 +212,44 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 </div>
 <section class="members">
 <div class="card">
-<div class="avatar" style="background-image:url('trung.jpg');"></div>
-<h2><span id="name-trung"></span></h2>
-<p class="role"><span id="role-trung"></span></p>
-<div class="badges">
-<span class="badge">Lãnh đạo</span>
-<span class="badge">Chiến thuật</span>
-<span class="badge">Tuyển quân</span>
-</div>
-</div>
-<div class="card">
-<div class="avatar" style="background-image:url('sang.jpg');"></div>
-<h2><span id="name-sang"></span></h2>
-<p class="role"><span id="role-sang"></span></p>
-<div class="badges">
-<span class="badge">Dẫn dắt</span>
-<span class="badge">Huấn luyện</span>
-<span class="badge">Phân tích</span>
-</div>
+    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('trung.jpg');"></div>
+    <h2><span id="name-trung"></span></h2>
+    <p class="role"><span id="role-trung"></span></p>
+    <div class="badges">
+        <span class="badge">Lãnh đạo</span>
+        <span class="badge">Chiến thuật</span>
+        <span class="badge">Tuyển quân</span>
+    </div>
 </div>
 <div class="card">
-<div class="avatar" style="background-image:url('huy.jpg');"></div>
-<h2><span id="name-tv2"></span></h2>
-<p class="role"><span id="role-tv2"></span></p>
-<div class="badges">
-<span class="badge">Lãnh đạo</span>
-<span class="badge">Chiến thuật</span>
-<span class="badge">Tuyển quân</span>
-</div>
+    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('sang.jpg');"></div>
+    <h2><span id="name-sang"></span></h2>
+    <p class="role"><span id="role-sang"></span></p>
+    <div class="badges">
+        <span class="badge">Dẫn dắt</span>
+        <span class="badge">Huấn luyện</span>
+        <span class="badge">Phân tích</span>
+    </div>
 </div>
 <div class="card">
-<div class="avatar" style="background-image:url('bich.jpg');"></div>
-<h2><span id="name-tv3"></span></h2>
-<p class="role"><span id="role-tv3"></span></p>
-<div class="badges">
-<span class="badge">Lãnh đạo</span>
-<span class="badge">Chiến thuật</span>
-<span class="badge">Tuyển quân</span>
+    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('huy.jpg');"></div>
+    <h2><span id="name-tv2"></span></h2>
+    <p class="role"><span id="role-tv2"></span></p>
+    <div class="badges">
+        <span class="badge">Lãnh đạo</span>
+        <span class="badge">Chiến thuật</span>
+        <span class="badge">Tuyển quân</span>
+    </div>
+</div>
+<div class="card card-4-special">
+    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('bich.jpg');"></div>
+    <h2><span id="name-tv3"></span></h2>
+    <p class="role"><span id="role-tv3"></span></p>
+    <div class="badges">
+        <span class="badge">Lãnh đạo</span>
+        <span class="badge">Chiến thuật</span>
+        <span class="badge">Tuyển quân</span>
+    </div>
 </div>
 </section>
 <a id="backButton" href="index.html"> Quay lại trang chủ</a>
@@ -338,17 +263,33 @@ const memberData=[
 {id:'role-sang',text:'👑Chủ quân đoàn N2',speed:60},
 {id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
 {id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
-{id:'name-tv3',text:' Bích (TF.Bích )',speed:80},
+{id:'name-tv3',text:' Vợ Huy(TF.Bích )',speed:80},
 {id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
 ];
 function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
-async function runMemberLoop(){while(!0){for(const e of memberData)await typeWriterEffect(e.id,e.text,e.speed),await typeWriterEffect(e.id.replace('name','role'),memberData.find(a=>a.id===e.id.replace('name','role')).text,memberData.find(a=>a.id===e.id.replace('name','role')).speed);for(const e of memberData)document.getElementById(e.id).textContent='',document.getElementById(e.id.replace('name','role')).textContent='' }
-}
+async function runMemberLoop(){while(true){for(const e of memberData){await typeWriterEffect(e.id,e.text,e.speed);const roleData = memberData.find(a=>a.id===e.id.replace('name','role'));await typeWriterEffect(roleData.id, roleData.text, roleData.speed);}await new Promise(r => setTimeout(r, 5000));for(const e of memberData){document.getElementById(e.id).textContent='';document.getElementById(e.id.replace('name','role')).textContent='';}}}
 function animateCards(){document.querySelectorAll('.card').forEach((e,t)=>{e.style.animationDelay=`${t*0.15+0.5}s`,e.classList.add('card-enter')})}
-window.onload=async function(){await typeWriterEffect('typing-title',textToType,100),runMemberLoop(),startStarfallEffect(),animateCards()};
 const stars=[],numStars=60;
-function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}function startStarfallEffect(){initStarfall(),updateStarfall()}
+function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}
+function startStarfallEffect(){initStarfall(),updateStarfall()}
+document.querySelectorAll('.card').forEach(card=>{
+card.addEventListener('mousemove',(e)=>{
+const rect=card.getBoundingClientRect();
+const x=e.clientX-rect.left;
+const y=e.clientY-rect.top;
+const centerX=rect.width/2;
+const centerY=rect.height/2;
+const rotateX=(y-centerY)/20;
+const rotateY=(x-centerX)/-20;
+const avatar=card.querySelector('.avatar');
+avatar.style.transform=`scale(1.05) translate(${rotateY/4}px, ${rotateX/4}px) rotateY(${rotateY/2}deg) rotateX(${rotateX/2}deg) translateZ(30px)`;
+card.style.transform=`translateY(-8px) scale(1.03) rotateY(${rotateY/8}deg) rotateX(${rotateX/8}deg)`});
+card.addEventListener('mouseleave',()=>{
+const avatar=card.querySelector('.avatar');
+avatar.style.transform=`scale(1.0) translate(0,0) rotateY(0deg) rotateX(0deg) translateZ(20px)`;
+card.style.transform=`translateY(0) scale(1) rotateY(0deg) rotateX(0deg)`});
+});
+window.onload=async function(){await typeWriterEffect('typing-title',textToType,100),runMemberLoop(),startStarfallEffect(),animateCards()};
 </script>
 </body>
 </html>
-
