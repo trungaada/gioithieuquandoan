@@ -1,111 +1,237 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sự kiện — Quân đoàn TitanForce</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sự kiện — Quân đoàn TitanForce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Thiết lập chung */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Montserrat', sans-serif;
+        }
 
-    body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
+        /* Thân trang */
+        body {
+            /* Nền tối, mạnh mẽ hơn */
+            background: linear-gradient(135deg, #0d1a26, #1a334d, #254a6b); 
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        /* Tiêu đề chính */
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            text-transform: uppercase;
+            /* Hiệu ứng cầu vồng/lấp lánh mạnh mẽ hơn */
+            background: linear-gradient(90deg, #ff00cc, #00ffff, #ffcc00);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: rainbow 4s linear infinite, glowTitle 1.5s ease-in-out infinite alternate;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
 
-    h1 {
-      font-size: 2.5em;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: rainbow 4s linear infinite;
-    }
+        @keyframes rainbow {
+            to { filter: hue-rotate(360deg); }
+        }
 
-    @keyframes rainbow {
-      to { filter: hue-rotate(360deg); }
-    }
+        @keyframes glowTitle {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.4); }
+            to { text-shadow: 0 0 15px #00ffff, 0 0 20px #ff00cc; }
+        }
 
-    .event-card {
-      background: rgba(255,255,255,0.1);
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      padding: 25px;
-      max-width: 700px;
-      backdrop-filter: blur(8px);
-      animation: fadeIn 2s ease;
-      margin-bottom: 30px;
-    }
+        /* Thẻ Sự kiện - Đã điều chỉnh nhỏ hơn */
+        .event-card {
+            background: rgba(18, 30, 42, 0.9);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), inset 0 0 8px rgba(0, 255, 255, 0.4);
+            
+            /* Cập nhật Kích thước */
+            padding: 30px;
+            max-width: 480px; 
+            width: 100%;
+            /* KẾT THÚC Cập nhật Kích thước */
+            
+            backdrop-filter: blur(10px);
+            animation: fadeIn 2s ease;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+            /* THAY ĐỔI CHỦ YẾU: Căn nội dung sang trái */
+            text-align: left; 
+        }
+        
+        /* Hiệu ứng góc cho thẻ */
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 15px;
+            pointer-events: none;
+            background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 1%, transparent 30%);
+        }
 
-    h2 {
-      color: #00ffff;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px #00ffff;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    p {
-      font-size: 1.1em;
-      line-height: 1.6;
-      margin: 10px 0;
-    }
+        /* Tiêu đề Sự kiện - Căn giữa tiêu đề H2 */
+        h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            text-shadow: 0 0 18px #ffcc00, 0 0 25px rgba(255,204,0,0.5);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+            padding-bottom: 10px;
+            text-align: center; /* Căn giữa tiêu đề */
+        }
 
-    .highlight {
-      color: #ffd700;
-      font-weight: bold;
-    }
+        /* Đoạn văn bản */
+        p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin: 12px 0;
+            color: #ffffff;
+            text-align: justify; /* Căn đều hai bên cho các dòng gần bằng nhau */
+        }
+        
+        /* Danh sách quyền lợi */
+        ul {
+            list-style: none;
+            padding-left: 0; /* Bỏ padding mặc định của ul */
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        ul li {
+            position: relative;
+            padding-left: 15px;
+            font-size: 1.0em;
+            margin-bottom: 8px;
+            /* text-align: left; */ /* Đã set cho ul, nhưng để đảm bảo */
+        }
+        ul li::before {
+            content: '»';
+            color: #00ffff;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        h3 {
+             color: #00e676;
+             margin-top: 20px;
+             margin-bottom: 10px;
+             font-size: 1.2em;
+             text-align: center; /* Căn giữa tiêu đề phụ */
+        }
 
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-      color: white;
-      padding: 10px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+        /* Chữ nổi bật */
+        .highlight {
+            color: #ff0000;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff0000, 0 0 15px rgba(255,0,0,0.6);
+        }
+        
+        /* Nút hành động chung - Căn giữa */
+        .btn {
+            display: block; /* Đặt là block để chiếm hết chiều ngang thẻ sự kiện */
+            margin: 25px auto 0; /* Căn giữa nút */
+            width: 80%; /* Giảm chiều rộng nút để nút không quá lớn */
+            max-width: 250px;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: 0.4s ease;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border: none;
+            text-align: center;
+        }
 
-    .btn:hover {
-      background: linear-gradient(90deg, #ff6a00, #ee0979);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #fff;
-    }
+        .btn:hover {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
+        }
 
-    /* Nút quay về trang chủ */
-    .back-btn {
-      background: linear-gradient(90deg, #00ff99, #00ccff);
-    }
-    .back-btn:hover {
-      background: linear-gradient(90deg, #ff0099, #ff6600);
-    }
+        /* Nút Tham Gia Ngay */
+        .join-btn {
+            background: linear-gradient(90deg, #00bfff, #0080ff);
+        }
+        .join-btn:hover {
+            background: linear-gradient(90deg, #00e676, #00c853);
+            box-shadow: 0 8px 20px rgba(0, 191, 255, 0.6);
+        }
 
-  </style>
+        /* Nút quay về trang chủ */
+        .back-btn {
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #34495e, #2c3e50);
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+        }
+        
+        /* Media Queries cho di động */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2em; margin-bottom: 25px; }
+            .event-card { 
+                padding: 20px;
+                max-width: 95%; 
+            }
+            h2 { font-size: 1.4em; }
+            p, ul li { font-size: 0.95em; }
+            .btn { padding: 8px 18px; font-size: 0.9em; width: 90%; }
+        }
+    </style>
 </head>
 <body>
-  <h1>Sự kiện Quân Đoàn TitanForce</h1>
+    <h1>Sự kiện Quân Đoàn TitanForce</h1>
 
-  <div class="event-card">
-    <h2>🎉 Kỷ niệm thành lập TitanForce 🎖️</h2>
-    <p>Ngày <span class="highlight">9/11/2025</span> đánh dấu cột mốc quan trọng — Quân đoàn <span class="highlight">TitanForce²</span> chính thức ra mắt!</p>
-    <p>Với tinh thần <span class="highlight">Đoàn Kết - Kỷ Luật - Bất Bại</span>, chúng tôi đã cùng nhau xây dựng một cộng đồng mạnh mẽ, sẵn sàng chinh phục mọi thử thách trong Free Fire và các tựa game khác.</p>
-    <p>🔥 Sự kiện mở rộng đang diễn ra: <br> Chào đón các thành viên mới gia nhập hàng ngũ TitanForce!</p>
-    <p>Hãy cùng nhau viết tiếp hành trình huyền thoại của chúng ta!</p>
-    <a href="thanhvien.html" class="btn">Tham Gia Ngay</a>
-  </div>
+    <div class="event-card">
+        <h2><span role="img" aria-label="party popper">🎉</span> Kỷ niệm thành lập TitanForce <span role="img" aria-label="military medal">🎖️</span></h2>
+        
+        <p>
+            <span class="highlight">Sứ mệnh của TitanForce:</span> 
+            Thành lập vào ngày <span class="highlight">9/11/2025</span>, chúng tôi không chỉ là một clan mà là một **gia đình đồng đội** chiến đấu. 
+            Mục tiêu của chúng tôi là xây dựng **đội hình chuyên nghiệp** và tạo ra một môi trường gắn kết, **phát triển kỹ năng** cá nhân và tập thể trong mọi đấu trường.
+        </p>
 
-  <a href="index.html" class="btn back-btn">⬅️ Quay về Trang Chủ</a>
+        <p>Ngày <span class="highlight">9/11/2025</span> đánh dấu cột mốc quan trọng — Quân đoàn <span class="highlight">TitanForce²</span> chính thức ra mắt!</p>
+        <p>Với tinh thần <span class="highlight">Đoàn Kết - Kỷ Luật - Bất Bại</span>, chúng tôi đã cùng nhau xây dựng một cộng đồng mạnh mẽ, sẵn sàng chinh phục mọi thử thách trong Free Fire và các tựa game khác.</p>
+        
+        <p>🔥 Sự kiện mở rộng đang diễn ra: <br> Chào đón các thành viên mới gia nhập hàng ngũ TitanForce!</p>
+
+        <h3>🎁 Quyền lợi khi gia nhập TitanForce:</h3>
+        <ul>
+            <li>Hỗ trợ **luyện tập 1-1** từ các thành viên cấp cao.</li>
+            <li>Tham gia các giải đấu nội bộ với **giải thưởng hấp dẫn**.</li>
+            <li>Được cung cấp tài liệu và chiến thuật **độc quyền** của Quân đoàn.</li>
+            <li>Cơ hội thăng cấp nhanh chóng lên **vị trí chủ chốt** (Team Leader, Quản lý).</li>
+        </ul>
+
+        <p>Hãy cùng nhau viết tiếp hành trình huyền thoại của chúng ta!</p>
+        <a href="https://www.facebook.com/share/1BjHoy1jeC/" class="btn join-btn">Tham Gia Ngay</a>
+    </div>
+
+    <a href="index.html" class="btn back-btn">⬅️ Quay về Trang Chủ</a>
 </body>
 </html>
