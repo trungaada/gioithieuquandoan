@@ -23,6 +23,29 @@
     --member-role-color: #FFD700;
     font-family: 'Poppins', system-ui, sans-serif;
 }
+.logo-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#main-logo {
+    width: clamp(100px, 15vw, 150px);
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.4);
+    border: 3px solid var(--color-primary);
+    transition: transform 0.4s ease-in-out;
+}
+#main-logo:hover {
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.6);
+}
+@media (max-width: 600px) {
+    #main-logo {
+        width: 100px;
+    }
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -178,7 +201,6 @@ p.lead {
     transition: all 0.35s ease; 
     position: relative;
 }
-
 .card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
 h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
 p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
@@ -203,7 +225,10 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <div id="starfall-container" style="position: fixed; inset: 0; overflow: hidden; z-index: 1;"></div>
 <main>
 <header>
-<h1 id="typing-title"></h1>
+    <div class="logo-container">
+        <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF - TitanForce²">
+    </div>
+    <h1 id="typing-title"></h1>
 <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
 </header>
 <div class="marquee-container">
@@ -232,9 +257,6 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <span class="badge">Phân tích</span>
 </div>
 </div>
-
-
-
 <div class="card">
 <div class="avatar" style="background-image:url('huy.jpg');"></div>
 <h2><span id="name-tv2"></span></h2>
@@ -245,7 +267,6 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <span class="badge">Tuyển quân</span>
 </div>
 </div>
-
 <div class="card">
 <div class="avatar" style="background-image:url('bich.jpg');"></div>
 <h2><span id="name-tv3"></span></h2>
@@ -255,7 +276,6 @@ a#backButton:hover { background: var(--color-primary); color: var(--bg); box-sha
 <span class="badge">Chiến thuật</span>
 <span class="badge">Tuyển quân</span>
 </div>
-
 </section>
 <a id="backButton" href="index.html"> Quay lại trang chủ</a>
 </main>
@@ -268,18 +288,16 @@ const memberData=[
 {id:'role-sang',text:'👑Chủ quân đoàn N2',speed:60},
 {id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
 {id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
-{id:'name-tv3',text:' Huy (TF.Bích )',speed:80},
+{id:'name-tv3',text:' Bích (TF.Bích )',speed:80},
 {id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
-
 ];
 function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
-async function runMemberLoop(){while(!0){for(const e of memberData)await typeWriterEffect(e.id,e.text,e.speed),await typeWriterEffect(e.id.replace('name','role'),memberData.find(a=>a.id===e.id.replace('name','role')).text,memberData.find(a=>a.id===e.id.replace('name','role')).speed);for(const e of memberData)document.getElementById(e.id).textContent='',document.getElementById(e.id.replace('name','role')).textContent=''}
+async function runMemberLoop(){while(!0){for(const e of memberData)await typeWriterEffect(e.id,e.text,e.speed),await typeWriterEffect(e.id.replace('name','role'),memberData.find(a=>a.id===e.id.replace('name','role')).text,memberData.find(a=>a.id===e.id.replace('name','role')).speed);for(const e of memberData)document.getElementById(e.id).textContent='',document.getElementById(e.id.replace('name','role')).textContent='' }
 }
 function animateCards(){document.querySelectorAll('.card').forEach((e,t)=>{e.style.animationDelay=`${t*0.15+0.5}s`,e.classList.add('card-enter')})}
 window.onload=async function(){await typeWriterEffect('typing-title',textToType,100),runMemberLoop(),startStarfallEffect(),animateCards()};
 const stars=[],numStars=60;
 function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}function startStarfallEffect(){initStarfall(),updateStarfall()}
 </script>
-
 </body>
 </html>
