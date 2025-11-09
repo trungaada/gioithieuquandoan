@@ -338,7 +338,7 @@ const memberData=[
 {id:'role-sang',text:'👑Chủ quân đoàn N2',speed:60},
 {id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
 {id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
-{id:'name-tv3',text:' Huy (TF.Bích )',speed:80},
+{id:'name-tv3',text:' Bích (TF.Bích )',speed:80},
 {id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
 ];
 function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
@@ -351,3 +351,4 @@ function initStarfall(){const e=document.getElementById('starfall-container'),t=
 </script>
 </body>
 </html>
+
