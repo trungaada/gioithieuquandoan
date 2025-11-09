@@ -2,294 +2,446 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Giới thiệu thành viên — Quân đoàn TF</title>
-<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tuyển Thành Viên — Clan Free Fire</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@400;600;700&family=Bebas+Neue&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg: #030a18;
-    --card: #0f1724;
-    --accent: #6ee7b7;
-    --accent-shadow: rgba(110, 231, 183, 0.5);
+    --accent: #ff3d00;
+    --accent-dark: #ff1744;
+    --bg: #0f1724;
+    --card: #161e2f;
     --muted: #9aa4b2;
-    --glass: rgba(255, 255, 255, 0.06);
-    --radius: 18px;
-    --color-primary: #00FFFF;
-    --color-secondary: #3b82f6;
-    --neon-blue-shadow: rgba(0, 255, 255, 0.8);
-    --member-name-color: #FF0000;
-    --member-name-shadow: rgba(255, 0, 0, 0.8);
-    --member-role-color: #FFD700;
-    font-family: 'Poppins', system-ui, sans-serif;
+    --glow: 0 0 10px rgba(255, 61, 0, 0.8), 0 0 20px rgba(255, 23, 68, 0.6);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body {
-    width: 100%;
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Montserrat', Poppins, Arial, sans-serif;
+    color: #e6eef8;
     min-height: 100vh;
-    background: url('logo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #e6eef6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 60px 20px 80px;
+    text-align: center;
+    padding-bottom: 40px;
+    background: var(--bg);
+    position: relative;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
 }
 body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%), linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
-    background-size: 30px 30px;
-    opacity: 0.25;
-    z-index: 0;
-    pointer-events: none;
-}
-body { opacity: 0; animation: fadeIn 1s ease-out 0.2s forwards; }
-@keyframes fadeIn { to { opacity: 1; } }
-@keyframes float { 0% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); } 50% { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.8); } 100% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.6); } }
-main { z-index: 1; max-width: 1200px; width: 100%; text-align: center; }
-header { margin-bottom: 30px; }
-.logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; }
-#main-logo {
-    width: clamp(100px, 15vw, 150px);
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.4);
-    border: 3px solid var(--color-primary);
-    transition: transform 0.4s ease-in-out;
-}
-#main-logo:hover { transform: rotate(5deg) scale(1.05); box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.6); }
-@media (max-width: 600px) { #main-logo { width: 100px; } }
-h1#typing-title {
-    font-size: clamp(28px, 6vw, 46px);
-    color: var(--color-primary);
-    text-shadow: 0 0 8px var(--neon-blue-shadow);
-    font-weight: 700;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: .15em solid var(--color-primary);
-    animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite;
-}
-@keyframes flicker { 0%,100% { text-shadow: 0 0 10px var(--neon-blue-shadow), 0 0 20px rgba(0, 255, 255, 0.4); } 50% { text-shadow: 0 0 5px var(--color-primary); } }
-@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--color-primary); } }
-p.lead { color: var(--muted); font-style: italic; margin-top: 6px; font-size: 15px; }
-.marquee-container { margin: 25px auto; padding: 8px 0; width: 100%; background: var(--glass); border-top: 1px solid rgba(110, 231, 183, 0.2); border-bottom: 1px solid rgba(110, 231, 183, 0.2); box-shadow: 0 0 10px rgba(110, 231, 183, 0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-.marquee-text { font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 5px var(--accent-shadow); white-space: nowrap; }
-.members { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; width: 100%; margin-top: 30px; }
-.card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: float 6s ease-in-out infinite;
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--radius);
-    padding: 25px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease;
-    position: relative;
-    overflow: hidden;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-}
-@keyframes slideUpFadeIn { to { opacity: 1; transform: translateY(0); } }
-.card-enter { animation: slideUpFadeIn 0.8s cubic-bezier(0.165,0.84,0.44,1) forwards; }
-.card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius);
-    background: linear-gradient(60deg, var(--color-primary) 0%, var(--accent) 100%);
-    opacity: 0;
-    z-index: -2;
-    filter: blur(15px);
-    transition: opacity 0.5s ease, filter 0.5s ease;
-}
-.card-border-glow {
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius);
-    background: linear-gradient(45deg, var(--color-primary) 0%, var(--accent) 50%, var(--member-name-color) 100%);
-    background-size: 200% 200%;
-    z-index: -1;
-    filter: blur(8px);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    animation: rotate-border 6s linear infinite;
-}
-.card:hover .card-border-glow { opacity: 1; }
-@keyframes rotate-border { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-.card:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 20px var(--accent-shadow); }
-.card:hover::before { opacity: 0.8; filter: blur(20px); }
-.card:hover::after { opacity: 0.2; }
-.avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    margin: 0 auto 12px;
-    border: 3px solid rgba(255, 100, 100, 0.8);
-    box-shadow: 0 0 15px rgba(255, 100, 100, 0.5), 0 0 25px rgba(255, 100, 100, 0.3) inset;
-    transition: all 0.35s ease;
-    position: relative;
-    will-change: transform;
-    transform: translateZ(20px);
-}
-.card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; }
-/* Avatar bình thường */
-.card-4-special .avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    margin: 0 auto 12px;
-    position: relative;
-    z-index: 1;
-}
-
-/* Viền gradient 7 màu chỉ khi hover */
-.card-4-special:hover .avatar::after {
     content: "";
-    position: absolute;
-    inset: -5px; /* độ dày viền */
-    border-radius: 50%;
-    background: conic-gradient(
-        #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF, #FF0000
-    );
-    -webkit-mask: radial-gradient(farthest-side, #000 90%, transparent 100%) center/100% 100% no-repeat;
-    mask: radial-gradient(farthest-side, #000 90%, transparent 100%) center/100% 100% no-repeat;
-    animation: spin 3s linear infinite;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('logo.jpg') center/cover no-repeat fixed;
+    opacity: 0.1;
     z-index: -1;
 }
-
-/* Quay viền gradient */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+header {
+    position: relative;
+    padding: 30px 20px 10px;
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+.clan-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid var(--accent);
+    box-shadow: var(--glow);
+    animation: fadeInScale 0.8s ease-out forwards;
+}
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: var(--accent);
+    text-shadow: var(--glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+}
+.clan-name {
+    font-family: 'Caveat', cursive;
+    font-size: 36px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 0 #000, 2px 2px 0 rgba(255, 61, 0, 0.5);
+}
+header p {
+    color: var(--muted);
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.home-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: #1d2a3a;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent);
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+.home-btn:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 61, 0, 0.6);
+    transform: scale(1.05);
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+    animation-delay: 0.6s;
+}
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(255, 61, 0, 0.7); }
+    50% { box-shadow: 0 0 25px rgba(255, 61, 0, 1), 0 0 5px rgba(255, 61, 0, 0.5); }
+    100% { box-shadow: 0 0 15px rgba(255, 61, 0, 0.7); }
+}
+button.btn {
+    background: var(--accent);
+    color: #0b1220;
+    border: 3px solid var(--accent);
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 61, 0, 0.7);
+    animation: pulseGlow 3s infinite alternate;
+    text-transform: uppercase;
+    flex-grow: 1;
+    max-width: 280px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 0 #000;
+}
+button.btn:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    box-shadow: 0 0 25px rgba(255, 61, 0, 1), 0 0 50px rgba(255, 61, 0, 0.4);
+    transform: translateY(-3px);
+}
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    background: rgba(22, 30, 47, 0.95);
+    border-radius: 15px;
+    border: 2px solid var(--accent);
+    padding: 20px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 61, 0, 0.5), inset 0 0 10px rgba(255, 61, 0, 0.3);
+    display: none;
+    animation: fadeIn 0.6s ease;
+}
+.content.active { display: block; }
+@keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+h2 {
+    color: var(--accent);
+    margin-top: 0;
+    font-size: 20px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 6px rgba(255, 61, 0, 0.8);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    -webkit-text-stroke: 0.4px #fff;
+    text-stroke: 0.4px #fff;
+    position: relative;
+}
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 61, 0, 0.8);
+}
+ul {
+    color: #e6eef8;
+    line-height: 1.8;
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+ul li::before {
+    content: '▶';
+    color: var(--accent);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    position: absolute;
+    left: 0;
+    font-size: 0.8em;
+    top: 0;
+}
+.links {
+    margin-top: 25px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.links a, .links button {
+    display: inline-block;
+    margin: 0 15px 15px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #0b1220;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(255, 61, 0, 0.6);
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+}
+.links a:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--accent);
+}
+.copy-btn {
+    background: #4CAF50 !important;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.6) !important;
+    color: #fff !important;
+}
+.copy-btn:hover {
+    background: #45a049 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #4CAF50 !important;
+}
+.main-back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #0b1220;
+    text-decoration: none;
+    font-weight: 800;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(255, 61, 0, 0.7);
+}
+.main-back-btn:hover {
+    background: var(--accent-dark);
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 61, 0, 1);
+    transform: scale(1.05);
+}
+.back-btn { display: none; } 
+footer {
+    text-align: center;
+    padding: 15px;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 61, 0, 0.1);
 }
 
-h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255,0,0,0.4); }
-p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
-h2 span, p.role span, h1#typing-title { display: inline-block; white-space: nowrap; overflow: hidden; }
-h1#typing-title { border-right: .15em solid var(--color-primary); }
-h2 span, p.role span { border-right: none; animation: none; }
-.typing-member { border-right: .15em solid var(--color-primary); animation: blink-caret-member .75s step-end infinite; }
-p.role .typing-member { border-right: .15em solid var(--member-role-color); }
-@keyframes blink-caret-member { from, to { border-color: transparent } 50% { border-color: currentColor; } }
-.typing-done { border-right: none !important; animation: none !important; }
-.badge { display: inline-block; margin: 3px; padding: 5px 10px; font-size: 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: rgba(110,231,183,0.08); transition: 0.3s; }
-.card:hover .badge { background: var(--accent); color: var(--bg); box-shadow: 0 0 8px var(--accent-shadow); }
-@keyframes neon-flicker-btn { 0%,100%{ box-shadow: 0 0 8px var(--neon-blue-shadow),0 0 15px rgba(0,255,255,0.4); border-color: var(--color-primary);} 50%{ box-shadow: 0 0 4px rgba(0,255,255,0.6),0 0 8px rgba(0,255,255,0.2); border-color: rgba(0,255,255,0.7);} }
-a#backButton { display: inline-block; margin-top: 35px; color: var(--color-primary); text-decoration: none; border: 2px solid var(--color-primary); border-radius: 12px; padding: 12px 20px; font-weight: 700; background: rgba(0,255,255,0.15); box-shadow: 0 0 10px rgba(0,255,255,0.5); transition: 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; animation: neon-flicker-btn 2.5s ease-in-out infinite alternate; }
-a#backButton:hover { background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); color: var(--bg); transform: scale(1.1); border-color: transparent; box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0,255,255,0.6); animation: none; text-shadow: 0 0 5px #fff, 0 0 10px var(--color-secondary); }
-@media (max-width: 600px) { body { padding: 40px 15px; } .avatar { width: 80px; height: 80px; } h1 { font-size: 26px; } .members { gap: 15px; } .card { padding: 20px; } }
-.falling-star { position: absolute; background-color: rgba(255,255,255,0.8); border-radius: 50%; pointer-events: none; box-shadow: 0 0 5px 2px rgba(255,255,255,0.4); will-change: transform, opacity; transition: none; }
+/* --- Hoa Anh Đào Rơi (PHÍA SAU NỘI DUNG) --- */
+.sakura {
+    position: fixed;
+    top: -10px;
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 0; /* phía sau header, buttons, content */
+    animation: fall linear infinite;
+}
+header, .buttons, .content {
+    position: relative;
+    z-index: 1; /* nội dung luôn trên hoa */
+}
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    header h1 { font-size: 28px; letter-spacing: 1.5px;}
+    .clan-name { font-size: 32px; }
+    .buttons { gap: 15px; }
+    .buttons button.btn { font-size: 14px; padding: 12px 20px; max-width: none; }
+    .content { margin: 0 10px; padding: 20px; max-width: none; }
+    .links a, .links button, .main-back-btn { display: block; margin: 0 auto 10px; width: 85%; max-width: 250px; font-size: 13px; }
+    ul li { font-size: 12px; }
+    h2 { font-size: 18px; }
+}
 </style>
 </head>
 <body>
-<div id="starfall-container" style="position: fixed; inset: 0; overflow: hidden; z-index: 1;"></div>
-<main>
+
 <header>
-    <div class="logo-container">
-        <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF - TitanForce²">
-    </div>
-    <h1 id="typing-title"></h1>
-    <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
+<img src="logo2.jpg" alt="Clan TF Logo" class="clan-logo">
+<h1><span class="clan-name">Clan TF</span> — Tuyển Thành Viên Free Fire</h1>
+<p> </p> <p>Chọn nhóm bạn muốn xem thông tin chi tiết và gia nhập</p>
+<a href="index.html" class="home-btn">⬅ Về trang chủ</a>
 </header>
-<div class="marquee-container">
-<marquee class="marquee-text" direction="left" scrollamount="6">
-⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay! | Sức mạnh đến từ kỷ luật và đoàn kết.
-</marquee>
+
+<div class="buttons">
+    <button class="btn" onclick="showContent('sinh-ton')">1️⃣ Đội Hình Sinh Tồn</button>
+    <button class="btn" onclick="showContent('solo')">2️⃣ Vị Trí Solo Tử Chiến</button>
+    <button class="btn" onclick="showContent('kai')">3️⃣ Vị Trí Bắn Kai Tử Chiến</button>
 </div>
-<section class="members">
-<div class="card">
-    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('trung.jpg');"></div>
-    <h2><span id="name-trung"></span></h2>
-    <p class="role"><span id="role-trung"></span></p>
-    <div class="badges">
-        <span class="badge">Lãnh đạo</span>
-        <span class="badge">Chiến thuật</span>
-        <span class="badge">Tuyển quân</span>
+
+<div id="sinh-ton" class="content">
+<h2>🔥 Yêu Cầu Nhóm Sinh Tồn </h2>
+<ul>
+<li>Đội hình 4 người — Ưu tiên người chơi <b>phối hợp đội hình</b> và có <b>micro</b> giao tiếp tốt.</li>
+<li>Rank tối thiểu: <b>Cao Thủ</b> trở lên.</li>
+<li>Lúc test bạn phải bắn ít nhất 10kill</li>
+<li>Lối bắn tư Duy</li>
+<li>Trong lúc test đọi ngũ chúng tôi sẽ xem xét</li>
+<li><b>Thành thạo một vai trò cụ thể</b> (Rush, Cover, Hỗ trợ, Sniper) .</li>
+</ul>
+<div class="links">
+<a href="https://www.facebook.com/nguyen.manh.long.806663" target="_blank">💬 Liên hệ Fanpage Facebook</a>
+<a href="https://www.facebook.com/share/1BjHoy1jeC/" target="_blank">💬 Group Facebook</a>
+<button class="copy-btn" onclick="copyText('8412096596')">📋 Chép ID Game để kb </button>
+</div>
+<div style="text-align:center">
+<a href="#" class="main-back-btn" onclick="hideContent()">⬅ QUAY LẠI CHỌN NHÓM</a>
+</div>
+</div>
+
+<div id="solo" class="content">
+<h2>⚡️ Yêu Cầu Nhóm Solo Tử Chiến Headshot</h2>
+<ul>
+<li>Dành cho người chơi <b>Solo kỹ năng cá nhân CỰC CAO</b>, tự tin đấu 1vs1 và 4vs4.</li>
+<li><b>Phản xạ chớp nhoáng</b>, Aim chuẩn, và có kinh nghiệm trong các kèo Solo .</li>
+<li>Độ tuổi để xin vào quân đoàn nam trên k9, nữ trên k10</li>
+<li>Có ngoại lệ dành cho những bạn dưới k9 (bắn 6/7) sẽ được vào quân đoàn</li>
+<li>Sẽ có đội ngũ test khi bạn xin vào quân đoàn</li>
+<li>Headshot  500 máu, kĩ năng tự do không kairot, không skin</li>
+<li>Dành cho người chơi <b>Tham gia test</b>, tự tin đối với nam 5/7, nữ 3/7.</li>
+<li>Chúc các bạn thành công</li>
+<div class="links">
+<a href="https://www.facebook.com/nguyen.manh.long.806663" target="_blank">💬 Liên hệ Fanpage Facebook 1</a>
+<a href="https://www.facebook.com/share/16dJQajrpb/" target="_blank">💬 Liên hệ Fanpage Facebook 2 </a>
+<a href="https://www.facebook.com/share/1BjHoy1jeC/" target="_blank">💬 Group Facebook</a>
+<button class="copy-btn" onclick="copyText('69836174')">📋 Chép ID Game để kb </button>
+</div>
+</div>
+
+<!-- Nội dung mới cho Kai Tử Chiến -->
+<div id="kai" class="content">
+    <h2>⚡ Vị Trí Bắn Kai 2 5 Tử Chiến</h2>
+    <ul>
+        <li>Dành cho người chơi <b>thích Kai và kỹ năng bắn chuẩn</b>, di chuyển tốt</li>
+        <li>Lv: <b>trên 50</b> hoặc tương đương.</li>
+        <li>Yêu cầu phản xạ nhanh, Aim chuẩn và chiến thuật linh hoạt.</li>
+        <li>Ưu tiên các bạn có kinh nghiệm <b>tấn công đầu tiên và cover đồng đội</b>.</li>
+        <li>Trong quá trình test sẽ có đội ngũ giám sát kỹ năng bắn Kai.</li>
+        <li>Có thể bắn <b>tối thiểu 5/7 kill</b> để được xét duyệt vào nhóm.</li>
+        <P> </P>
+        
+    </ul>
+    <div class="links">
+        <a href="https://www.facebook.com/nguyen.manh.long.806663" target="_blank">💬 Liên hệ Fanpage Facebook</a>
+        <a href="https://www.facebook.com/share/1BjHoy1jeC/" target="_blank">💬 Group Facebook</a>
+        <button class="copy-btn" onclick="copyText('123456789')">📋 Chép ID Game để kb</button>
+    </div>
+    <div style="text-align:center">
+        <a href="#" class="main-back-btn" onclick="hideContent()">⬅ QUAY LẠI CHỌN NHÓM</a>
     </div>
 </div>
-<div class="card">
-    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('sang.jpg');"></div>
-    <h2><span id="name-sang"></span></h2>
-    <p class="role"><span id="role-sang"></span></p>
-    <div class="badges">
-        <span class="badge">Dẫn dắt</span>
-        <span class="badge">Huấn luyện</span>
-        <span class="badge">Phân tích</span>
-    </div>
+
+
+
+
+<div style="text-align:center">
+<a href="#" class="main-back-btn" onclick="hideContent()">⬅ QUAY LẠI CHỌN NHÓM</a>
 </div>
-<div class="card">
-    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('huy.jpg');"></div>
-    <h2><span id="name-tv2"></span></h2>
-    <p class="role"><span id="role-tv2"></span></p>
-    <div class="badges">
-        <span class="badge">Lãnh đạo</span>
-        <span class="badge">Chiến thuật</span>
-        <span class="badge">Tuyển quân</span>
-    </div>
 </div>
-<div class="card card-4-special">
-    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('bich.jpg');"></div>
-    <h2><span id="name-tv3"></span></h2>
-    <p class="role"><span id="role-tv3"></span></p>
-    <div class="badges">
-        <span class="badge">Lãnh đạo</span>
-        <span class="badge">Chiến thuật</span>
-        <span class="badge">Tuyển quân</span>
-    </div>
-</div>
-</section>
-<a id="backButton" href="index.html"> Quay lại trang chủ</a>
-</main>
+
+<footer>
+© <span id="year"></span> Clan TF — Free Fire. Kết nối cùng chiến thắng!
+</footer>
+
 <script>
-const textToType="Quản Trị Quân Đoàn";
-const memberData=[
-{id:'name-trung',text:'Trung (TF.Kuronami )',speed:80},
-{id:'role-trung',text:'👑 Chỉ huy N2',speed:60},
-{id:'name-sang',text:' Sang (TF.Liopc )',speed:80},
-{id:'role-sang',text:'👑Chủ quân đoàn N2',speed:60},
-{id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
-{id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
-{id:'name-tv3',text:' Vợ Huy(TF.Bích )',speed:80},
-{id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
-];
-function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
-async function runMemberLoop(){while(true){for(const e of memberData){await typeWriterEffect(e.id,e.text,e.speed);const roleData = memberData.find(a=>a.id===e.id.replace('name','role'));await typeWriterEffect(roleData.id, roleData.text, roleData.speed);}await new Promise(r => setTimeout(r, 5000));for(const e of memberData){document.getElementById(e.id).textContent='';document.getElementById(e.id.replace('name','role')).textContent='';}}}
-function animateCards(){document.querySelectorAll('.card').forEach((e,t)=>{e.style.animationDelay=`${t*0.15+0.5}s`,e.classList.add('card-enter')})}
-const stars=[],numStars=60;
-function initStarfall(){const e=document.getElementById('starfall-container'),t=2,n=5;for(let a=0;a<numStars;a++){const r=document.createElement('div');r.classList.add('falling-star'),e.appendChild(r);const i=Math.random()*(n-t)+t,o=Math.random()*window.innerWidth,l=Math.random()*window.innerHeight,s=Math.random()*.5+.5,d=(Math.random()-.5)*.2;r.style.width=`${i}px`,r.style.height=`${i}px`,stars.push({element:r,x:o,y:l,size:i,speed:s,xDrift:d,opacity:Math.random()*.5+.5}),r.style.transform=`translate3d(${o}px, ${l}px, 0)`,r.style.opacity=stars[a].opacity}}function updateStarfall(){for(let e=0;e<numStars;e++){const t=stars[e];t.y+=t.speed,t.x+=t.xDrift,t.y>window.innerHeight&&(t.y=-t.size,t.x=Math.random()*window.innerWidth,t.speed=Math.random()*.5+.5),t.element.style.transform=`translate3d(${t.x}px, ${t.y}px, 0)`,t.element.style.opacity=t.opacity*(1+Math.sin(t.y*.05+t.x*.01)*.1)}requestAnimationFrame(updateStarfall)}
-function startStarfallEffect(){initStarfall(),updateStarfall()}
-document.querySelectorAll('.card').forEach(card=>{
-card.addEventListener('mousemove',(e)=>{
-const rect=card.getBoundingClientRect();
-const x=e.clientX-rect.left;
-const y=e.clientY-rect.top;
-const centerX=rect.width/2;
-const centerY=rect.height/2;
-const rotateX=(y-centerY)/20;
-const rotateY=(x-centerX)/-20;
-const avatar=card.querySelector('.avatar');
-avatar.style.transform=`scale(1.05) translate(${rotateY/4}px, ${rotateX/4}px) rotateY(${rotateY/2}deg) rotateX(${rotateX/2}deg) translateZ(30px)`;
-card.style.transform=`translateY(-8px) scale(1.03) rotateY(${rotateY/8}deg) rotateX(${rotateX/8}deg)`});
-card.addEventListener('mouseleave',()=>{
-const avatar=card.querySelector('.avatar');
-avatar.style.transform=`scale(1.0) translate(0,0) rotateY(0deg) rotateX(0deg) translateZ(20px)`;
-card.style.transform=`translateY(0) scale(1) rotateY(0deg) rotateX(0deg)`});
-});
-window.onload=async function(){await typeWriterEffect('typing-title',textToType,100),runMemberLoop(),startStarfallEffect(),animateCards()};
+function copyText(textToCopy) {
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Đã chép ID Game: " + textToCopy);
+    }).catch(err => {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = textToCopy;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert("Đã chép ID Game: " + textToCopy + " (Fallback)");
+    });
+}
+
+const sinhTon = document.getElementById('sinh-ton');
+const solo = document.getElementById('solo');
+function showContent(id) {
+    sinhTon.classList.remove('active');
+    solo.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function hideContent() {
+    sinhTon.classList.remove('active');
+    solo.classList.remove('active');
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
+}
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// --- Hoa Anh Đào Rơi ---
+function createSakura() {
+    const sakura = document.createElement('div');
+    sakura.classList.add('sakura');
+    sakura.textContent = "🌸";
+    sakura.style.left = Math.random() * 100 + 'vw';
+    sakura.style.animationDuration = (5 + Math.random() * 5) + 's';
+    sakura.style.width = (10 + Math.random() * 20) + 'px';
+    sakura.style.height = sakura.style.width;
+    sakura.style.opacity = 0.6 + Math.random() * 0.3;
+    sakura.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(sakura);
+    sakura.addEventListener('animationend', () => sakura.remove());
+}
+setInterval(createSakura, 700);
 </script>
+
 </body>
 </html>
