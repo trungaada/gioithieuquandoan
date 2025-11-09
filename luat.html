@@ -1,138 +1,310 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Luật Quân Đoàn TF</title>
-  <style>
-    :root {
-      --accent: #00e676;
-      --bg-overlay: rgba(0, 0, 0, 0.6);
-      --card: rgba(22, 30, 46, 0.9);
-      --text: #e0e0e0;
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Luật Quân Đoàn TF</title>
+    <style>
+        :root {
+            --accent: #DC143C; /* MÀU ĐỎ MẠNH MẼ (CRIMSON) */
+            --secondary-accent: #FFD700; /* MÀU VÀNG KIM (GOLD) */
+            --bg-overlay: rgba(0, 0, 0, 0.8);
+            --card: rgba(30, 20, 30, 0.95);
+            --text: #f0f0f0;
+            --text-hover: #ffffff;
+            --border-color: rgba(220, 20, 60, 0.4);
+        }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      background: url("logo.jpg") no-repeat center center fixed;
-      background-size: cover;
-      color: var(--text);
-      margin: 0;
-      padding: 20px;
-      position: relative;
-      min-height: 100vh;
-    }
+        body {
+            font-family: "Poppins", sans-serif;
+            background: url("logo.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+            overflow-x: hidden;
+        }
 
-    /* Lớp phủ mờ để dễ đọc chữ */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg-overlay);
-      z-index: 0;
-    }
+        /* --- HIỆU ỨNG HOA RƠI CSS START --- */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            z-index: 5;
+        }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
+        .particle.red {
+            background-color: var(--accent);
+            width: 6px;
+            height: 6px;
+            opacity: 0.7;
+        }
 
-    h1 {
-      color: var(--accent);
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 1.8rem;
-      text-shadow: 0 0 10px #00e676;
-    }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+        /* --- HIỆU ỨNG HOA RƠI CSS END --- */
 
-    .law-card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 230, 118, 0.2);
-      text-align: left;
-    }
+        /* Lớp phủ mờ để dễ đọc chữ */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-overlay);
+            z-index: 0;
+        }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
 
-    li {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      line-height: 1.6;
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    li::before {
-      content: "⚔️ ";
-      color: var(--accent);
-    }
+        /* Hiệu ứng cho tiêu đề chính */
+        h1 {
+            background-image: linear-gradient(45deg, var(--accent) 30%, #ff6b6b 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 2.4rem;
+            text-shadow: 0 0 18px var(--accent), 0 0 30px rgba(220, 20, 60, 0.6);
+            font-weight: 900;
+        }
+        
+        /* ---------------------------------- */
+        /* --- THÊM KHUNG LOGO TẠI ĐÂY --- */
+        /* ---------------------------------- */
+        .logo-container {
+            margin: 0 auto 30px auto; /* Canh giữa và tạo khoảng cách dưới */
+            width: 120px; /* Kích thước khung */
+            height: 120px;
+            border-radius: 50%; /* Hình tròn */
+            overflow: hidden;
+            border: 4px solid var(--secondary-accent); /* Khung vàng kim */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 10px var(--accent); /* Hiệu ứng sáng */
+            background-color: var(--card); /* Màu nền */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .back-btn {
-      display: inline-block;
-      margin-top: 25px;
-      background: var(--accent);
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
-      transition: 0.3s;
-    }
+        .logo-container:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 30px var(--secondary-accent), 0 0 15px var(--accent);
+        }
 
-    .back-btn:hover {
-      background: #00c853;
-      box-shadow: 0 0 15px rgba(0, 230, 118, 0.7);
-      transform: scale(1.05);
-    }
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo hình ảnh vừa khít và không bị biến dạng */
+            display: block;
+        }
+        /* ---------------------------------- */
 
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-      h1 {
-        font-size: 1.4rem;
-      }
-      .law-card {
-        padding: 15px;
-      }
-    }
-  </style>
+        .law-card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 30px rgba(220, 20, 60, 0.4), 0 0 10px rgba(255, 215, 0, 0.2);
+            text-align: left;
+            backdrop-filter: blur(5px);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            cursor: default;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        /* Hiệu ứng khi di chuột qua mục luật */
+        li:hover {
+            background-color: rgba(220, 20, 60, 0.1);
+            color: var(--text-hover);
+            transform: translateX(6px);
+        }
+
+        li::before {
+            content: "🔥 ";
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .law-card ul ul li::before {
+            content: "⚔️ ";
+            color: var(--secondary-accent);
+        }
+        
+        /* Định dạng cho các từ khóa quan trọng */
+        li strong {
+            color: var(--secondary-accent);
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6); 
+            transition: color 0.3s;
+        }
+
+        li:hover strong {
+            color: #ffffff;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.8), 0 0 5px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #ff4500;
+            box-shadow: 0 0 25px var(--accent), 0 0 10px #fff;
+            transform: scale(1.1) translateY(-3px);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+            .law-card {
+                padding: 15px;
+            }
+            .logo-container {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="content">
-    <h1>Luật Quân Đoàn TF</h1>
-    <div class="law-card">
-      <ul>
-        <li>Biết tôn trọng mọi người trong QD, nhưng phải biết trên biết dưới.</li>
-        <li>Trai gái trên K12, ưu tiên K9 trở lên.</li>
-        <li>Có tương tác box chat, rời QD thì báo chủ QD.</li>
-        <li>Off 7 ngày sẽ bị kick, nếu có lý do phải báo chủ QD.</li>
-        <li>Không va nhau dưới mọi hình thức. Giỡn được nhưng không quá trớn.</li>
-        <li>Test thành viên vào QD: Nam 5/7, Nữ 2-3/7 round mới được vào.</li>
-        <li>Tìm kiếm người có trình trên mobile; PC không tuyển hack (có dấu hiệu sẽ kick thẳng).</li>
-        <li>Đổi tên tùy ý (ưu tiên TF.Tên nếu thích).</li>
-        <li>QD có 2 nhánh:
-          <ul>
-            <li>Nhánh 1: Chuyên phòng giải — Sinh tồn.</li>
-            <li>Nhánh 2: Chuyên phòng tử chiến — Headshot (Kai nếu có).</li>
-          </ul>
-        </li>
-        <li>Có 3 box QD (1 box tổng, 2 box nhánh QD). Ai thuộc nhánh nào thì ở nhánh đó, không nhảy qua lại.</li>
-        <li>Có giải QD (tử chiến & sinh tồn) — Thời gian sẽ được chủ QD thông báo.</li>
-      </ul>
+    <div id="particle-container"></div> 
+
+    <div class="content">
+        <div class="logo-container">
+            <img src="logo2.jpg" alt="Logo Quân Đoàn TF"> 
+        </div>
+        
+        <h1>Luật Quân Đoàn TF</h1>
+        <div class="law-card">
+            <ul>
+                <li>🔥 Biết **tôn trọng** mọi người trong QD, nhưng phải biết **trên biết dưới**.</li>
+                <li>🔥 **Độ tuổi:** Trai gái trên K12, ưu tiên K9 trở lên.</li>
+                <li>🔥 Có **tương tác box chat**, rời QD thì phải **báo chủ QD**.</li>
+                <li>⚠️ **Off 7 ngày** sẽ bị kick, nếu có lý do phải **báo chủ QD** trước.</li>
+                <li>🚫 Không **va chạm** dưới mọi hình thức. Giỡn được nhưng không **quá trớn**.</li>
+                <li>📝 **Test thành viên vào QD:** Nam **5/7**, Nữ **2-3/7** round mới được vào.</li>
+                <li>☠️ Tìm kiếm người có trình trên mobile; PC không tuyển **hack** (có dấu hiệu sẽ **kick thẳng**).</li>
+                <li>🏷️ **Đổi tên** tùy ý (ưu tiên **TF.Tên** nếu thích).</li>
+                <li>🎯 QD có **2 nhánh** riêng biệt:
+                    <ul>
+                        <li>⚔️ Nhánh 1: Chuyên phòng **giải — Sinh tồn** (Survival).</li>
+                        <li>⚔️ Nhánh 2: Chuyên phòng **tử chiến — Headshot** (Kai nếu có).</li>
+                    </ul>
+                </li>
+                <li>💬 Có **3 box QD** (1 box tổng, 2 box nhánh QD). Ai thuộc nhánh nào thì ở nhánh đó, **không nhảy qua lại**.</li>
+                <li>🏆 Có giải QD (**tử chiến & sinh tồn**) — Thời gian sẽ được **chủ QD thông báo**.</li>
+            </ul>
+        </div>
+        <a href="index.html" class="back-btn">⬅️ QUAY VỀ TRANG CHỦ</a>
     </div>
-    <a href="index.html" class="back-btn">⬅️ Quay về Trang Chủ</a>
-  </div>
+
+    <script>
+        const particleContainer = document.getElementById('particle-container');
+        const numParticles = 30; // Số lượng "hoa rơi"
+
+        // Hàm tạo một hạt (particle)
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Ngẫu nhiên chọn màu đỏ hoặc vàng
+            if (Math.random() > 0.5) {
+                particle.classList.add('red');
+            }
+
+            // Vị trí ngẫu nhiên
+            const size = Math.random() * 8 + 4; // Kích thước từ 4px đến 12px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `-${Math.random() * 10}vh`; // Bắt đầu từ trên cùng
+
+            // Tốc độ rơi ngẫu nhiên
+            const duration = Math.random() * 15 + 10; // Thời gian rơi từ 10s đến 25s
+            particle.style.animationDuration = `${duration}s`;
+            
+            // Độ trễ ngẫu nhiên để rơi không đồng loạt
+            const delay = Math.random() * 20; // Độ trễ từ 0s đến 10s
+            particle.style.animationDelay = `${delay}s`;
+
+            particleContainer.appendChild(particle);
+
+            // Xóa hạt sau khi rơi xong để tiết kiệm bộ nhớ
+            particle.addEventListener('animationend', () => {
+                particle.remove();
+                // Tạo hạt mới để duy trì hiệu ứng
+                createParticle();
+            });
+        }
+
+        // Tạo số lượng hạt ban đầu
+        for (let i = 0; i < numParticles; i++) {
+            createParticle();
+        }
+    </script>
 </body>
 </html>
