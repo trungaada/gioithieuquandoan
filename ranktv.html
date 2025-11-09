@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảng Xếp Loại Rank — Quân đoàn TF</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body {
+    background: url('logo2.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 30px 10px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8em; /* Tăng kích thước tiêu đề */
+    letter-spacing: 3px; /* Tăng khoảng cách chữ */
+    margin-bottom: 30px;
+    color: #00eaff;
+    text-shadow: 0 0 20px #00eaff, 0 0 30px #00eaff; /* Hiệu ứng glow mạnh hơn */
+}
+
+.controls {
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+select, button {
+    background: #00eaff;
+    color: #0f2027;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px; /* Bo tròn nhiều hơn */
+    font-weight: 700;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Chuyển động mượt mà hơn */
+    box-shadow: 0 0 10px rgba(0, 234, 255, 0.5); /* Thêm box-shadow */
+}
+
+select:hover, button:hover {
+    background: #00bfff;
+    transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ lên khi hover */
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.7); /* Box-shadow mạnh hơn khi hover */
+}
+
+.table-container {
+    max-width: 900px; /* Tăng chiều rộng tối đa của bảng */
+    margin: auto;
+    border-radius: 20px; /* Bo tròn nhiều hơn */
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 234, 255, 0.7), 0 0 60px rgba(0, 234, 255, 0.3); /* Hiệu ứng glow mạnh mẽ hơn cho khung */
+    background: rgba(0, 10, 15, 0.7); /* Nền tối hơn và trong suốt hơn */
+    border: 2px solid #00eaff; /* Viền ngoài màu xanh phát sáng */
+    padding: 10px; /* Khoảng đệm bên trong khung */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.3); /* Nền bảng hơi trong suốt */
+    border-radius: 15px; /* Bo tròn các góc của bảng bên trong */
+}
+
+thead {
+    background: linear-gradient(90deg, #00bfff, #00eaff); /* Hiệu ứng gradient cho header */
+    color: #0f2027;
+    text-transform: uppercase; /* Chữ hoa */
+    font-size: 1.1em;
+}
+
+th, td {
+    padding: 15px 12px; /* Tăng khoảng đệm */
+    border-bottom: 1px solid rgba(255,255,255,0.15); /* Đường kẻ mỏng hơn */
+    text-align: center;
+}
+
+tbody tr {
+    background: rgba(0,0,0,0.2); /* Nền hàng bình thường */
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(0,0,0,0.3); /* Xen kẽ màu hàng */
+}
+
+tbody tr:hover {
+    background: rgba(0, 234, 255, 0.15); /* Hiệu ứng hover màu xanh phát sáng */
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.rank-st { color: #00ffcc; font-weight: bold; text-shadow: 0 0 5px #00ffcc; } /* Glow cho rank */
+.rank-tc { color: #ffd700; font-weight: bold; text-shadow: 0 0 5px #ffd700; } /* Glow cho rank */
+
+footer {
+    margin-top: 30px;
+    font-size: 1em;
+    color: #bbb;
+    text-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+</style>
+</head>
+<body>
+
+<h1>BẢNG XẾP LOẠI RANK — Quân đoàn TF</h1>
+
+<div class="controls">
+  <select id="mode">
+    <option value="st">Sắp theo Rank Sinh Tồn</option>
+    <option value="tc">Sắp theo Rank Tử Chiến</option>
+  </select>
+  <button onclick="sortRank('asc')">⬆️ Từ thấp → cao</button>
+  <button onclick="sortRank('desc')">⬇️ Từ cao → thấp</button>
+  <button onclick="window.location.href='index.html'">🏠 Trang chủ</button>
+</div>
+
+
+<div class="table-container">
+  <table id="rankTable">
+    <thead>
+      <tr>
+        <th>Hạng</th>
+        <th>Tên Thành Viên</th>
+        <th>Rank Sinh Tồn</th>
+        <th>Rank Tử Chiến</th>
+      </tr>
+    </thead>
+    <tbody id="rankBody"></tbody>
+  </table>
+</div>
+
+<footer>© 2025 Quân đoàn TitanForce² — Cập nhật 09/11/2025</footer>
+
+<script>
+// Map rank sang số để sắp xếp
+const rankValue = {
+  "Đồng": 0,
+  "Bạc": 1,
+  "Vàng": 2,
+  "Bạch Kim": 3,
+  "Kim Cương": 4,
+  "Huyền Thoại": 5,
+  "Cao Thủ": 6,
+  "Thách Đấu": 7,
+  "Top Sever": 8
+};
+
+// Dữ liệu 50 thành viên (icon đã loại bỏ, "Tinh Anh" đổi thành "Cao Thủ")
+const members = [
+  ["TF•Hades","Thách Đấu","Top Sever"],
+  ["TF•TuanAnh","Huyền Thoại","Thách Đấu"],
+  ["TF•Rin","Cao Thủ","Kim Cương"],
+  ["TF•DuyKha","Kim Cương","Cao Thủ"],
+  ["TF•Zenn","Bạch Kim","Kim Cương"],
+  ["TF•Ken","Kim Cương","Cao Thủ"],
+  ["TF•Long","Bạch Kim","Bạch Kim"],
+  ["TF•Tí","Vàng","Bạch Kim"],
+  ["TF•Bin","Bạch Kim","Vàng"],
+  ["TF•HuyHoàng","Kim Cương","Cao Thủ"],
+  ["TF•Zoro","Cao Thủ","Cao Thủ"],
+  ["TF•Lực","Bạch Kim","Bạch Kim"],
+  ["TF•HoàngNam","Vàng","Cao Thủ"],
+  ["TF•Phúc","Cao Thủ","Kim Cương"],
+  ["TF•Kun","Kim Cương","Bạch Kim"],
+  ["TF•Zin","Bạch Kim","Cao Thủ"],
+  ["TF•Phong","Cao Thủ","Vàng"],
+  ["TF•Hiếu","Vàng","Bạch Kim"],
+  ["TF•Toàn","Bạch Kim","Cao Thủ"],
+  ["TF•Linh","Cao Thủ","Bạch Kim"],
+  ["TF•Đạt","Bạch Kim","Bạch Kim"],
+  ["TF•Nghĩa","Vàng","Cao Thủ"],
+  ["TF•Trung","Cao Thủ","Kim Cương"],
+  ["TF•Dương","Kim Cương","Cao Thủ"],
+  ["TF•PhongK","Bạch Kim","Bạch Kim"],
+  ["TF•Nhật","Cao Thủ","Kim Cương"],
+  ["TF•Trí","Bạch Kim","Bạch Kim"],
+  ["TF•Phát","Cao Thủ","Cao Thủ"],
+  ["TF•Hải","Bạch Kim","Cao Thủ"],
+  ["TF•Minh","Cao Thủ","Vàng"],
+  ["TF•Hoài","Bạch Kim","Cao Thủ"],
+  ["TF•Bảo","Cao Thủ","Kim Cương"],
+  ["TF•Nam","Kim Cương","Cao Thủ"],
+  ["TF•Thái","Cao Thủ","Bạch Kim"],
+  ["TF•Khang","Vàng","Bạch Kim"],
+  ["TF•Tùng","Bạch Kim","Cao Thủ"],
+  ["TF•Việt","Cao Thủ","Cao Thủ"],
+  ["TF•Đức","Bạch Kim","Vàng"],
+  ["TF•Hòa","Cao Thủ","Bạch Kim"],
+  ["TF•Thiện","Bạch Kim","Bạch Kim"],
+  ["TF•Quân","Bạch Kim","Cao Thủ"],
+  ["TF•Thịnh","Cao Thủ","Vàng"],
+  ["TF•Khôi","Bạch Kim","Cao Thủ"],
+  ["TF•An","Cao Thủ","Bạch Kim"],
+  ["TF•Hưng","Kim Cương","Cao Thủ"],
+ ["TF•An","Bạch Kim","Cao Thủ"],
+  ["TF•An","Bạch Kim","Cao Thủ"],
+   ["TF•An","Bạch Kim","Cao Thủ"],
+  ["TF•An","Bạch Kim","Cao Thủ"],
+  ["TF•An","Cao Thủ","Cao Thủ"]
+];
+
+// Hiển thị bảng
+function renderTable(data) {
+  const tbody = document.getElementById("rankBody");
+  tbody.innerHTML = "";
+  data.forEach((m, i) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${i+1}</td>
+        <td>${m[0]}</td>
+        <td class="rank-st">${m[1]}</td>
+        <td class="rank-tc">${m[2]}</td>
+      </tr>
+    `;
+  });
+}
+
+// Sắp xếp bảng theo rank
+function sortRank(direction) {
+  const mode = document.getElementById("mode").value; // st hoặc tc
+  const index = (mode === "st") ? 1 : 2;
+
+  members.sort((a, b) => {
+    const rankA = rankValue[a[index].trim()];
+    const rankB = rankValue[b[index].trim()];
+    return direction === "asc" ? rankA - rankB : rankB - rankA;
+  });
+
+  renderTable(members);
+}
+
+// Hiển thị mặc định
+renderTable(members);
+</script>
+
+</body>
+</html>
