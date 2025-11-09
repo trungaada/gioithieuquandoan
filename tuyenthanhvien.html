@@ -274,6 +274,27 @@ footer {
     margin-top: 40px;
     border-top: 1px solid rgba(255, 61, 0, 0.1);
 }
+
+/* --- Hoa Anh Đào Rơi (PHÍA SAU NỘI DUNG) --- */
+.sakura {
+    position: fixed;
+    top: -10px;
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 0; /* phía sau header, buttons, content */
+    animation: fall linear infinite;
+}
+header, .buttons, .content {
+    position: relative;
+    z-index: 1; /* nội dung luôn trên hoa */
+}
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
 @media (max-width: 768px) {
     header h1 { font-size: 28px; letter-spacing: 1.5px;}
     .clan-name { font-size: 32px; }
@@ -351,7 +372,6 @@ function copyText(textToCopy) {
     navigator.clipboard.writeText(textToCopy).then(() => {
         alert("Đã chép ID Game: " + textToCopy);
     }).catch(err => {
-        console.error('Không thể chép ID: ', err);
         const tempInput = document.createElement('textarea');
         tempInput.value = textToCopy;
         document.body.appendChild(tempInput);
@@ -376,6 +396,22 @@ function hideContent() {
     window.scrollTo({top: 0, behavior: 'smooth'}); 
 }
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// --- Hoa Anh Đào Rơi ---
+function createSakura() {
+    const sakura = document.createElement('div');
+    sakura.classList.add('sakura');
+    sakura.textContent = "🌸";
+    sakura.style.left = Math.random() * 100 + 'vw';
+    sakura.style.animationDuration = (5 + Math.random() * 5) + 's';
+    sakura.style.width = (10 + Math.random() * 20) + 'px';
+    sakura.style.height = sakura.style.width;
+    sakura.style.opacity = 0.6 + Math.random() * 0.3;
+    sakura.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(sakura);
+    sakura.addEventListener('animationend', () => sakura.remove());
+}
+setInterval(createSakura, 700);
 </script>
 
 </body>
