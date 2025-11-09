@@ -1,37 +1,138 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Luật quân đoàn TF</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luật Quân Đoàn TF</title>
   <style>
+    :root {
+      --accent: #00e676;
+      --bg-overlay: rgba(0, 0, 0, 0.6);
+      --card: rgba(22, 30, 46, 0.9);
+      --text: #e0e0e0;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-     background: url("logo.jpg") no-repeat center center fixed;
-      color: #fff;
-      margin: 40px;
+      font-family: "Poppins", sans-serif;
+      background: url("logo.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      position: relative;
+      min-height: 100vh;
     }
+
+    /* Lớp phủ mờ để dễ đọc chữ */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-overlay);
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
     h1 {
-      color: #ffcc00;
+      color: var(--accent);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px #00e676;
     }
+
+    .law-card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 230, 118, 0.2);
+      text-align: left;
+    }
+
     ul {
-      line-height: 1.8;
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-    a {
-      color: #58a6ff;
+
+    li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      line-height: 1.6;
+    }
+
+    li::before {
+      content: "⚔️ ";
+      color: var(--accent);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 25px;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
       text-decoration: none;
+      box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #00c853;
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.7);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+      .law-card {
+        padding: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Luật Quân Đoàn TitanForce²</h1>
-  <ul>
-    <li>Tôn trọng mọi thành viên trong quân đoàn.</li>
-    <li>Không gây xích mích hoặc xúc phạm người khác.</li>
-    <li>Tham gia hoạt động quân đoàn đầy đủ khi có thông báo.</li>
-    <li>Không quảng cáo, spam hoặc sử dụng hack/cheat.</li>
-    <li>Vắng mặt lâu phải báo với chỉ huy hoặc chủ quân đoàn.</li>
-  </ul>
-
-  <p><a href="home.html">⬅️ Quay lại trang chủ</a></p>
+  <div class="content">
+    <h1>Luật Quân Đoàn TF</h1>
+    <div class="law-card">
+      <ul>
+        <li>Biết tôn trọng mọi người trong QD, nhưng phải biết trên biết dưới.</li>
+        <li>Trai gái trên K12, ưu tiên K9 trở lên.</li>
+        <li>Có tương tác box chat, rời QD thì báo chủ QD.</li>
+        <li>Off 7 ngày sẽ bị kick, nếu có lý do phải báo chủ QD.</li>
+        <li>Không va nhau dưới mọi hình thức. Giỡn được nhưng không quá trớn.</li>
+        <li>Test thành viên vào QD: Nam 5/7, Nữ 2-3/7 round mới được vào.</li>
+        <li>Tìm kiếm người có trình trên mobile; PC không tuyển hack (có dấu hiệu sẽ kick thẳng).</li>
+        <li>Đổi tên tùy ý (ưu tiên TF.Tên nếu thích).</li>
+        <li>QD có 2 nhánh:
+          <ul>
+            <li>Nhánh 1: Chuyên phòng giải — Sinh tồn.</li>
+            <li>Nhánh 2: Chuyên phòng tử chiến — Headshot (Kai nếu có).</li>
+          </ul>
+        </li>
+        <li>Có 3 box QD (1 box tổng, 2 box nhánh QD). Ai thuộc nhánh nào thì ở nhánh đó, không nhảy qua lại.</li>
+        <li>Có giải QD (tử chiến & sinh tồn) — Thời gian sẽ được chủ QD thông báo.</li>
+      </ul>
+    </div>
+    <a href="index.html" class="back-btn">⬅️ Quay về Trang Chủ</a>
+  </div>
 </body>
 </html>
