@@ -23,6 +23,30 @@ body {
     flex-direction: column;
     text-align: center;
     padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+/* 🌸 Hoa anh đào rơi */
+.sakura {
+    position: fixed;
+    top: -10px;
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 182, 193, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255,192,203,0.8);
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 h1 {
@@ -198,5 +222,22 @@ h3 {
 <a href="tuyenthanhvien.html" class="btn join-btn">Tham Gia Ngay</a>
 </div>
 <a href="index.html" class="btn back-btn">⬅️ Quay về Trang Chủ</a>
+
+<script>
+/* 🌸 Hoa anh đào rơi */
+function createSakura() {
+    const sakura = document.createElement('div');
+    sakura.classList.add('sakura');
+    sakura.style.left = Math.random() * 100 + 'vw';
+    sakura.style.animationDuration = (Math.random() * 3 + 5) + 's';
+    sakura.style.opacity = Math.random();
+    sakura.style.transform = `scale(${Math.random() * 0.8 + 0.3})`;
+    document.body.appendChild(sakura);
+    setTimeout(() => {
+        sakura.remove();
+    }, 8000);
+}
+setInterval(createSakura, 250);
+</script>
 </body>
 </html>
