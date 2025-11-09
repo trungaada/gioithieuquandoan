@@ -201,6 +201,56 @@ p.lead {
     transition: all 0.35s ease; 
     position: relative;
 }
+/* Nút quay lại trang chủ */
+/* Nút quay lại trang chủ */
+a#backButton {
+    display: inline-block;
+    margin-top: 35px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border: 2px solid var(--color-primary); /* Tăng độ dày viền */
+    border-radius: 12px; /* Bo tròn hơn */
+    padding: 12px 20px; /* Lớn hơn một chút */
+    font-weight: 700; /* In đậm hơn */
+    background: rgba(0, 255, 255, 0.15); /* Nền trong suốt hơn */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Thêm bóng nhẹ mặc định */
+    transition: 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+    animation: neon-flicker-btn 2.5s ease-in-out infinite alternate; /* Dùng keyframe mới */
+}
+
+/* Hover hiệu ứng neon + scale + gradient */
+a#backButton:hover {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Gradient khi hover */
+    color: var(--bg); /* Màu chữ nền tối */
+    transform: scale(1.1); /* Phóng to rõ ràng hơn */
+    border-color: transparent; /* Ẩn viền khi hover */
+    box-shadow: 0 0 20px var(--neon-blue-shadow), 0 0 40px rgba(0, 255, 255, 0.6);
+    animation: none; /* Tắt flicker khi hover */
+    text-shadow: 0 0 5px #fff, 0 0 10px var(--color-secondary); /* Thêm text shadow */
+}
+
+/* Neon nhấp nháy mặc định */
+@keyframes neon-flicker-btn {
+    0%, 100% {
+        box-shadow: 0 0 8px var(--neon-blue-shadow), 0 0 15px rgba(0, 255, 255, 0.4);
+        border-color: var(--color-primary);
+    }
+    50% {
+        box-shadow: 0 0 4px rgba(0, 255, 255, 0.6), 0 0 8px rgba(0, 255, 255, 0.2);
+        border-color: rgba(0, 255, 255, 0.7);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 .card:hover .avatar { border-color: rgba(173, 216, 230, 0.5); box-shadow: 0 0 10px rgba(173, 216, 230, 0.2), 0 0 20px rgba(173, 216, 230, 0.1) inset; transform: scale(1.05); }
 h2 { font-size: 20px; margin-bottom: 4px; color: var(--member-name-color); text-shadow: 0 0 5px var(--member-name-shadow), 0 0 10px rgba(255, 0, 0, 0.4); }
 p.role { font-size: 13px; font-weight: 700; color: var(--member-role-color); text-transform: uppercase; margin-bottom: 12px; }
@@ -288,7 +338,7 @@ const memberData=[
 {id:'role-sang',text:'👑Chủ quân đoàn N2',speed:60},
 {id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
 {id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
-{id:'name-tv3',text:' Bích (TF.Bích )',speed:80},
+{id:'name-tv3',text:' Huy (TF.Bích )',speed:80},
 {id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
 ];
 function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
