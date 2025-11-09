@@ -14,7 +14,7 @@
 }
 body {
     background: url("logo.jpg") no-repeat center center fixed;
-    background-size: cover; /* ảnh sẽ phủ toàn bộ màn hình */
+    background-size: cover;
     color: #ffffff;
     min-height: 100vh;
     display: flex;
@@ -26,25 +26,25 @@ body {
     overflow-x: hidden;
 }
 
+/* 🌸 Hoa anh đào rơi phía sau */
 .sakura {
     position: fixed;
     top: -50px;
     pointer-events: none;
-    z-index: 9999;
     user-select: none;
-    font-size: 12px; /* sẽ thay đổi ngẫu nhiên trong JS */
+    font-size: 12px; /* JS sẽ random */
     animation-name: fall;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    color: #ff69b4; /* tô màu hoa hồng cho emoji */
-    text-shadow: 0 0 4px #ffb6c1; /* ánh sáng nhẹ */
+    color: #ff69b4;
+    text-shadow: 0 0 4px #ffb6c1;
+    z-index: 1; /* thấp hơn logo và event-card */
 }
 
 @keyframes fall {
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
-
 
 h1 {
     font-size: 3em;
@@ -58,48 +58,43 @@ h1 {
     letter-spacing: 2px;
 }
 @keyframes rainbow { to { filter: hue-rotate(360deg); } }
-@keyframes glowTitle { from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.4); } to { text-shadow: 0 0 15px #00ffff, 0 0 20px #ff00cc; } }
+@keyframes glowTitle { from { text-shadow: 0 0 5px rgba(255,255,255,0.4); } to { text-shadow: 0 0 15px #00ffff, 0 0 20px #ff00cc; } }
+
 .logo-container {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    overflow: hidden; /* đảm bảo hình tròn thật */
-    display: inline-block; /* giúp căn giữa nếu cần */
+    overflow: hidden;
+    display: inline-block;
     margin-bottom: 40px;
-    
-    /* Viền neon */
-    border: 3px solid #00ffff;
-    box-shadow: 
-        0 0 15px #00ffff,
-        0 0 30px rgba(0,255,255,0.5),
-        0 0 45px rgba(0,255,255,0.3);
+    position: relative; /* để z-index có hiệu lực */
+    z-index: 10; /* cao hơn sakura */
 
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0,255,255,0.5), 0 0 45px rgba(0,255,255,0.3);
     animation: fadeIn 2s ease, neonPulse 2s ease-in-out infinite alternate;
 }
-
 .logo-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* giữ tỉ lệ ảnh đầy đủ */
-    display: block; /* fix lỗi margin mặc định của img */
-    border-radius: 50%; /* backup nếu overflow chưa đủ */
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
 }
-
-
 
 .event-card {
     background: rgba(18, 30, 42, 0.9);
     border: 2px solid #00ffff;
     border-radius: 15px;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), inset 0 0 8px rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 25px rgba(0,255,255,0.6), inset 0 0 8px rgba(0,255,255,0.4);
     padding: 30px;
     max-width: 480px;
     width: 100%;
     backdrop-filter: blur(10px);
     animation: fadeIn 2s ease;
     margin-bottom: 30px;
-    position: relative;
-    overflow: hidden;
+    position: relative; /* để z-index có hiệu lực */
+    z-index: 10; /* cao hơn sakura */
     text-align: left;
 }
 .event-card::before {
@@ -110,13 +105,15 @@ h1 {
     pointer-events: none;
     background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 1%, transparent 30%);
 }
+
 @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
 h2 {
     color: #ffd700;
     margin-bottom: 15px;
     font-size: 1.6em;
     text-shadow: 0 0 18px #ffcc00, 0 0 25px rgba(255,204,0,0.5);
-    border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+    border-bottom: 2px solid rgba(255,215,0,0.4);
     padding-bottom: 10px;
     text-align: center;
 }
@@ -173,19 +170,16 @@ h3 {
     font-size: 1em;
     transition: 0.4s ease;
     text-transform: uppercase;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     border: none;
     text-align: center;
 }
-.btn:hover {
-    background: linear-gradient(90deg, #f39c12, #e67e22);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
-}
-.join-btn { background: linear-gradient(90deg, #00bfff, #0080ff); }
-.join-btn:hover { background: linear-gradient(90deg, #00e676, #00c853); box-shadow: 0 8px 20px rgba(0, 191, 255, 0.6); }
-.back-btn { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
-.back-btn:hover { background: linear-gradient(90deg, #34495e, #2c3e50); box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6); }
+.btn:hover { background: linear-gradient(90deg, #f39c12, #e67e22); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(243,156,18,0.6);}
+.join-btn { background: linear-gradient(90deg, #00bfff, #0080ff);}
+.join-btn:hover { background: linear-gradient(90deg, #00e676, #00c853); box-shadow: 0 8px 20px rgba(0,191,255,0.6);}
+.back-btn { background: linear-gradient(90deg, #9b59b6, #8e44ad);}
+.back-btn:hover { background: linear-gradient(90deg, #34495e, #2c3e50); box-shadow: 0 8px 20px rgba(155,89,182,0.6);}
+
 @media (max-width: 600px) {
     h1 { font-size: 2.2em; margin-bottom: 25px; }
     .event-card { padding: 20px; max-width: 95%; }
@@ -219,23 +213,6 @@ h3 {
 <a href="tuyenthanhvien.html" class="btn join-btn">Tham Gia Ngay</a>
 </div>
 <a href="index.html" class="btn back-btn">⬅️ Quay về Trang Chủ</a>
-<style>
-.sakura {
-    position: fixed;
-    top: -50px;
-    pointer-events: none;
-    z-index: 9999;
-    user-select: none;
-    font-size: 12px;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-}
-@keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-</style>
 
 <script>
 function createSakura() {
@@ -250,7 +227,6 @@ function createSakura() {
     setTimeout(() => sakura.remove(), parseFloat(sakura.style.animationDuration) * 1000);
 }
 
-// tạo liên tục mỗi 300ms
 setInterval(createSakura, 300);
 </script>
 
