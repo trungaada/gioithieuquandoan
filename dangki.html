@@ -17,15 +17,30 @@
 
 body { 
   font-family:'Montserrat',sans-serif; 
-  background:var(--bg); 
-  color:var(--text); 
   margin:0; 
   padding:20px; 
   display:flex;
   flex-direction:column;
   align-items:center;
   min-height:100vh;
+  background-image: url('logo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text);
+  position: relative;
 }
+
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+
+h1, p, .buttons, form, .message { position:relative; z-index:1; }
 
 h1 { 
   color:var(--accent); 
@@ -71,8 +86,8 @@ button.group-btn:hover {
 form { 
   width:100%; 
   max-width:400px; 
-  margin-bottom:20px;
-  background:var(--card); 
+  margin-bottom:10px;
+  background:rgba(22,30,47,0.85);
   padding:20px; 
   border-radius:12px; 
   box-shadow:0 0 15px rgba(255,61,0,0.4); 
@@ -97,7 +112,7 @@ input, select, textarea {
   margin-bottom:12px; 
   border-radius:6px; 
   border:none; 
-  font-size:0.9rem; 
+  font-size:0.9rem;
 }
 
 button.submit-btn { 
@@ -120,7 +135,7 @@ button.submit-btn:hover {
 
 .message { 
   text-align:center; 
-  margin-top:10px; 
+  margin-top:5px; 
   min-height:24px; 
   font-weight:bold; 
   font-size:0.95rem;
@@ -151,6 +166,7 @@ button.submit-btn:hover {
   <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
 </div>
 
+<!-- FORM Sinh Tồn -->
 <form id="sinhTonForm">
   <h2>🔥 Nhóm Sinh Tồn</h2>
   <input type="hidden" name="entry.group" value="Sinh Tồn">
@@ -168,8 +184,15 @@ button.submit-btn:hover {
     <option value="">-- Chọn Vai Trò --</option>
     <option>Rush</option><option>Cover</option><option>Sniper</option><option>Hỗ trợ</option>
   </select>
-  <label>Lý do muốn gia nhập (tuỳ chọn):</label>
-  <textarea name="entry.reason" rows="3"></textarea>
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi" required>
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option>
+    <option>Nữ</option>
+    <option>Khác</option>
+  </select>
   <label>Tên Facebook (Bắt Buộc):</label>
   <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
   <label>Liên kết Facebook (Bắt Buộc):</label>
@@ -178,6 +201,7 @@ button.submit-btn:hover {
 </form>
 <div class="message"></div>
 
+<!-- FORM Solo -->
 <form id="soloForm">
   <h2>⚡ Nhóm Solo</h2>
   <input type="hidden" name="entry.group" value="Solo Tử Chiến">
@@ -195,8 +219,9 @@ button.submit-btn:hover {
     <option value="">-- Chọn Vai Trò --</option>
     <option>Rush</option><option>Cover</option><option>Sniper</option><option>Hỗ trợ</option>
   </select>
-  <label>Lý do muốn gia nhập (tuỳ chọn):</label>
-  <textarea name="entry.reason" rows="3"></textarea>
+
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi " required>
   <label>Tên Facebook (Bắt Buộc):</label>
   <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
   <label>Liên kết Facebook (Bắt Buộc):</label>
@@ -212,16 +237,24 @@ function showForm(id){
   document.getElementById(id).classList.add('active');
 }
 
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzg1Oj0I2Thz2Mu0J0EN-zauzrrfiYaT8vp1p1amh-fKJcduigIpzYGP5z6pX6V45uZ/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwmZ2VrHOjCJGmnp8xz8II4nwfwulEZBn9YGZbklCouHZMDFjj_RBdTmgO-EXM9tmru/exec"; // Thay bằng URL của bạn
 
 ['sinhTonForm','soloForm'].forEach(f => {
   const form = document.getElementById(f);
+  const msg = form.nextElementSibling; // div.message ngay sau form
   form.addEventListener("submit", async e => {
     e.preventDefault();
     const data = new FormData(form);
-    const msg = form.nextElementSibling;
+    const age = Number(data.get("entry.age"));
+
+    // Kiểm tra tuổi
+    if (isNaN(age) || age < 14) {
+      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số và từ 14 trở lên!</p>`;
+      return;
+    }
+
     msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
-    
+
     try {
       await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
       msg.innerHTML = `<p class='success'>Đăng kí thành công!<br>Cảm ơn bạn 😎</p>`;
