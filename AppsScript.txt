@@ -1,0 +1,29 @@
+function doPost(e){
+  try {
+    const params = e.parameter;
+    const name = params['entry.name'] || 'Không có tên';
+    const uid = params['entry.uid'] || '-';
+    const rank = params['entry.rank'] || '-';
+    const role = params['entry.role'] || '-';
+    const reason = params['entry.reason'] || '-';
+
+    const recipient = "clashbasegate@gmail.com"; // Gmail nhận đăng ký
+    const subject = `Đăng ký Clan TF — ${name}`;
+    const body = `
+Có người vừa đăng ký Clan TF:
+
+Tên: ${name}
+UID: ${uid}
+Rank: ${rank}
+Vai trò: ${role}
+Lý do: ${reason}
+
+Thời gian: ${new Date().toLocaleString()}
+    `;
+
+    MailApp.sendEmail(recipient, subject, body);
+    return ContentService.createTextOutput("Đăng ký của bạn đã được gửi thành công!").setMimeType(ContentService.MimeType.TEXT);
+  } catch(err) {
+    return ContentService.createTextOutput("Lỗi: " + err.message).setMimeType(ContentService.MimeType.TEXT);
+  }
+}
