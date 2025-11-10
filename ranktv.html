@@ -28,50 +28,7 @@ h1 {
     text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
 }
 
-/* Thanh menu */
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin: 10px auto 20px;
-  width: 100%;
-  max-width: 600px;
-}
-select, button {
-  flex: 1 1 160px;
-  background: #00eaff;
-  color: #0f2027;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 25px;
-  font-weight: 700;
-  font-size: 0.9em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
-}
-select:hover, button:hover {
-  background: #00bfff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
-}
-
-/* Responsive cho điện thoại */
-@media screen and (max-width: 480px) {
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-  select, button {
-    width: 100%;
-    font-size: 0.85em;
-    padding: 8px 10px;
-  }
-}
+* Thanh menu */ .controls { display: flex; flex-wrap: wrap; /* tự động xuống dòng nếu không đủ chỗ */ justify-content: center; /* căn giữa ngang */ align-items: center; /* căn giữa dọc */ gap: 8px; /* khoảng cách giữa các nút/select */ margin-bottom: 15px; } select, button { flex-shrink: 1; /* co giãn nếu màn hình nhỏ */ min-width: 80px; /* đảm bảo nút không quá nhỏ */ max-width: 160px; /* giới hạn chiều rộng tối đa */ text-align: center; font-size: 0.9em; padding: 8px 15px; border-radius: 25px; font-weight: 700; background: #00eaff; color: #0f2027; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 8px rgba(0, 234, 255, 0.5); } select:hover, button:hover { background: #00bfff; transform: translateY(-1px); box-shadow: 0 0 12px rgba(0, 191, 255, 0.7); } /* Responsive cho màn hình nhỏ */ @media screen and (max-width: 480px) { .controls { flex-direction: column; /* xếp nút theo cột */ gap: 6px; } select, button { width: 90%; /* chiếm gần hết chiều ngang */ font-size: 0.8em; padding: 6px 10px; } }
 
 /* Bảng */
 .table-container {
