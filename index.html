@@ -2,188 +2,343 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng ký Clan TF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Trang chủ Quân đoàn TF</title>
 <style>
-:root { --accent:#ff3d00; --bg:#0f1724; --card:#161e2f; }
-body { font-family:'Montserrat',sans-serif; background:var(--bg); color:#e6eef8; text-align:center; margin:0; padding:40px 15px; }
-h1 { color:var(--accent); font-family:'Orbitron',sans-serif; text-transform:uppercase; margin-bottom:10px; }
-p { color:#b3bcc8; margin-bottom:30px; }
-.buttons { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:30px; }
-button.group-btn { background:var(--accent); border:none; color:#fff; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; transition:0.3s; }
-button.group-btn:hover { background:#ff1744; transform:scale(1.05); }
-form { max-width:400px; margin:0 auto; background:var(--card); padding:25px; border-radius:12px; box-shadow:0 0 15px rgba(255,61,0,0.4); border:2px solid var(--accent); text-align:left; display:none; }
-form.active { display:block; }
-label { display:block; margin-bottom:6px; color:#fff; font-weight:600; }
-input, select, textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:none; font-size:14px; }
-button.submit-btn { background:var(--accent); color:#fff; border:none; padding:12px 25px; border-radius:8px; font-weight:700; cursor:pointer; width:100%; transition:0.3s; }
-button.submit-btn:hover { background:#ff1744; transform:scale(1.03); }
-.success{color:#4CAF50;text-align:center;margin-top:20px;font-weight:bold;}
-.error{color:#f44336;text-align:center;margin-top:20px;font-weight:bold;}
-table { width:100%; border-collapse:collapse; margin-top:30px; }
-th, td { padding:10px; border:1px solid #e6eef8; font-size:14px; text-align:center; }
-th { background:var(--accent); color:#fff; }
-#filterGroup { margin-top:20px; padding:8px; border-radius:6px; border:none; font-size:14px; }
+* { 
+    box-sizing:border-box; margin:0; padding:0; 
+    -webkit-tap-highlight-color: transparent; 
+    -webkit-overflow-scrolling: touch; 
+}
+body { 
+    font-family:Arial,sans-serif; 
+    background:url("logo.jpg") no-repeat center center fixed; 
+    background-size:cover; 
+    color:#fff; 
+    font-size:15px; 
+    min-height:100vh; 
+    overflow-x:hidden;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+main {
+    opacity: 0; 
+    text-align:center; 
+    padding:20px 15px; margin:70px auto 40px auto; max-width:650px;
+    background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8);
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px); 
+    transition: all 0.4s ease-in-out;
+}
+body.fade-in main {
+    opacity: 1;
+    animation: fadeIn 1.2s ease-out forwards;
+}
+nav {
+    position:fixed; top:0; left:0; width:100%;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:5px 12px; z-index:100;
+    background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size:400% 100%; animation:rainbow-gradient 15s ease infinite;
+    box-shadow:0 2px 8px rgba(204,0,0,0.7);
+}
+@keyframes rainbow-gradient { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%} 
+}
+.logo { 
+    height:35px; max-width:60px; border-radius:50%; 
+    box-shadow:0 0 8px rgba(255,60,0,0.8); 
+    transition:0.3s ease; 
+}
+.logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
+.menu-toggle {
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+    width:28px;
+    height:25px;
+    cursor:pointer;
+}
+.menu-toggle span {
+    display:block;
+    height:3px;
+    background-color:#fff;  
+    border-radius:2px;
+    transition:all 0.3s ease;
+}
+.nav-links {
+    position:absolute; top:45px; right:12px;
+    background-color: rgba(0,0,0,0.85);
+    flex-direction:column; 
+    width:200px; 
+    gap:0;
+    display:none; 
+    border-radius:0 0 8px 8px;
+    box-shadow:0 0 10px rgba(255,60,0,0.8);
+}
+.nav-links.active { display:flex; }
+.nav-links a { 
+    padding:10px; 
+    border-bottom:1px solid rgba(255,255,255,0.1); 
+    font-size:14px; font-weight:bold; text-decoration:none; 
+    color:white; background:linear-gradient(135deg,#CC0000,#400000); 
+    transition:all 0.3s ease;
+}
+.nav-links a:hover { 
+    background:linear-gradient(135deg,#FF3C00,#FF7F00); 
+    transform:scale(1.03); 
+    box-shadow:0 0 10px #FF3C00; 
+}
+@media (min-width: 1025px) {
+    .nav-links {
+        right: 12px;
+        width: 250px; 
+    }
+}
+h1 { font-size:28px; color:#FF3C00; margin-bottom:15px; text-shadow:0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
+h2 { font-size:20px; color:#FFCC00; margin:20px 0 10px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:3px; text-shadow:0 0 4px rgba(255,204,0,0.7);}
+p { font-size:15px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:15px; }
+ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
+ul li { padding:8px 0; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:15px; color:#fff; }
+ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
+.slogan { font-size: 16px; margin-top: -5px; margin-bottom: 20px; }
+.typing-text {
+    border-right: 3px solid #FFCC00;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink-caret 0.75s step-end infinite;
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #FFCC00; }
+}
+.cta-button {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #CC0000, #FFCC00);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(204, 0, 0, 0.8);
+  border: 1px solid #fff;
+  margin: 5px;
+}
+.cta-button:hover {
+  background: linear-gradient(90deg, #FFCC00, #CC0000);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 15px rgba(255, 60, 0, 1);
+}
+.main-footer {
+    position: relative; 
+    z-index: 200; 
+    text-align: center;
+    padding: 15px 10px;
+    margin-top: 30px;
+    background-color: rgba(0,0,0,0.7);
+    color: #ccc;
+    font-size: 13px;
+    border-top: 1px solid rgba(255,60,0,0.5);
+}
+.main-footer a {
+    color: #FFCC00;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    display: inline-block; 
+}
+.main-footer a:hover {
+    color: #FF3C00;
+    text-decoration: underline;
+}
+.pulsating-author {
+    animation: glow-pulse 2s infinite alternate;
+}
+@keyframes glow-pulse {
+    0% { text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5); transform: scale(1); }
+    50% { text-shadow: 0 0 10px rgba(255,204,0,0.9), 0 0 20px rgba(255,100,0,0.7); transform: scale(1.05); }
+    100% { text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5); transform: scale(1); }
+}
+
+/* 🌸 Hiệu ứng hoa anh đào */
+.sakura {
+  position: fixed;
+  top: -10px;
+  z-index: 10;
+  pointer-events: none;
+  color: pink;
+  opacity: 0.9;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.6;
+  }
+}
 </style>
 </head>
 <body>
+<nav>
+    <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links" id="nav-links">
+        <a href="gioithieu.html">📜 Quản Trị quân đoàn</a>
+        <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
+        <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
+        <a href="ranktv.html">💎 Mức rank thành viên</a>
+        <a href="luat.html">⚔️ Luật quân đoàn</a>
+        <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
+        <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
+        <a href="dangki.html"> 🔥Đăng kí</a>
 
-<h1>Đăng ký Clan TF</h1>
-<p>Chọn nhóm muốn gia nhập và điền thông tin!</p>
+</nav>
 
-<div class="buttons">
-  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
-  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
-  <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
-</div>
+<main class="titanforce-main">
+    <header class="tf-header">
+        <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
+        <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
+    </header>
 
+    <section class="tf-introduction">
+        <h2>💡 Triết lý của TitanForce</h2>
+        <p>
+            Quân đoàn TF không chỉ là một cộng đồng game thủ, mà còn là một **học viện rèn luyện phẩm chất và kỹ năng**. Chúng tôi tin rằng, trong thế giới game cũng như cuộc sống, chiến thắng không đến từ may mắn, mà từ **sự chuẩn bị tỉ mỉ, kỷ luật thép và tinh thần đồng đội không lay chuyển**.
+        </p>
+        <p>
+            Chúng tôi theo đuổi sự phát triển bền vững, nơi mỗi thành viên được xem là một **mũi nhọn tinh nhuệ**. Đam mê phải đi đôi với sự **tư duy chuyên nghiệp** để biến sở thích thành một con đường chinh phục đỉnh cao.
+        </p>
+        <p class="call-to-action-intro">
+            **Đây là nơi những người khao khát khẳng định bản thân được tôi luyện thành các Titan bất bại.**
+        </p>
+    </section>
 
-<form id="sinhTonForm">
-  <h2>🔥 Nhóm Sinh Tồn</h2>
-  <input type="hidden" name="entry.group" value="Sinh Tồn">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Kim Cương</option>
-    <option>Tinh Anh</option>
-    <option>Cao Thủ</option>
-    <option>Huyền Thoại</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option>
-    <option>Cover</option>
-    <option>Sniper</option>
-    <option>Hỗ trợ</option>
-  </select>
-  <label>Lý do muốn gia nhập (tuỳ chọn):</label>
-  <textarea name="entry.reason" rows="3"></textarea>
-  <label>Liên kết Facebook (tuỳ chọn):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username">
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
-</form>
+    <hr>
 
-<form id="soloForm">
-  <h2>⚡ Nhóm Solo</h2>
-  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Kim Cương</option>
-    <option>Tinh Anh</option>
-    <option>Cao Thủ</option>
-    <option>Huyền Thoại</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option>
-    <option>Cover</option>
-    <option>Sniper</option>
-    <option>Hỗ trợ</option>
-  </select>
-  <label>Lý do muốn gia nhập (tuỳ chọn):</label>
-  <textarea name="entry.reason" rows="3"></textarea>
-  <label>Liên kết Facebook (tuỳ chọn):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username">
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
-</form>
+    <section class="tf-core-values">
+        <h2>✨ Sứ mệnh: Kiến tạo và Dẫn dắt</h2>
+        <p>
+            Sứ mệnh của TF là kiến tạo nên một môi trường **chuyên nghiệp, văn minh và truyền cảm hứng**. Chúng tôi cam kết không chỉ nâng cao kỹ năng cá nhân cho từng thành viên, mà còn **xây dựng một bản sắc mạnh mẽ** để dẫn dắt cộng đồng game, khẳng định vị thế TitanForce ở mọi đấu trường.
+        </p>
 
-<div id="message"></div>
+        <h2>🔥 Giá trị Cốt lõi: Ba trụ cột Titan 🔥</h2>
+        <div class="tf-value-list">
+            <ul>
+                <li>**Tôn trọng & Đoàn kết (Unity):** Sức mạnh Titan đến từ sự hợp nhất. Mọi thành viên là một phần không thể thiếu, được tôn trọng và bảo vệ.</li>
+                <li>**Kỷ luật & Chuyên nghiệp (Discipline):** Hành động có chiến thuật, tuân thủ kỷ luật trong luyện tập và thi đấu. Kỷ luật là con đường ngắn nhất đến chiến thắng.</li>
+                <li>**Đổi mới & Tinh thần Chiến binh (Warrior Spirit):** Không ngừng học hỏi, không ngại đối mặt với thất bại. Luôn tiên phong tìm kiếm chiến thuật mới và duy trì tinh thần chiến đấu không bao giờ bỏ cuộc.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <hr>
 
-<select id="filterGroup">
-  <option value="">-- Lọc theo nhóm --</option>
-  <option value="Sinh Tồn">Sinh Tồn</option>
-  <option value="Solo Tử Chiến">Solo Tử Chiến</option>
-</select>
+    <section class="tf-activities">
+        <h2>⚡️ Chương trình Huấn luyện & Phát triển</h2>
+        <p>
+            Chúng tôi áp dụng quy trình đào tạo nghiêm ngặt, được thiết kế để phát huy tối đa tiềm năng của mỗi game thủ:
+        </p>
+        <ul>
+            <li>**Huấn luyện Chiến thuật Chuyên sâu:** Phân tích meta game, xây dựng chiến thuật nhóm (Team-Based Strategy) và kỹ năng ra quyết định dưới áp lực cao (Clutch Factor).</li>
+            <li>**Luyện tập Thường xuyên:** Tổ chức Luyện tập Đấu đội 4v4 và Thi đấu đối kháng 1vs1/2vs2 để mài giũa phản xạ và khả năng phối hợp.</li>
+            <li>**Hệ thống Giải đấu Nội bộ:** Mô phỏng môi trường thi đấu chuyên nghiệp, tạo cơ hội cọ xát thực tế và tìm kiếm tài năng ưu tú.</li>
+            <li>**Phân tích & Phản hồi (Review & Feedback):** Dành thời gian phân tích replay trận đấu, rút kinh nghiệm và điều chỉnh chiến thuật một cách khoa học.</li>
+        </ul>
+    </section>
 
-<table id="memberTable">
-  <thead>
-    <tr>
-      <th>Thời gian</th>
-      <th>Nhóm</th>
-      <th>Tên</th>
-      <th>UID</th>
-      <th>Rank</th>
-      <th>Vai trò</th>
-      <th>Lý do</th>
-      <th>Facebook</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+    <hr>
+
+    <section class="tf-recruitment-requirements">
+        <h2>🎯 Tiêu chuẩn & Quy trình Tuyển chọn Titan</h2>
+        <p>
+            TF chỉ tìm kiếm những cá nhân có cùng tầm nhìn và sẵn sàng cam kết với con đường chuyên nghiệp.
+        </p>
+        <div class="tf-requirements-list">
+            <ul>
+                <li>**Cam kết Phát triển:** Có tinh thần học hỏi cao, nghiêm túc xem việc luyện tập là một phần của sự phát triển cá nhân.</li>
+                <li>**Thái độ Đỉnh cao:** Ưu tiên thái độ chuyên nghiệp, trung thực và khả năng chịu trách nhiệm hơn là chỉ số kỹ năng nhất thời.</li>
+                <li>**Thời gian Tập trung:** Cam kết tham gia các buổi huấn luyện theo lịch trình (tối thiểu **3 buổi/tuần**).</li>
+            </ul>
+        </div>
+        
+        
+    </section>
+    
+    <hr>
+
+    <footer class="tf-footer-cta">
+        <p>
+            **Vinh quang đang chờ đợi!** Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
+        </p>
+        <div class="cta-buttons-group">
+            <a href="tuyenthanhvien.html" class="cta-button primary">🚀 Đăng kí Thành viên Ngay!</a>
+            <a href="https://www.facebook.com/share/1BjHoy1jeC/" class="cta-button secondary">💬 Fanpage Cộng đồng</a>
+        </div>
+    </footer>
+</main>
+<footer class="main-footer">
+    <p>Trang web được code và thiết kế bởi 
+    <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. 
+    © 2025 Quân đoàn TF.</p>
+</footer>
 
 <script>
-function showForm(id){
-  document.getElementById('sinhTonForm').classList.remove('active');
-  document.getElementById('soloForm').classList.remove('active');
-  document.getElementById(id).classList.add('active');
-  document.getElementById('message').innerHTML = '';
-}
-
-// Thay bằng URL Web App của bạn
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxiK-0wBZtgiG3L1wybhfhiisNLX5qmv4QvTOiKPi-nvaDfKPhVi78-1HtciyUkA2fj/exec";
-
-['sinhTonForm','soloForm'].forEach(f => {
-  const form = document.getElementById(f);
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const msg = document.getElementById('message');
-    msg.innerHTML = "⏳ Đang gửi...";
-    try {
-      await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
-      msg.innerHTML = `<p class='success'>✅ Gửi thành công! Cảm ơn bạn 😎</p>`;
-      form.reset();
-      loadMembers(document.getElementById('filterGroup').value || '');
-    } catch (err) {
-      console.error(err);
-      msg.innerHTML = `<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>`;
+function typeWriter(text, i, fnCallback) {
+    const element = document.getElementById("typed-slogan");
+    if (!element) return;
+    if (i < text.length) {
+        element.innerHTML = text.substring(0, i + 1);
+        setTimeout(() => typeWriter(text, i + 1, fnCallback), 80);
+    } else if (typeof fnCallback == 'function') {
+        fnCallback();
     }
-  });
-});
-
-// Tải danh sách thành viên từ Sheet
-async function loadMembers(group = '') {
-  try {
-    const res = await fetch(WEB_APP_URL);
-    const data = await res.json();
-    const tbody = document.querySelector("#memberTable tbody");
-    tbody.innerHTML = '';
-    data
-      .filter(d => !group || d.group === group)
-      .forEach(d => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${new Date(d.time).toLocaleString()}</td>
-          <td>${d.group}</td>
-          <td>${d.name}</td>
-          <td>${d.uid}</td>
-          <td>${d.rank}</td>
-          <td>${d.role}</td>
-          <td>${d.reason || ''}</td>
-          <td>${d.facebook || ''}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-  } catch(err) {
-    console.error("Lỗi tải danh sách:", err);
-  }
 }
+window.onload = function() {
+    document.body.classList.add('fade-in');
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1025 && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+    const sloganText = "TitanForce: Chiến Thắng Bằng Sức Mạnh Đồng Đội Và Kỷ Luật";
+    setTimeout(() => {
+        typeWriter(sloganText, 0, () => {
+            const element = document.getElementById("typed-slogan");
+            if (element) element.style.borderRight = 'none';
+        });
+    }, 500);
 
-// Load danh sách khi mở trang
-loadMembers();
-
-// Lọc theo nhóm
-document.getElementById('filterGroup').addEventListener('change', (e) => {
-  loadMembers(e.target.value);
-});
+    // 🌸 Hiệu ứng hoa anh đào rơi liên tục, mượt và tránh lag
+    function createSakura() {
+        const sakura = document.createElement("div");
+        sakura.classList.add("sakura");
+        sakura.textContent = "🌸";
+        sakura.style.left = Math.random() * 100 + "vw";
+        sakura.style.fontSize = (Math.random() * 14 + 10) + "px";
+        const duration = Math.random() * 6 + 6; // 6–12 giây
+        sakura.style.animationDuration = duration + "s";
+        sakura.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(sakura);
+        setTimeout(() => sakura.remove(), duration * 1000);
+    }
+    setInterval(createSakura, 700);
+};
 </script>
-
 </body>
 </html>
