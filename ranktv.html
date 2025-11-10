@@ -28,24 +28,85 @@ h1 {
     text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
 }
 
-* Thanh menu */ .controls { display: flex; flex-wrap: wrap; /* tự động xuống dòng nếu không đủ chỗ */ justify-content: center; /* căn giữa ngang */ align-items: center; /* căn giữa dọc */ gap: 8px; /* khoảng cách giữa các nút/select */ margin-bottom: 15px; } select, button { flex-shrink: 1; /* co giãn nếu màn hình nhỏ */ min-width: 80px; /* đảm bảo nút không quá nhỏ */ max-width: 160px; /* giới hạn chiều rộng tối đa */ text-align: center; font-size: 0.9em; padding: 8px 15px; border-radius: 25px; font-weight: 700; background: #00eaff; color: #0f2027; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 8px rgba(0, 234, 255, 0.5); } select:hover, button:hover { background: #00bfff; transform: translateY(-1px); box-shadow: 0 0 12px rgba(0, 191, 255, 0.7); } /* Responsive cho màn hình nhỏ */ @media screen and (max-width: 480px) { .controls { flex-direction: column; /* xếp nút theo cột */ gap: 6px; } select, button { width: 90%; /* chiếm gần hết chiều ngang */ font-size: 0.8em; padding: 6px 10px; } }
+/* 🔹 Thanh menu thân thiện Android */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;                /* 🌟 Giãn đều giữa các nút */
+  margin: 18px auto;
+  max-width: 90%;
+  padding: 5px;
+}
+
+/* 🔹 Nút & select có kích thước chạm thoải mái */
+select, button {
+  flex: 1 1 160px;
+  background: linear-gradient(90deg, #00bfff, #00eaff);
+  color: #0f2027;
+  border: none;
+  padding: 12px 18px;       /* 🌟 Nút cao hơn, dễ chạm */
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+  touch-action: manipulation; /* ⚡ Giúp cảm ứng mượt hơn */
+}
+
+select:hover, button:hover {
+  background: linear-gradient(90deg, #00eaff, #00bfff);
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.8);
+}
+
+/* 🔹 Khi nhấn trên màn hình cảm ứng (hiệu ứng nhấn mềm) */
+select:active, button:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* 🔹 Tối ưu trên điện thoại */
+@media screen and (max-width: 480px) {
+  .controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+  select, button {
+    width: 95%;
+    font-size: 0.9em;
+    padding: 10px 14px;
+    border-radius: 25px;
+  }
+}
+
+
 
 /* Bảng */
 .table-container {
     max-width: 100%;
     margin: auto;
     border-radius: 15px;
-    overflow-x: auto;
+    overflow: hidden; /* ⭐ Giữ bo tròn cho toàn bảng */
     box-shadow: 0 0 20px rgba(0, 234, 255, 0.7), 0 0 40px rgba(0, 234, 255, 0.3);
     background: rgba(0, 10, 15, 0.7);
     border: 2px solid #00eaff;
     padding: 5px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(0,0,0,0.3);
+
+/* ⭐ Bo tròn riêng phần tiêu đề bảng */
+thead {
+    background: linear-gradient(90deg, #00bfff, #00eaff);
+    color: #0f2027;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    border-top-left-radius: 15px;   /* Bo góc trái trên */
+    border-top-right-radius: 15px;  /* Bo góc phải trên */
 }
+
 thead {
     background: linear-gradient(90deg, #00bfff, #00eaff);
     color: #0f2027;
