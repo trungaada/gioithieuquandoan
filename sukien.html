@@ -26,28 +26,28 @@ body {
     overflow-x: hidden;
 }
 
-/* 🌸 Hoa anh đào rơi phía sau */
+/* 🌸 Hoa anh đào */
 .sakura {
     position: fixed;
     top: -50px;
     pointer-events: none;
     user-select: none;
-    font-size: 12px; /* JS sẽ random */
+    font-size: 12px;
     animation-name: fall;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
     color: #ff69b4;
     text-shadow: 0 0 4px #ffb6c1;
-    z-index: 1; /* thấp hơn logo và event-card */
+    z-index: 1;
 }
-
 @keyframes fall {
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
+/* --- Tiêu đề --- */
 h1 {
-    font-size: 3em;
+    font-size: 2.8em;
     font-weight: 700;
     text-transform: uppercase;
     background: linear-gradient(90deg, #ff00cc, #00ffff, #ffcc00);
@@ -60,18 +60,18 @@ h1 {
 @keyframes rainbow { to { filter: hue-rotate(360deg); } }
 @keyframes glowTitle { from { text-shadow: 0 0 5px rgba(255,255,255,0.4); } to { text-shadow: 0 0 15px #00ffff, 0 0 20px #ff00cc; } }
 
+/* --- Logo --- */
 .logo-container {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     overflow: hidden;
     display: inline-block;
     margin-bottom: 40px;
-    position: relative; /* để z-index có hiệu lực */
-    z-index: 10; /* cao hơn sakura */
-
+    position: relative;
+    z-index: 10;
     border: 3px solid #00ffff;
-    box-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0,255,255,0.5), 0 0 45px rgba(0,255,255,0.3);
+    box-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0,255,255,0.5);
     animation: fadeIn 2s ease, neonPulse 2s ease-in-out infinite alternate;
 }
 .logo-container img {
@@ -82,19 +82,20 @@ h1 {
     border-radius: 50%;
 }
 
+/* --- Khung sự kiện --- */
 .event-card {
     background: rgba(18, 30, 42, 0.9);
     border: 2px solid #00ffff;
     border-radius: 15px;
     box-shadow: 0 0 25px rgba(0,255,255,0.6), inset 0 0 8px rgba(0,255,255,0.4);
-    padding: 30px;
-    max-width: 480px;
+    padding: 25px 35px;
+    max-width: 680px; /* ✅ to hơn */
     width: 100%;
     backdrop-filter: blur(10px);
     animation: fadeIn 2s ease;
     margin-bottom: 30px;
-    position: relative; /* để z-index có hiệu lực */
-    z-index: 10; /* cao hơn sakura */
+    position: relative;
+    z-index: 10;
     text-align: left;
 }
 .event-card::before {
@@ -105,36 +106,36 @@ h1 {
     pointer-events: none;
     background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 1%, transparent 30%);
 }
-
 @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+/* --- Chữ nhỏ hơn nhẹ --- */
 h2 {
     color: #ffd700;
     margin-bottom: 15px;
-    font-size: 1.6em;
+    font-size: 1.4em; /* ↓ nhỏ lại */
     text-shadow: 0 0 18px #ffcc00, 0 0 25px rgba(255,204,0,0.5);
     border-bottom: 2px solid rgba(255,215,0,0.4);
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     text-align: center;
 }
 p {
-    font-size: 1.05em;
+    font-size: 0.95em; /* ↓ nhỏ hơn */
     line-height: 1.6;
-    margin: 12px 0;
+    margin: 10px 0;
     color: #ffffff;
     text-align: justify;
 }
 ul {
     list-style: none;
     padding-left: 0;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     text-align: left;
 }
 ul li {
     position: relative;
     padding-left: 15px;
-    font-size: 1.0em;
-    margin-bottom: 8px;
+    font-size: 0.95em; /* ↓ nhỏ hơn */
+    margin-bottom: 6px;
 }
 ul li::before {
     content: '»';
@@ -146,11 +147,13 @@ ul li::before {
 }
 h3 {
     color: #00e676;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.2em;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-size: 1.1em;
     text-align: center;
 }
+
+/* --- Các phần khác --- */
 .highlight {
     color: #ff0000;
     font-weight: bold;
@@ -167,28 +170,29 @@ h3 {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 0.95em; /* ↓ nhẹ */
     transition: 0.4s ease;
     text-transform: uppercase;
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     border: none;
     text-align: center;
 }
-.btn:hover { background: linear-gradient(90deg, #f39c12, #e67e22); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(243,156,18,0.6);}
-.join-btn { background: linear-gradient(90deg, #00bfff, #0080ff);}
-.join-btn:hover { background: linear-gradient(90deg, #00e676, #00c853); box-shadow: 0 8px 20px rgba(0,191,255,0.6);}
-.back-btn { background: linear-gradient(90deg, #9b59b6, #8e44ad);}
-.back-btn:hover { background: linear-gradient(90deg, #34495e, #2c3e50); box-shadow: 0 8px 20px rgba(155,89,182,0.6);}
+.btn:hover { background: linear-gradient(90deg, #f39c12, #e67e22); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(243,156,18,0.6); }
+.join-btn { background: linear-gradient(90deg, #00bfff, #0080ff); }
+.join-btn:hover { background: linear-gradient(90deg, #00e676, #00c853); box-shadow: 0 8px 20px rgba(0,191,255,0.6); }
+.back-btn { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
+.back-btn:hover { background: linear-gradient(90deg, #34495e, #2c3e50); box-shadow: 0 8px 20px rgba(155,89,182,0.6); }
 
 @media (max-width: 600px) {
-    h1 { font-size: 2.2em; margin-bottom: 25px; }
-    .event-card { padding: 20px; max-width: 95%; }
-    h2 { font-size: 1.4em; }
-    p, ul li { font-size: 0.95em; }
+    h1 { font-size: 2em; margin-bottom: 20px; }
+    .event-card { padding: 18px; max-width: 95%; }
+    h2 { font-size: 1.2em; }
+    p, ul li { font-size: 0.9em; }
     .btn { padding: 8px 18px; font-size: 0.9em; width: 90%; }
-    .logo { max-width: 100px; margin-bottom: 25px; }
+    .logo-container { width: 120px; height: 120px; margin-bottom: 25px; }
 }
 </style>
+
 </head>
 <body>
 <h1>Sự kiện Quân Đoàn TitanForce</h1>
@@ -197,20 +201,38 @@ h3 {
 </div>
 
 <div class="event-card">
-<h2><span role="img" aria-label="party popper">🎉</span> Kỷ niệm thành lập TitanForce <span role="img" aria-label="military medal">🎖️</span></h2>
-<p><span class="highlight">Sứ mệnh của TitanForce:</span> Thành lập vào ngày <span class="highlight">9/11/2025</span>, chúng tôi không chỉ là một clan mà là một **gia đình đồng đội** chiến đấu. Mục tiêu của chúng tôi là xây dựng **đội hình chuyên nghiệp** và tạo ra một môi trường gắn kết, **phát triển kỹ năng** cá nhân và tập thể trong mọi đấu trường.</p>
-<p>Ngày <span class="highlight">9/11/2025</span> đánh dấu cột mốc quan trọng — Quân đoàn <span class="highlight">TitanForce²</span> chính thức ra mắt!</p>
-<p>Với tinh thần <span class="highlight">Đoàn Kết - Kỷ Luật - Bất Bại</span>, chúng tôi đã cùng nhau xây dựng một cộng đồng mạnh mẽ, sẵn sàng chinh phục mọi thử thách trong Free Fire và các tựa game khác.</p>
-<p>🔥 Sự kiện mở rộng đang diễn ra: <br> Chào đón các thành viên mới gia nhập hàng ngũ TitanForce!</p>
+<h2><span role="img" aria-label="party popper">🎉</span> Kỷ niệm thành lập TitanForce <span role="img" aria-label="military medal">🎖️</span> - <span role="img" aria-label="trophy">🏆</span> Vươn Tới Đỉnh Cao!</h2>
+<p><span class="highlight">✨ Sứ mệnh của TitanForce:</span> Thành lập vào ngày <span class="highlight">23/9/2025</span>, chúng tôi không chỉ là một clan mà là một **gia đình đồng đội** chiến đấu. <span role="img" aria-label="target">🎯</span> Mục tiêu của chúng tôi là xây dựng **đội hình chuyên nghiệp** và tạo ra một môi trường gắn kết, **phát triển kỹ năng** cá nhân và tập thể trong mọi đấu trường <span role="img" aria-label="video game">🎮</span>.</p>
+<p>Ngày <span class="highlight">1/11/2025</span> đánh dấu cột mốc quan trọng — Quân đoàn <span class="highlight">TitanForce²</span> chính thức ra mắt! <span role="img" aria-label="rocket">🚀</span></p>
+
+<hr>
+<h3><span role="img" aria-label="sparkles">🌟</span> TitanForce - Nơi Bạn Thuộc Về:</h3>
+<ul>
+    <li><span role="img" aria-label="speech bubble">💬</span> **Cộng đồng năng động:** Server Discord/Group Chat luôn sôi nổi, là nơi giao lưu, chia sẻ kinh nghiệm và những khoảnh khắc vui vẻ không chỉ trong game.</li>
+    <li><span role="img" aria-label="calendar">🗓️</span> **Hoạt động thường xuyên:** Đấu Rank, Custom Room hàng đêm, và các buổi *team-building* online hàng tuần để tăng cường sự gắn kết.</li>
+    <li><span role="img" aria-label="shield">🛡️</span> **Tinh thần fair-play:** Chúng tôi đề cao sự tôn trọng và môi trường thi đấu lành mạnh, không toxic.</li>
+</ul>
+<hr>
+
+<p>Với tinh thần <span class="highlight">Đoàn Kết - Kỷ Luật - Bất Bại</span>, chúng tôi đã cùng nhau xây dựng một cộng đồng mạnh mẽ, sẵn sàng chinh phục mọi thử thách trong **Free Fire** và các tựa game khác. <span role="img" aria-label="fist">✊</span></p>
+<p>🔥 Sự kiện mở rộng đang diễn ra: <br> Chào đón các thành viên mới gia nhập hàng ngũ TitanForce! <span role="img" aria-label="waving hand">👋</span></p>
+
+<div class="welcome-note" style="border: 2px solid #ffcc00; padding: 10px; margin: 15px 0; border-radius: 8px; background-color: #fffacd;">
+    <h4 style="color: #e65100;"><span role="img" aria-label="heart">💖</span> Chào Mừng Chiến Binh Mới!</h4>
+    <p style="color: #1a237e;">Gia đình TitanForce luôn dang rộng vòng tay đón chào những tài năng mới! Chúng tôi tin rằng mỗi thành viên là một **<span style="color: #d32f2f;">mảnh ghép không thể thiếu</span>** để tạo nên sức mạnh **<span style="color: #00796b;">Bất Bại</span>** của Quân đoàn. Hãy sẵn sàng cho những trận chiến rực lửa và những kỷ niệm khó quên cùng đồng đội!</p>
+</div>
 <h3>🎁 Quyền lợi khi gia nhập TitanForce:</h3>
 <ul>
-<li>Hỗ trợ **luyện tập 1-1** từ các thành viên cấp cao.</li>
-<li>Tham gia các giải đấu nội bộ với **giải thưởng hấp dẫn**.</li>
-<li>Được cung cấp tài liệu và chiến thuật **độc quyền** của Quân đoàn.</li>
-<li>Cơ hội thăng cấp nhanh chóng lên **vị trí chủ chốt** (Team Leader, Quản lý).</li>
+<li><span role="img" aria-label="teacher">👨‍🏫</span> Hỗ trợ **luyện tập 1-1** từ các thành viên cấp cao, giúp bạn nâng cao K/D và chiến thuật.</li>
+<li><span role="img" aria-label="money bag">💰</span> Tham gia các giải đấu nội bộ với **giải thưởng hấp dẫn** (Thẻ Garena, Tiền mặt, Kim cương).</li>
+<li><span role="img" aria-label="book">📚</span> Được cung cấp tài liệu và chiến thuật **độc quyền** của Quân đoàn, cập nhật theo meta game mới nhất.</li>
+<li><span role="img" aria-label="crown">👑</span> Cơ hội thăng cấp nhanh chóng lên **vị trí chủ chốt** (Team Leader, Quản lý) nếu bạn thể hiện được năng lực và sự nhiệt huyết.</li>
 </ul>
-<p>Hãy cùng nhau viết tiếp hành trình huyền thoại của chúng ta!</p>
-<a href="tuyenthanhvien.html" class="btn join-btn">Tham Gia Ngay</a>
+
+<h3><span role="img" aria-label="bolt">⚡</span> BẠN CÓ PHẢI LÀ MẢNH GHÉP TIẾP THEO?</h3>
+<p>Nếu bạn có **đam mê cháy bỏng** với Esports, luôn khát khao chiến thắng và tìm kiếm một *đại gia đình* để cùng nhau chinh phục, đừng chần chừ!</p>
+<p><span role="img" aria-label="sparkles">✨</span> Hãy cùng nhau viết tiếp hành trình huyền thoại của chúng ta! <span role="img" aria-label="map">🗺️</span></p>
+<a href="tuyenthanhvien.html" class="btn join-btn">Đăng kí ngay <span role="img" aria-label="cheering megaphone">📣</span></a>
 </div>
 <a href="index.html" class="btn back-btn">⬅️ Quay về Trang Chủ</a>
 
