@@ -27,31 +27,53 @@ h1 {
     color: #00eaff;
     text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
 }
+
+/* Thanh menu */
 .controls {
-    margin-bottom: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 10px auto 20px;
+  width: 100%;
+  max-width: 600px;
 }
 select, button {
-    background: #00eaff;
-    color: #0f2027;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 0.9em;
-    margin: 3px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+  flex: 1 1 160px;
+  background: #00eaff;
+  color: #0f2027;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
 }
 select:hover, button:hover {
-    background: #00bfff;
-    transform: translateY(-1px);
-    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
+  background: #00bfff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
 }
+
+/* Responsive cho điện thoại */
+@media screen and (max-width: 480px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  select, button {
+    width: 100%;
+    font-size: 0.85em;
+    padding: 8px 10px;
+  }
+}
+
+/* Bảng */
 .table-container {
     max-width: 100%;
     margin: auto;
@@ -95,89 +117,18 @@ tbody tr:hover {
     vertical-align: middle;
     margin-right: 3px;
 }
-.rank-st-td, .rank-tc-td {
-    min-width: 90px;
-}
-.top-rank-cell {
-    font-size: 1em;
-    font-weight: 700;
-}
 footer {
     margin-top: 20px;
     font-size: 0.8em;
     color: #bbb;
     text-shadow: 0 0 3px rgba(255,255,255,0.2);
 }
-
-/* Responsive cho màn hình nhỏ */
 @media screen and (max-width: 480px) {
-    h1 {
-        font-size: 1.5em;
-    }
-    select, button {
-        font-size: 0.8em;
-        padding: 6px 10px;
-    }
-    th, td {
-        padding: 5px 3px;
-        font-size: 0.75em;
-    }
-    .rank-img {
-        height: 20px;
-    }
-    .rank-st-td, .rank-tc-td {
-        min-width: 70px;
-    }
+    h1 { font-size: 1.5em; }
+    th, td { font-size: 0.75em; }
+    .rank-img { height: 20px; }
 }
-
-/* Thanh menu */
-.controls {
-    display: flex;
-    flex-wrap: wrap;          /* tự động xuống dòng nếu không đủ chỗ */
-    justify-content: center;  /* căn giữa ngang */
-    align-items: center;      /* căn giữa dọc */
-    gap: 8px;                 /* khoảng cách giữa các nút/select */
-    margin-bottom: 15px;
-}
-
-select, button {
-    flex-shrink: 1;           /* co giãn nếu màn hình nhỏ */
-    min-width: 80px;          /* đảm bảo nút không quá nhỏ */
-    max-width: 160px;         /* giới hạn chiều rộng tối đa */
-    text-align: center;
-    font-size: 0.9em;
-    padding: 8px 15px;
-    border-radius: 25px;
-    font-weight: 700;
-    background: #00eaff;
-    color: #0f2027;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
-}
-
-select:hover, button:hover {
-    background: #00bfff;
-    transform: translateY(-1px);
-    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
-}
-
-/* Responsive cho màn hình nhỏ */
-@media screen and (max-width: 480px) {
-    .controls {
-        flex-direction: column; /* xếp nút theo cột */
-        gap: 6px;
-    }
-    select, button {
-        width: 90%;             /* chiếm gần hết chiều ngang */
-        font-size: 0.8em;
-        padding: 6px 10px;
-    }
-}
-
 </style>
-
 </head>
 <body>
 
@@ -199,6 +150,7 @@ select:hover, button:hover {
       <tr>
         <th>Hạng</th>
         <th>Tên Thành Viên</th>
+        <th>LV</th>
         <th>Rank Sinh Tồn</th>
         <th>Rank Tử Chiến</th>
       </tr>
@@ -210,124 +162,105 @@ select:hover, button:hover {
 <footer>© 2025 Quân đoàn TitanForce² — Cập nhật 09/11/2025</footer>
 
 <script>
-const rankValue = {
-  "d": 0,   // đồng
-  "b": 1,   // bạc
-  "v": 2,   // vàng
-  "bk": 3,  // bạch kim
-  "kc": 4,  // kim cương
-  "ht": 5,  // huyền thoại
-  "ct": 6,  // cao thủ
-  "tv": 8   // top sever
-};
-
-// Map rank tới hình ảnh (đặt cùng thư mục)
+const rankValue = { "d":0,"b":1,"v":2,"bk":3,"kc":4,"ht":5,"ct":6,"tv":8 };
 const rankImages = {
-    "d": "1.png",
-    "b": "2.png",
-    "v": "3.png",
-    "bk": "4.png",
-    "kc": "5.png",
-    "ht": "6.png",
-    "ct": "7.jpg",
-    "tv": "8.jpg"
+  "d": "1.png","b": "2.png","v": "3.png","bk": "4.png",
+  "kc": "5.png","ht": "6.png","ct": "7.jpg","tv": "8.jpg"
 };
-
-function getRankImage(rankCode) {
-    const src = rankImages[rankCode] || "1.png"; // mặc định đồng
-    return `<img src="${src}" alt="${rankCode}" class="rank-img">`;
+function getRankImage(rankCode){
+  const src = rankImages[rankCode] || "1.png";
+  return `<img src="${src}" alt="${rankCode}" class="rank-img">`;
 }
 
-// Chuẩn hóa members: đổi rank thành code
+// Dữ liệu: [Tên, LV, Rank ST, Rank TC]
 const members = [
-  ["TF•Hades","ct","tv"],
-  ["TF•TuanAnh","ht","ct"],
-  ["TF•Rin","ct","kc"],
-  ["TF•DuyKha","kc","ct"],
-  ["TF•Zenn","bk",""],       // Nếu rank trống, giữ chuỗi rỗng
-  ["TF•Ken","kc","ct"],
-  ["TF•Long","bk","bk"],
-  ["TF•Tí","v","bk"],
-  ["TF•Bin","bk","v"],
-  ["TF•HuyHoàng","kc","ct"],
-  ["TF•Zoro","ct","ct"],
-  ["TF•Lực","bk","bk"],
-  ["TF•HoàngNam","v","ct"],
-  ["TF•Phúc","ct","kc"],
-  ["TF•Kun","kc","bk"],
-  ["TF•Zin","bk","ct"],
-  ["TF•Phong","ct","v"],
-  ["TF•Hiếu","v","bk"],
-  ["TF•Toàn","bk","ct"],
-  ["TF•Linh","ct","bk"],
-  ["TF•Đạt","bk","bk"],
-  ["TF•Nghĩa","v","ct"],
-  ["TF•Trung","ct","kc"],
-  ["TF•Dương","kc","ct"],
-  ["TF•PhongK","bk","bk"],
-  ["TF•Nhật","ct","kc"],
-  ["TF•Trí","bk","bk"],
-  ["TF•Phát","ct","ct"],
-  ["TF•Hải","bk","ct"],
-  ["TF•Minh","ct","v"],
-  ["TF•Hoài","bk","ct"],
-  ["TF•Bảo","ct","kc"],
-  ["TF•Nam","kc","ct"],
-  ["TF•Thái","ct","bk"],
-  ["TF•Khang","v","bk"],
-  ["TF•Tùng","bk","ct"],
-  ["TF•Việt","ct","ct"],
-  ["TF•Đức","bk","v"],
-  ["TF•Hòa","ct","bk"],
-  ["TF•Thiện","bk","bk"],
-  ["TF•Quân","bk","ct"],
-  ["TF•Thịnh","ct","v"],
-  ["TF•Khôi","bk","ct"],
-  ["TF•An","ct","bk"],
-  ["TF•Hưng","kc","ct"],
-  ["TF•An","bk","ct"],
-  ["TF•An","bk","ct"],
-  ["TF•An","bk","ct"],
-  ["TF•An","bk","ct"],
-  ["TF•An","ct","ct"]
+["TF•Hades",90,"ct","tv"],
+["TF•TuanAnh",85,"ht","ct"],
+["TF•Rin",83,"ct","kc"],
+["TF•DuyKha",82,"kc","ct"],
+["TF•Zenn",78,"bk",""],
+["TF•Ken",84,"kc","ct"],
+["TF•Long",75,"bk","bk"],
+["TF•Tí",70,"v","bk"],
+["TF•Bin",69,"bk","v"],
+["TF•HuyHoàng",83,"kc","ct"],
+["TF•Zoro",88,"ct","ct"],
+["TF•Lực",76,"bk","bk"],
+["TF•HoàngNam",80,"v","ct"],
+["TF•Phúc",81,"ct","kc"],
+["TF•Kun",77,"kc","bk"],
+["TF•Zin",82,"bk","ct"],
+["TF•Phong",79,"ct","v"],
+["TF•Hiếu",72,"v","bk"],
+["TF•Toàn",75,"bk","ct"],
+["TF•Linh",78,"ct","bk"],
+["TF•Đạt",74,"bk","bk"],
+["TF•Nghĩa",79,"v","ct"],
+["TF•Trung",87,"ct","kc"],
+["TF•Dương",82,"kc","ct"],
+["TF•PhongK",76,"bk","bk"],
+["TF•Nhật",80,"ct","kc"],
+["TF•Trí",77,"bk","bk"],
+["TF•Phát",83,"ct","ct"],
+["TF•Hải",78,"bk","ct"],
+["TF•Minh",74,"ct","v"],
+["TF•Hoài",79,"bk","ct"],
+["TF•Bảo",83,"ct","kc"],
+["TF•Nam",85,"kc","ct"],
+["TF•Thái",77,"ct","bk"],
+["TF•Khang",72,"v","bk"],
+["TF•Tùng",76,"bk","ct"],
+["TF•Việt",81,"ct","ct"],
+["TF•Đức",73,"bk","v"],
+["TF•Hòa",78,"ct","bk"],
+["TF•Thiện",74,"bk","bk"],
+["TF•Quân",76,"bk","ct"],
+["TF•Thịnh",79,"ct","v"],
+["TF•Khôi",77,"bk","ct"],
+["TF•An",75,"ct","bk"],
+["TF•Hưng",82,"kc","ct"],
+["TF•An",74,"bk","ct"],
+["TF•An",73,"bk","ct"],
+["TF•An",72,"bk","ct"],
+["TF•An",70,"bk","ct"],
+["TF•An",88,"ct","ct"]
 ];
 
-
-function renderTable(data) {
+function renderTable(data){
   const tbody = document.getElementById("rankBody");
   tbody.innerHTML = "";
   data.forEach((m, i) => {
-    let rankDisplay = `${i+1}`; 
-    if (i === 0) rankDisplay = '🥇';
-    else if (i === 1) rankDisplay = '🥈';
-    else if (i === 2) rankDisplay = '🥉';
-    const rankSTImage = getRankImage(m[1]);
-    const rankTCImage = getRankImage(m[2]);
+    let rankDisplay = `${i+1}`;
+    if(i===0) rankDisplay='🥇';
+    else if(i===1) rankDisplay='🥈';
+    else if(i===2) rankDisplay='🥉';
+    const rankSTImage = getRankImage(m[2]);
+    const rankTCImage = getRankImage(m[3]);
     tbody.innerHTML += `
       <tr>
-        <td class="top-rank-cell">${rankDisplay}</td>
+        <td>${rankDisplay}</td>
         <td>${m[0]}</td>
-        <td class="rank-st-td">${rankSTImage}</td>
-        <td class="rank-tc-td">${rankTCImage}</td>
-      </tr>
-    `;
+        <td>${m[1]}</td>
+        <td>${rankSTImage}</td>
+        <td>${rankTCImage}</td>
+      </tr>`;
   });
 }
 
-function sortRank(direction) {
+function sortRank(direction){
   const mode = document.getElementById("mode").value;
-  const index = (mode === "st") ? 1 : 2;
-  members.sort((a, b) => {
-    const rankA = rankValue[a[index].trim()];
-    const rankB = rankValue[b[index].trim()];
-    if (rankA === rankB) return a[0].localeCompare(b[0]);
-    return direction === "asc" ? rankA - rankB : rankB - rankA;
+  const index = (mode==="st") ? 2 : 3;
+  members.sort((a,b)=>{
+    const rankA = rankValue[a[index].trim()] || 0;
+    const rankB = rankValue[b[index].trim()] || 0;
+    if(rankA===rankB) return b[1]-a[1]; // nếu rank bằng thì ai LV cao hơn xếp trên
+    return direction==="asc" ? rankA-rankB : rankB-rankA;
   });
   renderTable(members);
 }
 
 sortRank('desc');
-document.getElementById('mode').addEventListener('change', () => { sortRank('desc'); });
+document.getElementById('mode').addEventListener('change',()=>{sortRank('desc');});
 </script>
 
 </body>
