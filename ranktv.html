@@ -28,61 +28,55 @@ h1 {
     text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
 }
 
-/* 🔹 Thanh menu thân thiện Android */
+*/* Thanh menu */
 .controls {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;                /* 🌟 Giãn đều giữa các nút */
-  margin: 18px auto;
-  max-width: 90%;
-  padding: 5px;
+  flex-wrap: wrap; /* tự động xuống dòng nếu không đủ chỗ */
+  justify-content: center; /* căn giữa ngang */
+  align-items: center; /* căn giữa dọc */
+  gap: 15px; /* tăng khoảng cách giữa các nút/select */
+  margin-bottom: 20px;
 }
 
-/* 🔹 Nút & select có kích thước chạm thoải mái */
-select, button {
-  flex: 1 1 160px;
-  background: linear-gradient(90deg, #00bfff, #00eaff);
+select,
+button {
+  flex-shrink: 1; /* co giãn nếu màn hình nhỏ */
+  min-width: 90px;
+  max-width: 180px;
+  text-align: center;
+  font-size: 0.95em;
+  padding: 9px 18px;
+  border-radius: 25px;
+  font-weight: 700;
+  background: #00eaff;
   color: #0f2027;
   border: none;
-  padding: 12px 18px;       /* 🌟 Nút cao hơn, dễ chạm */
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 0.95em;
   cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
-  touch-action: manipulation; /* ⚡ Giúp cảm ứng mượt hơn */
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
 }
 
-select:hover, button:hover {
-  background: linear-gradient(90deg, #00eaff, #00bfff);
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(0, 234, 255, 0.8);
+select:hover,
+button:hover {
+  background: #00bfff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(0, 191, 255, 0.8);
 }
 
-/* 🔹 Khi nhấn trên màn hình cảm ứng (hiệu ứng nhấn mềm) */
-select:active, button:active {
-  transform: scale(0.97);
-  opacity: 0.9;
-}
-
-/* 🔹 Tối ưu trên điện thoại */
+/* Responsive cho màn hình nhỏ */
 @media screen and (max-width: 480px) {
   .controls {
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: column; /* xếp nút theo cột */
+    gap: 10px; /* vẫn có khoảng cách giữa các nút */
   }
-  select, button {
+
+  select,
+  button {
     width: 95%;
-    font-size: 0.9em;
-    padding: 10px 14px;
-    border-radius: 25px;
+    font-size: 0.85em;
+    padding: 7px 12px;
   }
 }
-
 
 
 /* Bảng */
