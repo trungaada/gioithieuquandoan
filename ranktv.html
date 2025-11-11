@@ -2,342 +2,272 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Trang chủ Quân đoàn TF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảng Xếp Loại Rank — Quân đoàn TF</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 <style>
-* { 
-    box-sizing:border-box; margin:0; padding:0; 
-    -webkit-tap-highlight-color: transparent; 
-    -webkit-overflow-scrolling: touch; 
-}
-body { 
-    font-family:Arial,sans-serif; 
-    background:url("logo.jpg") no-repeat center center fixed; 
-    background-size:cover; 
-    color:#fff; 
-    font-size:15px; 
-    min-height:100vh; 
-    overflow-x:hidden;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-main {
-    opacity: 0; 
-    text-align:center; 
-    padding:20px 15px; margin:70px auto 40px auto; max-width:650px;
-    background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8);
-    backdrop-filter: blur(5px); 
-    -webkit-backdrop-filter: blur(5px); 
-    transition: all 0.4s ease-in-out;
-}
-body.fade-in main {
-    opacity: 1;
-    animation: fadeIn 1.2s ease-out forwards;
-}
-nav {
-    position:fixed; top:0; left:0; width:100%;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:5px 12px; z-index:100;
-    background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-    background-size:400% 100%; animation:rainbow-gradient 15s ease infinite;
-    box-shadow:0 2px 8px rgba(204,0,0,0.7);
-}
-@keyframes rainbow-gradient { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%} 
-}
-.logo { 
-    height:35px; max-width:60px; border-radius:50%; 
-    box-shadow:0 0 8px rgba(255,60,0,0.8); 
-    transition:0.3s ease; 
-}
-.logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
-.menu-toggle {
-    display:flex;
-    flex-direction:column;
-    justify-content: space-around;
-    width:28px;
-    height:25px;
-    cursor:pointer;
-}
-.menu-toggle span {
-    display:block;
-    height:3px;
-    background-color:#fff;  
-    border-radius:2px;
-    transition:all 0.3s ease;
-}
-.nav-links {
-    position:absolute; top:45px; right:12px;
-    background-color: rgba(0,0,0,0.85);
-    flex-direction:column; 
-    width:200px; 
-    gap:0;
-    display:none; 
-    border-radius:0 0 8px 8px;
-    box-shadow:0 0 10px rgba(255,60,0,0.8);
-}
-.nav-links.active { display:flex; }
-.nav-links a { 
-    padding:10px; 
-    border-bottom:1px solid rgba(255,255,255,0.1); 
-    font-size:14px; font-weight:bold; text-decoration:none; 
-    color:white; background:linear-gradient(135deg,#CC0000,#400000); 
-    transition:all 0.3s ease;
-}
-.nav-links a:hover { 
-    background:linear-gradient(135deg,#FF3C00,#FF7F00); 
-    transform:scale(1.03); 
-    box-shadow:0 0 10px #FF3C00; 
-}
-@media (min-width: 1025px) {
-    .nav-links {
-        right: 12px;
-        width: 250px; 
-    }
-}
-h1 { font-size:28px; color:#FF3C00; margin-bottom:15px; text-shadow:0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
-h2 { font-size:20px; color:#FFCC00; margin:20px 0 10px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:3px; text-shadow:0 0 4px rgba(255,204,0,0.7);}
-p { font-size:15px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:15px; }
-ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
-ul li { padding:8px 0; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:15px; color:#fff; }
-ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
-.slogan { font-size: 16px; margin-top: -5px; margin-bottom: 20px; }
-.typing-text {
-    border-right: 3px solid #FFCC00;
-    font-weight: bold;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: blink-caret 0.75s step-end infinite;
-}
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #FFCC00; }
-}
-.cta-button {
-  display: inline-block;
-  padding: 12px 20px;
-  background: linear-gradient(90deg, #CC0000, #FFCC00);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 10px rgba(204, 0, 0, 0.8);
-  border: 1px solid #fff;
-  margin: 5px;
-}
-.cta-button:hover {
-  background: linear-gradient(90deg, #FFCC00, #CC0000);
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 15px rgba(255, 60, 0, 1);
-}
-.main-footer {
-    position: relative; 
-    z-index: 200; 
+body {
+    background: url('logo2.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
-    padding: 15px 10px;
-    margin-top: 30px;
-    background-color: rgba(0,0,0,0.7);
-    color: #ccc;
-    font-size: 13px;
-    border-top: 1px solid rgba(255,60,0,0.5);
+    padding: 20px 5px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.main-footer a {
-    color: #FFCC00;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    display: inline-block; 
-}
-.main-footer a:hover {
-    color: #FF3C00;
-    text-decoration: underline;
-}
-.pulsating-author {
-    animation: glow-pulse 2s infinite alternate;
-}
-@keyframes glow-pulse {
-    0% { text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5); transform: scale(1); }
-    50% { text-shadow: 0 0 10px rgba(255,204,0,0.9), 0 0 20px rgba(255,100,0,0.7); transform: scale(1.05); }
-    100% { text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5); transform: scale(1); }
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #00eaff;
+    text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
 }
 
-/* 🌸 Hiệu ứng hoa anh đào */
-.sakura {
-  position: fixed;
-  top: -10px;
-  z-index: 10;
-  pointer-events: none;
-  color: pink;
-  opacity: 0.9;
-  animation: fall linear forwards;
+*/* Thanh menu */
+.controls {
+  display: flex;
+  flex-wrap: wrap; /* tự động xuống dòng nếu không đủ chỗ */
+  justify-content: center; /* căn giữa ngang */
+  align-items: center; /* căn giữa dọc */
+  gap: 15px; /* tăng khoảng cách giữa các nút/select */
+  margin-bottom: 20px;
 }
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0.6;
+
+select,
+button {
+  flex-shrink: 1; /* co giãn nếu màn hình nhỏ */
+  min-width: 90px;
+  max-width: 180px;
+  text-align: center;
+  font-size: 0.95em;
+  padding: 9px 18px;
+  border-radius: 25px;
+  font-weight: 700;
+  background: #00eaff;
+  color: #0f2027;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+}
+
+select:hover,
+button:hover {
+  background: #00bfff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(0, 191, 255, 0.8);
+}
+
+/* Responsive cho màn hình nhỏ */
+@media screen and (max-width: 480px) {
+  .controls {
+    flex-direction: column; /* xếp nút theo cột */
+    gap: 10px; /* vẫn có khoảng cách giữa các nút */
   }
+
+  select,
+  button {
+    width: 95%;
+    font-size: 0.85em;
+    padding: 7px 12px;
+  }
+}
+
+
+/* Bảng */
+.table-container {
+    max-width: 100%;
+    margin: auto;
+    border-radius: 15px;
+    overflow: hidden; /* ⭐ Giữ bo tròn cho toàn bảng */
+    box-shadow: 0 0 20px rgba(0, 234, 255, 0.7), 0 0 40px rgba(0, 234, 255, 0.3);
+    background: rgba(0, 10, 15, 0.7);
+    border: 2px solid #00eaff;
+    padding: 5px;
+}
+
+/* ⭐ Bo tròn riêng phần tiêu đề bảng */
+thead {
+    background: linear-gradient(90deg, #00bfff, #00eaff);
+    color: #0f2027;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    border-top-left-radius: 15px;   /* Bo góc trái trên */
+    border-top-right-radius: 15px;  /* Bo góc phải trên */
+}
+
+thead {
+    background: linear-gradient(90deg, #00bfff, #00eaff);
+    color: #0f2027;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+th, td {
+    padding: 8px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    font-size: 0.85em;
+}
+tbody tr {
+    background: rgba(0,0,0,0.2);
+}
+tbody tr:nth-child(even) {
+    background: rgba(0,0,0,0.3);
+}
+tbody tr:hover {
+    background: rgba(0, 234, 255, 0.15);
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+.rank-img {
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+footer {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #bbb;
+    text-shadow: 0 0 3px rgba(255,255,255,0.2);
+}
+@media screen and (max-width: 480px) {
+    h1 { font-size: 1.5em; }
+    th, td { font-size: 0.75em; }
+    .rank-img { height: 20px; }
 }
 </style>
 </head>
 <body>
-<nav>
-    <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
-    <div class="menu-toggle" id="mobile-menu">
-        <span></span><span></span><span></span>
-    </div>
-    <div class="nav-links" id="nav-links">
-        <a href="gioithieu.html">📜 Quản Trị quân đoàn</a>
-        <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
-        <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
-        <a href="ranktv.html">💎 Mức rank thành viên</a>
-        <a href="luat.html">⚔️ Luật quân đoàn</a>
-        <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
-        <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
 
-</nav>
+<h1>BẢNG XẾP LOẠI RANK — Quân đoàn TF</h1>
 
-<main class="titanforce-main">
-    <header class="tf-header">
-        <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
-        <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
-    </header>
+<div class="controls">
+  <select id="mode">
+    <option value="st">Sắp theo Rank Sinh Tồn</option>
+    <option value="tc">Sắp theo Rank Tử Chiến</option>
+  </select>
+  <button onclick="sortRank('asc')">⬆️ Từ thấp → cao</button>
+  <button onclick="sortRank('desc')">⬇️️ Từ cao → thấp</button>
+  <button onclick="window.location.href='index.html'">🏠 Trang chủ</button>
+</div>
 
-    <section class="tf-introduction">
-        <h2>💡 Triết lý của TitanForce</h2>
-        <p>
-            Quân đoàn TF không chỉ là một cộng đồng game thủ, mà còn là một **học viện rèn luyện phẩm chất và kỹ năng**. Chúng tôi tin rằng, trong thế giới game cũng như cuộc sống, chiến thắng không đến từ may mắn, mà từ **sự chuẩn bị tỉ mỉ, kỷ luật thép và tinh thần đồng đội không lay chuyển**.
-        </p>
-        <p>
-            Chúng tôi theo đuổi sự phát triển bền vững, nơi mỗi thành viên được xem là một **mũi nhọn tinh nhuệ**. Đam mê phải đi đôi với sự **tư duy chuyên nghiệp** để biến sở thích thành một con đường chinh phục đỉnh cao.
-        </p>
-        <p class="call-to-action-intro">
-            **Đây là nơi những người khao khát khẳng định bản thân được tôi luyện thành các Titan bất bại.**
-        </p>
-    </section>
+<div class="table-container">
+  <table id="rankTable">
+    <thead>
+      <tr>
+        <th>Hạng</th>
+        <th>Tên Thành Viên</th>
+        <th>LV</th>
+        <th>Rank Sinh Tồn</th>
+        <th>Rank Tử Chiến</th>
+      </tr>
+    </thead>
+    <tbody id="rankBody"></tbody>
+  </table>
+</div>
 
-    <hr>
-
-    <section class="tf-core-values">
-        <h2>✨ Sứ mệnh: Kiến tạo và Dẫn dắt</h2>
-        <p>
-            Sứ mệnh của TF là kiến tạo nên một môi trường **chuyên nghiệp, văn minh và truyền cảm hứng**. Chúng tôi cam kết không chỉ nâng cao kỹ năng cá nhân cho từng thành viên, mà còn **xây dựng một bản sắc mạnh mẽ** để dẫn dắt cộng đồng game, khẳng định vị thế TitanForce ở mọi đấu trường.
-        </p>
-
-        <h2>🔥 Giá trị Cốt lõi: Ba trụ cột Titan 🔥</h2>
-        <div class="tf-value-list">
-            <ul>
-                <li>**Tôn trọng & Đoàn kết (Unity):** Sức mạnh Titan đến từ sự hợp nhất. Mọi thành viên là một phần không thể thiếu, được tôn trọng và bảo vệ.</li>
-                <li>**Kỷ luật & Chuyên nghiệp (Discipline):** Hành động có chiến thuật, tuân thủ kỷ luật trong luyện tập và thi đấu. Kỷ luật là con đường ngắn nhất đến chiến thắng.</li>
-                <li>**Đổi mới & Tinh thần Chiến binh (Warrior Spirit):** Không ngừng học hỏi, không ngại đối mặt với thất bại. Luôn tiên phong tìm kiếm chiến thuật mới và duy trì tinh thần chiến đấu không bao giờ bỏ cuộc.</li>
-            </ul>
-        </div>
-    </section>
-    
-    <hr>
-
-    <section class="tf-activities">
-        <h2>⚡️ Chương trình Huấn luyện & Phát triển</h2>
-        <p>
-            Chúng tôi áp dụng quy trình đào tạo nghiêm ngặt, được thiết kế để phát huy tối đa tiềm năng của mỗi game thủ:
-        </p>
-        <ul>
-            <li>**Huấn luyện Chiến thuật Chuyên sâu:** Phân tích meta game, xây dựng chiến thuật nhóm (Team-Based Strategy) và kỹ năng ra quyết định dưới áp lực cao (Clutch Factor).</li>
-            <li>**Luyện tập Thường xuyên:** Tổ chức Luyện tập Đấu đội 4v4 và Thi đấu đối kháng 1vs1/2vs2 để mài giũa phản xạ và khả năng phối hợp.</li>
-            <li>**Hệ thống Giải đấu Nội bộ:** Mô phỏng môi trường thi đấu chuyên nghiệp, tạo cơ hội cọ xát thực tế và tìm kiếm tài năng ưu tú.</li>
-            <li>**Phân tích & Phản hồi (Review & Feedback):** Dành thời gian phân tích replay trận đấu, rút kinh nghiệm và điều chỉnh chiến thuật một cách khoa học.</li>
-        </ul>
-    </section>
-
-    <hr>
-
-    <section class="tf-recruitment-requirements">
-        <h2>🎯 Tiêu chuẩn & Quy trình Tuyển chọn Titan</h2>
-        <p>
-            TF chỉ tìm kiếm những cá nhân có cùng tầm nhìn và sẵn sàng cam kết với con đường chuyên nghiệp.
-        </p>
-        <div class="tf-requirements-list">
-            <ul>
-                <li>**Cam kết Phát triển:** Có tinh thần học hỏi cao, nghiêm túc xem việc luyện tập là một phần của sự phát triển cá nhân.</li>
-                <li>**Thái độ Đỉnh cao:** Ưu tiên thái độ chuyên nghiệp, trung thực và khả năng chịu trách nhiệm hơn là chỉ số kỹ năng nhất thời.</li>
-                <li>**Thời gian Tập trung:** Cam kết tham gia các buổi huấn luyện theo lịch trình (tối thiểu **3 buổi/tuần**).</li>
-            </ul>
-        </div>
-        
-        
-    </section>
-    
-    <hr>
-
-    <footer class="tf-footer-cta">
-        <p>
-            **Vinh quang đang chờ đợi!** Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
-        </p>
-        <div class="cta-buttons-group">
-            <a href="tuyenthanhvien.html" class="cta-button primary">🚀 Đăng kí Thành viên Ngay!</a>
-            <a href="https://www.facebook.com/share/1BjHoy1jeC/" class="cta-button secondary">💬 Fanpage Cộng đồng</a>
-        </div>
-    </footer>
-</main>
-<footer class="main-footer">
-    <p>Trang web được code và thiết kế bởi 
-    <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. 
-    © 2025 Quân đoàn TF.</p>
-</footer>
+<footer>© 2025 Quân đoàn TitanForce² — Cập nhật 09/11/2025</footer>
 
 <script>
-function typeWriter(text, i, fnCallback) {
-    const element = document.getElementById("typed-slogan");
-    if (!element) return;
-    if (i < text.length) {
-        element.innerHTML = text.substring(0, i + 1);
-        setTimeout(() => typeWriter(text, i + 1, fnCallback), 80);
-    } else if (typeof fnCallback == 'function') {
-        fnCallback();
-    }
-}
-window.onload = function() {
-    document.body.classList.add('fade-in');
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1025 && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-        }
-    });
-    const sloganText = "TitanForce: Chiến Thắng Bằng Sức Mạnh Đồng Đội Và Kỷ Luật";
-    setTimeout(() => {
-        typeWriter(sloganText, 0, () => {
-            const element = document.getElementById("typed-slogan");
-            if (element) element.style.borderRight = 'none';
-        });
-    }, 500);
-
-    // 🌸 Hiệu ứng hoa anh đào rơi liên tục, mượt và tránh lag
-    function createSakura() {
-        const sakura = document.createElement("div");
-        sakura.classList.add("sakura");
-        sakura.textContent = "🌸";
-        sakura.style.left = Math.random() * 100 + "vw";
-        sakura.style.fontSize = (Math.random() * 14 + 10) + "px";
-        const duration = Math.random() * 6 + 6; // 6–12 giây
-        sakura.style.animationDuration = duration + "s";
-        sakura.style.transform = `rotate(${Math.random() * 360}deg)`;
-        document.body.appendChild(sakura);
-        setTimeout(() => sakura.remove(), duration * 1000);
-    }
-    setInterval(createSakura, 700);
+const rankValue = { "d":0,"b":1,"v":2,"bk":3,"bkt":4,"kc":5,"kct":6,"ht":7,"htc":8,"ct":9,"ct1":10,"dct":11,"tv":12};
+const rankImages = {
+  "d": "1.png","b": "2.png","v": "3.png","bk": "9.jpg",
+  "kc": "5.png","ht": "6.png","ct": "7.jpg","tv": "8.jpg","ct1": "10.jpg","dct": "11.jpg","htc": "12.jpg","bkt": "13.jpg","kct": "14.jpg"
 };
+function getRankImage(rankCode){
+  const src = rankImages[rankCode] || "1.png";
+  return `<img src="${src}" alt="${rankCode}" class="rank-img">`;
+}
+
+// Dữ liệu: [Tên, LV, Rank ST, Rank TC]
+const members = [
+["ム𝙏𝙁.𝙆𝙪𝙪Đẩ𝙪𝙪亗",51,"bk","bkt"],
+["TF.Late'love...",58,"bk","ct1"],
+["TF.MASTER",58,"v","ct1"],
+["TF.Kaixer",43,"bk","htc"],
+["TF. Huy²",66,"ht","dct"],
+["TF.Tyeu la gì",64,"kc","dct"],
+["TF.TiếnThành",61,"kc","htc"],
+["TF.VanDuy",60,"kc","kct"],
+["TF.Mạnh Cường",58,"kc","htc"],
+["TF.ebe dug khoc",70,"kc","htc"],
+["TF.Tidasick",58,"kc","htc"],
+["TF.số1bắnngu",66,"bk","ct1"],
+["TF.boilowkeyy",61,"bk","htc"],
+["TF.LioPc",56,"v","tv"],
+["TF.Kuronami",60,"v","bkt"],
+["TF.Huy",61,"ht","ct1"],
+["TF.ngc bich",63,"kc","htc"],
+["TF.Tiến24th8",55,"ht","kct"],
+["TF.kaizokid99",49,"kc","htc"],
+["TF.Mikasa",30,"kc","bkt"],
+["TF.MinhThu",48,"kc","htc"],
+["TF.Bávl",60,"bk","htc"],
+["TF.Dũng",45,"bk","htc"],
+["TF.LongChóĐiên",57,"bk","htc"],
+["TF.VănSự",44,"bk","kct"],
+["TF.HoàngVũ",58,"ht","bkt"],
+["TF.GiaHuy",45,"bk","htc"],
+["TF.Hưng",59,"v","ht"],
+["TF.DươngNgọc",61,"ht","htc"],
+["TF.Bengok",46,"v","kct"],
+["TF.Somsmza",52,"v","bkt"],
+["TF.P.Như",54,"bk","kct"],
+["TF.BoykaNèđây",61,"kc","htc"],
+["TF.Anlorexe",55,"kc","htc"],
+["TF.ZENOZ",68,"kc","kct"],
+["TF.Nhật",63,"bk","ct1"],
+["TF.Ly",58,"kc","bkt"],
+["TF.Mobile",70,"bk","kct"],
+["TF.Shinjun",73,"ht","ct1"],
+["TF.Q.Đạt",67,"bk","kct"],
+["TF.Cường",57,"kc","ct1"],
+["TF.PhucDuy",61,"ht","htc"],
+["TF.tduycte08",69,"bk","bkt"],
+["TF.AT",52,"v","kct"],
+];
+
+function renderTable(data){
+  const tbody = document.getElementById("rankBody");
+  tbody.innerHTML = "";
+  data.forEach((m, i) => {
+    let rankDisplay = `${i+1}`;
+    if(i===0) rankDisplay='🥇';
+    else if(i===1) rankDisplay='🥈';
+    else if(i===2) rankDisplay='🥉';
+    const rankSTImage = getRankImage(m[2]);
+    const rankTCImage = getRankImage(m[3]);
+    tbody.innerHTML += `
+      <tr>
+        <td>${rankDisplay}</td>
+        <td>${m[0]}</td>
+        <td>${m[1]}</td>
+        <td>${rankSTImage}</td>
+        <td>${rankTCImage}</td>
+      </tr>`;
+  });
+}
+
+function sortRank(direction){
+  const mode = document.getElementById("mode").value;
+  const index = (mode==="st") ? 2 : 3;
+  members.sort((a,b)=>{
+    const rankA = rankValue[a[index].trim()] || 0;
+    const rankB = rankValue[b[index].trim()] || 0;
+    if(rankA===rankB) return b[1]-a[1]; // nếu rank bằng thì ai LV cao hơn xếp trên
+    return direction==="asc" ? rankA-rankB : rankB-rankA;
+  });
+  renderTable(members);
+}
+
+sortRank('desc');
+document.getElementById('mode').addEventListener('change',()=>{sortRank('desc');});
 </script>
+
 </body>
 </html>
