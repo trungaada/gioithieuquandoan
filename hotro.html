@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Danh sách hỗ trợ — TitanForce (FF)</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --bg:#070e1c;
+    --card:#0f1c2b;
+    --accent:#ff4500;
+    --accent-hover:#e03f00;
+    --text:#e6eef8;
+    --subtle-text:#9fb0c8;
+    --border-color:rgba(255,255,255,0.08);
+    --neon-glow: rgba(255, 69, 0, 0.7);
+}
+body{
+    font-family:'Montserrat',sans-serif;
+    background: linear-gradient(180deg, rgba(7,14,28,0.92) 0%, rgba(13,23,42,0.96) 100%), url('logo2.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:var(--text);
+    margin:0;
+    padding:24px;
+    min-height:100vh;
+}
+.container{max-width:900px;margin:0 auto;}
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:24px;
+    padding:20px;
+    border-radius:16px;
+    background: rgba(15,28,43,0.8);
+    border:2px solid var(--accent);
+    box-shadow:0 0 15px var(--neon-glow), 0 0 25px rgba(255,69,0,0.2);
+}
+header h1{
+    font-size:28px;
+    font-weight:700;
+    color:white;
+    text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent-hover), 0 0 20px rgba(255,69,0,0.5);
+}
+header .subtitle{color:var(--subtle-text);}
+.card{
+    background:rgba(15,28,43,0.85);
+    border-radius:20px;
+    padding:25px;
+    border:2px solid var(--accent);
+    box-shadow: 0 0 15px rgba(255,69,0,0.3), 0 15px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    margin-bottom:24px;
+}
+.list{display:grid; gap:16px; margin-top:16px;}
+.support{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 18px;
+    border-radius:14px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    position:relative;
+    cursor:pointer;
+}
+.support:hover{
+    background:rgba(255,255,255,0.1);
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.6),0 0 25px rgba(255,69,0,0.4);
+}
+.avatar{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    flex-shrink:0;
+    background:var(--accent);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:18px;
+    box-shadow:0 0 15px rgba(255,69,0,0.8), inset 0 0 6px rgba(255,255,255,0.5);
+    overflow:hidden;
+    border:2px solid white;
+}
+.avatar img{width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;}
+.meta{flex:1;}
+.meta .role{font-size:13px;color:var(--subtle-text);}
+.actions{display:flex; gap:10px; flex-shrink:0;}
+.btn{
+    border:0; padding:10px 14px; border-radius:8px;
+    background:var(--accent); color:white; cursor:pointer; font-weight:600;
+    transition:all 0.3s ease; position:relative; min-height:44px;
+}
+.btn.primary:hover{background:var(--accent-hover);}
+.btn.copy{background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1);}
+.btn.copy:hover{background:rgba(255,255,255,0.15); transform: scale(1.05);}
+.btn.back{background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); color:white; font-weight:600;}
+.btn.back:hover{background: rgba(255,69,0,0.9); border-color: var(--accent); transform: rotate(-3deg) scale(1.05);}
+footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
+@media(max-width:600px){
+    body{padding:15px;}
+    header{flex-direction:column; align-items:stretch; gap:8px; margin-bottom:15px; padding:15px;}
+    .card{padding:15px; border-radius:12px;}
+    .support{flex-wrap:wrap; justify-content:space-between; padding:12px;}
+    .avatar{width:44px; height:44px; font-size:16px;}
+    .meta{min-width:65%;}
+    .actions{width:100%; justify-content:flex-end; margin-top:8px; gap:8px;}
+    .btn{padding:10px 12px; font-size:15px; border-radius:10px;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div>
+<h1>Hỗ trợ — Web FF</h1>
+<p class="subtitle">Danh sách liên hệ Facebook kèm tên hỗ trợ (click để chat trực tiếp).</p>
+</div>
+<button class="btn back" onclick="goIndex()">⬅️ Quay về trang chính</button>
+</header>
+
+<div class="card">
+<div class="small" style="font-size:14px; line-height:1.6; padding-bottom:10px; margin-bottom:15px; border-bottom:1px dashed var(--border-color);">
+⏰ Giờ hỗ trợ (GMT+7): 8:00 - 22:00 hàng ngày.<br>
+⚠️ Chỉ liên hệ qua các link Facebook tại đây. Không cung cấp mật khẩu/mã OTP.
+</div>
+
+<div class="list" id="supportList">
+
+  <div class="support" data-fb="https://www.facebook.com/share/16dJQajrpb/" data-img="sang.jpg">
+    <div class="avatar"></div>
+    <div class="meta">
+      <div class="role">Hỗ trợ lỗi — TitanForce</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
+      <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+    </div>
+  </div>
+
+  <div class="support" data-fb="https://www.facebook.com/share/1BgP2pED8P/" data-img="trung.jpg">
+    <div class="avatar"></div>
+    <div class="meta">
+      <div class="role">Hỗ trợ kỹ thuật — Web FF</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
+      <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+    </div>
+  </div>
+
+  <div class="support" data-fb="https://www.facebook.com/share/1Cj6XSJve1/?mibextid=wwXIfr" data-img="huy.jpg">
+    <div class="avatar"></div>
+    <div class="meta">
+      <div class="role">Hỗ trợ lỗi — TitanForce</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
+      <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>Chỉnh danh sách trực tiếp trong file HTML (mỗi item là div.support với data-fb và data-img).</footer>
+</div>
+
+<script>
+function goIndex(){window.location.href='index.html';}
+function openFB(btn){
+    const item = btn.closest('.support');
+    const url = item.getAttribute('data-fb') || '';
+    if(url) window.open(url,'_blank');
+}
+function copyLink(btn){
+    const item = btn.closest('.support');
+    const url = item.getAttribute('data-fb') || '';
+    if(url){
+        navigator.clipboard.writeText(url).then(()=>{
+            btn.textContent='Đã sao chép ✓';
+            setTimeout(()=>btn.textContent='Sao chép link',1200);
+        }).catch(()=>{alert('Trình duyệt không cho phép sao chép link')});
+    }
+}
+
+// Click vào thẻ support (không phải nút) cũng mở Facebook
+document.querySelectorAll('.support').forEach(s=>{
+    s.addEventListener('click', e=>{
+        if(!e.target.closest('.btn')){
+            const url = s.getAttribute('data-fb');
+            if(url) window.open(url,'_blank');
+        }
+    });
+});
+
+// Avatar hiển thị ảnh
+document.querySelectorAll('.support').forEach(s=>{
+    const av = s.querySelector('.avatar');
+    const img = s.getAttribute('data-img');
+    if(img){
+        const image = document.createElement('img');
+        image.src = img;
+        av.innerHTML='';
+        av.appendChild(image);
+    }
+});
+</script>
+</body>
+</html>
