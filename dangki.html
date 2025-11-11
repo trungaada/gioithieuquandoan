@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đăng ký Clan TF</title>
 <style>
+/* Root colors */
 :root {
   --accent:#ff3d00;
   --bg:#0f1724;
@@ -13,16 +14,18 @@
   --text-muted:#b3bcc8;
 }
 
-*{box-sizing:border-box;}
+/* Global */
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; }
 
+/* Body & Background */
 body{
-  font-family:'Montserrat',sans-serif;
-  margin:0;
-  padding:20px;
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content:flex-start;
   min-height:100vh;
+  padding:20px;
   background-image:url('logo.jpg');
   background-size:cover;
   background-position:center;
@@ -32,65 +35,50 @@ body{
   position:relative;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.page-content{
-  opacity:0;
-  animation:fadeIn 0.8s ease-out forwards;
-  animation-delay:0.3s;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
 body::before{
   content:"";
   position:fixed;
-  top:0;left:0;right:0;bottom:0;
+  top:0; left:0; right:0; bottom:0;
   background:rgba(0,0,0,0.4);
   z-index:0;
 }
 
-h1,p,.buttons,form,.message{position:relative;z-index:1;}
-
-h1{
-  color:var(--accent);
-  font-family:'Orbitron',sans-serif;
-  text-transform:uppercase;
-  margin-bottom:10px;
-  font-size:2rem;
-  text-align:center;
+/* Page Content */
+.page-content{
+  width:100%;
+  max-width:420px; /* PC vừa */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  animation:fadeIn 0.8s ease-out forwards;
+  opacity:0;
+  animation-delay:0.3s;
 }
 
-p{
-  color:var(--text-muted);
-  margin-bottom:20px;
-  text-align:center;
-  font-size:1rem;
-}
+/* Headings & Text */
+h1{ font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase; margin-bottom:10px; font-size:2rem; text-align:center; z-index:1; }
+p{ color:var(--text-muted); margin-bottom:20px; font-size:1rem; text-align:center; z-index:1; }
 
+/* Buttons */
 .buttons{
   display:flex;
   justify-content:center;
-  gap:15px;
   flex-wrap:wrap;
+  gap:12px;
   margin-bottom:20px;
+  z-index:1;
 }
 
 button.group-btn{
   background:var(--accent);
-  border:none;
   color:#fff;
-  padding:10px 18px;
+  border:none;
   border-radius:8px;
+  padding:10px 18px;
   font-weight:700;
+  font-size:0.9rem;
   cursor:pointer;
   transition:0.3s;
-  font-size:0.9rem;
 }
 
 button.group-btn:hover{
@@ -98,108 +86,88 @@ button.group-btn:hover{
   transform:scale(1.05);
 }
 
+/* Forms */
 form{
   width:100%;
-  max-width:400px;
-  margin-bottom:10px;
+  max-width:400px; /* PC */
   background:rgba(22,30,47,0.85);
   padding:20px;
   border-radius:12px;
-  box-shadow:0 0 15px rgba(255,61,0,0.4);
   border:2px solid var(--accent);
+  box-shadow:0 0 15px rgba(255,61,0,0.4);
   text-align:left;
   display:none;
+  z-index:1;
 }
 
-form.active{display:block;}
+form.active{ display:block; }
 
-label{
-  display:block;
-  margin-bottom:6px;
-  color:#fff;
-  font-weight:600;
-  font-size:0.9rem;
-}
-
-input,select,textarea{
+/* Labels & Inputs */
+label{ display:block; margin-bottom:6px; color:#fff; font-weight:600; font-size:0.9rem; }
+input, select, textarea{
   width:100%;
   padding:10px;
   margin-bottom:12px;
-  border-radius:6px;
   border:2px solid #fff;
+  border-radius:6px;
   font-size:0.9rem;
-  transition:all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-@keyframes rainbowBorder{
-  0%{border-color:red;}
-  14%{border-color:orange;}
-  28%{border-color:yellow;}
-  42%{border-color:green;}
-  57%{border-color:cyan;}
-  71%{border-color:blue;}
-  85%{border-color:violet;}
-  100%{border-color:red;}
-}
-
-input:focus,select:focus,textarea:focus{
+input:focus, select:focus, textarea:focus{
   outline:none;
-  animation:rainbowBorder 1.5s linear infinite;
+  animation: rainbowBorder 1.5s linear infinite;
   box-shadow:0 0 10px rgba(255,255,255,0.7);
   transform:scale(1.02);
 }
 
-input:hover,select:hover,textarea:hover{
-  transform:scale(1.01);
-}
-
-input::placeholder,textarea::placeholder{
-  color:#aaa;
-  transition:color 0.3s;
-}
-
-input:focus::placeholder,textarea:focus::placeholder{
-  color:#fff;
-}
-
+/* Submit Button */
 button.submit-btn{
   background:var(--accent);
   color:#fff;
   border:none;
-  padding:12px 20px;
   border-radius:8px;
+  padding:12px 20px;
   font-weight:700;
   cursor:pointer;
   width:100%;
-  transition:0.3s;
   font-size:1rem;
+  transition:0.3s;
 }
 
-button.submit-btn:hover{
-  background:#ff1744;
-  transform:scale(1.03);
-}
+button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
 
+/* Message */
 .message{
   text-align:center;
   margin-top:5px;
   min-height:24px;
   font-weight:bold;
   font-size:0.95rem;
+  z-index:1;
 }
 
-.success{color:#4CAF50;}
-.error{color:#f44336;}
-.loading{color:#ffeb3b;animation:blink 1s infinite;}
+.success{ color:#4CAF50; }
+.error{ color:#f44336; }
+.loading{ color:#ffeb3b; animation:blink 1s infinite; }
 
-@keyframes blink{0%,50%,100%{opacity:1;}25%,75%{opacity:0.3;}}
+@keyframes fadeIn{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+@keyframes rainbowBorder{
+  0%{border-color:red;} 14%{border-color:orange;} 28%{border-color:yellow;}
+  42%{border-color:green;} 57%{border-color:cyan;} 71%{border-color:blue;}
+  85%{border-color:violet;} 100%{border-color:red;}
+}
+@keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;} }
 
+/* Mobile & Tablet */
 @media(max-width:480px){
-  h1{font-size:1.5rem;}
-  .buttons{gap:10px;}
-  button.group-btn,button.submit-btn{font-size:0.85rem;padding:8px 12px;}
-  form{padding:15px;}
-  input,select,textarea{font-size:0.85rem;}
+  .page-content{ max-width:360px; }
+  form{ padding:15px; }
+  h1{ font-size:1.5rem; }
+  p{ font-size:0.95rem; }
+  input, select, textarea{ font-size:0.85rem; padding:8px; }
+  button.group-btn, button.submit-btn{ font-size:0.85rem; padding:8px 12px; }
+  .buttons{ gap:8px; }
 }
 
 </style>
@@ -211,126 +179,132 @@ button.submit-btn:hover{
 <p>Chọn nhóm muốn gia nhập và điền thông tin!</p>
 
 <div class="buttons">
-  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
-  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
-  <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
-  <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
+  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
+  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
+  <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
+  <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
 </div>
 
 <form id="sinhTonForm">
-  <h2>🔥 Nhóm Sinh Tồn</h2>
-  <input type="hidden" name="entry.group" value="Sinh Tồn">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
-    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option><option>Cover</option><option>Sniper</option><option>Hỗ trợ</option>
-  </select>
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi" required>
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option>
-    <option>Nữ</option>
-    <option>Khác</option>
-  </select>
-  <label>Tên Facebook (Bắt Buộc):</label>
-  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label>Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
+  <h2>🔥 Nhóm Sinh Tồn</h2>
+  <input type="hidden" name="entry.group" value="Sinh Tồn">
+  <label>Tên trong game:</label><input type="text" name="entry.name" required>
+  <label>UID:</label><input type="text" name="entry.uid" required>
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
+    <option value="">-- Chọn Rank --</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
+    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
+  </select>
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Rush</option>
+    <option>Cover</option>
+    <option>Sniper</option>
+    <option>Hỗ trợ</option>
+  </select>
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi" required>
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option>
+    <option>Nữ</option>
+    <option>Khác</option>
+  </select>
+  <label>Tên Facebook (Bắt Buộc):</label>
+  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
+  <label>Liên kết Facebook (Bắt Buộc):</label>
+  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
+  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
-<div class="message"></div>
 
 <form id="soloForm">
-  <h2>⚡ Nhóm Solo</h2>
-  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
-    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option><option>Cover</option><option>Sniper</option><option>Hỗ trợ</option>
-  </select>
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi " required>
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option>
-    <option>Nữ</option>
-    <option>Khác</option>
-  </select>
-  <label>Tên Facebook (Bắt Buộc):</label>
-  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label>Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
+  <h2>⚡ Nhóm Solo</h2>
+  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
+  <label>Tên trong game:</label><input type="text" name="entry.name" required>
+  <label>UID:</label><input type="text" name="entry.uid" required>
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
+    <option value="">-- Chọn Rank --</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
+    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
+  </select>
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Kai 2 </option>
+    <option>Kai 5</option>
+    <option>Headshot kai 2</option>
+    <option>Headshot kai 5</option>
+  </select>
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi" required>
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option>
+    <option>Nữ</option>
+    <option>Khác</option>
+  </select>
+  <label>Tên Facebook (Bắt Buộc):</label>
+  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
+  <label>Liên kết Facebook (Bắt Buộc):</label>
+  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
+  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
 <div class="message"></div>
+
 </div>
+
 <script>
 function showForm(id){
-  document.getElementById('sinhTonForm').classList.remove('active');
-  document.getElementById('soloForm').classList.remove('active');
-  document.getElementById(id).classList.add('active');
+  document.getElementById('sinhTonForm').classList.remove('active');
+  document.getElementById('soloForm').classList.remove('active');
+  document.getElementById(id).classList.add('active');
 }
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwmZ2VrHOjCJGmnp8xz8II4nwfwulEZBn9YGZbklCouHZMDFjj_RBdTmgO-EXM9tmru/exec";
 
 ['sinhTonForm','soloForm'].forEach(f => {
-  const form = document.getElementById(f);
-  const msg = form.nextElementSibling;
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const age = Number(data.get("entry.age"));
-    if (isNaN(age) || age < 14) {
-      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số và từ 14 trở lên!</p>`;
-      return;
-    }
-    msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
-    try {
-      await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" })
-      msg.innerHTML = `<p class='success'>
+  const form = document.getElementById(f);
+  const msg = form.nextElementSibling;
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const age = Number(data.get("entry.age"));
+    if (isNaN(age) || age < 14) {
+      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số và từ 14 trở lên!</p>`;
+      return;
+    }
+    msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
+    try {
+      await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" })
+      msg.innerHTML = `<p class='success'>
 ✅ Đăng kí thành công!<br>
 ⚡ Vui để ý điện thoại/Facebook, thông tin của bạn đang được xét duyệt 😎
 </p>`;
-      form.reset();
-    } catch(err) {
-      console.error(err);
-      msg.innerHTML = `<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>`;
-    }
-  });
+      form.reset();
+    } catch(err) {
+      console.error(err);
+      msg.innerHTML = `<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>`;
+    }
+  });
 });
 
-// Scroll tới input khi focus
+// Scroll tới input khi focus (tối ưu mobile)
 document.querySelectorAll('input, select, textarea').forEach(el => {
-  el.addEventListener('focus', () => {
-    const rect = el.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const top = rect.top + scrollTop - 100; 
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  });
+  el.addEventListener('focus', () => {
+    const rect = el.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const top = rect.top + scrollTop - 100; 
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
 });
-
 </script>
 
 </body>
