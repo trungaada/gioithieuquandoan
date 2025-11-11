@@ -18,7 +18,7 @@
 }
 body{
     font-family:'Montserrat',sans-serif;
-    background: linear-gradient(180deg, rgba(7,14,28,0.92) 0%, rgba(13,23,42,0.96) 100%), url('logo2.jpg');
+    background:  url('logo2.jpg');
     background-size:cover;
     background-position:center;
     background-attachment:fixed;
@@ -93,6 +93,12 @@ header .subtitle{color:var(--subtle-text);}
 .avatar img{width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;}
 .meta{flex:1;}
 .meta .role{font-size:13px;color:var(--subtle-text);}
+.issues{
+    font-size:13px;
+    color:var(--subtle-text);
+    margin-top:4px;
+    line-height:1.4;
+}
 .actions{display:flex; gap:10px; flex-shrink:0;}
 .btn{
     border:0; padding:10px 14px; border-radius:8px;
@@ -139,6 +145,11 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
     <div class="avatar"></div>
     <div class="meta">
       <div class="role">Hỗ trợ lỗi — TitanForce</div>
+      <div class="issues">
+        🔹 Lỗi Chưa được gửi kết bạn<br>
+        🔹 Lỗi Chưa được duyệt<br>
+        🔹 Lỗi chưa được test
+      </div>
     </div>
     <div class="actions">
       <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
@@ -150,6 +161,10 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
     <div class="avatar"></div>
     <div class="meta">
       <div class="role">Hỗ trợ kỹ thuật — Web FF</div>
+      <div class="issues">
+        🔹 Lỗi đăng ký tài khoản<br>
+        🔹 Lỗi kết nối server
+      </div>
     </div>
     <div class="actions">
       <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
@@ -161,6 +176,11 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
     <div class="avatar"></div>
     <div class="meta">
       <div class="role">Hỗ trợ lỗi — TitanForce</div>
+      <div class="issues">
+        🔹 Lỗi Chưa được gửi kết bạn<br>
+        🔹 Lỗi Chưa được duyệt<br>
+        🔹 Lỗi chưa được test
+      </div>
     </div>
     <div class="actions">
       <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
@@ -171,7 +191,9 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
 </div>
 </div>
 
-<footer>Chỉnh danh sách trực tiếp trong file HTML (mỗi item là div.support với data-fb và data-img).</footer>
+<footer><p>Trang web được code và thiết kế bởi 
+    <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. 
+    © 2025 Quân đoàn TF.</p></footer>
 </div>
 
 <script>
@@ -185,7 +207,7 @@ function copyLink(btn){
     const item = btn.closest('.support');
     const url = item.getAttribute('data-fb') || '';
     if(url){
-        navigator.clipboard.writeText(url).then(()=>{
+        navigator.clipboard.writeText(url).then(()=>{ 
             btn.textContent='Đã sao chép ✓';
             setTimeout(()=>btn.textContent='Sao chép link',1200);
         }).catch(()=>{alert('Trình duyệt không cho phép sao chép link')});
