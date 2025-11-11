@@ -1,54 +1,110 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Code Giới thiệu Quân Đoàn</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Giới thiệu Quân Đoàn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            background-image: url('logo2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    h1 {
-      color: #333;
-      margin-bottom: 20px;
-    }
+        .content-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    #qrcode {
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-  </style>
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        #qrcode {
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background-color: #cc0000;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            font-weight: bold;
+            box-shadow: 0 4px #990000;
+        }
+
+        button:hover {
+            background-color: #990000;
+        }
+
+        button:active {
+            box-shadow: 0 2px #660000;
+            transform: translateY(2px);
+        }
+
+        /* Responsive: QR code nhỏ lại trên màn hình nhỏ */
+        @media (max-width: 480px) {
+            #qrcode {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Quét QR để vào trang Quân Đoàn</h1>
+    <div class="content-container">
+        <h1> Chia sẻ Quân đoàn với mọi người bằng cách Quét QR </h1>
+        <div id="qrcode"></div>
+        <button onclick="goBack()">Quay về trang chủ</button>
+    </div>
 
-  <div id="qrcode"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- Thư viện QRCode.js từ CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var qrContainer = document.getElementById("qrcode");
+            new QRCode(qrContainer, {
+                text: "https://trungaada.github.io/gioithieuquandoan/",
+                width: 250,
+                height: 250,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        });
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var qrContainer = document.getElementById("qrcode");
-      var qrcode = new QRCode(qrContainer, {
-        text: "https://trungaada.github.io/gioithieuquandoan/",
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    });
-  </script>
+        function goBack() {
+            window.location.href = "index.html"; 
+        }
+    </script>
 </body>
 </html>
