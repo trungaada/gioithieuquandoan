@@ -15,6 +15,10 @@
     --subtle-text:#9fb0c8;
     --border-color:rgba(255,255,255,0.08);
     --neon-glow: rgba(255, 69, 0, 0.7);
+    --role-color1: #ff6f00;  /* màu cam neon */
+    --role-color2: #00ff99;  /* màu xanh neon */
+    --issues-color1: #00e6ff; /* màu xanh dương neon */
+    --issues-color2: #ffcc00; /* màu vàng neon */
 }
 body{
     font-family:'Montserrat',sans-serif;
@@ -79,12 +83,10 @@ header .subtitle{color:var(--subtle-text);}
     box-shadow:0 0 20px rgba(255,69,0,0.5),0 0 40px rgba(255,69,0,0.3),0 0 60px rgba(255,140,0,0.2);
 }
 .support:hover .role{
-    color: var(--accent);
     text-shadow: 0 0 5px rgba(255, 69, 0, 0.9), 0 0 10px rgba(255, 165, 0, 0.5);
     transition: all 0.3s ease;
 }
 .support:hover .issues{
-    color: var(--text);
     text-shadow: 0 0 3px rgba(230, 238, 248, 0.5);
     transition: all 0.3s ease;
 }
@@ -111,8 +113,12 @@ header .subtitle{color:var(--subtle-text);}
 }
 .avatar img{width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;}
 .meta{flex:1;}
-.meta .role{font-size:13px;color:var(--subtle-text);}
-.issues{font-size:13px;color:var(--subtle-text);margin-top:4px;line-height:1.4;}
+.meta .role{font-size:14px;font-weight:600; margin-bottom:4px;}
+.meta .role.role-support{color: var(--role-color1);}
+.meta .role.role-technical{color: var(--role-color2);}
+.issues{font-size:13px;margin-top:4px;line-height:1.4;}
+.issues.issues-warning{color: var(--issues-color2);}
+.issues.issues-technical{color: var(--issues-color1);}
 .actions{display:flex; gap:10px; flex-shrink:0;}
 .btn{border:0; padding:10px 14px; border-radius:8px; background:var(--accent); color:white; cursor:pointer; font-weight:600; transition:all 0.3s ease; position:relative; min-height:44px;}
 .btn.primary:hover{background:var(--accent-hover); animation: pulseBtn 1.2s infinite;}
@@ -152,8 +158,6 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
     color: #ffcc00;
     text-shadow: 0 0 5px rgba(255, 204, 0, 0.7), 0 0 10px rgba(255, 204, 0, 0.4);
 }
-
-
 .icon {
     margin-right: 8px;
     font-size: 16px;
@@ -162,7 +166,6 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
 }
 .time-info .icon { color: var(--accent); }
 .warning-text .icon { color: #ffcc00; }
-
 @keyframes neon-flicker {
     0% { text-shadow: 0 0 3px rgba(255,255,255,0.5); }
     25% { text-shadow: 0 0 6px rgba(255,204,0,0.7); }
@@ -170,7 +173,6 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
     75% { text-shadow: 0 0 6px rgba(255,204,0,0.7); }
     100% { text-shadow: 0 0 3px rgba(255,255,255,0.5); }
 }
-
 </style>
 </head>
 <body>
@@ -190,48 +192,44 @@ footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
     <div class="warning-text"><span class="icon">⚠️</span> Nếu đội ngũ bên mình không trả lời tin nhắn kịp. Thông cảm cho bên đội ngũ của tôi.</div>
   </div>
   <div class="list" id="supportList">
-    <!-- Support items giữ nguyên -->
-  </div>
-</div>
-
-<div class="list" id="supportList">
-  <div class="support" data-fb="https://www.facebook.com/share/16dJQajrpb/" data-img="sang.jpg">
-    <div class="avatar"></div>
-    <div class="meta">
-      <div class="role">Hỗ trợ lỗi — TitanForce</div>
-      <div class="issues">🔹 Lỗi Chưa được gửi kết bạn<br>🔹 Lỗi Chưa được duyệt<br>🔹 Lỗi chưa được test</div>
+    <div class="support" data-fb="https://www.facebook.com/share/16dJQajrpb/" data-img="sang.jpg">
+      <div class="avatar"></div>
+      <div class="meta">
+        <div class="role role-support">Hỗ trợ lỗi — TitanForce</div>
+        <div class="issues issues-warning">🔹 Lỗi Chưa được gửi kết bạn<br>🔹 Lỗi Chưa được duyệt<br>🔹 Lỗi chưa được test</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
+        <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+      </div>
     </div>
-    <div class="actions">
-      <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
-      <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+    <div class="support" data-fb="https://www.facebook.com/share/1BgP2pED8P/" data-img="trung.jpg">
+      <div class="avatar"></div>
+      <div class="meta">
+        <div class="role role-technical">Hỗ trợ kỹ thuật — Web FF</div>
+        <div class="issues issues-technical">🔹 Lỗi đăng ký tài khoản<br>🔹 Lỗi kết nối server</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
+        <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+      </div>
     </div>
-  </div>
-  <div class="support" data-fb="https://www.facebook.com/share/1BgP2pED8P/" data-img="trung.jpg">
-    <div class="avatar"></div>
-    <div class="meta">
-      <div class="role">Hỗ trợ kỹ thuật — Web FF</div>
-      <div class="issues">🔹 Lỗi đăng ký tài khoản<br>🔹 Lỗi kết nối server</div>
-    </div>
-    <div class="actions">
-      <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
-      <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
-    </div>
-  </div>
-  <div class="support" data-fb="https://www.facebook.com/share/1Cj6XSJve1/?mibextid=wwXIfr" data-img="huy.jpg">
-    <div class="avatar"></div>
-    <div class="meta">
-      <div class="role">Hỗ trợ lỗi — TitanForce</div>
-      <div class="issues">🔹 Lỗi Chưa được gửi kết bạn<br>🔹 Lỗi Chưa được duyệt<br>🔹 Lỗi chưa được test</div>
-    </div>
-    <div class="actions">
-      <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
-      <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+    <div class="support" data-fb="https://www.facebook.com/share/1Cj6XSJve1/?mibextid=wwXIfr" data-img="huy.jpg">
+      <div class="avatar"></div>
+      <div class="meta">
+        <div class="role role-support">Hỗ trợ lỗi — TitanForce</div>
+        <div class="issues issues-warning">🔹 Lỗi Chưa được gửi kết bạn<br>🔹 Lỗi Chưa được duyệt<br>🔹 Lỗi chưa được test</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
+        <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <footer><p>Trang web được code và thiết kế bởi <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. © 2025 Quân đoàn TF.</p></footer>
 </div>
+
 <script>
 function goIndex(){window.location.href='index.html';}
 function openFB(btn){
