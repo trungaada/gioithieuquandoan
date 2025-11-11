@@ -212,7 +212,7 @@ a#backButton:hover { background: linear-gradient(45deg, var(--color-primary), va
 </div>
 <section class="members">
 <div class="card">
-    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('trung.jpg');"></div>
+    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('trung1.jpg');"></div>
     <h2><span id="name-trung"></span></h2>
     <p class="role"><span id="role-trung"></span></p>
     <div class="badges">
@@ -241,16 +241,6 @@ a#backButton:hover { background: linear-gradient(45deg, var(--color-primary), va
         <span class="badge">Tuyển quân</span>
     </div>
 </div>
-<div class="card card-4-special">
-    <div class="card-border-glow"></div> <div class="avatar" style="background-image:url('bich.jpg');"></div>
-    <h2><span id="name-tv3"></span></h2>
-    <p class="role"><span id="role-tv3"></span></p>
-    <div class="badges">
-        <span class="badge">Lãnh đạo</span>
-        <span class="badge">Chiến thuật</span>
-        <span class="badge">Tuyển quân</span>
-    </div>
-</div>
 </section>
 <a id="backButton" href="index.html"> Quay lại trang chủ</a>
 </main>
@@ -263,8 +253,6 @@ const memberData=[
 {id:'role-sang',text:'👑Chủ quân đoàn N2',speed:60},
 {id:'name-tv2',text:' Huy (TF.Huy )',speed:80},
 {id:'role-tv2',text:'👑 Chỉ huy N1 ',speed:60},
-{id:'name-tv3',text:' Bích (TF.Bích )',speed:80},
-{id:'role-tv3',text:'👑 Chỉ huy ',speed:60}
 ];
 function typeWriterEffect(e,t,s){return new Promise(r=>{const a=document.getElementById(e);a.classList.add('typing-member');if(!a)return r();let i=0;a.textContent='';function n(){i<t.length?(a.textContent+=t.charAt(i),i++,setTimeout(n,s)):(a.classList.remove('typing-member'),a.classList.add('typing-done'),r())}n()})}
 async function runMemberLoop(){while(true){for(const e of memberData){await typeWriterEffect(e.id,e.text,e.speed);const roleData = memberData.find(a=>a.id===e.id.replace('name','role'));await typeWriterEffect(roleData.id, roleData.text, roleData.speed);}await new Promise(r => setTimeout(r, 5000));for(const e of memberData){document.getElementById(e.id).textContent='';document.getElementById(e.id.replace('name','role')).textContent='';}}}
@@ -293,4 +281,3 @@ window.onload=async function(){await typeWriterEffect('typing-title',textToType,
 </script>
 </body>
 </html>
-
