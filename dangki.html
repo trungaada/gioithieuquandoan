@@ -6,27 +6,30 @@
 <title>Đăng ký Clan TF</title>
 <style>
 :root {
-  --accent:#ff3d00;
-  --bg:#0f1724;
-  --card:#161e2f;
-  --text:#e6eef8;
-  --text-muted:#b3bcc8;
+ --accent:#ff3d00;
+ --bg:#0f1724;
+ --card:#161e2f;
+ --text:#e6eef8;
+ --text-muted:#b3bcc8;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; }
 body{
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  min-height:100vh; padding:20px;
-  background-image:url('logo.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
-  color:var(--text); position:relative;
+ display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+ min-height:100vh; padding:20px;
+ background-image:url('logo.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
+color:var(--text); position:relative;
 }
 body::before{ content:""; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:0; }
+
 .page-content{ width:100%; max-width:420px; display:flex; flex-direction:column; align-items:center; animation:fadeIn 0.8s ease-out forwards; opacity:0; animation-delay:0.3s; }
 h1{ font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase; margin-bottom:10px; font-size:2rem; text-align:center; z-index:1; }
 p{ color:var(--text-muted); margin-bottom:20px; font-size:1rem; text-align:center; z-index:1; }
 .buttons{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; z-index:1; }
 button.group-btn{ background:var(--accent); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-weight:700; font-size:0.9rem; cursor:pointer; transition:0.3s; }
 button.group-btn:hover{ background:#ff1744; transform:scale(1.05); }
+button.group-btn.highlight { animation: pulseGlow 1.5s ease-in-out infinite; }
+
 form{ width:100%; max-width:400px; background:rgba(22,30,47,0.85); padding:20px; border-radius:12px; border:2px solid var(--accent); box-shadow:0 0 15px rgba(255,61,0,0.4); text-align:left; display:none; z-index:1; }
 form.active{ display:block; }
 label{ display:block; margin-bottom:6px; color:#fff; font-weight:600; font-size:0.9rem; }
@@ -38,10 +41,29 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
 .success{ color:#4CAF50; }
 .error{ color:#f44336; }
 .loading{ color:#ffeb3b; animation:blink 1s infinite; }
+
 @keyframes fadeIn{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 @keyframes rainbowBorder{ 0%{border-color:red;} 14%{border-color:orange;} 28%{border-color:yellow;} 42%{border-color:green;} 57%{border-color:cyan;} 71%{border-color:blue;} 85%{border-color:violet;} 100%{border-color:red;} }
 @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;} }
-@media(max-width:480px){ .page-content{ max-width:360px; } form{ padding:15px; } h1{ font-size:1.5rem; } p{ font-size:0.95rem; } input, select, textarea{ font-size:0.85rem; padding:8px; } button.group-btn, button.submit-btn{ font-size:0.85rem; padding:8px 12px; } .buttons{ gap:8px; } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0px var(--accent); } 50% { box-shadow: 0 0 10px var(--accent), 0 0 20px rgba(255, 61, 0, 0.5); } 100% { box-shadow: 0 0 0px var(--accent); } }
+
+@media(max-width:480px){ 
+  .page-content{ max-width:360px; } 
+  form{ padding:15px; } 
+  h1{ font-size:1.5rem; } 
+  p{ font-size:0.95rem; } 
+  input, select, textarea{ font-size:0.85rem; padding:8px; } 
+  button.group-btn, button.submit-btn{ font-size:0.85rem; padding:8px 12px; } 
+  .buttons{ gap:8px; } 
+}
+
+#sakuraCanvas {
+ position:fixed;
+ top:0; left:0;
+ width:100%; height:100%;
+ pointer-events:none;
+ z-index:0;
+}
 </style>
 </head>
 <body>
@@ -51,132 +73,184 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
 <p>Chọn nhóm muốn gia nhập và điền thông tin!</p>
 
 <div class="buttons">
-  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
-  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
-  <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
-  <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
+  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
+  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
+  <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
+  <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
 </div>
 
-<!-- Sinh Tồn Form -->
 <form id="sinhTonForm">
-  <h2>🔥 Nhóm Sinh Tồn</h2>
-  <input type="hidden" name="entry.group" value="Sinh Tồn">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
-    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option>
-    <option>Cover</option>
-    <option>Sniper</option>
-    <option>Hỗ trợ</option>
-  </select>
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option>
-    <option>Nữ</option>
-    <option>Khác</option>
-  </select>
-  <label>Tên Facebook (Bắt Buộc):</label>
-  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label>Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <div class="message" id="msg-sinhTonForm"></div>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
+  <h2>🔥 Nhóm Sinh Tồn</h2>
+  <input type="hidden" name="entry.group" value="Sinh Tồn">
+  <label>Tên trong game:</label><input type="text" name="entry.name" required>
+  <label>UID:</label><input type="text" name="entry.uid" required>
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
+    <option value="">-- Chọn Rank --</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
+    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
+  </select>
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Rush</option>
+    <option>Cover</option>
+    <option>Sniper</option>
+    <option>Hỗ trợ</option>
+  </select>
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option>
+    <option>Nữ</option>
+    <option>Khác</option>
+  </select>
+  <label>Tên Facebook (Bắt Buộc):</label>
+  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
+  <label>Liên kết Facebook (Bắt Buộc):</label>
+  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
+  <div class="message" id="msg-sinhTonForm"></div>
+  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
-<!-- Solo Form -->
 <form id="soloForm">
-  <h2>⚡ Nhóm Solo</h2>
-  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
-    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Kai 2</option>
-    <option>Kai 5</option>
-    <option>Headshot Kai 2</option>
-    <option>Headshot Kai 5</option>
-  </select>
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option>
-    <option>Nữ</option>
-    <option>Khác</option>
-  </select>
-  <label>Tên Facebook (Bắt Buộc):</label>
-  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label>Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <div class="message" id="msg-soloForm"></div>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
+  <h2>⚡ Nhóm Solo</h2>
+  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
+  <label>Tên trong game:</label><input type="text" name="entry.name" required>
+  <label>UID:</label><input type="text" name="entry.uid" required>
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
+    <option value="">-- Chọn Rank --</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
+    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
+  </select>
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Kai 2</option>
+    <option>Kai 5</option>
+    <option>Headshot Kai 2</option>
+    <option>Headshot Kai 5</option>
+  </select>
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option>
+    <option>Nữ</option>
+    <option>Khác</option>
+  </select>
+  <label>Tên Facebook (Bắt Buộc):</label>
+  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
+  <label>Liên kết Facebook (Bắt Buộc):</label>
+  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
+  <div class="message" id="msg-soloForm"></div>
+  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
+<canvas id="sakuraCanvas"></canvas>
 
 <script>
+const canvas = document.getElementById('sakuraCanvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+const petals = [];
+const PETAL_COUNT = 30;
+function random(min,max){ return Math.random()*(max-min)+min; }
+function initPetals(){
+  for(let i=0;i<PETAL_COUNT;i++){
+    petals.push({
+      x: random(0,W),
+      y: random(0,H),
+      r: random(5,12),
+      d: random(1,3),
+      swing: random(0,Math.PI*2),
+      swingSpeed: random(0.01,0.03),
+      color: 'rgba(255,182,193,0.8)'
+    });
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<petals.length;i++){
+    let p = petals[i];
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    p.y += p.d;
+    p.x += Math.sin(p.swing) * 2;
+    p.swing += p.swingSpeed;
+    if(p.y > H) { p.y = -10; p.x = random(0,W); }
+    if(p.x > W) { p.x = 0; }
+    if(p.x < 0) { p.x = W; }
+  }
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize', () => {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+});
+initPetals();
+draw();
+
 function showForm(id){
-  document.getElementById('sinhTonForm').classList.remove('active');
-  document.getElementById('soloForm').classList.remove('active');
-  document.getElementById(id).classList.add('active');
+  document.getElementById('sinhTonForm').classList.remove('active');
+  document.getElementById('soloForm').classList.remove('active');
+  document.getElementById(id).classList.add('active');
 }
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwmZ2VrHOjCJGmnp8xz8II4nwfwulEZBn9YGZbklCouHZMDFjj_RBdTmgO-EXM9tmru/exec";
 
 ['sinhTonForm','soloForm'].forEach(f => {
-  const form = document.getElementById(f);
-  const msg = document.getElementById('msg-' + f); // sửa lại
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const age = Number(data.get("entry.age"));
-    if (isNaN(age) || age < 14 || age > 30) {
-      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số từ 14 đến 30!</p>`;
-      return;
-    }
-    msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
-    try {
-      await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
-      msg.innerHTML = `<p class='success'>
-✅ Đăng kí thành công!<br>
-⚡ Vui lòng để ý điện thoại/Facebook, thông tin của bạn đang được xét duyệt 😎
-</p>`;
-      form.reset();
-    } catch(err) {
-      console.error(err);
-      msg.innerHTML = `<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>`;
-    }
-  });
+  const form = document.getElementById(f);
+  const msg = document.getElementById('msg-' + f);
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const age = Number(data.get("entry.age"));
+    if (isNaN(age) || age < 14 || age > 30) {
+      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số từ 14 đến 30!</p>`;
+      return;
+    }
+    msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
+    try {
+      await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
+      msg.innerHTML = `<p class='success'>✅ Đăng kí thành công!<br>⚡ Vui lòng để ý điện thoại/Facebook, thông tin của bạn đang được xét duyệt 😎</p>`;
+      form.reset();
+    } catch(err) {
+      console.error(err);
+      msg.innerHTML = `<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>`;
+    }
+  });
 });
 
-// scroll tới input khi focus
 document.querySelectorAll('input, select, textarea').forEach(el => {
-  el.addEventListener('focus', () => {
-    const rect = el.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const top = rect.top + scrollTop - 100; 
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  });
+  el.addEventListener('focus', () => {
+    const rect = el.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const top = rect.top + scrollTop - 100; 
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
+});
+
+window.addEventListener('load', () => {
+    const sinhTonBtn = document.querySelector('button[onclick="showForm(\'sinhTonForm\')"]');
+    const soloBtn = document.querySelector('button[onclick="showForm(\'soloForm\')"]');
+    setTimeout(() => {
+        sinhTonBtn.classList.add('highlight');
+        soloBtn.classList.add('highlight');
+    }, 1000);
+    setTimeout(() => {
+        sinhTonBtn.classList.remove('highlight');
+        soloBtn.classList.remove('highlight');
+    }, 4000);
 });
 </script>
 
