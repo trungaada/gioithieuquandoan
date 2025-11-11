@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đăng ký Clan TF</title>
 <style>
-/* Root colors */
 :root {
   --accent:#ff3d00;
   --bg:#0f1724;
@@ -14,11 +13,9 @@
   --text-muted:#b3bcc8;
 }
 
-/* Global */
 * { box-sizing:border-box; margin:0; padding:0; }
 html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; }
 
-/* Body & Background */
 body{
   display:flex;
   flex-direction:column;
@@ -43,10 +40,9 @@ body::before{
   z-index:0;
 }
 
-/* Page Content */
 .page-content{
   width:100%;
-  max-width:420px; /* PC vừa */
+  max-width:420px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -55,11 +51,9 @@ body::before{
   animation-delay:0.3s;
 }
 
-/* Headings & Text */
 h1{ font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase; margin-bottom:10px; font-size:2rem; text-align:center; z-index:1; }
 p{ color:var(--text-muted); margin-bottom:20px; font-size:1rem; text-align:center; z-index:1; }
 
-/* Buttons */
 .buttons{
   display:flex;
   justify-content:center;
@@ -86,10 +80,9 @@ button.group-btn:hover{
   transform:scale(1.05);
 }
 
-/* Forms */
 form{
   width:100%;
-  max-width:400px; /* PC */
+  max-width:400px;
   background:rgba(22,30,47,0.85);
   padding:20px;
   border-radius:12px;
@@ -102,7 +95,6 @@ form{
 
 form.active{ display:block; }
 
-/* Labels & Inputs */
 label{ display:block; margin-bottom:6px; color:#fff; font-weight:600; font-size:0.9rem; }
 input, select, textarea{
   width:100%;
@@ -121,7 +113,6 @@ input:focus, select:focus, textarea:focus{
   transform:scale(1.02);
 }
 
-/* Submit Button */
 button.submit-btn{
   background:var(--accent);
   color:#fff;
@@ -137,7 +128,6 @@ button.submit-btn{
 
 button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
 
-/* Message */
 .message{
   text-align:center;
   margin-top:5px;
@@ -159,7 +149,6 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
 }
 @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;} }
 
-/* Mobile & Tablet */
 @media(max-width:480px){
   .page-content{ max-width:360px; }
   form{ padding:15px; }
@@ -169,7 +158,6 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
   button.group-btn, button.submit-btn{ font-size:0.85rem; padding:8px 12px; }
   .buttons{ gap:8px; }
 }
-
 </style>
 </head>
 <body>
@@ -206,7 +194,7 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
     <option>Hỗ trợ</option>
   </select>
   <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi" required>
+  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi " required>
   <label>Giới tính:</label>
   <select name="entry.gender" required>
     <option value="">-- Chọn Giới Tính --</option>
@@ -242,7 +230,7 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
     <option>Headshot kai 5</option>
   </select>
   <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="100" placeholder="Nhập tuổi" required>
+  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi " required>
   <label>Giới tính:</label>
   <select name="entry.gender" required>
     <option value="">-- Chọn Giới Tính --</option>
@@ -277,8 +265,8 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwmZ2VrHOjCJGmnp8xz
     e.preventDefault();
     const data = new FormData(form);
     const age = Number(data.get("entry.age"));
-    if (isNaN(age) || age < 14) {
-      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số và từ 14 trở lên!</p>`;
+    if (isNaN(age) || age < 14 || age > 30) {
+      msg.innerHTML = `<p class='error'>❌ Tuổi phải là số từ 14 đến 30!</p>`;
       return;
     }
     msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
@@ -286,7 +274,7 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwmZ2VrHOjCJGmnp8xz
       await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" })
       msg.innerHTML = `<p class='success'>
 ✅ Đăng kí thành công!<br>
-⚡ Vui để ý điện thoại/Facebook, thông tin của bạn đang được xét duyệt 😎
+⚡ Vui lòng để ý điện thoại/Facebook, thông tin của bạn đang được xét duyệt 😎
 </p>`;
       form.reset();
     } catch(err) {
@@ -296,7 +284,6 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwmZ2VrHOjCJGmnp8xz
   });
 });
 
-// Scroll tới input khi focus (tối ưu mobile)
 document.querySelectorAll('input, select, textarea').forEach(el => {
   el.addEventListener('focus', () => {
     const rect = el.getBoundingClientRect();
