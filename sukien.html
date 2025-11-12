@@ -195,7 +195,7 @@ h3 {
 
 </head>
 <body>
-<h1>Sự kiện Quân Đoàn TitanForce</h1>
+<h1>Thông Báo Quân Đoàn TitanForce</h1>
 <div class="logo-container">
     <img src="logo2.jpg" alt="Logo TitanForce">
 </div>
@@ -250,6 +250,47 @@ function createSakura() {
 }
 
 setInterval(createSakura, 300);
+// === CHỐNG COPY SIÊU CỨNG ===
+  document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à,cút ngay cho bố"); });
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+
+    document.addEventListener('keydown', function(e) {
+        // Chặn phím Ctrl + [C,X,V,S,U,A]
+        if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
+        // Chặn Ctrl + Shift + [I,J,C]
+        if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+        // Chặn F12
+        if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+    });
+
+    // Chặn mở DevTools console (thủ thuật cơ bản)
+    setInterval(function(){
+        if(window.devtools && window.devtools.open) {
+            alert("⚠️ DevTools đang mở! Vui lòng đóng để tiếp tục.");
+            window.devtools.open = false;
+        }
+    }, 1000);
+
+    // Chặn copy bằng chuột và bàn phím
+    window.oncopy = window.oncut = window.onpaste = function(e){
+        e.preventDefault();
+        alert("⚠️ Không được phép sao chép nội dung trang!");
+        return false;
+    };
+
+    // Chặn click giữa (scroll wheel) mở menu DevTools
+    document.addEventListener('mousedown', function(e){
+        if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
+    });
+
+    // Thêm “bẫy” Ctrl+Shift+I theo cách nâng cao
+    document.addEventListener('keyup', function(e){
+        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i'){ 
+            e.preventDefault(); 
+            alert("⚠️ DevTools bị chặn!");
+        }
+    });
 </script>
 
 </body>
