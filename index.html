@@ -5,194 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Trang chủ Quân đoàn TF</title>
 <style>
-* { 
-    box-sizing:border-box; margin:0; padding:0; 
-    -webkit-tap-highlight-color: transparent; 
-    -webkit-overflow-scrolling: touch; 
-}
-body { 
-    font-family:Arial,sans-serif; 
-    background:url("logo.jpg") no-repeat center center fixed; 
-    background-size:cover; 
-    color:#fff; 
-    font-size:15px; 
-    min-height:100vh; 
-    overflow-x:hidden;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-main {
-    opacity: 0; 
-    text-align:center; 
-    padding:20px 15px; margin:70px auto 40px auto; max-width:650px;
-    background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8);
-    backdrop-filter: blur(5px); 
-    -webkit-backdrop-filter: blur(5px); 
-    transition: all 0.4s ease-in-out;
-}
-body.fade-in main {
-    opacity: 1;
-    animation: fadeIn 1.2s ease-out forwards;
-}
-nav {
-    position:fixed; top:0; left:0; width:100%;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:5px 12px; z-index:100;
-    background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-    background-size:400% 100%; animation:rainbow-gradient 15s ease infinite;
-    box-shadow:0 2px 8px rgba(204,0,0,0.7);
-}
-@keyframes rainbow-gradient { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%} 
-}
-.logo { 
-    height:35px; max-width:60px; border-radius:50%; 
-    box-shadow:0 0 8px rgba(255,60,0,0.8); 
-    transition:0.3s ease; 
-}
+* { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color: transparent; -webkit-overflow-scrolling: touch; }
+body { font-family:Arial,sans-serif; background:url("logo.jpg") no-repeat center center fixed; background-size:cover; color:#fff; font-size:15px; min-height:100vh; overflow-x:hidden;}
+@keyframes fadeIn {from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); }}
+main { opacity:0; text-align:center; padding:20px 15px; margin:70px auto 40px auto; max-width:650px; background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: all 0.4s ease-in-out;}
+body.fade-in main { opacity:1; animation: fadeIn 1.2s ease-out forwards; }
+nav { position:fixed; top:0; left:0; width:100%; display:flex; align-items:center; justify-content:space-between; padding:5px 12px; z-index:100; background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); background-size:400% 100%; animation:rainbow-gradient 15s ease infinite; box-shadow:0 2px 8px rgba(204,0,0,0.7);}
+@keyframes rainbow-gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+.logo { height:35px; max-width:60px; border-radius:50%; box-shadow:0 0 8px rgba(255,60,0,0.8); transition:0.3s ease; }
 .logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
-.menu-toggle {
-    display:flex;
-    flex-direction:column;
-    justify-content: space-around;
-    width:28px;
-    height:25px;
-    cursor:pointer;
-}
-.menu-toggle span {
-    display:block;
-    height:3px;
-    background-color:#fff;  
-    border-radius:2px;
-    transition:all 0.3s ease;
-}
-.nav-links {
-    position:absolute; top:45px; right:12px;
-    background-color: rgba(0,0,0,0.85);
-    flex-direction:column; 
-    width:200px; 
-    gap:0;
-    display:none; 
-    border-radius:0 0 8px 8px;
-    box-shadow:0 0 10px rgba(255,60,0,0.8);
-}
+.menu-toggle { display:flex; flex-direction:column; justify-content: space-around; width:28px; height:25px; cursor:pointer; }
+.menu-toggle span { display:block; height:3px; background-color:#fff; border-radius:2px; transition:all 0.3s ease; }
+.nav-links { position:absolute; top:45px; right:12px; background-color: rgba(0,0,0,0.85); flex-direction:column; width:200px; gap:0; display:none; border-radius:0 0 8px 8px; box-shadow:0 0 10px rgba(255,60,0,0.8); }
 .nav-links.active { display:flex; }
-.nav-links a { 
-    padding:10px; 
-    border-bottom:1px solid rgba(255,255,255,0.1); 
-    font-size:14px; font-weight:bold; text-decoration:none; 
-    color:white; background:linear-gradient(135deg,#CC0000,#400000); 
-    transition:all 0.3s ease;
-}
-.nav-links a:hover { 
-    background:linear-gradient(135deg,#FF3C00,#FF7F00); 
-    transform:scale(1.03); 
-    box-shadow:0 0 10px #FF3C00; 
-}
-@media (min-width: 1025px) {
-    .nav-links {
-        right: 12px;
-        width: 250px; 
-    }
-}
+.nav-links a { padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:14px; font-weight:bold; text-decoration:none; color:white; background:linear-gradient(135deg,#CC0000,#400000); transition:all 0.3s ease; }
+.nav-links a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scale(1.03); box-shadow:0 0 10px #FF3C00; }
+@media (min-width: 1025px) { .nav-links { right:12px; width:250px; } }
 h1 { font-size:28px; color:#FF3C00; margin-bottom:15px; text-shadow:0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
 h2 { font-size:20px; color:#FFCC00; margin:20px 0 10px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:3px; text-shadow:0 0 4px rgba(255,204,0,0.7);}
 p { font-size:15px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:15px; }
 ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
 ul li { padding:8px 0; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:15px; color:#fff; }
 ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
-.slogan { font-size: 16px; margin-top: -5px; margin-bottom: 20px; }
-.typing-text {
-    border-right: 3px solid #FFCC00;
-    font-weight: bold;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: blink-caret 0.75s step-end infinite;
+.slogan { font-size:16px; margin-top:-5px; margin-bottom:20px; }
+.typing-text { border-right:3px solid #FFCC00; font-weight:bold; display:inline-block; white-space:nowrap; overflow:hidden; animation: blink-caret 0.75s step-end infinite; }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #FFCC00; } }
+.cta-button { display:inline-block; padding:12px 20px; background: linear-gradient(90deg, #CC0000, #FFCC00); color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px; text-transform:uppercase; transition:all 0.3s ease; box-shadow:0 3px 10px rgba(204,0,0,0.8); border:1px solid #fff; margin:5px; }
+.cta-button:hover { background:linear-gradient(90deg,#FFCC00,#CC0000); transform: translateY(-2px) scale(1.03); box-shadow:0 4px 15px rgba(255,60,0,1);}
+.main-footer { position:relative; z-index:200; text-align:center; padding:15px 10px; margin-top:30px; background-color: rgba(0,0,0,0.7); color:#ccc; font-size:13px; border-top:1px solid rgba(255,60,0,0.5); }
+.main-footer a { color:#FFCC00; text-decoration:none; font-weight:bold; transition: color 0.3s ease; display:inline-block; }
+.main-footer a:hover { color:#FF3C00; text-decoration:underline; }
+.pulsating-author { animation:glow-pulse 2s infinite alternate; }
+@keyframes glow-pulse { 0%{text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);} 50%{text-shadow:0 0 10px rgba(255,204,0,0.9),0 0 20px rgba(255,100,0,0.7); transform:scale(1.05);} 100%{text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);} }
+
+/* 🌸 Hoa anh đào */
+.sakura { position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; animation:fall linear forwards; }
+@keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } }
+
+/* 🎉 POPUP CHÀO MỪNG */
+/* Popup nền */
+#welcome-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
 }
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #FFCC00; }
-}
-.cta-button {
-  display: inline-block;
-  padding: 12px 20px;
-  background: linear-gradient(90deg, #CC0000, #FFCC00);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 10px rgba(204, 0, 0, 0.8);
-  border: 1px solid #fff;
-  margin: 5px;
-}
-.cta-button:hover {
-  background: linear-gradient(90deg, #FFCC00, #CC0000);
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 15px rgba(255, 60, 0, 1);
-}
-.main-footer {
-    position: relative; 
-    z-index: 200; 
-    text-align: center;
-    padding: 15px 10px;
-    margin-top: 30px;
-    background-color: rgba(0,0,0,0.7);
-    color: #ccc;
-    font-size: 13px;
-    border-top: 1px solid rgba(255,60,0,0.5);
-}
-.main-footer a {
-    color: #FFCC00;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    display: inline-block; 
-}
-.main-footer a:hover {
-    color: #FF3C00;
-    text-decoration: underline;
-}
-.pulsating-author {
-    animation: glow-pulse 2s infinite alternate;
-}
-@keyframes glow-pulse {
-    0% { text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5); transform: scale(1); }
-    50% { text-shadow: 0 0 10px rgba(255,204,0,0.9), 0 0 20px rgba(255,100,0,0.7); transform: scale(1.05); }
-    100% { text-shadow: 0 0 5px rgba(255,204,0,0.7), 0 0 10px rgba(255,204,0,0.5); transform: scale(1); }
+#welcome-popup.show {
+    opacity: 1;
+    visibility: visible;
 }
 
-/* 🌸 Hiệu ứng hoa anh đào */
-.sakura {
-  position: fixed;
-  top: -10px;
-  z-index: 10;
-  pointer-events: none;
-  color: pink;
-  opacity: 0.9;
-  animation: fall linear forwards;
+/* Nội dung popup */
+.popup-content {
+    background: rgba(15,15,15,0.95);
+    padding: 25px 30px;             /* padding đều 2 bên */
+    border-radius: 15px;
+    text-align: center;              /* căn giữa chữ */
+    box-shadow: 0 0 25px rgba(255,60,0,0.8);
+    animation: popup-in 0.8s ease forwards;
+    max-width: 90%;
+    width: 380px;                    /* rộng hơn để chữ thoáng */
+    line-height: 1.6;                /* khoảng cách dòng tốt hơn */
 }
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0.6;
-  }
+
+/* Logo popup */
+.popup-logo {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #FF3C00;
 }
+
+/* Tiêu đề */
+.popup-content h2 {
+    color: #FF3C00;
+    margin: 10px 0 15px;             /* khoảng cách đều hơn */
+    text-shadow: 0 0 8px #FF3C00;
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+/* Nội dung chữ */
+.popup-content p {
+    color: #fff;
+    margin: 10px 0;                  /* khoảng cách giữa các đoạn */
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: center;
+    word-wrap: break-word;           /* xuống dòng khi dài */
+}
+
+/* Button */
+.popup-btn {
+    background: linear-gradient(90deg,#FF3C00,#FFCC00);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255,60,0,0.8);
+    margin-top: 20px;                /* tăng khoảng cách trên */
+}
+.popup-btn:hover {
+    background: linear-gradient(90deg,#FFCC00,#FF3C00);
+    transform: scale(1.05);
+}
+
+/* Animation popup */
+@keyframes popup-in {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
 </style>
 </head>
 <body>
 <nav>
     <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
-    <div class="menu-toggle" id="mobile-menu">
-        <span></span><span></span><span></span>
-    </div>
+    <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
     <div class="nav-links" id="nav-links">
         <a href="gioithieu.html">📜 Quản Trị quân đoàn</a>
         <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
@@ -201,18 +144,33 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
         <a href="luat.html">⚔️ Luật quân đoàn</a>
         <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
         <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
-        <a href="slo.html"> ⚔️ Giao lưu quân đoàn</a>
-        <a href="hotro.html"> 👥 Hỗ trợ </a>
-        <a href="qr.html"> 👥 Mã QR </a>
+        <a href="slo.html">⚔️ Giao lưu quân đoàn</a>
+        <a href="hotro.html">👥 Hỗ trợ</a>
+        <a href="qr.html">👥 Mã QR</a>
+    </div>
 </nav>
 
-<main class="titanforce-main">
-    <header class="tf-header">
-        <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
-        <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
-    </header>
+<!-- POPUP -->
+<div id="welcome-popup">
+  <div class="popup-content">
+    <img src="logo2.jpg" alt="Logo TF" class="popup-logo">
+    <h2>🎉 Chào mừng đến quân đoàn TitanForce! 🛡️</h2> 
+    <p>Đây là trang web chính thức TitanForce!</p>
+    <p>Quân đoàn TF kính chào bạn — Hãy cùng nhau tạo nên sức mạnh TitanForce!</p>
+    <p>Hiện tại chúng tôi đang phát triển và nếu có sai xót xin hãy bỏ qua .</p>
+    <p>⚠️ Lưu ý những trang web khác đều là giả hoặc ăn cắp, mong mọi người chú ý. ❌</p>
+    <button class="popup-btn" id="close-popup">OK 👍</button>
+  </div>
+</div>
 
-    <section class="tf-introduction">
+<main class="titanforce-main">
+    <!-- Nội dung chính giữ nguyên -->
+     <header class="tf-header">
+      <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
+      <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
+  </header>
+  <!-- (Toàn bộ nội dung chính giữ nguyên) -->
+   <section class="tf-introduction">
         <h2>💡 Triết lý của TitanForce</h2>
         <p>
             Quân đoàn TF không chỉ là một cộng đồng game thủ, mà còn là một **học viện rèn luyện phẩm chất và kỹ năng**. Chúng tôi tin rằng, trong thế giới game cũng như cuộc sống, chiến thắng không đến từ may mắn, mà từ **sự chuẩn bị tỉ mỉ, kỷ luật thép và tinh thần đồng đội không lay chuyển**.
@@ -275,10 +233,7 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
         
         
     </section>
-    
-    <hr>
-
-    <footer class="tf-footer-cta">
+     <footer class="tf-footer-cta">
         <p>
             **Vinh quang đang chờ đợi!** Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
         </p>
@@ -288,58 +243,105 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
         </div>
     </footer>
 </main>
+
 <footer class="main-footer">
-    <p>Trang web được code và thiết kế bởi 
-    <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. 
-    © 2025 Quân đoàn TF.</p>
+    <p>Trang web được code và thiết kế bởi <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. © 2025 Quân đoàn TF.</p>
 </footer>
 
 <script>
-function typeWriter(text, i, fnCallback) {
-    const element = document.getElementById("typed-slogan");
-    if (!element) return;
-    if (i < text.length) {
-        element.innerHTML = text.substring(0, i + 1);
-        setTimeout(() => typeWriter(text, i + 1, fnCallback), 80);
-    } else if (typeof fnCallback == 'function') {
-        fnCallback();
+function typeWriter(text,i,fnCallback){
+    const element=document.getElementById("typed-slogan");
+    if(!element) return;
+    if(i<text.length){
+        element.innerHTML=text.substring(0,i+1);
+        setTimeout(()=>typeWriter(text,i+1,fnCallback),80);
     }
+    else if(typeof fnCallback=='function') fnCallback();
 }
-window.onload = function() {
+
+window.onload=function(){
     document.body.classList.add('fade-in');
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1025 && navLinks.classList.contains('active')) {
+
+    const menuToggle=document.getElementById('mobile-menu');
+    const navLinks=document.getElementById('nav-links');
+    menuToggle.addEventListener('click',()=>navLinks.classList.toggle('active'));
+    window.addEventListener('resize',()=>{
+        if(window.innerWidth>=1025 && navLinks.classList.contains('active')) 
             navLinks.classList.remove('active');
+    });
+
+    const sloganText="TitanForce: Chiến Thắng Bằng Sức Mạnh Đồng Đội Và Kỷ Luật";
+    setTimeout(()=>{
+        typeWriter(sloganText,0,()=>{
+            const e=document.getElementById("typed-slogan"); 
+            if(e) e.style.borderRight='none';
+        });
+    },500);
+
+    function createSakura(){
+        const sakura=document.createElement("div");
+        sakura.classList.add("sakura");
+        sakura.textContent="🌸";
+        sakura.style.left=Math.random()*100+"vw";
+        sakura.style.fontSize=(Math.random()*14+10)+"px";
+        const duration=Math.random()*6+6;
+        sakura.style.animationDuration=duration+"s";
+        document.body.appendChild(sakura);
+        setTimeout(()=>sakura.remove(),duration*1000);
+    }
+    setInterval(createSakura,700);
+
+    // Popup chào mừng
+    const popup=document.getElementById("welcome-popup");
+    const closeBtn=document.getElementById("close-popup");
+    setTimeout(()=>popup.classList.add("show"),800);
+    closeBtn.addEventListener("click",()=>popup.classList.remove("show"));
+    setTimeout(()=>popup.classList.remove("show"),8000);
+
+    // === CHỐNG COPY SIÊU CỨNG ===
+    document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à,cút ngay cho bố"); });
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+
+    document.addEventListener('keydown', function(e) {
+        // Chặn phím Ctrl + [C,X,V,S,U,A]
+        if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
+        // Chặn Ctrl + Shift + [I,J,C]
+        if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+        // Chặn F12
+        if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+    });
+
+    // Chặn mở DevTools console (thủ thuật cơ bản)
+    setInterval(function(){
+        if(window.devtools && window.devtools.open) {
+            alert("⚠️ DevTools đang mở! Vui lòng đóng để tiếp tục.");
+            window.devtools.open = false;
+        }
+    }, 1000);
+
+    // Chặn copy bằng chuột và bàn phím
+    window.oncopy = window.oncut = window.onpaste = function(e){
+        e.preventDefault();
+        alert("⚠️ Không được phép sao chép nội dung trang!");
+        return false;
+    };
+
+    // Chặn click giữa (scroll wheel) mở menu DevTools
+    document.addEventListener('mousedown', function(e){
+        if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
+    });
+
+    // Thêm “bẫy” Ctrl+Shift+I theo cách nâng cao
+    document.addEventListener('keyup', function(e){
+        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i'){ 
+            e.preventDefault(); 
+            alert("⚠️ DevTools bị chặn!");
         }
     });
-    const sloganText = "TitanForce: Chiến Thắng Bằng Sức Mạnh Đồng Đội Và Kỷ Luật";
-    setTimeout(() => {
-        typeWriter(sloganText, 0, () => {
-            const element = document.getElementById("typed-slogan");
-            if (element) element.style.borderRight = 'none';
-        });
-    }, 500);
-
-    // 🌸 Hiệu ứng hoa anh đào rơi liên tục, mượt và tránh lag
-    function createSakura() {
-        const sakura = document.createElement("div");
-        sakura.classList.add("sakura");
-        sakura.textContent = "🌸";
-        sakura.style.left = Math.random() * 100 + "vw";
-        sakura.style.fontSize = (Math.random() * 14 + 10) + "px";
-        const duration = Math.random() * 6 + 6; // 6–12 giây
-        sakura.style.animationDuration = duration + "s";
-        sakura.style.transform = `rotate(${Math.random() * 360}deg)`;
-        document.body.appendChild(sakura);
-        setTimeout(() => sakura.remove(), duration * 1000);
-    }
-    setInterval(createSakura, 700);
 };
 </script>
+
+
 </body>
 </html>
