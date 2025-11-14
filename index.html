@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Trang chủ Quân đoàn TF</title>
 <style>
+/* ... (GIỮ NGUYÊN CSS KHÔNG LIÊN QUAN ĐẾN ICON) ... */
 * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color: transparent; -webkit-overflow-scrolling: touch; }
 body { font-family:Arial,sans-serif; background:url("logo.jpg") no-repeat center center fixed; background-size:cover; color:#fff; font-size:15px; min-height:100vh; overflow-x:hidden;}
 @keyframes fadeIn {from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); }}
@@ -37,143 +38,78 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 .main-footer a:hover { color:#FF3C00; text-decoration:underline; }
 .pulsating-author { animation:glow-pulse 2s infinite alternate; }
 @keyframes glow-pulse { 0%{text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);} 50%{text-shadow:0 0 10px rgba(255,204,0,0.9),0 0 20px rgba(255,100,0,0.7); transform:scale(1.05);} 100%{text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);} }
-
-/* 🌸 Hoa anh đào */
 .sakura { position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; animation:fall linear forwards; }
 @keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } }
-
-/* 🎉 POPUP CHÀO MỪNG */
-/* Popup nền */
-#welcome-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.5s;
-}
-#welcome-popup.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Nội dung popup */
-.popup-content {
-    background: rgba(15,15,15,0.95);
-    padding: 25px 30px;             /* padding đều 2 bên */
-    border-radius: 15px;
-    text-align: center;              /* căn giữa chữ */
-    box-shadow: 0 0 25px rgba(255,60,0,0.8);
-    animation: popup-in 0.8s ease forwards;
-    max-width: 90%;
-    width: 380px;                    /* rộng hơn để chữ thoáng */
-    line-height: 1.6;                /* khoảng cách dòng tốt hơn */
-}
-
-/* Logo popup */
-.popup-logo {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 15px;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #FF3C00;
-}
-
-/* Tiêu đề */
-.popup-content h2 {
-    color: #FF3C00;
-    margin: 10px 0 15px;             /* khoảng cách đều hơn */
-    text-shadow: 0 0 8px #FF3C00;
-    font-size: 22px;
-    line-height: 1.4;
-}
-
-/* Nội dung chữ */
-.popup-content p {
-    color: #fff;
-    margin: 10px 0;                  /* khoảng cách giữa các đoạn */
-    font-size: 15px;
-    line-height: 1.5;
-    text-align: center;
-    word-wrap: break-word;           /* xuống dòng khi dài */
-}
-
-/* Button */
-.popup-btn {
-    background: linear-gradient(90deg,#FF3C00,#FFCC00);
-    color: #fff;
-    border: none;
-    padding: 10px 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(255,60,0,0.8);
-    margin-top: 20px;                /* tăng khoảng cách trên */
-}
-.popup-btn:hover {
-    background: linear-gradient(90deg,#FFCC00,#FF3C00);
-    transform: scale(1.05);
-}
-
-/* Animation popup */
-@keyframes popup-in {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-.icon-social {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    vertical-align: middle;
-    border-radius: 4px;
-}
+#welcome-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; visibility: hidden; transition: 0.5s; }
+#welcome-popup.show { opacity: 1; visibility: visible; }
+.popup-content { background: rgba(15,15,15,0.95); padding: 25px 30px; border-radius: 15px; text-align: center; box-shadow: 0 0 25px rgba(255,60,0,0.8); animation: popup-in 0.8s ease forwards; max-width: 90%; width: 380px; line-height: 1.6; }
+.popup-logo { width: 70px; height: 70px; margin-bottom: 15px; border-radius: 50%; box-shadow: 0 0 12px #FF3C00; }
+.popup-content h2 { color: #FF3C00; margin: 10px 0 15px; text-shadow: 0 0 8px #FF3C00; font-size: 22px; line-height: 1.4; }
+.popup-content p { color: #fff; margin: 10px 0; font-size: 15px; line-height: 1.5; text-align: center; word-wrap: break-word; }
+.popup-btn { background: linear-gradient(90deg,#FF3C00,#FFCC00); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(255,60,0,0.8); margin-top: 20px; }
+.popup-btn:hover { background: linear-gradient(90deg,#FFCC00,#FF3C00); transform: scale(1.05); }
+@keyframes popup-in { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 
+/* === ĐIỀU CHỈNH ICON MẠNG XÃ HỘI === */
 
-
+/* Nhóm nút CTA */
 .cta-buttons-group {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;                /* icon nhỏ nên khoảng cách vừa */
-    margin-top: 20px;
+    gap: 15px; /* Giảm nhẹ khoảng cách giữa các icon */
+    margin-top: 25px; /* Tăng khoảng cách phía trên */
     flex-wrap: wrap;
 }
 
-/* Icon nhỏ gọn hơn */
+/* Khối liên kết/Icon */
 .icon-social {
-    width: 110px;             /* nhỏ nhưng vẫn nhìn rõ */
-    height: 55px;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    /* Kích thước khối liên kết - rộng hơn để dễ click */
+    width: 60px; /* Chiều rộng khối */
+    height: 60px; /* Chiều cao khối */
+    
+    border-radius: 50%; /* Làm tròn thành hình tròn để nổi bật */
+    background: rgba(255,255,255,0.1); /* Nền trong suốt nhẹ */
+    border: 2px solid rgba(255,100,0,0.5); /* Viền màu cam/đỏ nhẹ */
     backdrop-filter: blur(4px);
+    
+    /* Căn giữa hình ảnh bên trong */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.22s ease;
+    
+    /* Hiệu ứng chuyển động */
+    transition: all 0.25s ease-in-out; 
+    
+    /* Đổ bóng ban đầu cho icon nổi bật */
+    box-shadow: 0 0 10px rgba(255,60,0,0.5); 
 }
 
-/* Hover nhẹ – tinh tế */
+/* Hình ảnh Icon bên trong */
+.icon-social img {
+    width: 80%; /* Chiếm 80% chiều rộng của khối cha (.icon-social) */
+    height: 80%; /* Chiếm 80% chiều cao của khối cha (.icon-social) */
+    object-fit: contain; /* Đảm bảo hình ảnh vừa vặn mà không bị méo */
+    border-radius: 10px; /* Bo góc hình ảnh bên trong (nếu cần) */
+}
+
+/* Hover nhẹ – Tinh tế và Mạnh mẽ */
 .icon-social:hover {
-    transform: translateY(-3px) scale(1.09);
-    box-shadow: 0 6px 15px rgba(255,120,0,0.5);
-    border-color: rgba(255,150,0,0.9);
+    transform: translateY(-4px) scale(1.1); /* Nảy nhẹ lên và to hơn */
+    box-shadow: 0 8px 20px rgba(255,80,0,0.9), 0 0 30px rgba(255,160,0,0.7); /* Bóng đổ mạnh hơn, sáng hơn */
+    border-color: #FFCC00; /* Đổi màu viền khi hover */
+    background: rgba(255,100,0,0.15); /* Nền sáng hơn khi hover */
 }
 
+/* Footer CTA - Dùng cho chữ Call-to-action */
+.tf-footer-cta {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,60,0,0.3);
+}
 
-
-
-
+/* === KẾT THÚC ĐIỀU CHỈNH ICON MẠNG XÃ HỘI === */
 </style>
 </head>
 <body>
@@ -195,7 +131,6 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
     </div>
 </nav>
 
-<!-- POPUP -->
 <div id="welcome-popup">
   <div class="popup-content">
     <img src="logo2.jpg" alt="Logo TF" class="popup-logo">
@@ -209,13 +144,11 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 </div>
 
 <main class="titanforce-main">
-    <!-- Nội dung chính giữ nguyên -->
-     <header class="tf-header">
+    <header class="tf-header">
       <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
       <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
   </header>
-  <!-- (Toàn bộ nội dung chính giữ nguyên) -->
-   <section class="tf-introduction">
+    <section class="tf-introduction">
         <h2>💡 Triết lý của TitanForce</h2>
         <p>
             Quân đoàn TF không chỉ là một cộng đồng game thủ, mà còn là một **học viện rèn luyện phẩm chất và kỹ năng**. Chúng tôi tin rằng, trong thế giới game cũng như cuộc sống, chiến thắng không đến từ may mắn, mà từ **sự chuẩn bị tỉ mỉ, kỷ luật thép và tinh thần đồng đội không lay chuyển**.
@@ -275,35 +208,25 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
                 <li>**Thời gian Tập trung:** Cam kết tham gia các buổi huấn luyện theo lịch trình (tối thiểu **3 buổi/tuần**).</li>
             </ul>
         </div>
-        
-        
     </section>
-     <footer class="tf-footer-cta">
+
+    <footer class="tf-footer-cta">
         <p>
-            **Vinh quang đang chờ đợi!** Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
+            <strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
         </p>
+
         <div class="cta-buttons-group">
-            <footer class="tf-footer-cta">
-    <p>
-        <strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
-    </p>
+            <a href="https://www.tiktok.com/@lio.vn" class="icon-social">
+                <img src="tiktok.png" alt="TikTok">
+            </a>
 
-    <div class="cta-buttons-group">
-        <a href="https://www.tiktok.com/@lio.vn">
-            <img src="tiktok.png" class="icon-social">
-        </a>
+            <a href="https://www.facebook.com/profile.php?id=61583586631135" class="icon-social">
+                <img src="fbicon.png" alt="Facebook">
+            </a>
 
-        <a href="https://www.facebook.com/profile.php?id=61583586631135">
-            <img src="fbicon.png" class="icon-social">
-        </a>
-
-        <a href="https://zalo.me/g/yupyif524">
-            <img src="zalo.png" class="icon-social">
-        </a>
-    </div>
-</footer>
-
-
+            <a href="https://zalo.me/g/yupyif524" class="icon-social">
+                <img src="zalo.png" alt="Zalo">
+            </a>
         </div>
     </footer>
 </main>
@@ -313,6 +236,7 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 </footer>
 
 <script>
+// ... (GIỮ NGUYÊN JAVASCRIPT) ...
 function typeWriter(text,i,fnCallback){
     const element=document.getElementById("typed-slogan");
     if(!element) return;
