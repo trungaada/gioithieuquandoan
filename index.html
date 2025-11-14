@@ -129,6 +129,50 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
     from { transform: scale(0.7); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+.icon-social {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+    border-radius: 4px;
+}
+
+
+
+
+.cta-buttons-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;                /* icon nhỏ nên khoảng cách vừa */
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* Icon nhỏ gọn hơn */
+.icon-social {
+    width: 110px;             /* nhỏ nhưng vẫn nhìn rõ */
+    height: 55px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.22s ease;
+}
+
+/* Hover nhẹ – tinh tế */
+.icon-social:hover {
+    transform: translateY(-3px) scale(1.09);
+    box-shadow: 0 6px 15px rgba(255,120,0,0.5);
+    border-color: rgba(255,150,0,0.9);
+}
+
+
+
+
 
 </style>
 </head>
@@ -144,6 +188,7 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
         <a href="luat.html">⚔️ Luật quân đoàn</a>
         <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
         <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
+         <a href="dangki.html">🔥 Đăng kí thành viên</a>
         <a href="slo.html">⚔️ Giao lưu quân đoàn</a>
         <a href="hotro.html">👥 Hỗ trợ</a>
         <a href="qr.html">👥 Mã QR</a>
@@ -238,9 +283,27 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
             **Vinh quang đang chờ đợi!** Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
         </p>
         <div class="cta-buttons-group">
-            <a href="tuyenthanhvien.html" class="cta-button primary">🚀 Đăng kí Thành viên Ngay!</a>
-            <a href="https://www.facebook.com/profile.php?id=61583586631135" class="cta-button secondary">💬 Fanpage Cộng đồng</a>
-              <a href="https://zalo.me/g/yupyif524" class="cta-button secondary">💬 Zalo Cộng đồng</a>
+            <footer class="tf-footer-cta">
+    <p>
+        <strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
+    </p>
+
+    <div class="cta-buttons-group">
+        <a href="https://www.tiktok.com/@lio.vn">
+            <img src="tiktok.png" class="icon-social">
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61583586631135">
+            <img src="fbicon.png" class="icon-social">
+        </a>
+
+        <a href="https://zalo.me/g/yupyif524">
+            <img src="zalo.png" class="icon-social">
+        </a>
+    </div>
+</footer>
+
+
         </div>
     </footer>
 </main>
@@ -346,4 +409,3 @@ window.onload=function(){
 
 </body>
 </html>
-
