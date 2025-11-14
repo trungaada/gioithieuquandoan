@@ -6,8 +6,11 @@
 <title>Bảng Xếp Loại Rank — Quân đoàn TF</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 <style>
+/* ---------------------------------------------------- */
+/* CÁC STYLE CƠ BẢN VÀ HIỆU ỨNG NEON/CYBERPUNK */
+/* ---------------------------------------------------- */
 body {
-    background: url('logo2.jpg') no-repeat center center;
+    background: url('logo2.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
@@ -18,127 +21,168 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    color: #00eaff;
-    text-shadow: 0 0 15px #00eaff, 0 0 20px #00eaff;
+    filter: brightness(1.05);
+    position: relative;
+    overflow-x: hidden;
 }
 
-*/* Thanh menu */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(0, 234, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 234, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2em;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    color: #00eaff;
+    text-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff, 0 0 40px rgba(0, 234, 255, 0.5);
+    animation: glitch 3s infinite alternate;
+    display: inline-block;
+}
+
+@keyframes glitch {
+    0% { transform: translate(1px, 1px) skewX(0); }
+    5% { transform: translate(-1px, -1px) skewX(-2deg); }
+    10% { transform: translate(1px, 2px) skewX(0); }
+    15% { transform: translate(-2px, 1px) skewX(2deg); }
+    20% { transform: translate(2px, -1px) skewX(-1deg); }
+    25% { transform: translate(-1px, -2px) skewX(1deg); }
+    30%, 100% { transform: translate(0, 0) skewX(0); }
+}
+
+/* Thanh menu */
 .controls {
-  display: flex;
-  flex-wrap: wrap; /* tự động xuống dòng nếu không đủ chỗ */
-  justify-content: center; /* căn giữa ngang */
-  align-items: center; /* căn giữa dọc */
-  gap: 15px; /* tăng khoảng cách giữa các nút/select */
-  margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 select,
 button {
-  flex-shrink: 1; /* co giãn nếu màn hình nhỏ */
-  min-width: 90px;
-  max-width: 180px;
-  text-align: center;
-  font-size: 0.95em;
-  padding: 9px 18px;
-  border-radius: 25px;
-  font-weight: 700;
-  background: #00eaff;
-  color: #0f2027;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+    min-width: 90px;
+    max-width: 180px;
+    font-size: 0.95em;
+    padding: 9px 18px;
+    border-radius: 25px;
+    font-weight: 700;
+    background: linear-gradient(145deg, #00bfff, #00eaff);
+    color: #0f2027;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 234, 255, 0.8),
+                0 0 20px rgba(0, 234, 255, 0.4);
 }
 
 select:hover,
 button:hover {
-  background: #00bfff;
-  transform: translateY(-2px);
-  box-shadow: 0 0 14px rgba(0, 191, 255, 0.8);
+    background: linear-gradient(145deg, #00eaff, #00bfff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(0, 191, 255, 1);
 }
-
-/* Responsive cho màn hình nhỏ */
-@media screen and (max-width: 480px) {
-  .controls {
-    flex-direction: column; /* xếp nút theo cột */
-    gap: 10px; /* vẫn có khoảng cách giữa các nút */
-  }
-
-  select,
-  button {
-    width: 95%;
-    font-size: 0.85em;
-    padding: 7px 12px;
-  }
-}
-
 
 /* Bảng */
 .table-container {
-    max-width: 100%;
+    max-width: 900px;
     margin: auto;
     border-radius: 15px;
-    overflow: hidden; /* ⭐ Giữ bo tròn cho toàn bảng */
-    box-shadow: 0 0 20px rgba(0, 234, 255, 0.7), 0 0 40px rgba(0, 234, 255, 0.3);
-    background: rgba(0, 10, 15, 0.7);
-    border: 2px solid #00eaff;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 234, 255, 0.9),
+                0 0 60px rgba(0, 234, 255, 0.4);
+    background: rgba(0, 10, 15, 0.85);
+    border: 3px solid #00eaff;
     padding: 5px;
 }
 
-/* ⭐ Bo tròn riêng phần tiêu đề bảng */
 thead {
-    background: linear-gradient(90deg, #00bfff, #00eaff);
+    background: linear-gradient(90deg, #00bfff, #00eaff, #00bfff);
     color: #0f2027;
     text-transform: uppercase;
-    font-size: 0.9em;
-    border-top-left-radius: 15px;   /* Bo góc trái trên */
-    border-top-right-radius: 15px;  /* Bo góc phải trên */
 }
 
-thead {
-    background: linear-gradient(90deg, #00bfff, #00eaff);
-    color: #0f2027;
-    text-transform: uppercase;
-    font-size: 0.9em;
-}
 th, td {
     padding: 8px 6px;
     border-bottom: 1px solid rgba(255,255,255,0.15);
     text-align: center;
     font-size: 0.85em;
 }
-tbody tr {
-    background: rgba(0,0,0,0.2);
-}
-tbody tr:nth-child(even) {
-    background: rgba(0,0,0,0.3);
-}
+
 tbody tr:hover {
-    background: rgba(0, 234, 255, 0.15);
-    transition: background 0.3s ease;
+    background: rgba(0, 234, 255, 0.25);
+    box-shadow: inset 0 0 8px rgba(0, 234, 255, 0.5);
     cursor: pointer;
 }
+
 .rank-img {
     height: 25px;
     vertical-align: middle;
-    margin-right: 3px;
 }
+
+/* Hiệu ứng top 1,2,3 */
+tbody tr:first-child td:nth-child(1) {
+    color: gold;
+    font-weight: bold;
+    text-shadow: 0 0 5px gold;
+    font-size: 1.2em;
+}
+tbody tr:nth-child(1) td:nth-child(2) {
+    color: #ffd700;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffea00;
+}
+tbody tr:nth-child(2) td {
+    color: silver;
+    font-weight: bold;
+}
+tbody tr:nth-child(3) td {
+    color: #cd7f32;
+    font-weight: bold;
+}
+
 footer {
     margin-top: 20px;
     font-size: 0.8em;
-    color: #bbb;
-    text-shadow: 0 0 3px rgba(255,255,255,0.2);
+    color: #00eaff;
+    text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
 }
-@media screen and (max-width: 480px) {
-    h1 { font-size: 1.5em; }
-    th, td { font-size: 0.75em; }
-    .rank-img { height: 20px; }
+
+/* =================================== */
+/* HIỆU ỨNG HOA ANH ĐÀO RƠI (SAKURA)  */
+/* =================================== */
+.sakura {
+    position: fixed;
+    top: -10px;
+    width: 12px;
+    height: 12px;
+    background-image: url('sakura.png');
+    background-size: cover;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 9999;
+    animation: sakuraFall linear infinite;
+}
+
+@keyframes sakuraFall {
+    0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    50% { transform: translateX(20px) rotate(180deg); opacity: 0.9; }
+    100% { transform: translateY(100vh) translateX(-20px) rotate(360deg); opacity: 0; }
 }
 </style>
 </head>
@@ -147,44 +191,55 @@ footer {
 <h1>BẢNG XẾP LOẠI RANK — Quân đoàn TF</h1>
 
 <div class="controls">
-  <select id="mode">
-    <option value="st">Sắp theo Rank Sinh Tồn</option>
-    <option value="tc">Sắp theo Rank Tử Chiến</option>
-  </select>
-  <button onclick="sortRank('asc')">⬆️ Từ thấp → cao</button>
-  <button onclick="sortRank('desc')">⬇️️ Từ cao → thấp</button>
-  <button onclick="window.location.href='index.html'">🏠 Trang chủ</button>
+    <select id="mode">
+        <option value="st">Sắp theo Rank Sinh Tồn</option>
+        <option value="tc">Sắp theo Rank Tử Chiến</option>
+    </select>
+    <button onclick="sortRank('asc')">⬆️ Từ thấp → cao</button>
+    <button onclick="sortRank('desc')">⬇️️ Từ cao → thấp</button>
+    <button onclick="window.location.href='index.html'">🏠 Trang chủ</button>
 </div>
 
 <div class="table-container">
-  <table id="rankTable">
-    <thead>
-      <tr>
-        <th>Hạng</th>
-        <th>Tên Thành Viên</th>
-        <th>LV</th>
-        <th>Rank Sinh Tồn</th>
-        <th>Rank Tử Chiến</th>
-      </tr>
-    </thead>
-    <tbody id="rankBody"></tbody>
-  </table>
+    <table id="rankTable">
+        <thead>
+            <tr>
+                <th>Hạng</th>
+                <th>Tên Thành Viên</th>
+                <th>LV</th>
+                <th>Rank Sinh Tồn</th>
+                <th>Rank Tử Chiến</th>
+            </tr>
+        </thead>
+        <tbody id="rankBody"></tbody>
+    </table>
 </div>
 
 <footer>© 2025 Quân đoàn TitanForce² — Cập nhật 09/11/2025</footer>
 
 <script>
-const rankValue = { "d":0,"b":1,"v":2,"bk":3,"bkt":4,"kc":5,"kct":6,"ht":7,"htc":8,"ct":9,"ct1":10,"dct":11,"tv":12};
-const rankImages = {
-  "d": "1.png","b": "2.png","v": "3.png","bk": "9.jpg",
-  "kc": "5.png","ht": "6.png","ct": "7.jpg","tv": "8.jpg","ct1": "10.jpg","dct": "11.jpg","htc": "12.jpg","bkt": "13.jpg","kct": "14.jpg"
+/* ----------------------------------------------- */
+/* LOGIC RANK */
+/* ----------------------------------------------- */
+
+const rankValue = { 
+    "d":0,"b":1,"v":2,"bk":3,"bkt":4,"kc":5,"kct":6,"ht":7,"htc":8,"ct":9,
+    "ct1":10,"dct":11,"tv":12,"bkc":3
 };
-function getRankImage(rankCode){
-  const src = rankImages[rankCode] || "1.png";
-  return `<img src="${src}" alt="${rankCode}" class="rank-img">`;
+
+const rankImages = {
+    "d": "1.png","b": "2.png","v": "3.png","bk": "9.jpg",
+    "kc": "5.png","ht": "6.png","ct": "7.jpg","tv": "8.jpg",
+    "ct1": "10.jpg","dct": "11.jpg","htc": "12.jpg",
+    "bkt": "13.jpg","kct": "14.jpg","bkc":"9.jpg"
+};
+
+function getRankImage(code){
+    code = code ? code.trim() : "d";
+    const src = rankImages[code] || "1.png";
+    return `<img src="${src}" class="rank-img">`;
 }
 
-// Dữ liệu: [Tên, LV, Rank ST, Rank TC]
 const members = [
 ["ム𝙏𝙁.𝙆𝙪𝙪Đẩ𝙪𝙪亗",51,"bk","bkt"],
 ["TF.Late'love...",58,"bk","ct1"],
@@ -229,84 +284,110 @@ const members = [
 ["TF.Cường",57,"kc","ct1"],
 ["TF.PhucDuy",61,"ht","htc"],
 ["TF.tduycte08",69,"bk","bkt"],
-["TF.AT",52,"v","kct"],
+["TF.lina Gril",64,"ht","dct"],
+["TF.DƯƠNG NGỌC",61,"ht","htc"],
+["TF.no1xsn18.4",61,"bk","bkt"],
+["TF.im me di?",61,"ht","htc"],
+["TF.adu em nọc",73,"kc","htc"],
+["TF.PhưnLynhh:33",59,"kc","bkc"],
+["TF.cte lvmax",61,"ht","ct1"],
 ];
 
 function renderTable(data){
-  const tbody = document.getElementById("rankBody");
-  tbody.innerHTML = "";
-  data.forEach((m, i) => {
-    let rankDisplay = `${i+1}`;
-    if(i===0) rankDisplay='🥇';
-    else if(i===1) rankDisplay='🥈';
-    else if(i===2) rankDisplay='🥉';
-    const rankSTImage = getRankImage(m[2]);
-    const rankTCImage = getRankImage(m[3]);
-    tbody.innerHTML += `
-      <tr>
-        <td>${rankDisplay}</td>
-        <td>${m[0]}</td>
-        <td>${m[1]}</td>
-        <td>${rankSTImage}</td>
-        <td>${rankTCImage}</td>
-      </tr>`;
-  });
+    const tbody = document.getElementById("rankBody");
+    tbody.innerHTML = "";
+    data.forEach((m, i) => {
+        let rankDisplay = `${i+1}`;
+        let memberName = m[0];
+
+        if(i===0){ rankDisplay='🥇'; memberName='👑 '+memberName; }
+        else if(i===1) rankDisplay='🥈';
+        else if(i===2) rankDisplay='🥉';
+
+        tbody.innerHTML += `
+        <tr>
+            <td>${rankDisplay}</td>
+            <td>${memberName}</td>
+            <td>${m[1]}</td>
+            <td>${getRankImage(m[2])}</td>
+            <td>${getRankImage(m[3])}</td>
+        </tr>`;
+    });
 }
 
 function sortRank(direction){
-  const mode = document.getElementById("mode").value;
-  const index = (mode==="st") ? 2 : 3;
-  members.sort((a,b)=>{
-    const rankA = rankValue[a[index].trim()] || 0;
-    const rankB = rankValue[b[index].trim()] || 0;
-    if(rankA===rankB) return b[1]-a[1]; // nếu rank bằng thì ai LV cao hơn xếp trên
-    return direction==="asc" ? rankA-rankB : rankB-rankA;
-  });
-  renderTable(members);
+    const mode = document.getElementById("mode").value;
+    const index = (mode==="st") ? 2 : 3;
+
+    members.sort((a,b)=>{
+        const A = rankValue[a[index].trim()] || 0;
+        const B = rankValue[b[index].trim()] || 0;
+        if(A===B) return b[1]-a[1];
+        return direction==="asc" ? A-B : B-A;
+    });
+    renderTable(members);
 }
 
-sortRank('desc');
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mode').value = 'tc';
+    sortRank('desc');
+});
 document.getElementById('mode').addEventListener('change',()=>{sortRank('desc');});
- document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à,cút ngay cho bố"); });
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
 
-    document.addEventListener('keydown', function(e) {
-        // Chặn phím Ctrl + [C,X,V,S,U,A]
-        if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
-        // Chặn Ctrl + Shift + [I,J,C]
-        if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-        // Chặn F12
-        if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-    });
+/* ---------------------------------------------------- */
+/* HOA ANH ĐÀO RƠI */
+/* ---------------------------------------------------- */
+function createSakura() {
+    const s = document.createElement("div");
+    s.classList.add("sakura");
+    s.style.left = Math.random() * window.innerWidth + "px";
+    const duration = Math.random() * 4 + 4;
+    s.style.animationDuration = duration + "s";
+    const size = Math.random() * 10 + 10;
+    s.style.width = size + "px";
+    s.style.height = size + "px";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), duration * 1000);
+}
+setInterval(createSakura, 300);
 
-    // Chặn mở DevTools console (thủ thuật cơ bản)
-    setInterval(function(){
-        if(window.devtools && window.devtools.open) {
-            alert("⚠️ DevTools đang mở! Vui lòng đóng để tiếp tục.");
-            window.devtools.open = false;
-        }
-    }, 1000);
+/* ---------------------------------------------------- */
+/* CHỐNG COPY */
+/* ---------------------------------------------------- */
 
-    // Chặn copy bằng chuột và bàn phím
-    window.oncopy = window.oncut = window.onpaste = function(e){
-        e.preventDefault();
-        alert("⚠️ Không được phép sao chép nội dung trang!");
-        return false;
-    };
+document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à, cút ngay!"); });
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
 
-    // Chặn click giữa (scroll wheel) mở menu DevTools
-    document.addEventListener('mousedown', function(e){
-        if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
-    });
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
+    if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+    if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+});
 
-    // Thêm “bẫy” Ctrl+Shift+I theo cách nâng cao
-    document.addEventListener('keyup', function(e){
-        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i'){ 
-            e.preventDefault(); 
-            alert("⚠️ DevTools bị chặn!");
-        }
-    });
+setInterval(() => {
+    if(window.devtools && window.devtools.open){
+        alert("⚠️ DevTools đang mở! Tắt ngay!");
+        window.devtools.open = false;
+    }
+}, 1000);
+
+window.oncopy = window.oncut = window.onpaste = function(e){
+    e.preventDefault();
+    alert("⚠️ Không được phép sao chép!");
+    return false;
+};
+
+document.addEventListener('mousedown', e => {
+    if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
+});
+
+document.addEventListener('keyup', e => {
+    if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='i'){
+        e.preventDefault(); 
+        alert("⚠️ DevTools bị chặn!");
+    }
+});
 </script>
 
 </body>
