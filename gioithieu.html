@@ -1,502 +1,207 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang=vi>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giới thiệu thành viên — Quân đoàn TF</title>
 
-<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name=description content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²">
+<link href=https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap rel=stylesheet>
 
 <style>
-/* ===================== ROOT ===================== */
-:root {
-    --bg: #030a18;
-    --card: #0f1724;
-    --accent: #6ee7b7;
-    --accent-shadow: rgba(110, 231, 183, 0.5);
-    --muted: #9aa4b2;
-    --glass: rgba(255, 255, 255, 0.06);
-    --radius: 18px;
-
-    --color-primary: #00FFFF;
-    --color-secondary: #3b82f6;
-
-    --neon-blue-shadow: rgba(0, 255, 255, 0.8);
-
-    --member-name-color: #FF0000;
-    --member-name-shadow: rgba(255, 0, 0, 0.8);
-
-    --member-role-color: #FFD700;
-
-    font-family: 'Poppins', system-ui, sans-serif;
+:root{
+    --bg:#030a18;
+    --card:#0f1724;
+    --accent:#6ee7b7;
+    --accent-shadow:rgba(110,231,183,0.5);
+    --muted:#9aa4b2;
+    --glass:rgba(255,255,255,0.06);
+    --radius:18px;
+    --color-primary:#00FFFF;
+    --color-secondary:#3b82f6;
+    --neon-blue-shadow:rgba(0,255,255,0.8);
+    --member-name-color:#FF0000;
+    --member-name-shadow:rgba(255,0,0,0.8);
+    --member-role-color:#FFD700;
+    font-family:Poppins,system-ui,sans-serif;
 }
 
-/* ===================== RESET ===================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+html,body{
+    width:100%;
+    min-height:100vh;
+    background:url(logo.jpg) no-repeat center center fixed;
+    background-size:cover;
+    color:#e6eef6;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:60px 20px 80px;
+    overflow-x:hidden;
 }
 
-html, body {
-    width: 100%;
-    min-height: 100vh;
-    background: url('logo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #e6eef6;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    padding: 60px 20px 80px;
-    overflow-x: hidden;
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:linear-gradient(0deg,transparent 95%,rgba(110,231,183,0.08) 100%),linear-gradient(90deg,transparent 95%,rgba(110,231,183,0.08) 100%);
+    background-size:30px 30px;
+    opacity:0.25;
+    pointer-events:none;
+    z-index:0;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
-        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
-    background-size: 30px 30px;
-    opacity: 0.25;
-    pointer-events: none;
-    z-index: 0;
+body{opacity:0;animation:fadeIn 1s ease-out 0.2s forwards}
+@keyframes fadeIn{to{opacity:1}}
+
+main{z-index:1;width:100%;max-width:1200px;text-align:center}
+header{margin-bottom:30px}
+.logo-container{margin-bottom:20px;display:flex;justify-content:center}
+#main-logo{width:clamp(100px,15vw,150px);border-radius:50%;border:3px solid var(--color-primary);box-shadow:0 0 15px var(--neon-blue-shadow);transition:0.4s ease-in-out}
+#main-logo:hover{transform:rotate(5deg) scale(1.05);box-shadow:0 0 25px var(--neon-blue-shadow)}
+
+h1#typing-title{
+    font-size:clamp(28px,6vw,46px);
+    color:var(--color-primary);
+    text-shadow:0 0 8px var(--neon-blue-shadow);
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:.15em solid var(--color-primary);
+    animation:flicker 3s infinite alternate, blink-caret .75s step-end infinite;
 }
+@keyframes flicker{0%,100%{text-shadow:0 0 10px var(--neon-blue-shadow)}50%{text-shadow:0 0 5px var(--color-primary)}}
+@keyframes blink-caret{from,to{border-color:transparent}50%{border-color:var(--color-primary)}}
+p.lead{color:var(--muted);margin-top:6px;font-size:15px;font-style:italic}
 
-body {
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.2s forwards;
-}
+.marquee-container{width:100%;margin:25px 0;padding:8px 0;background:var(--glass);border-top:1px solid rgba(110,231,183,0.2);border-bottom:1px solid rgba(110,231,183,0.2);backdrop-filter:blur(5px)}
+.marquee-text{color:var(--accent);font-size:14px;font-weight:600;text-shadow:0 0 5px var(--accent-shadow)}
 
-@keyframes fadeIn { to { opacity: 1; } }
-
-/* ===================== HEADER ===================== */
-
-main {
-    z-index: 1;
-    width: 100%;
-    max-width: 1200px;
-    text-align: center;
-}
-
-header { margin-bottom: 30px; }
-
-.logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-#main-logo {
-    width: clamp(100px, 15vw, 150px);
-    border-radius: 50%;
-    border: 3px solid var(--color-primary);
-    box-shadow: 0 0 15px var(--neon-blue-shadow);
-    transition: 0.4s ease-in-out;
-}
-
-#main-logo:hover {
-    transform: rotate(5deg) scale(1.05);
-    box-shadow: 0 0 25px var(--neon-blue-shadow);
-}
-
-/* ===================== TITLE ===================== */
-
-h1#typing-title {
-    font-size: clamp(28px, 6vw, 46px);
-    color: var(--color-primary);
-    text-shadow: 0 0 8px var(--neon-blue-shadow);
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: .15em solid var(--color-primary);
-    animation: flicker 3s infinite alternate, blink-caret .75s step-end infinite;
-}
-
-@keyframes flicker {
-    0%,100% { text-shadow: 0 0 10px var(--neon-blue-shadow); }
-    50% { text-shadow: 0 0 5px var(--color-primary); }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--color-primary); }
-}
-
-p.lead {
-    color: var(--muted);
-    margin-top: 6px;
-    font-size: 15px;
-    font-style: italic;
-}
-
-/* ===================== MARQUEE ===================== */
-
-.marquee-container {
-    width: 100%;
-    margin: 25px 0;
-    padding: 8px 0;
-    background: var(--glass);
-    border-top: 1px solid rgba(110,231,183,0.2);
-    border-bottom: 1px solid rgba(110,231,183,0.2);
-    backdrop-filter: blur(5px);
-}
-
-.marquee-text {
-    color: var(--accent);
-    font-size: 14px;
-    font-weight: 600;
-    text-shadow: 0 0 5px var(--accent-shadow);
-}
-
-/* ===================== MEMBERS ===================== */
-
-.members {
-    display: grid;
-    width: 100%;
-    gap: 25px;
-    margin-top: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.card {
-    background: var(--glass);
-    padding: 25px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-
-    transform: translateY(20px);
-    opacity: 0;
-
-    animation: float 6s ease-in-out infinite;
-    perspective: 1000px;
-    overflow: hidden;
-    position: relative;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
-}
-
-.card-enter {
-    animation: slideUpFadeIn .8s ease forwards;
-}
-
-@keyframes slideUpFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card-border-glow {
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius);
-    background: linear-gradient(45deg, var(--color-primary), var(--accent), var(--member-name-color));
-    background-size: 200% 200%;
-    filter: blur(8px);
-    opacity: 0;
-    transition: 0.4s;
-    animation: rotate-border 6s linear infinite;
-}
-
-@keyframes rotate-border {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.card:hover .card-border-glow {
-    opacity: 1;
-}
-
-.avatar {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    border: 3px solid rgba(255,100,100,0.8);
-    box-shadow: 0 0 15px rgba(255,100,100,0.5);
-    transition: 0.35s;
-}
-
-/* ===================== TEXT ===================== */
-
-h2 {
-    margin-bottom: 4px;
-    color: var(--member-name-color);
-    text-shadow: 0 0 8px var(--member-name-shadow);
-}
-
-p.role {
-    color: var(--member-role-color);
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-/* ===================== BADGES ===================== */
-
-.badge {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    margin: 3px;
-    font-size: 12px;
-    transition: .3s;
-}
-
-.card:hover .badge {
-    background: var(--accent);
-    color: var(--bg);
-}
-
-/* ===================== BUTTON ===================== */
-
-#backButton {
-    margin-top: 35px;
-    display: inline-block;
-    padding: 12px 20px;
-    border-radius: 12px;
-    border: 2px solid var(--color-primary);
-    font-weight: 700;
-    color: var(--color-primary);
-    text-decoration: none;
-    background: rgba(0,255,255,0.15);
-    animation: neon-flicker-btn 2.5s infinite alternate;
-    transition: .4s;
-}
-
-@keyframes neon-flicker-btn {
-    0%,100% {
-        box-shadow: 0 0 10px var(--neon-blue-shadow);
-    }
-    50% {
-        box-shadow: 0 0 4px rgba(0,255,255,0.6);
-    }
-}
-
-#backButton:hover {
-    transform: scale(1.1);
-    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-    color: var(--bg);
-    box-shadow: 0 0 30px var(--neon-blue-shadow);
-}
-
-/* ===================== STARFALL ===================== */
-
-.falling-star {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,.8);
-    box-shadow: 0 0 5px rgba(255,255,255,.4);
-    pointer-events: none;
-}
-
+.members{display:grid;width:100%;gap:25px;margin-top:30px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--glass);padding:25px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.05);box-shadow:0 4px 15px rgba(0,0,0,0.5);transform:translateY(20px);opacity:0;animation:float 6s ease-in-out infinite;perspective:1000px;overflow:hidden;position:relative}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-5px)}100%{transform:translateY(0)}}
+.card-enter{animation:slideUpFadeIn .8s ease forwards}
+@keyframes slideUpFadeIn{to{opacity:1;transform:translateY(0)}}
+.card-border-glow{position:absolute;inset:-2px;border-radius:var(--radius);background:linear-gradient(45deg,var(--color-primary),var(--accent),var(--member-name-color));background-size:200% 200%;filter:blur(8px);opacity:0;transition:.4s;animation:rotate-border 6s linear infinite}
+@keyframes rotate-border{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.card:hover .card-border-glow{opacity:1}
+.avatar{width:90px;height:90px;margin:0 auto 12px;border-radius:50%;background-size:cover;background-position:center;border:3px solid rgba(255,100,100,.8);box-shadow:0 0 15px rgba(255,100,100,.5);transition:.35s}
+h2{margin-bottom:4px;color:var(--member-name-color);text-shadow:0 0 8px var(--member-name-shadow)}
+p.role{color:var(--member-role-color);font-weight:700;margin-bottom:12px}
+.badge{display:inline-block;padding:5px 10px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);margin:3px;font-size:12px;transition:.3s}
+.card:hover .badge{background:var(--accent);color:var(--bg)}
+#backButton{margin-top:35px;display:inline-block;padding:12px 20px;border-radius:12px;border:2px solid var(--color-primary);font-weight:700;color:var(--color-primary);text-decoration:none;background:rgba(0,255,255,.15);animation:neon-flicker-btn 2.5s infinite alternate;transition:.4s}
+@keyframes neon-flicker-btn{0%,100%{box-shadow:0 0 10px var(--neon-blue-shadow)}50%{box-shadow:0 0 4px rgba(0,255,255,.6)}}
+#backButton:hover{transform:scale(1.1);background:linear-gradient(45deg,var(--color-primary),var(--color-secondary));color:var(--bg);box-shadow:0 0 30px var(--neon-blue-shadow)}
+.falling-star{position:absolute;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:0 0 5px rgba(255,255,255,.4);pointer-events:none}
 </style>
 </head>
 
 <body>
 
-<!-- Hiệu ứng sao rơi -->
-<div id="starfall-container" style="position:fixed;inset:0;overflow:hidden;z-index:1"></div>
+<div id=starfall-container style=position:fixed;inset:0;overflow:hidden;z-index:1></div>
 
 <main>
+<header>
+    <div class=logo-container>
+        <img id=main-logo src=logo2.jpg alt=Logo Quân đoàn TF>
+    </div>
+    <h1 id=typing-title></h1>
+    <p class=lead>Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
+</header>
 
-    <header>
-        <div class="logo-container">
-            <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF">
+<div class=marquee-container>
+    <marquee class=marquee-text scrollamount=6>
+        ⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay!
+    </marquee>
+</div>
+
+<section class=members>
+    <div class=card>
+        <div class=card-border-glow></div>
+        <div class=avatar style=background-image:url(trung1.jpg)></div>
+        <h2><span id=name-trung></span></h2>
+        <p class=role><span id=role-trung></span></p>
+        <div class=badges>
+            <span class=badge>Lãnh đạo</span>
+            <span class=badge>Chiến thuật</span>
+            <span class=badge>Tuyển quân</span>
         </div>
-
-        <h1 id="typing-title"></h1>
-        <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
-    </header>
-
-    <div class="marquee-container">
-        <marquee class="marquee-text" scrollamount="6">
-            ⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay!
-        </marquee>
     </div>
 
-    <!-- ===================== MEMBER CARDS ===================== -->
-    <section class="members">
-
-        <!-- MEMBER 1 -->
-        <div class="card">
-            <div class="card-border-glow"></div>
-
-            <div class="avatar" style="background-image:url('trung1.jpg')"></div>
-
-            <h2><span id="name-trung"></span></h2>
-            <p class="role"><span id="role-trung"></span></p>
-
-            <div class="badges">
-                <span class="badge">Lãnh đạo</span>
-                <span class="badge">Chiến thuật</span>
-                <span class="badge">Tuyển quân</span>
-            </div>
+    <div class=card>
+        <div class=card-border-glow></div>
+        <div class=avatar style=background-image:url(huy.jpg)></div>
+        <h2><span id=name-tv2></span></h2>
+        <p class=role><span id=role-tv2></span></p>
+        <div class=badges>
+            <span class=badge>Lãnh đạo</span>
+            <span class=badge>Chiến thuật</span>
+            <span class=badge>Tuyển quân</span>
         </div>
+    </div>
+</section>
 
-        <!-- MEMBER 2 -->
-        <div class="card">
-            <div class="card-border-glow"></div>
-
-            <div class="avatar" style="background-image:url('huy.jpg')"></div>
-
-            <h2><span id="name-tv2"></span></h2>
-            <p class="role"><span id="role-tv2"></span></p>
-
-            <div class="badges">
-                <span class="badge">Lãnh đạo</span>
-                <span class="badge">Chiến thuật</span>
-                <span class="badge">Tuyển quân</span>
-            </div>
-        </div>
-
-    </section>
-
-    <a id="backButton" href="index.html">Quay lại trang chủ</a>
-
+<a id=backButton href=index.html>Quay lại trang chủ</a>
 </main>
 
-<!-- ===================== SCRIPT ===================== -->
 <script>
-/* TYPING TEXT */
-const textToType = "Quản Trị Quân Đoàn";
-
-const memberData = [
-    { id: "name-trung", text: "Trung (TF.Kuronami )", speed: 80 },
-    { id: "role-trung", text: "👑 Chỉ huy N2", speed: 60 },
-    { id: "name-tv2", text: "Huy (TF.Huy )", speed: 80 },
-    { id: "role-tv2", text: "👑 Chỉ huy N1", speed: 60 },
+const textToType='Quản Trị Quân Đoàn';
+const memberData=[
+    {id:'name-trung',text:'Trung (TF.Kuronami )',speed:80},
+    {id:'role-trung',text:'👑 Chỉ huy N2',speed:60},
+    {id:'name-tv2',text:'Huy (TF.Huy )',speed:80},
+    {id:'role-tv2',text:'👑 Chỉ huy N1',speed:60}
 ];
 
-function typeWriterEffect(id, text, speed) {
-    return new Promise(resolve => {
-        const el = document.getElementById(id);
-        el.classList.add("typing-member");
-
-        let i = 0;
-        el.textContent = "";
-
-        function type() {
-            if (i < text.length) {
-                el.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                el.classList.remove("typing-member");
-                el.classList.add("typing-done");
-                resolve();
-            }
+function typeWriterEffect(id,text,speed){
+    return new Promise(resolve=>{
+        const el=document.getElementById(id);
+        el.classList.add('typing-member');
+        let i=0;
+        el.textContent='';
+        function type(){
+            if(i<text.length){el.textContent+=text.charAt(i);i++;setTimeout(type,speed)}
+            else{el.classList.remove('typing-member');el.classList.add('typing-done');resolve()}
         }
         type();
     });
 }
 
-async function runMemberLoop() {
-    while (true) {
-        for (const m of memberData) {
-            await typeWriterEffect(m.id, m.text, m.speed);
-        }
-        await new Promise(r => setTimeout(r, 5000));
-
-        memberData.forEach(m => {
-            document.getElementById(m.id).textContent = "";
-        });
+async function runMemberLoop(){
+    while(true){
+        for(const m of memberData) await typeWriterEffect(m.id,m.text,m.speed);
+        await new Promise(r=>setTimeout(r,5000));
+        memberData.forEach(m=>document.getElementById(m.id).textContent='')
     }
 }
 
-/* CARD ANIMATION */
-function animateCards() {
-    document.querySelectorAll(".card").forEach((c, i) => {
-        c.style.animationDelay = `${i * 0.15 + 0.5}s`;
-        c.classList.add("card-enter");
-    });
-}
+function animateCards(){document.querySelectorAll('.card').forEach((c,i)=>{c.style.animationDelay=`${i*0.15+0.5}s`;c.classList.add('card-enter')})}
 
-/* STARFALL */
-const stars = [];
-function initStarfall() {
-    const container = document.getElementById("starfall-container");
-    const numStars = 60;
-
-    for (let i = 0; i < numStars; i++) {
-        const s = document.createElement("div");
-        s.classList.add("falling-star");
-
-        const size = Math.random() * 4 + 2;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.transform = `translate(${x}px, ${y}px)`;
-
+const stars=[];
+function initStarfall(){
+    const container=document.getElementById('starfall-container'),numStars=60;
+    for(let i=0;i<numStars;i++){
+        const s=document.createElement('div');
+        s.classList.add('falling-star');
+        const size=Math.random()*4+2,x=Math.random()*window.innerWidth,y=Math.random()*window.innerHeight;
+        s.style.width=size+'px';
+        s.style.height=size+'px';
+        s.style.transform=`translate(${x}px, ${y}px)`;
         container.appendChild(s);
-
-        stars.push({
-            element: s,
-            x, y,
-            speed: Math.random() * 1 + 0.5,
-            drift: (Math.random() - 0.5) * 0.3,
-            size
-        });
+        stars.push({element:s,x,y,speed:Math.random()*1+0.5,drift:(Math.random()-.5)*.3,size})
     }
 }
+function updateStarfall(){stars.forEach(s=>{s.y+=s.speed;s.x+=s.drift;if(s.y>window.innerHeight){s.y=-s.size;s.x=Math.random()*window.innerWidth}s.element.style.transform=`translate(${s.x}px, ${s.y}px)`});requestAnimationFrame(updateStarfall)}
 
-function updateStarfall() {
-    stars.forEach(s => {
-        s.y += s.speed;
-        s.x += s.drift;
+document.addEventListener('contextmenu',e=>{e.preventDefault();alert('⚠️ Copy cái l**n? Làm thì mới có ăn nhé!')});
+document.addEventListener('selectstart',e=>e.preventDefault());
+document.addEventListener('dragstart',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{if(e.key==='F12'){alert('⚠️ DevTools bị chặn!');e.preventDefault()}});
 
-        if (s.y > window.innerHeight) {
-            s.y = -s.size;
-            s.x = Math.random() * window.innerWidth;
-        }
-
-        s.element.style.transform = `translate(${s.x}px, ${s.y}px)`;
-    });
-    requestAnimationFrame(updateStarfall);
-}
-
-/* LOCK COPY + DEVTOOLS */
-document.addEventListener("contextmenu", e => {
-    e.preventDefault();
-    alert("⚠️ Copy cái l**n? Làm thì mới có ăn nhé!");
-});
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
-
-document.addEventListener("keydown", e => {
-    if (e.key === "F12") {
-        alert("⚠️ DevTools bị chặn!");
-        e.preventDefault();
-    }
-});
-
-/* ON LOAD */
-window.onload = async function () {
-    await typeWriterEffect("typing-title", textToType, 100);
-    runMemberLoop();
-    initStarfall();
-    updateStarfall();
-    animateCards();
-};
+window.onload=async function(){await typeWriterEffect('typing-title',textToType,100);runMemberLoop();initStarfall();updateStarfall();animateCards();}
 </script>
-
 </body>
 </html>
