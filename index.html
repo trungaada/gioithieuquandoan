@@ -5,13 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Trang chủ Quân đoàn TF</title>
 <style>
-/* ... (GIỮ NGUYÊN CSS KHÔNG LIÊN QUAN ĐẾN ICON) ... */
-* { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color: transparent; -webkit-overflow-scrolling: touch; }
-body { font-family:Arial,sans-serif; background:url("logo.jpg") no-repeat center center fixed; background-size:cover; color:#fff; font-size:15px; min-height:100vh; overflow-x:hidden;}
-@keyframes fadeIn {from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); }}
-main { opacity:0; text-align:center; padding:20px 15px; margin:70px auto 40px auto; max-width:650px; background-color: rgba(10,10,10,0.8); border-radius:10px; box-shadow:0 0 20px rgba(255,60,0,0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: all 0.4s ease-in-out;}
-body.fade-in main { opacity:1; animation: fadeIn 1.2s ease-out forwards; }
-nav { position:fixed; top:0; left:0; width:100%; display:flex; align-items:center; justify-content:space-between; padding:5px 12px; z-index:100; background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); background-size:400% 100%; animation:rainbow-gradient 15s ease infinite; box-shadow:0 2px 8px rgba(204,0,0,0.7);}
+/* === RESET & BODY === */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    -webkit-tap-highlight-color: transparent; 
+    -webkit-overflow-scrolling: touch; 
+}
+body { 
+    font-family: Arial, sans-serif; 
+    background: url("logo.jpg") no-repeat center center fixed; 
+    background-size: cover; 
+    color: #fff; 
+    font-size: 16px; 
+    line-height: 1.75;
+    min-height: 100vh; 
+    overflow-x: hidden;
+    text-align: justify;
+}
+
+/* === MAIN FADE-IN === */
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+main { 
+    opacity:0; 
+    text-align:center; 
+    padding:25px 20px; 
+    margin:70px auto 40px auto; 
+    max-width:650px; 
+    background-color: rgba(10,10,10,0.8); 
+    border-radius:10px; 
+    box-shadow:0 0 20px rgba(255,60,0,0.8); 
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px); 
+    transition: all 0.4s ease-in-out;
+}
+body.fade-in main { 
+    opacity:1; 
+    animation: fadeIn 1.2s ease-out forwards; 
+}
+
+/* === NAVBAR === */
+nav { 
+    position:fixed; 
+    top:0; left:0; width:100%; 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    padding:5px 12px; 
+    z-index:100; 
+    background-image: linear-gradient(to right, #ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3); 
+    background-size:400% 100%; 
+    animation:rainbow-gradient 15s ease infinite; 
+    box-shadow:0 2px 8px rgba(204,0,0,0.7);
+}
 @keyframes rainbow-gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 .logo { height:35px; max-width:60px; border-radius:50%; box-shadow:0 0 8px rgba(255,60,0,0.8); transition:0.3s ease; }
 .logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
@@ -22,97 +69,63 @@ nav { position:fixed; top:0; left:0; width:100%; display:flex; align-items:cente
 .nav-links a { padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:14px; font-weight:bold; text-decoration:none; color:white; background:linear-gradient(135deg,#CC0000,#400000); transition:all 0.3s ease; }
 .nav-links a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scale(1.03); box-shadow:0 0 10px #FF3C00; }
 @media (min-width: 1025px) { .nav-links { right:12px; width:250px; } }
-h1 { font-size:28px; color:#FF3C00; margin-bottom:15px; text-shadow:0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
-h2 { font-size:20px; color:#FFCC00; margin:20px 0 10px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:3px; text-shadow:0 0 4px rgba(255,204,0,0.7);}
-p { font-size:15px; line-height:1.6; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:15px; }
+
+/* === HEADER / TITLES === */
+h1 { font-size: 32px; color: #FF3C00; margin-bottom: 25px; text-align: center; text-shadow: 0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
+h2 { font-size: 22px; color: #FFCC00; margin: 25px 0 15px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:5px; text-align:center; }
+
+/* === PARAGRAPHS & LIST === */
+p { font-size:16px; line-height:1.75; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:18px; }
 ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
-ul li { padding:8px 0; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:15px; color:#fff; }
+ul li { padding:10px 0; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:16px; color:#fff; line-height:1.6; }
 ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
-.slogan { font-size:16px; margin-top:-5px; margin-bottom:20px; }
-.typing-text { border-right:3px solid #FFCC00; font-weight:bold; display:inline-block; white-space:nowrap; overflow:hidden; animation: blink-caret 0.75s step-end infinite; }
-@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #FFCC00; } }
-.cta-button { display:inline-block; padding:12px 20px; background: linear-gradient(90deg, #CC0000, #FFCC00); color:white; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px; text-transform:uppercase; transition:all 0.3s ease; box-shadow:0 3px 10px rgba(204,0,0,0.8); border:1px solid #fff; margin:5px; }
-.cta-button:hover { background:linear-gradient(90deg,#FFCC00,#CC0000); transform: translateY(-2px) scale(1.03); box-shadow:0 4px 15px rgba(255,60,0,1);}
-.main-footer { position:relative; z-index:200; text-align:center; padding:15px 10px; margin-top:30px; background-color: rgba(0,0,0,0.7); color:#ccc; font-size:13px; border-top:1px solid rgba(255,60,0,0.5); }
-.main-footer a { color:#FFCC00; text-decoration:none; font-weight:bold; transition: color 0.3s ease; display:inline-block; }
-.main-footer a:hover { color:#FF3C00; text-decoration:underline; }
-.pulsating-author { animation:glow-pulse 2s infinite alternate; }
-@keyframes glow-pulse { 0%{text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);} 50%{text-shadow:0 0 10px rgba(255,204,0,0.9),0 0 20px rgba(255,100,0,0.7); transform:scale(1.05);} 100%{text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);} }
+
+/* === SLOGAN / TYPING TEXT === */
+.slogan { font-size:18px; margin:10px 0 25px 0; text-align:center; }
+.typing-text { border-right:3px solid #FFCC00; font-weight:bold; display:inline-block; white-space:nowrap; overflow:hidden; padding-right:5px; }
+
+/* === CTA BUTTONS & ICON SOCIAL === */
+.cta-button, .popup-btn { font-size:16px; padding:12px 24px; border-radius:8px; }
+.cta-buttons-group { display:flex; justify-content:center; align-items:center; gap:15px; margin-top:25px; flex-wrap:wrap; }
+.icon-social { width:60px; height:60px; border-radius:50%; background: rgba(255,255,255,0.1); border:2px solid rgba(255,100,0,0.5); backdrop-filter: blur(4px); display:flex; justify-content:center; align-items:center; box-shadow:0 0 10px rgba(255,60,0,0.5); transition:all 0.25s ease-in-out; }
+.icon-social img { width:80%; height:80%; object-fit:contain; border-radius:10px; }
+.icon-social:hover { transform:translateY(-4px) scale(1.1); box-shadow:0 8px 20px rgba(255,80,0,0.9),0 0 30px rgba(255,160,0,0.7); border-color:#FFCC00; background: rgba(255,100,0,0.15); }
+
+/* === FOOTER === */
+.tf-footer-cta p, .main-footer p { font-size:16px; line-height:1.6; text-align:center; }
+
+/* === NEON GLOW TF.KURONAMI === */
+.pulsating-author {
+    font-weight: bold;
+    font-size: 18px;
+    color: #FFCC00;
+    text-transform: uppercase;
+    animation: neon-glow 1.8s ease-in-out infinite alternate;
+}
+@keyframes neon-glow {
+    0% { text-shadow: 0 0 5px #FFCC00, 0 0 10px #FF9900; color:#FFCC00; }
+    50% { text-shadow: 0 0 15px #FFCC00, 0 0 25px #FF6600, 0 0 40px #FF3300; color:#FFD700; }
+    100% { text-shadow: 0 0 5px #FFCC00, 0 0 10px #FF9900; color:#FFCC00; }
+}
+
+/* === POPUP WELCOME === */
+#welcome-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; visibility:hidden; transition:0.5s; }
+#welcome-popup.show { opacity:1; visibility:visible; }
+.popup-content { background: rgba(15,15,15,0.95); padding:25px 30px; border-radius:15px; text-align:center; box-shadow:0 0 25px rgba(255,60,0,0.8); animation: popup-in 0.8s ease forwards; max-width:90%; width:380px; line-height:1.6; }
+.popup-logo { width:70px; height:70px; margin-bottom:15px; border-radius:50%; box-shadow:0 0 12px #FF3C00; }
+.popup-content h2 { font-size:22px; line-height:1.4; color:#FF3C00; margin:10px 0 15px; text-shadow:0 0 8px #FF3C00; }
+.popup-content p { font-size:16px; line-height:1.6; color:#fff; margin:10px 0; text-align:center; word-wrap:break-word; }
+.popup-btn { background: linear-gradient(90deg,#FF3C00,#FFCC00); color:#fff; border:none; padding:10px 22px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:16px; transition: all 0.3s ease; box-shadow:0 0 10px rgba(255,60,0,0.8); margin-top:20px; }
+.popup-btn:hover { background: linear-gradient(90deg,#FFCC00,#FF3C00); transform:scale(1.05); }
+@keyframes popup-in { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
+
+/* === SAKURA === */
 .sakura { position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; animation:fall linear forwards; }
 @keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } }
-#welcome-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; visibility: hidden; transition: 0.5s; }
-#welcome-popup.show { opacity: 1; visibility: visible; }
-.popup-content { background: rgba(15,15,15,0.95); padding: 25px 30px; border-radius: 15px; text-align: center; box-shadow: 0 0 25px rgba(255,60,0,0.8); animation: popup-in 0.8s ease forwards; max-width: 90%; width: 380px; line-height: 1.6; }
-.popup-logo { width: 70px; height: 70px; margin-bottom: 15px; border-radius: 50%; box-shadow: 0 0 12px #FF3C00; }
-.popup-content h2 { color: #FF3C00; margin: 10px 0 15px; text-shadow: 0 0 8px #FF3C00; font-size: 22px; line-height: 1.4; }
-.popup-content p { color: #fff; margin: 10px 0; font-size: 15px; line-height: 1.5; text-align: center; word-wrap: break-word; }
-.popup-btn { background: linear-gradient(90deg,#FF3C00,#FFCC00); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(255,60,0,0.8); margin-top: 20px; }
-.popup-btn:hover { background: linear-gradient(90deg,#FFCC00,#FF3C00); transform: scale(1.05); }
-@keyframes popup-in { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-
-/* === ĐIỀU CHỈNH ICON MẠNG XÃ HỘI === */
-
-/* Nhóm nút CTA */
-.cta-buttons-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Giảm nhẹ khoảng cách giữa các icon */
-    margin-top: 25px; /* Tăng khoảng cách phía trên */
-    flex-wrap: wrap;
-}
-
-/* Khối liên kết/Icon */
-.icon-social {
-    /* Kích thước khối liên kết - rộng hơn để dễ click */
-    width: 60px; /* Chiều rộng khối */
-    height: 60px; /* Chiều cao khối */
-    
-    border-radius: 50%; /* Làm tròn thành hình tròn để nổi bật */
-    background: rgba(255,255,255,0.1); /* Nền trong suốt nhẹ */
-    border: 2px solid rgba(255,100,0,0.5); /* Viền màu cam/đỏ nhẹ */
-    backdrop-filter: blur(4px);
-    
-    /* Căn giữa hình ảnh bên trong */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    /* Hiệu ứng chuyển động */
-    transition: all 0.25s ease-in-out; 
-    
-    /* Đổ bóng ban đầu cho icon nổi bật */
-    box-shadow: 0 0 10px rgba(255,60,0,0.5); 
-}
-
-/* Hình ảnh Icon bên trong */
-.icon-social img {
-    width: 80%; /* Chiếm 80% chiều rộng của khối cha (.icon-social) */
-    height: 80%; /* Chiếm 80% chiều cao của khối cha (.icon-social) */
-    object-fit: contain; /* Đảm bảo hình ảnh vừa vặn mà không bị méo */
-    border-radius: 10px; /* Bo góc hình ảnh bên trong (nếu cần) */
-}
-
-/* Hover nhẹ – Tinh tế và Mạnh mẽ */
-.icon-social:hover {
-    transform: translateY(-4px) scale(1.1); /* Nảy nhẹ lên và to hơn */
-    box-shadow: 0 8px 20px rgba(255,80,0,0.9), 0 0 30px rgba(255,160,0,0.7); /* Bóng đổ mạnh hơn, sáng hơn */
-    border-color: #FFCC00; /* Đổi màu viền khi hover */
-    background: rgba(255,100,0,0.15); /* Nền sáng hơn khi hover */
-}
-
-/* Footer CTA - Dùng cho chữ Call-to-action */
-.tf-footer-cta {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,60,0,0.3);
-}
-
-/* === KẾT THÚC ĐIỀU CHỈNH ICON MẠNG XÃ HỘI === */
 </style>
 </head>
 <body>
+
 <nav>
     <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
     <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
@@ -124,7 +137,7 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
         <a href="luat.html">⚔️ Luật quân đoàn</a>
         <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
         <a href="tuyenthanhvien.html">🔥 Tuyển Thành viên</a>
-         <a href="dangki.html">🔥 Đăng kí thành viên</a>
+        <a href="dangki.html">🔥 Đăng kí thành viên</a>
         <a href="slo.html">⚔️ Giao lưu quân đoàn</a>
         <a href="hotro.html">👥 Hỗ trợ</a>
         <a href="qr.html">👥 Mã QR</a>
@@ -134,10 +147,10 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 <div id="welcome-popup">
   <div class="popup-content">
     <img src="logo2.jpg" alt="Logo TF" class="popup-logo">
-    <h2>🎉 Chào mừng đến quân đoàn TitanForce! 🛡️</h2> 
+    <h2>🎉 Chào mừng đến quân đoàn TitanForce! 🛡️</h2>
     <p>Đây là trang web chính thức TitanForce!</p>
     <p>Quân đoàn TF kính chào bạn — Hãy cùng nhau tạo nên sức mạnh TitanForce!</p>
-    <p>Hiện tại chúng tôi đang phát triển và nếu có sai xót xin hãy bỏ qua .</p>
+    <p>Hiện tại chúng tôi đang phát triển và nếu có sai xót xin hãy bỏ qua.</p>
     <p>⚠️ Lưu ý những trang web khác đều là giả hoặc ăn cắp, mong mọi người chú ý. ❌</p>
     <button class="popup-btn" id="close-popup">OK 👍</button>
   </div>
@@ -148,6 +161,8 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
       <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
       <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
   </header>
+
+  <!-- Nội dung các section giữ nguyên -->
     <section class="tf-introduction">
         <h2>💡 Triết lý của TitanForce</h2>
         <p>
@@ -210,25 +225,15 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
         </div>
     </section>
 
-    <footer class="tf-footer-cta">
-        <p>
-            <strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!
-        </p>
-
-        <div class="cta-buttons-group">
-            <a href="https://www.tiktok.com/@lio.vn" class="icon-social">
-                <img src="tiktok.png" alt="TikTok">
-            </a>
-
-            <a href="https://www.facebook.com/profile.php?id=61583586631135" class="icon-social">
-                <img src="fbicon.png" alt="Facebook">
-            </a>
-
-            <a href="https://zalo.me/g/yupyif524" class="icon-social">
-                <img src="zalo.png" alt="Zalo">
-            </a>
-        </div>
-    </footer>
+  <footer class="tf-footer-cta">
+    <p><strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!</p>
+    <div class="cta-buttons-group">
+        <a href="https://www.tiktok.com/@lio.vn" class="icon-social"><img src="tiktok.png" alt="TikTok"></a>
+        <a href="https://www.facebook.com/profile.php?id=61583586631135" class="icon-social"><img src="fbicon.png" alt="Facebook"></a>
+        <a href="https://zalo.me/g/yupyif524" class="icon-social"><img src="zalo.png" alt="Zalo"></a>
+        <a href="https://discord.gg/YVez9ZthF" class="icon-social"><img src="ds.png" alt="Discord"></a>
+    </div>
+  </footer>
 </main>
 
 <footer class="main-footer">
@@ -236,36 +241,30 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 </footer>
 
 <script>
-// ... (GIỮ NGUYÊN JAVASCRIPT) ...
+// TYPEWRITER
 function typeWriter(text,i,fnCallback){
     const element=document.getElementById("typed-slogan");
     if(!element) return;
     if(i<text.length){
         element.innerHTML=text.substring(0,i+1);
         setTimeout(()=>typeWriter(text,i+1,fnCallback),80);
-    }
-    else if(typeof fnCallback=='function') fnCallback();
+    } else if(typeof fnCallback=='function') fnCallback();
 }
 
 window.onload=function(){
     document.body.classList.add('fade-in');
 
+    // Navbar toggle
     const menuToggle=document.getElementById('mobile-menu');
     const navLinks=document.getElementById('nav-links');
     menuToggle.addEventListener('click',()=>navLinks.classList.toggle('active'));
-    window.addEventListener('resize',()=>{
-        if(window.innerWidth>=1025 && navLinks.classList.contains('active')) 
-            navLinks.classList.remove('active');
-    });
+    window.addEventListener('resize',()=>{ if(window.innerWidth>=1025 && navLinks.classList.contains('active')) navLinks.classList.remove('active'); });
 
+    // Typewriter slogan
     const sloganText="TitanForce: Chiến Thắng Bằng Sức Mạnh Đồng Đội Và Kỷ Luật";
-    setTimeout(()=>{
-        typeWriter(sloganText,0,()=>{
-            const e=document.getElementById("typed-slogan"); 
-            if(e) e.style.borderRight='none';
-        });
-    },500);
+    setTimeout(()=>{ typeWriter(sloganText,0,()=>{ const e=document.getElementById("typed-slogan"); if(e) e.style.borderRight='none'; }); },500);
 
+    // Sakura
     function createSakura(){
         const sakura=document.createElement("div");
         sakura.classList.add("sakura");
@@ -279,57 +278,25 @@ window.onload=function(){
     }
     setInterval(createSakura,700);
 
-    // Popup chào mừng
+    // Popup
     const popup=document.getElementById("welcome-popup");
     const closeBtn=document.getElementById("close-popup");
     setTimeout(()=>popup.classList.add("show"),800);
     closeBtn.addEventListener("click",()=>popup.classList.remove("show"));
     setTimeout(()=>popup.classList.remove("show"),8000);
 
-    // === CHỐNG COPY SIÊU CỨNG ===
-    document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à,cút ngay cho bố"); });
+    // CHỐNG COPY
+    document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy bị chặn!"); });
     document.addEventListener('selectstart', e => e.preventDefault());
     document.addEventListener('dragstart', e => e.preventDefault());
-
     document.addEventListener('keydown', function(e) {
-        // Chặn phím Ctrl + [C,X,V,S,U,A]
-        if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
-        // Chặn Ctrl + Shift + [I,J,C]
-        if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-        // Chặn F12
-        if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+        if(e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
+        if(e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+        if(e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
     });
-
-    // Chặn mở DevTools console (thủ thuật cơ bản)
-    setInterval(function(){
-        if(window.devtools && window.devtools.open) {
-            alert("⚠️ DevTools đang mở! Vui lòng đóng để tiếp tục.");
-            window.devtools.open = false;
-        }
-    }, 1000);
-
-    // Chặn copy bằng chuột và bàn phím
-    window.oncopy = window.oncut = window.onpaste = function(e){
-        e.preventDefault();
-        alert("⚠️ Không được phép sao chép nội dung trang!");
-        return false;
-    };
-
-    // Chặn click giữa (scroll wheel) mở menu DevTools
-    document.addEventListener('mousedown', function(e){
-        if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
-    });
-
-    // Thêm “bẫy” Ctrl+Shift+I theo cách nâng cao
-    document.addEventListener('keyup', function(e){
-        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i'){ 
-            e.preventDefault(); 
-            alert("⚠️ DevTools bị chặn!");
-        }
-    });
+    window.oncopy = window.oncut = window.onpaste = function(e){ e.preventDefault(); alert("⚠️ Không được phép sao chép nội dung trang!"); return false; };
+    document.addEventListener('mousedown', function(e){ if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); } });
 };
 </script>
-
-
 </body>
 </html>
