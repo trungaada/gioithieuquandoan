@@ -126,6 +126,265 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 </head>
 <body>
 
+
+
+
+
+
+
+
+
+
+
+    <!-- TF AI Assistant (Thân thiện - Vui vẻ) - Dán trước </body> -->
+<style>
+/* --- UI nhỏ gọn, không xung đột --- */
+#tf-ai-btn {
+  position:fixed; right:22px; bottom:22px; z-index:99999;
+  width:60px; height:60px; border-radius:50%;
+  background:linear-gradient(135deg,#ff7a00,#ff3c00);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:28px; cursor:pointer;
+  box-shadow:0 6px 20px rgba(255,60,0,0.25);
+  transition: transform 0.2s ease;
+}
+#tf-ai-btn:hover { transform: scale(1.1); }
+
+#tf-ai-box {
+  position:fixed; right:22px; bottom:92px; width:340px; max-width:92vw;
+  background:rgba(10,10,12,0.98); color:#fff; border-radius:12px; overflow:hidden; z-index:99999;
+  box-shadow:0 15px 40px rgba(0,0,0,0.6); display:none; border:2px solid rgba(255,60,0,0.15);
+  opacity:0; transform: translateY(20px); transition: all 0.3s ease;
+}
+#tf-ai-box.show { display:block; opacity:1; transform: translateY(0); }
+
+#tf-ai-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 12px;
+  background:linear-gradient(90deg,#ff5a00,#ffb84d);
+  color:#111; font-weight:700;
+}
+
+#tf-ai-body {
+  height:300px; overflow:auto; padding:12px;
+  font-size:14px; line-height:1.5;
+  scroll-behavior: smooth;
+}
+.tf-msg { margin:8px 0; padding:8px 10px; border-radius:8px; max-width:90%; word-break:break-word; }
+.tf-msg.user { background:rgba(255,255,255,0.06); color:#fff; margin-left:auto; text-align:right; font-weight:600;}
+.tf-msg.bot { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:#fff; }
+
+#tf-ai-input-wrap {
+  display:flex; gap:8px; padding:10px;
+  border-top:1px solid rgba(255,255,255,0.03); background:rgba(0,0,0,0.3);
+}
+#tf-ai-input {
+  flex:1; padding:8px 10px; border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff; outline:none;
+}
+#tf-ai-send {
+  padding:8px 12px; border-radius:8px;
+  background:#ff3c00; border:none; color:#fff; font-weight:700; cursor:pointer;
+}
+#tf-help { font-size:12px; opacity:0.85; color:#fff; margin-top:6px; text-align:center; }
+</style>
+</head>
+<body>
+
+<div id="tf-ai-btn" title="TF Assistant">🤖</div>
+
+<div id="tf-ai-box" role="dialog" aria-label="TF Assistant">
+  <div id="tf-ai-header">
+    <div>🤖 TF Assistant</div>
+    <div style="font-size:14px;cursor:pointer;" id="tf-ai-close">✖</div>
+  </div>
+  <div id="tf-ai-body" aria-live="polite"></div>
+  <div style="padding:0 12px 12px;">
+    <div id="tf-help">Gõ "help" để xem chủ đề — Bot trả lời theo nội dung Quân Đoàn TF.</div>
+    <div id="tf-ai-input-wrap">
+      <input id="tf-ai-input" placeholder="Bạn muốn hỏi điều gì về TF? (ví dụ: luật, đăng ký, hỗ trợ)" />
+      <button id="tf-ai-send">Gửi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== DỮ LIỆU TF ======
+const TF_DATA = {
+  gioiThieu: {
+    moTa: "Quân Đoàn TF (TitanForce) có 2 nhánh hoạt động: Sinh Tồn và Tử Chiến (Headshot). Có 3 box chat: 1 box tổng + 2 box theo nhánh.",
+    yeuCauChung: [
+      "Tôn trọng mọi người, biết trên biết dưới.",
+      "Tinh thần đồng đội, hỗ trợ nhau, không toxic.",
+      "Độ tuổi ưu tiên K9 trở lên (trên lớp 12).",
+      "Có tương tác box chat, rời QD phải báo chủ QD.",
+      "Off 7 ngày sẽ bị kick, nếu có lý do phải báo.",
+      "Không va chạm, không chê bai, giỡn nhưng không quá trớn.",
+      "Tìm người có trình mobile, PC không tuyển hack.",
+      "Đổi tên tùy ý, khuyến khích TF.Tên."
+    ]
+  },
+  luat: {
+    testThanhVien: { nam: "5/7 round", nu: "2-3/7 round" },
+    nhanh: ["Nhánh 1: Sinh tồn (Survival)", "Nhánh 2: Headshot / Kai"],
+    rulesList: [
+      "Tôn trọng mọi người trong QD, biết trên biết dưới.",
+      "Tinh thần đồng đội: giúp đỡ, không toxic.",
+      "Độ tuổi: ưu tiên K9 trở lên.",
+      "Off 7 ngày sẽ bị kick nếu không báo.",
+      "Không va chạm dưới mọi hình thức.",
+      "Test thành viên: Nam 5/7, Nữ 2-3/7 round.",
+      "Có 2 nhánh: Sinh tồn và Tử chiến (Headshot).",
+      "Có 3 box QD (1 tổng, 2 nhánh)."
+    ]
+  },
+  dangKy: {
+    nhom: ["Sinh Tồn", "Solo Tử Chiến"],
+    rank: ["Đồng","Bạc","Vàng","Bạch Kim","Kim Cương","Huyền Thoại","Cao Thủ","Đại Cao Thủ","Top Sever"],
+    vaiTroSinhTon: ["Rush","Cover","Sniper","Hỗ trợ"],
+    vaiTroSolo: ["Kai 2","Kai 5","Headshot Kai 2","Headshot Kai 5"],
+    tuoi: "14–30",
+    yeuCauFB: "Bắt buộc cung cấp tên và link Facebook"
+  },
+  hotro: {
+    gioHoTro: ["Thứ 2–6: 7:00 – 21:00","Thứ 7–CN: 7:00 – 23:30"],
+    canhBao: [
+      "Chỉ liên hệ qua link Facebook chính thức.",
+      "Không cung cấp mật khẩu hoặc mã OTP.",
+      "Đội ngũ có thể trả lời chậm, vui lòng thông cảm."
+    ],
+    nhanSu: [
+      { ten: "Dương", vaiTro: "Hỗ trợ lỗi — TitanForce", loi: ["Chưa được gửi kết bạn","Chưa được duyệt","Chưa được test"] },
+      { ten: "Trung", vaiTro: "Hỗ trợ kỹ thuật — Web FF", loi: ["Lỗi đăng ký tài khoản","Lỗi kết nối server"] },
+      { ten: "Huy", vaiTro: "Hỗ trợ lỗi — TitanForce", loi: ["Chưa được gửi kết bạn","Chưa được duyệt","Chưa được test"] }
+    ]
+  }
+};
+
+// ===== UI Bindings =====
+const btn = document.getElementById('tf-ai-btn');
+const box = document.getElementById('tf-ai-box');
+const closeBtn = document.getElementById('tf-ai-close');
+const sendBtn = document.getElementById('tf-ai-send');
+const input = document.getElementById('tf-ai-input');
+const body = document.getElementById('tf-ai-body');
+
+btn.addEventListener('click', ()=> box.classList.add('show'));
+closeBtn.addEventListener('click', ()=> box.classList.remove('show'));
+sendBtn.addEventListener('click', handleSend);
+input.addEventListener('keydown', e => { if(e.key==='Enter') handleSend(); });
+
+// greeting
+appendBot("Chào bạn! Mình là TF Assistant — vui vẻ, thân thiện 😄. Gõ 'help' để xem chủ đề nhé!");
+
+function appendUser(text){
+  const el = document.createElement('div'); el.className='tf-msg user'; el.textContent = text;
+  body.appendChild(el);
+  body.scrollTop = body.scrollHeight;
+}
+function appendBot(html){
+  const el = document.createElement('div'); el.className='tf-msg bot'; el.innerHTML = html;
+  body.appendChild(el);
+  body.scrollTop = body.scrollHeight;
+}
+
+// ===== Bot logic =====
+function handleSend(){
+  const q = input.value.trim();
+  if(!q) return;
+  appendUser(q);
+  input.value = '';
+  const low = q.toLowerCase();
+
+  // HELP
+  if(low==='help'||low==='h'||low==='menu'){
+    appendBot(`<b>Những chủ đề bạn có thể hỏi:</b>
+      <ul style="margin:6px 0 0 18px;">
+      <li>• luật / luật qd / rules</li>
+      <li>• đăng ký / đăng kí / đăng ký clan</li>
+      <li>• rank / xếp hạng</li>
+      <li>• test thành viên / tiêu chuẩn</li>
+      <li>• hỗ trợ / giờ hỗ trợ / liên hệ</li>
+      <li>• giới thiệu / mô tả qd</li>
+      <li>• ai là (ví dụ: ai là trung?)</li>
+      </ul>`);
+    return;
+  }
+
+  // Greetings
+  if(/^(hi|hello|chào|hay|xin chào|alo)\b/i.test(low)){
+    appendBot("Xin chào! Bạn cần hỗ trợ gì về Quân Đoàn TF? (gõ 'help' để xem chủ đề). 😎"); return;
+  }
+
+  // LUAT
+  if(low.includes('luật') || low.includes('luat') || low.includes('rule')){
+    const rules = TF_DATA.luat.rulesList.map(r=>`<li>${r}</li>`).join('');
+    appendBot(`<b>Luật Quân Đoàn TF:</b><ul style="margin:6px 0 0 18px;">${rules}</ul>`);
+    return;
+  }
+
+  // TEST
+  if(low.includes('test')||low.includes('thành viên')||low.includes('thanh vien')){
+    appendBot(`<b>Test thành viên:</b> Nam: <b>${TF_DATA.luat.testThanhVien.nam}</b>, Nữ: <b>${TF_DATA.luat.testThanhVien.nu}</b>`); return;
+  }
+
+  // DANG KY
+  if(low.includes('đăng ký') || low.includes('dang ky') || low.includes('đăng kí')){
+    appendBot(`<b>Đăng ký:</b> Nhóm: <b>${TF_DATA.dangKy.nhom.join('</b>, <b>')}</b>. Rank: ${TF_DATA.dangKy.rank.join(', ')}.`); return;
+  }
+
+  // RANK
+  if(low.includes('rank') || low.includes('xếp hạng')){
+    appendBot(`<b>Các bậc Rank hiện có:</b> ${TF_DATA.dangKy.rank.join(' • ')}`); return;
+  }
+
+  // NHÁNH
+  if(low.includes('sinh tồn') || low.includes('solo') || low.includes('tử chiến') || low.includes('headshot')){
+    appendBot(`<b>Nhánh hoạt động:</b> ${TF_DATA.luat.nhanh.join(' • ')}`); return;
+  }
+
+  // HỖ TRỢ
+  if(low.includes('hỗ trợ') || low.includes('ho tro') || low.includes('liên hệ') || low.includes('lien he')){
+    const times = TF_DATA.hotro.gioHoTro.join(' — ');
+    const warns = TF_DATA.hotro.canhBao.map(w=>`• ${w}`).join('<br>');
+    const staff = TF_DATA.hotro.nhanSu.map(s=>`<b>${s.ten}</b> — ${s.vaiTro}`).join('<br>');
+    appendBot(`<b>Giờ hỗ trợ:</b> ${times}<br><b>Lưu ý:</b><br>${warns}<br><b>Nhân sự:</b><br>${staff}`);
+    return;
+  }
+
+  // hỏi về 1 người
+  const matchOpen = low.match(/(dương|trung|huy)/);
+  if(matchOpen){
+    const name = matchOpen[0].charAt(0).toUpperCase()+matchOpen[0].slice(1);
+    const person = TF_DATA.hotro.nhanSu.find(p=>p.ten.toLowerCase()===name.toLowerCase());
+    if(person){
+      appendBot(`<b>${person.ten}</b> — ${person.vaiTro}. Vấn đề: ${person.loi.join(', ')}`);
+    } else { appendBot("Không tìm thấy người đó."); }
+    return;
+  }
+
+  // GIỚI THIỆU
+  if(low.includes('giới thiệu') || low.includes('gioi thieu') || low.includes('mô tả')){
+    appendBot(`<b>Giới thiệu:</b> ${TF_DATA.gioiThieu.moTa}<br><b>Yêu cầu chung:</b><ul>${TF_DATA.gioiThieu.yeuCauChung.map(x=>`<li>${x}</li>`).join('')}</ul>`); return;
+  }
+
+  // FALLBACK
+  appendBot("Mình chưa hiểu câu hỏi đó 😅. Thử gõ: <b>help</b>, <b>luật</b>, <b>đăng ký</b>, <b>hỗ trợ</b>, <b>giới thiệu</b>.");
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <nav>
     <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
     <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
