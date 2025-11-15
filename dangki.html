@@ -78,79 +78,118 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
   <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
   <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
 </div>
-
 <form id="sinhTonForm">
-  <h2>🔥 Nhóm Sinh Tồn</h2>
-  <input type="hidden" name="entry.group" value="Sinh Tồn">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
-    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option>
-    <option>Cover</option>
-    <option>Sniper</option>
-    <option>Hỗ trợ</option>
-  </select>
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option>
-    <option>Nữ</option>
-    <option>Khác</option>
-  </select>
-  <label>Tên Facebook (Bắt Buộc):</label>
-  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label>Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <div class="message" id="msg-sinhTonForm"></div>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
+  <h2>🔥 Nhóm Sinh Tồn</h2>
+  <input type="hidden" name="entry.group" value="Sinh Tồn">
+
+  <label>Tên trong game:</label>
+  <input type="text" name="entry.name" required>
+
+  <label>UID:</label>
+  <input type="text" name="entry.uid" required>
+
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
+    <option value="">-- Chọn Rank --</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
+    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
+  </select>
+
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Rush</option>
+    <option>Cover</option>
+    <option>Sniper</option>
+    <option>Hỗ trợ</option>
+  </select>
+
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="30" required>
+
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option><option>Nữ</option><option>Khác</option>
+  </select>
+
+  <label>Tên Facebook (Bắt Buộc):</label>
+  <input type="text" name="entry.fb_name" required>
+
+  <label>Liên kết Facebook (Bắt Buộc):</label>
+  <input type="url" name="entry.facebook" required>
+
+  <!-- 🟢 Thêm phần chọn giờ -->
+  <label>Giờ hoạt động:</label>
+  <select name="entry.time" required>
+    <option value="">-- Chọn giờ chơi --</option>
+    <option>19:00</option>
+    <option>20:00</option>
+    <option>21:00</option>
+    <option>22:00</option>
+    <option>23:00</option>
+  </select>
+
+  <div class="message" id="msg-sinhTonForm"></div>
+  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
 <form id="soloForm">
-  <h2>⚡ Nhóm Solo</h2>
-  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>UID:</label><input type="text" name="entry.uid" required>
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
-    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Kai 2</option>
-    <option>Kai 5</option>
-    <option>Headshot Kai 2</option>
-    <option>Headshot Kai 5</option>
-  </select>
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option>
-    <option>Nữ</option>
-    <option>Khác</option>
-  </select>
-  <label>Tên Facebook (Bắt Buộc):</label>
-  <input type="text" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label>Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <div class="message" id="msg-soloForm"></div>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
+  <h2>⚡ Nhóm Solo</h2>
+  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
+
+  <label>Tên trong game:</label>
+  <input type="text" name="entry.name" required>
+
+  <label>UID:</label>
+  <input type="text" name="entry.uid" required>
+
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
+    <option value="">-- Chọn Rank --</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option><option>Huyền Thoại</option>
+    <option>Cao Thủ</option><option>Đại Cao Thủ</option><option>Top Sever</option>
+  </select>
+
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Kai 2</option>
+    <option>Kai 5</option>
+    <option>Headshot Kai 2</option>
+    <option>Headshot Kai 5</option>
+  </select>
+
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="30" required>
+
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option><option>Nữ</option><option>Khác</option>
+  </select>
+
+  <label>Tên Facebook (Bắt Buộc):</label>
+  <input type="text" name="entry.fb_name" required>
+
+  <label>Liên kết Facebook (Bắt Buộc):</label>
+  <input type="url" name="entry.facebook" required>
+
+  <!-- 🟢 Thêm phần chọn giờ -->
+  <label>Giờ hoạt động:</label>
+  <select name="entry.time" required>
+    <option value="">-- Chọn giờ chơi --</option>
+    <option>19:00</option>
+    <option>20:00</option>
+    <option>21:00</option>
+    <option>22:00</option>
+    <option>23:00</option>
+  </select>
+
+  <div class="message" id="msg-soloForm"></div>
+  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
 <canvas id="sakuraCanvas"></canvas>
