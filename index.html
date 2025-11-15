@@ -208,7 +208,7 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
   </div>
 </div>
 
-<script>
+<<script>
 // ====== DỮ LIỆU TF ======
 const TF_DATA = {
   gioiThieu: {
@@ -225,7 +225,6 @@ const TF_DATA = {
     ]
   },
   luat: {
-    testThanhVien: { nam: "5/7 round", nu: "2-3/7 round" },
     nhanh: ["Nhánh 1: Sinh tồn (Survival)", "Nhánh 2: Headshot / Kai"],
     rulesList: [
       "Tôn trọng mọi người trong QD, biết trên biết dưới.",
@@ -233,10 +232,23 @@ const TF_DATA = {
       "Độ tuổi: ưu tiên K9 trở lên.",
       "Off 7 ngày sẽ bị kick nếu không báo.",
       "Không va chạm dưới mọi hình thức.",
-      "Test thành viên: Nam 5/7, Nữ 2-3/7 round.",
       "Có 2 nhánh: Sinh tồn và Tử chiến (Headshot).",
       "Có 3 box QD (1 tổng, 2 nhánh)."
     ]
+  },
+  testChiTiet: {
+    nam: {
+      "Kai 2": "Đánh giá kỹ năng solo, phản xạ nhanh, sinh tồn cơ bản.",
+      "Kai 5": "Đánh giá phối hợp nhóm, kỹ năng chiến đấu nâng cao.",
+      "Kai 2 HS": "Đánh giá kỹ năng headshot, tốc độ phản xạ 1vs1 và 4vs4.",
+      "Kai 5 HS": "Đánh giá headshot 1vs1 và 4vs4."
+    },
+    nu: {
+      "Kai 2": "Đánh giá cơ bản, khả năng hỗ trợ nhóm.",
+      "Kai 5": "Đánh giá phối hợp và kỹ năng sinh tồn.",
+      "Kai 2 HS": "Khả năng headshot 1vs1 và 4vs4.",
+      "Kai 5 HS": "Khả năng headshot 1vs1 và 4vs4."
+    }
   },
   dangKy: {
     nhom: ["Sinh Tồn", "Solo Tử Chiến"],
@@ -244,7 +256,8 @@ const TF_DATA = {
     vaiTroSinhTon: ["Rush","Cover","Sniper","Hỗ trợ"],
     vaiTroSolo: ["Kai 2","Kai 5","Headshot Kai 2","Headshot Kai 5"],
     tuoi: "14–30",
-    yeuCauFB: "Bắt buộc cung cấp tên và link Facebook"
+    yeuCauFB: "Bắt buộc cung cấp tên và link Facebook",
+    gioSolo: "19-23h"
   },
   hotro: {
     gioHoTro: ["Thứ 2–6: 7:00 – 21:00","Thứ 7–CN: 7:00 – 23:30"],
@@ -258,6 +271,15 @@ const TF_DATA = {
       { ten: "Trung", vaiTro: "Hỗ trợ kỹ thuật — Web FF", loi: ["Lỗi đăng ký tài khoản","Lỗi kết nối server"] },
       { ten: "Huy", vaiTro: "Hỗ trợ lỗi — TitanForce", loi: ["Chưa được gửi kết bạn","Chưa được duyệt","Chưa được test"] }
     ]
+  },
+  qr: {
+    link: "qr.png", // Thay bằng link QR của bạn
+    moTa: "Quét mã QR để tham gia Quân Đoàn TF nhanh chóng!"
+  },
+  botInfo: {
+    ten: "TF Assistant 🤖",
+    moTa: "Mình là TF Assistant, trợ lý thân thiện của Quân Đoàn TF. Mình hỗ trợ trả lời các câu hỏi về luật, đăng ký, rank, test thành viên, giờ hỗ trợ, nhánh hoạt động và có thể hướng dẫn bạn quét QR để tham gia nhanh chóng.",
+    huongDan: "Gõ 'help' để xem danh sách chủ đề mình có thể hỗ trợ."
   }
 };
 
@@ -300,47 +322,112 @@ function handleSend(){
   if(low==='help'||low==='h'||low==='menu'){
     appendBot(`<b>Những chủ đề bạn có thể hỏi:</b>
       <ul style="margin:6px 0 0 18px;">
-      <li>• luật / luật qd / rules</li>
-      <li>• đăng ký / đăng kí / đăng ký clan</li>
-      <li>• rank / xếp hạng</li>
-      <li>• test thành viên / tiêu chuẩn</li>
-      <li>• hỗ trợ / giờ hỗ trợ / liên hệ</li>
-      <li>• giới thiệu / mô tả qd</li>
-      <li>• ai là (ví dụ: ai là trung?)</li>
+        <li>• luật / luật qd / rules</li>
+        <li>• test thành viên /luật test</li>
+        <li>• đăng ký / đăng ký clan</li>
+        <li>• rank / xếp hạng</li>
+        <li>• nhánh / hoạt động</li>
+        <li>• hỗ trợ / giờ hỗ trợ / liên hệ</li>
+        <li>• giới thiệu quân đoàn</li>
+        <li>• bạn là ai / bot là gì</li>
+        <li>• QR quân đoàn</li>
       </ul>`);
     return;
   }
 
   // Greetings
   if(/^(hi|hello|chào|hay|xin chào|alo)\b/i.test(low)){
-    appendBot("Xin chào! Bạn cần hỗ trợ gì về Quân Đoàn TF? (gõ 'help' để xem chủ đề). 😎"); return;
+    appendBot("Xin chào! Bạn cần hỗ trợ gì về Quân Đoàn TF? (gõ 'help' để xem chủ đề). 😎"); 
+    return;
   }
 
-  // LUAT
-  if(low.includes('luật') || low.includes('luat') || low.includes('rule')){
-    const rules = TF_DATA.luat.rulesList.map(r=>`<li>${r}</li>`).join('');
+  // LUẬT QUÂN ĐOÀN (chỉ luật, không test)
+  if(low.includes('luật quân đoàn') || low.includes('luat') || low.includes('rule')) {
+    const rules = TF_DATA.luat.rulesList.map(r => `<li>${r}</li>`).join('');
     appendBot(`<b>Luật Quân Đoàn TF:</b><ul style="margin:6px 0 0 18px;">${rules}</ul>`);
     return;
   }
 
-  // TEST
-  if(low.includes('test')||low.includes('thành viên')||low.includes('thanh vien')){
-    appendBot(`<b>Test thành viên:</b> Nam: <b>${TF_DATA.luat.testThanhVien.nam}</b>, Nữ: <b>${TF_DATA.luat.testThanhVien.nu}</b>`); return;
+  // TEST THÀNH VIÊN (riêng)
+  if(low.includes('test') || low.includes('thành viên') || low.includes('thanh vien')) {
+    const namTest = Object.entries(TF_DATA.testChiTiet.nam)
+                           .map(([k,v]) => `<b>${k}:</b> ${v}`)
+                           .join('<br>');
+    const nuTest = Object.entries(TF_DATA.testChiTiet.nu)
+                          .map(([k,v]) => `<b>${k}:</b> ${v}`)
+                          .join('<br>');
+    appendBot(`<b>Chi tiết test thành viên:</b><br><b>Nam:</b><br>${namTest}<br><b>Nữ:</b><br>${nuTest}`);
+    return;
   }
 
-  // DANG KY
-  if(low.includes('đăng ký') || low.includes('dang ky') || low.includes('đăng kí')){
-    appendBot(`<b>Đăng ký:</b> Nhóm: <b>${TF_DATA.dangKy.nhom.join('</b>, <b>')}</b>. Rank: ${TF_DATA.dangKy.rank.join(', ')}.`); return;
+  // QR CODE
+  if(low.includes('qr') || low.includes('mã qr') || low.includes('ma qr')) {
+    appendBot(`<b>Mã QR Quân Đoàn TF:</b><br>
+      <img src="${TF_DATA.qr.link}" alt="QR Code TF" style="width:150px; height:150px; margin-top:8px;">
+      <div style="margin-top:6px;">${TF_DATA.qr.moTa}</div>`);
+    return;
+  }
+
+  // GIỚI THIỆU BOT
+  if(low.includes('bạn là ai') || low.includes('bot là gì') || low.includes('assistant')) {
+    appendBot(`<b>${TF_DATA.botInfo.ten}</b><br>
+      ${TF_DATA.botInfo.moTa}<br>
+      <i>${TF_DATA.botInfo.huongDan}</i>`);
+    return;
+  }
+
+  // GIỚI THIỆU QUÂN ĐOÀN
+  if(low.includes('giới thiệu') || low.includes('gioi thieu') || low.includes('mô tả')){
+    appendBot(`<b>Giới thiệu:</b> ${TF_DATA.gioiThieu.moTa}<br>
+      <b>Yêu cầu chung:</b>
+      <ul>${TF_DATA.gioiThieu.yeuCauChung.map(x=>`<li>${x}</li>`).join('')}</ul>`);
+    return;
+  }
+
+  // ĐĂNG KÝ
+  if(low.includes('đăng ký') || low.includes('dang ky') || low.includes('đăng kí')) {
+    // Nếu đăng ký nhánh Solo / Tử Chiến
+    if(low.includes('solo') || low.includes('slo') || low.includes('tử chiến') || low.includes('headshot')) {
+      const vaiTroSolo = TF_DATA.dangKy.vaiTroSolo.join(' • ');
+      appendBot(`<b>Hướng dẫn đăng ký nhánh Solo / Tử Chiến (Headshot):</b>
+        <ul>
+          <li><b>Vai trò:</b> ${vaiTroSolo}</li>
+          <li><b>Tuổi tham gia:</b> ${TF_DATA.dangKy.tuoi} tuổi</li>
+          <li><b>Yêu cầu Facebook:</b> ${TF_DATA.dangKy.yeuCauFB}</li>
+          <li><b>Giờ đăng ký:</b> ${TF_DATA.dangKy.gioSolo}</li>
+        </ul>
+        <b>Lưu ý:</b> Chọn vai trò phù hợp với kỹ năng và rank của bạn. Điền đầy đủ thông tin khi đăng ký để được xét duyệt nhanh.`);
+      return;
+    }
+
+    // Đăng ký chung (Sinh Tồn)
+    const nhomOptions = TF_DATA.dangKy.nhom.map(n => `<li>${n}</li>`).join('');
+    const rankOptions = TF_DATA.dangKy.rank.join(' • ');
+    const vaiTroSinhTon = TF_DATA.dangKy.vaiTroSinhTon.join(' • ');
+    const vaiTroSolo = TF_DATA.dangKy.vaiTroSolo.join(' • ');
+    appendBot(`<b>Hướng dẫn đăng ký Quân Đoàn TF:</b>
+      <ul>
+        <li><b>Nhóm tham gia:</b><ul>${nhomOptions}</ul></li>
+        <li><b>Rank hiện có:</b> ${rankOptions}</li>
+        <li><b>Vai trò (Nhánh Sinh Tồn):</b> ${vaiTroSinhTon}</li>
+        <li><b>Vai trò (Nhánh Solo/Tử Chiến):</b> ${vaiTroSolo}</li>
+        <li><b>Tuổi tham gia:</b> ${TF_DATA.dangKy.tuoi} tuổi</li>
+        <li><b>Yêu cầu Facebook:</b> ${TF_DATA.dangKy.yeuCauFB}</li>
+      </ul>
+      <b>Lưu ý:</b> Điền đầy đủ thông tin để quá trình xét duyệt nhanh chóng.`);
+    return;
   }
 
   // RANK
   if(low.includes('rank') || low.includes('xếp hạng')){
-    appendBot(`<b>Các bậc Rank hiện có:</b> ${TF_DATA.dangKy.rank.join(' • ')}`); return;
+    appendBot(`<b>Các bậc Rank hiện có:</b> ${TF_DATA.dangKy.rank.join(' • ')}`);
+    return;
   }
 
-  // NHÁNH
+  // NHÁNH HOẠT ĐỘNG
   if(low.includes('sinh tồn') || low.includes('solo') || low.includes('tử chiến') || low.includes('headshot')){
-    appendBot(`<b>Nhánh hoạt động:</b> ${TF_DATA.luat.nhanh.join(' • ')}`); return;
+    appendBot(`<b>Nhánh hoạt động:</b> ${TF_DATA.luat.nhanh.join(' • ')}`);
+    return;
   }
 
   // HỖ TRỢ
@@ -352,7 +439,7 @@ function handleSend(){
     return;
   }
 
-  // hỏi về 1 người
+  // HỎI VỀ NHÂN SỰ
   const matchOpen = low.match(/(dương|trung|huy)/);
   if(matchOpen){
     const name = matchOpen[0].charAt(0).toUpperCase()+matchOpen[0].slice(1);
@@ -363,15 +450,11 @@ function handleSend(){
     return;
   }
 
-  // GIỚI THIỆU
-  if(low.includes('giới thiệu') || low.includes('gioi thieu') || low.includes('mô tả')){
-    appendBot(`<b>Giới thiệu:</b> ${TF_DATA.gioiThieu.moTa}<br><b>Yêu cầu chung:</b><ul>${TF_DATA.gioiThieu.yeuCauChung.map(x=>`<li>${x}</li>`).join('')}</ul>`); return;
-  }
-
   // FALLBACK
   appendBot("Mình chưa hiểu câu hỏi đó 😅. Thử gõ: <b>help</b>, <b>luật</b>, <b>đăng ký</b>, <b>hỗ trợ</b>, <b>giới thiệu</b>.");
 }
 </script>
+
 
 
 
@@ -398,7 +481,6 @@ function handleSend(){
         <a href="tuyenthanhvien.html">👥 Tuyển Thành viên</a>
         <a href="slo.html">⚔️ Giao lưu quân đoàn</a>
         <a href="hotro.html">👥 Hỗ trợ</a>
-        <a href="qr.html">   🔳 Mã QR</a>
     </div>
 </nav>
 
