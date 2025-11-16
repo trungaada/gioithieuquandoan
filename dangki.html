@@ -648,29 +648,25 @@
 
         /*
         * LOGIC TỐI ƯU CUỘN TRÁNH BÀN PHÍM CHE KHUNG NHẬP
+        * Điều chỉnh: Tăng thời gian chờ và khoảng đệm an toàn.
         */
         document.querySelectorAll('input,select,textarea').forEach(el => {
             el.addEventListener('focus', () => {
                 // Chỉ áp dụng cho thiết bị di động (chiều rộng nhỏ)
                 if (window.innerWidth < 768) { 
-                    // Dùng setTimeout để chờ bàn phím ảo xuất hiện hoàn toàn
+                    // Tăng delay lên 200ms để đảm bảo bàn phím đã bật hoàn toàn
                     setTimeout(() => {
                         const elementRect = el.getBoundingClientRect();
-                        const viewportHeight = window.innerHeight;
                         const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
                         
-                        // Vị trí y của phần tử TÍNH TỪ ĐẦU TRANG (scroll position + top)
+                        // Vị trí y tuyệt đối của phần tử TÍNH TỪ ĐẦU TRANG
                         const elementAbsoluteTop = elementRect.top + scrollPosition;
                         
-                        // Chiều cao của khung nhìn sau khi bàn phím ảo xuất hiện
-                        // Trên iOS, window.innerHeight thường bị giảm khi bàn phím xuất hiện
-                        // Trên Android, có thể phức tạp hơn, nhưng logic này vẫn giúp ích
+                        // Khoảng đệm an toàn: Chúng ta muốn input nằm cách đỉnh viewport 80px 
+                        const SAFE_PADDING = 80; 
                         
-                        // Chúng ta muốn phần tử nằm ở khoảng 20% từ trên xuống (hoặc khoảng cách an toàn 50px từ trên)
-                        const desiredOffset = viewportHeight * 0.15; // 15% từ trên
-                        const paddingFromTop = 50; // Khoảng đệm an toàn 50px
-                        
-                        let targetScrollTop = elementAbsoluteTop - Math.max(desiredOffset, paddingFromTop);
+                        // Vị trí cuộn mục tiêu: Vị trí tuyệt đối của phần tử - Khoảng đệm an toàn
+                        let targetScrollTop = elementAbsoluteTop - SAFE_PADDING;
                         
                         // Đảm bảo không cuộn lên trên đỉnh trang (vị trí 0)
                         if (targetScrollTop < 0) {
@@ -681,7 +677,7 @@
                             top: targetScrollTop,
                             behavior: 'smooth'
                         });
-                    }, 100); // Tăng delay lên 100ms để đảm bảo bàn phím đã bật
+                    }, 200); // Tăng delay lên 200ms
                 }
             });
         });
