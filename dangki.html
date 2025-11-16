@@ -15,7 +15,7 @@
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; }
-body{
+body {
   display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
   min-height:100vh; padding:20px;
   background-image:url('logo.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
@@ -23,8 +23,7 @@ body{
 }
 body::before{
   content:""; position:fixed; top:0; left:0; right:0; bottom:0;
-  background:rgba(0,0,0,0.5);
-  z-index:0;
+  background:rgba(0,0,0,0.5); z-index:0;
 }
 .page-content{
   width:100%; max-width:360px; display:flex; flex-direction:column; align-items:center;
@@ -164,7 +163,6 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
     <option>18h – 20h</option><option>19h – 21h</option><option>20h – 22h</option>
     <option>21h – 23h</option><option>Cả ngày</option>
   </select><label>Khung thời gian:</label></div>
-
   <div class="message" id="msg-sinhTonForm"></div>
   <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
@@ -196,7 +194,6 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
     <option>18h – 20h</option><option>19h – 21h</option><option>20h – 22h</option>
     <option>21h – 23h</option><option>Cả ngày</option>
   </select><label>Khung thời gian:</label></div>
-
   <div class="message" id="msg-soloForm"></div>
   <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
@@ -212,10 +209,8 @@ let H = canvas.height = window.innerHeight;
 const petals = [];
 const PETAL_COUNT = 30;
 function random(min,max){ return Math.random()*(max-min)+min; }
-function initPetals(){
-  for(let i=0;i<PETAL_COUNT;i++){
-    petals.push({x:random(0,W),y:random(0,H),r:random(5,12),d:random(1,3),swing:random(0,Math.PI*2),swingSpeed:random(0.01,0.03),color:'rgba(255,182,193,0.8)'});
-  }
+for(let i=0;i<PETAL_COUNT;i++){
+  petals.push({x:random(0,W),y:random(0,H),r:random(5,12),d:random(1,3),swing:random(0,Math.PI*2),swingSpeed:random(0.01,0.03),color:'rgba(255,182,193,0.8)'});
 }
 function draw(){
   ctx.clearRect(0,0,W,H);
@@ -230,7 +225,7 @@ function draw(){
   requestAnimationFrame(draw);
 }
 window.addEventListener('resize', ()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
-initPetals(); draw();
+draw();
 
 // Show form
 function showForm(id){
@@ -257,17 +252,21 @@ const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJu
   });
 });
 
-// Scroll to input when focus, input or change
+// Scroll theo input
 document.querySelectorAll('input, select, textarea').forEach(el=>{
-  const scrollToEl=()=>{
-    const rect=el.getBoundingClientRect();
-    const scrollTop=window.pageYOffset||document.documentElement.scrollTop;
-    const top=rect.top+scrollTop-100;
-    window.scrollTo({top,behavior:'smooth'});
+  let scrollTimeout;
+  const scrollToEl = ()=>{
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(()=>{
+      const rect=el.getBoundingClientRect();
+      const scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+      const top=rect.top+scrollTop-120;
+      window.scrollTo({top, behavior:'smooth'});
+    },50);
   };
-  el.addEventListener('focus',scrollToEl);
-  el.addEventListener('input',scrollToEl);
-  el.addEventListener('change',scrollToEl);
+  el.addEventListener('focus', scrollToEl);
+  el.addEventListener('input', scrollToEl);
+  el.addEventListener('change', scrollToEl);
 });
 
 // Highlight buttons
