@@ -11,7 +11,7 @@
   --card:#161e2f;
   --text:#e6eef8;
   --text-muted:#b3bcc8;
-  --form-bg-opacity:0.95;
+  --form-bg-opacity: 0.95;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; }
@@ -31,13 +31,13 @@ body::before{
 }
 h1{
   font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase; margin-bottom:10px; font-size:2rem; text-align:center; z-index:1;
-  text-shadow:0 0 5px rgba(255,61,0,0.7);
+  text-shadow: 0 0 5px rgba(255, 61, 0, 0.7);
 }
 p{ color:var(--text-muted); margin-bottom:20px; font-size:1rem; text-align:center; z-index:1; }
 .buttons{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; z-index:1; }
 button.group-btn{ background:var(--accent); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-weight:700; font-size:0.9rem; cursor:pointer; transition:0.3s; }
 button.group-btn:hover{ background:#ff1744; transform:scale(1.05); }
-button.group-btn.highlight { animation:pulseGlow 1.5s ease-in-out infinite; }
+button.group-btn.highlight { animation: pulseGlow 1.5s ease-in-out infinite; }
 form{
   width:100%; max-width:350px;
   background:rgba(22,30,47,var(--form-bg-opacity));
@@ -46,21 +46,25 @@ form{
   border:2px solid var(--accent);
   box-shadow:0 0 20px rgba(255,61,0,0.6), inset 0 0 5px rgba(255,255,255,0.1);
   text-align:left; display:none; z-index:1;
-  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 form.active{ display:block; }
-form h2 { color:var(--text); text-align:center; margin-bottom:20px; text-shadow:0 0 3px var(--accent); }
-.input-group { position:relative; margin-bottom:20px; }
+form h2 {
+  color: var(--text); text-align: center; margin-bottom: 20px; text-shadow: 0 0 3px var(--accent);
+}
+.input-group { position: relative; margin-bottom:20px; }
 .input-group input,
 .input-group select,
 .input-group textarea {
-  width:100%; padding:14px 12px; font-size:1rem; border:1px solid var(--text-muted); border-radius:8px;
-  background: rgba(22,30,47,0.9); color:#fff; outline:none; transition:0.3s cubic-bezier(0.25,0.8,0.25,1);
+  width: 100%; padding:14px 12px; font-size:1rem; border:1px solid var(--text-muted); border-radius:8px;
+  background: rgba(22,30,47,0.9); color:#fff; outline:none;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .input-group select {
-  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
   background: rgba(22,30,47,0.9) url("data:image/svg+xml;utf8,<svg fill='%23fff' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
-  background-size:16px; padding-right:36px; cursor:pointer;
+  background-size: 16px; padding-right:36px; cursor:pointer;
 }
 .input-group input:focus,
 .input-group input:not(:placeholder-shown),
@@ -69,13 +73,15 @@ form h2 { color:var(--text); text-align:center; margin-bottom:20px; text-shadow:
 .input-group select:valid,
 .input-group textarea:focus,
 .input-group textarea:not(:placeholder-shown) {
-  border-color:var(--accent); box-shadow:0 0 8px rgba(255,61,0,0.5);
+  border-color: var(--accent);
+  box-shadow:0 0 8px rgba(255,61,0,0.5);
   background: rgba(22,30,47,0.98);
 }
 .input-group select option { color:#000; background:#fff; }
 .input-group label {
-  position:absolute; top:18px; left:12px; transform:translateY(-50%);
-  color:var(--text-muted); font-size:1rem; pointer-events:none; transition:0.2s cubic-bezier(0.25,0.8,0.25,1);
+  position: absolute; top:18px; left:12px; transform: translateY(-50%);
+  color:var(--text-muted); font-size:1rem; pointer-events:none;
+  transition: 0.2s cubic-bezier(0.25,0.8,0.25,1);
   background:transparent; padding:0;
 }
 .input-group input:focus + label,
@@ -88,8 +94,8 @@ form h2 { color:var(--text); text-align:center; margin-bottom:20px; text-shadow:
   background: var(--card); padding:0 6px; border-radius:4px;
 }
 button.submit-btn{
-  background:var(--accent); color:#fff; border:none; border-radius:10px; padding:14px 20px;
-  font-weight:700; cursor:pointer; width:100%; font-size:1.1rem;
+  background:var(--accent); color:#fff; border:none;
+  border-radius:10px; padding:14px 20px; font-weight:700; cursor:pointer; width:100%; font-size:1.1rem;
   transition:0.3s; box-shadow:0 4px 10px rgba(255,61,0,0.5);
 }
 button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
@@ -130,6 +136,7 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
   <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
 </div>
 
+<!-- Form Sinh Tồn -->
 <form id="sinhTonForm">
   <h2>🔥 Nhóm Sinh Tồn</h2>
   <input type="hidden" name="entry.group" value="Sinh Tồn">
@@ -161,6 +168,7 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
   <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
+<!-- Form Solo -->
 <form id="soloForm">
   <h2>⚡ Nhóm Solo Tử Chiến</h2>
   <input type="hidden" name="entry.group" value="Solo Tử Chiến">
@@ -201,21 +209,19 @@ const ctx = canvas.getContext('2d');
 let W = canvas.width = window.innerWidth;
 let H = canvas.height = window.innerHeight;
 const petals = [];
-const PETAL_COUNT = 30;
-function random(min,max){ return Math.random()*(max-min)+min; }
-for(let i=0;i<PETAL_COUNT;i++){
-  petals.push({x:random(0,W),y:random(0,H),r:random(5,12),d:random(1,3),swing:random(0,Math.PI*2),swingSpeed:random(0.01,0.03),color:'rgba(255,182,193,0.8)'});
+for(let i=0;i<30;i++){
+  petals.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*7+5, d:Math.random()*2+1, swing:Math.random()*Math.PI*2, swingSpeed:Math.random()*0.02+0.01, color:'rgba(255,182,193,0.8)'});
 }
 function draw(){
   ctx.clearRect(0,0,W,H);
-  for(let p of petals){
+  petals.forEach(p=>{
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fillStyle=p.color; ctx.fill();
     p.y+=p.d; p.x+=Math.sin(p.swing)*2; p.swing+=p.swingSpeed;
-    if(p.y>H){ p.y=-10; p.x=random(0,W); }
+    if(p.y>H) { p.y=-10; p.x=Math.random()*W; }
     if(p.x>W) p.x=0; if(p.x<0) p.x=W;
-  }
+  });
   requestAnimationFrame(draw);
 }
 window.addEventListener('resize', ()=>{ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; });
@@ -229,7 +235,7 @@ function showForm(id){
 }
 
 // Form submission
-const WEB_APP_URL="https://script.google.com/macros/s/YOUR_WEB_APP_ID/exec";
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJuXOPSHsYShEUUq7yosVYKzxC6UnBu_G_TkxPqEtXvk8d9s2/exec";
 ['sinhTonForm','soloForm'].forEach(f=>{
   const form=document.getElementById(f);
   const msg=document.getElementById('msg-'+f);
@@ -246,18 +252,13 @@ const WEB_APP_URL="https://script.google.com/macros/s/YOUR_WEB_APP_ID/exec";
   });
 });
 
-// Scroll theo input (Android/iOS)
-document.querySelectorAll('input, select, textarea').forEach(el => {
+// Scroll input center mobile
+document.querySelectorAll('input, select, textarea').forEach(el=>{
   const scrollInput = () => {
-    setTimeout(() => {
-      if (!el.offsetParent) return;
-      const rect = el.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const offset = 20;
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const targetY = rect.top + scrollTop - (viewportHeight/2) + (rect.height/2) - offset;
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
-    }, 300);
+    setTimeout(()=>{
+      if(!el.offsetParent) return;
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+    },300);
   };
   el.addEventListener('focus', scrollInput);
   el.addEventListener('input', scrollInput);
