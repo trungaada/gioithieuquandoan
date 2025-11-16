@@ -1,451 +1,1022 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Giới thiệu thành viên — Quân đoàn TF</title>
-<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Trang chủ Quân đoàn TF</title>
 <style>
-:root {
-    --bg: #030a18;
-    --card: #0f1724;
-    --accent: #6ee7b7;
-    --accent-shadow: rgba(110, 231, 183, 0.5);
-    --muted: #9aa4b2;
-    --glass: rgba(255, 255, 255, 0.06);
-    --radius: 18px;
-    --color-primary: #00FFFF;
-    --color-secondary: #3b82f6;
-    --neon-blue-shadow: rgba(0, 255, 255, 0.8);
-    --member-name-color: #FF0000;
-    --member-name-shadow: rgba(255, 0, 0, 0.8);
-    --member-role-color: #FFD700;
-    --crown-color: gold; 
-    font-family: 'Poppins', system-ui, sans-serif;
+/* === RESET & BODY === */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    -webkit-tap-highlight-color: transparent; 
+    -webkit-overflow-scrolling: touch; 
 }
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
-
-html, body {
-    width: 100%;
-    min-height: 100vh;
-    background: url('logo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #e6eef6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 60px 20px 80px;
+body { 
+    font-family: Arial, sans-serif; 
+    background: url("logo.jpg") no-repeat center center fixed; 
+    background-size: cover; 
+    color: #fff; 
+    font-size: 16px; 
+    line-height: 1.75;
+    min-height: 100vh; 
     overflow-x: hidden;
+    text-align: justify;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
-        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
-    background-size: 30px 30px;
-    opacity: 0.25;
-    pointer-events: none;
-    z-index: 0;
+/* === MAIN FADE-IN === */
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+main { 
+    opacity:0; 
+    text-align:center; 
+    padding:25px 20px; 
+    margin:70px auto 40px auto; 
+    max-width:650px; 
+    background-color: rgba(10,10,10,0.8); 
+    border-radius:10px; 
+    box-shadow:0 0 20px rgba(255,60,0,0.8); 
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px); 
+    transition: all 0.4s ease-in-out;
+}
+body.fade-in main { 
+    opacity:1; 
+    animation: fadeIn 1.2s ease-out forwards; 
 }
 
-body {
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.2s forwards;
+/* === NAVBAR === */
+nav { 
+    position:fixed; 
+    top:0; left:0; width:100%; 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    padding:5px 12px; 
+    z-index:100; 
+    background-image: linear-gradient(to right, #ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3); 
+    background-size:400% 100%; 
+    animation:rainbow-gradient 15s ease infinite; 
+    box-shadow:0 2px 8px rgba(204,0,0,0.7);
+}
+@keyframes rainbow-gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+.logo { height:35px; max-width:60px; border-radius:50%; box-shadow:0 0 8px rgba(255,60,0,0.8); transition:0.3s ease; }
+.logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
+.menu-toggle { display:flex; flex-direction:column; justify-content: space-around; width:28px; height:25px; cursor:pointer; }
+.menu-toggle span { display:block; height:3px; background-color:#fff; border-radius:2px; transition:all 0.3s ease; }
+.nav-links { position:absolute; top:45px; right:12px; background-color: rgba(0,0,0,0.85); flex-direction:column; width:200px; gap:0; display:none; border-radius:0 0 8px 8px; box-shadow:0 0 10px rgba(255,60,0,0.8); }
+.nav-links.active { display:flex; }
+.nav-links a { padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:14px; font-weight:bold; text-decoration:none; color:white; background:linear-gradient(135deg,#CC0000,#400000); transition:all 0.3s ease; }
+.nav-links a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scale(1.03); box-shadow:0 0 10px #FF3C00; }
+@media (min-width: 1025px) { .nav-links { right:12px; width:250px; } }
+
+/* === HEADER / TITLES === */
+h1 { font-size: 32px; color: #FF3C00; margin-bottom: 25px; text-align: center; text-shadow: 0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
+h2 { font-size: 22px; color: #FFCC00; margin: 25px 0 15px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:5px; text-align:center; }
+
+/* === PARAGRAPHS & LIST === */
+p { font-size:16px; line-height:1.75; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:18px; }
+ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
+ul li { padding:10px 0; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:16px; color:#fff; line-height:1.6; }
+ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
+
+/* === SLOGAN / TYPING TEXT === */
+.slogan { font-size:18px; margin:10px 0 25px 0; text-align:center; }
+.typing-text { border-right:3px solid #FFCC00; font-weight:bold; display:inline-block; white-space:nowrap; overflow:hidden; padding-right:5px; }
+
+/* === CTA BUTTONS & ICON SOCIAL === */
+.cta-button, .popup-btn { font-size:16px; padding:12px 24px; border-radius:8px; }
+.cta-buttons-group { display:flex; justify-content:center; align-items:center; gap:15px; margin-top:25px; flex-wrap:wrap; }
+.icon-social { width:60px; height:60px; border-radius:50%; background: rgba(255,255,255,0.1); border:2px solid rgba(255,100,0,0.5); backdrop-filter: blur(4px); display:flex; justify-content:center; align-items:center; box-shadow:0 0 10px rgba(255,60,0,0.5); transition:all 0.25s ease-in-out; }
+.icon-social img { width:80%; height:80%; object-fit:contain; border-radius:10px; }
+.icon-social:hover { transform:translateY(-4px) scale(1.1); box-shadow:0 8px 20px rgba(255,80,0,0.9),0 0 30px rgba(255,160,0,0.7); border-color:#FFCC00; background: rgba(255,100,0,0.15); }
+
+/* === FOOTER === */
+.tf-footer-cta p, .main-footer p { font-size:16px; line-height:1.6; text-align:center; }
+
+/* === NEON GLOW TF.KURONAMI === */
+.pulsating-author {
+    font-weight: bold;
+    font-size: 18px;
+    color: #FFCC00;
+    text-transform: uppercase;
+    animation: neon-glow 1.8s ease-in-out infinite alternate;
+}
+@keyframes neon-glow {
+    0% { text-shadow: 0 0 5px #FFCC00, 0 0 10px #FF9900; color:#FFCC00; }
+    50% { text-shadow: 0 0 15px #FFCC00, 0 0 25px #FF6600, 0 0 40px #FF3300; color:#FFD700; }
+    100% { text-shadow: 0 0 5px #FFCC00, 0 0 10px #FF9900; color:#FFCC00; }
 }
 
-@keyframes fadeIn { to { opacity: 1; } }
+/* === POPUP WELCOME === */
+#welcome-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; visibility:hidden; transition:0.5s; }
+#welcome-popup.show { opacity:1; visibility:visible; }
+.popup-content { background: rgba(15,15,15,0.95); padding:25px 30px; border-radius:15px; text-align:center; box-shadow:0 0 25px rgba(255,60,0,0.8); animation: popup-in 0.8s ease forwards; max-width:90%; width:380px; line-height:1.6; }
+.popup-logo { width:70px; height:70px; margin-bottom:15px; border-radius:50%; box-shadow:0 0 12px #FF3C00; }
+.popup-content h2 { font-size:22px; line-height:1.4; color:#FF3C00; margin:10px 0 15px; text-shadow:0 0 8px #FF3C00; }
+.popup-content p { font-size:16px; line-height:1.6; color:#fff; margin:10px 0; text-align:center; word-wrap:break-word; }
+.popup-btn { background: linear-gradient(90deg,#FF3C00,#FFCC00); color:#fff; border:none; padding:10px 22px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:16px; transition: all 0.3s ease; box-shadow:0 0 10px rgba(255,60,0,0.8); margin-top:20px; }
+.popup-btn:hover { background: linear-gradient(90deg,#FFCC00,#FF3C00); transform:scale(1.05); }
+@keyframes popup-in { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
 
-main {
-    z-index: 1;
-    width: 100%;
-    max-width: 1200px;
-    text-align: center;
-}
-
-header { margin-bottom: 30px; }
-
-.logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-#main-logo {
-    width: clamp(100px, 15vw, 150px);
-    border-radius: 50%;
-    border: 3px solid var(--color-primary);
-    box-shadow: 0 0 15px var(--neon-blue-shadow);
-    transition: 0.4s ease-in-out;
-}
-
-#main-logo:hover {
-    transform: rotate(5deg) scale(1.05);
-    box-shadow: 0 0 25px var(--neon-blue-shadow);
-}
-
-h1#typing-title {
-    font-size: clamp(28px, 6vw, 46px);
-    color: var(--color-primary);
-    text-shadow: 0 0 8px var(--neon-blue-shadow);
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: none; /* bỏ con trỏ nhấp nháy */
-    animation: none;    /* bỏ animation */
-}
-
-
-@keyframes flicker {
-    0%,100% { text-shadow: 0 0 10px var(--neon-blue-shadow); }
-    50% { text-shadow: 0 0 5px var(--color-primary); }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--color-primary); }
-}
-
-p.lead {
-    color: var(--muted);
-    margin-top: 6px;
-    font-size: 15px;
-    font-style: italic;
-}
-
-.marquee-container {
-    width: 100%;
-    margin: 25px 0;
-    padding: 8px 0;
-    background: var(--glass);
-    border-top: 1px solid rgba(110,231,183,0.2);
-    border-bottom: 1px solid rgba(110,231,183,0.2);
-    backdrop-filter: blur(5px);
-}
-
-.marquee-text {
-    color: var(--accent);
-    font-size: 14px;
-    font-weight: 600;
-    text-shadow: 0 0 5px var(--accent-shadow);
-}
-
-.members {
-    display: grid;
-    width: 100%;
-    gap: 25px;
-    margin-top: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.card {
-    background: var(--glass);
-    padding: 25px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    transform: translateY(20px);
-    opacity: 0;
-    animation: float 6s ease-in-out infinite;
-    perspective: 1000px;
-    overflow: hidden;
-    position: relative;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
-}
-
-.card-enter {
-    animation: slideUpFadeIn .8s ease forwards;
-}
-
-@keyframes slideUpFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card-border-glow {
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius);
-    background: linear-gradient(45deg, var(--color-primary), var(--accent), var(--member-name-color));
-    background-size: 200% 200%;
-    filter: blur(8px);
-    opacity: 0;
-    transition: 0.4s;
-    animation: rotate-border 6s linear infinite;
-}
-
-@keyframes rotate-border {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.card:hover .card-border-glow {
-    opacity: 1;
-}
-
-.avatar {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    border: 3px solid rgba(255,100,100,0.8);
-    box-shadow: 0 0 15px rgba(255,100,100,0.5);
-    transition: 0.35s;
-}
-
-h2 {
-    margin-bottom: 4px;
-    color: var(--member-name-color);
-    text-shadow: 0 0 8px var(--member-name-shadow);
-}
-
-p.role {
-    color: var(--member-role-color);
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.crown-effect {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.crown-effect::before {
-    content: "👑";
-    font-size: 1.2em;
-    animation: pulse-glow 1.5s infinite alternate;
-    transform: translateY(-2px);
-}
-
-@keyframes pulse-glow {
-    0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 5px var(--member-role-color));
-    }
-    100% {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 10px var(--member-role-color));
-    }
-}
-
-.badge {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    margin: 3px;
-    font-size: 12px;
-    transition: .3s;
-}
-
-.card:hover .badge {
-    background: var(--accent);
-    color: var(--bg);
-}
-
-#backButton {
-    margin-top: 35px;
-    display: inline-block;
-    padding: 12px 20px;
-    border-radius: 12px;
-    border: 2px solid var(--color-primary);
-    font-weight: 700;
-    color: var(--color-primary);
-    text-decoration: none;
-    background: rgba(0,255,255,0.15);
-    animation: neon-flicker-btn 2.5s infinite alternate;
-    transition: .4s;
-}
-
-@keyframes neon-flicker-btn {
-    0%,100% { box-shadow: 0 0 10px var(--neon-blue-shadow); }
-    50% { box-shadow: 0 0 4px rgba(0,255,255,0.6); }
-}
-
-#backButton:hover {
-    transform: scale(1.1);
-    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-    color: var(--bg);
-    box-shadow: 0 0 30px var(--neon-blue-shadow);
-}
-
-.falling-star {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,.8);
-    box-shadow: 0 0 5px rgba(255,255,255,.4);
-    pointer-events: none;
-}
+/* === SAKURA === */
+.sakura { position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; animation:fall linear forwards; }
+@keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } }
 </style>
 </head>
-
 <body>
 
-<div id="starfall-container" style="position:fixed;inset:0;overflow:hidden;z-index:1"></div>
 
-<main>
-    <header>
-        <div class="logo-container">
-            <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF">
-        </div>
-        <h1 id="typing-title"></h1>
-        <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
-    </header>
 
-    <div class="marquee-container">
-        <marquee class="marquee-text" scrollamount="6">
-            ⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay!
-        </marquee>
+
+
+
+
+
+
+
+
+    <!-- TF AI Assistant (Thân thiện - Vui vẻ) - Dán trước </body> -->
+<style>
+/* --- UI nhỏ gọn, không xung đột --- */
+#tf-ai-btn {
+  position:fixed; right:22px; bottom:22px; z-index:99999;
+  width:60px; height:60px; border-radius:50%;
+  background:linear-gradient(135deg,#ff7a00,#ff3c00);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:28px; cursor:pointer;
+  box-shadow:0 6px 20px rgba(255,60,0,0.25);
+  transition: transform 0.2s ease;
+}
+#tf-ai-btn:hover { transform: scale(1.1); }
+
+#tf-ai-box {
+  position:fixed; right:22px; bottom:92px; width:340px; max-width:92vw;
+  background:rgba(10,10,12,0.98); color:#fff; border-radius:12px; overflow:hidden; z-index:99999;
+  box-shadow:0 15px 40px rgba(0,0,0,0.6); display:none; border:2px solid rgba(255,60,0,0.15);
+  opacity:0; transform: translateY(20px); transition: all 0.3s ease;
+}
+#tf-ai-box.show { display:block; opacity:1; transform: translateY(0); }
+
+#tf-ai-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 12px;
+  background:linear-gradient(90deg,#ff5a00,#ffb84d);
+  color:#111; font-weight:700;
+}
+
+#tf-ai-body {
+  height:300px; overflow:auto; padding:12px;
+  font-size:14px; line-height:1.5;
+  scroll-behavior: smooth;
+}
+.tf-msg { margin:8px 0; padding:8px 10px; border-radius:8px; max-width:90%; word-break:break-word; }
+.tf-msg.user { background:rgba(255,255,255,0.06); color:#fff; margin-left:auto; text-align:right; font-weight:600;}
+.tf-msg.bot { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:#fff; }
+
+#tf-ai-input-wrap {
+  display:flex; gap:8px; padding:10px;
+  border-top:1px solid rgba(255,255,255,0.03); background:rgba(0,0,0,0.3);
+}
+#tf-ai-input {
+  flex:1; padding:8px 10px; border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff; outline:none;
+}
+#tf-ai-send {
+  padding:8px 12px; border-radius:8px;
+  background:#ff3c00; border:none; color:#fff; font-weight:700; cursor:pointer;
+}
+#tf-help { font-size:12px; opacity:0.85; color:#fff; margin-top:6px; text-align:center; }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<div id="tf-ai-btn" title="TF Assistant">🤖</div>
+
+<div id="tf-ai-box" role="dialog" aria-label="TF Assistant">
+    <div id="tf-ai-header">
+        <div>🤖 TF Assistant</div>
+        <div style="font-size:14px;cursor:pointer;" id="tf-ai-close">✖</div>
     </div>
-
-    <section class="members">
-
-        <div class="card">
-            <div class="card-border-glow"></div>
-            <div class="avatar" style="background-image:url('trung1.jpg')"></div>
-            <h2><span id="name-trung" class="crown-effect"></span></h2> 
-            <p class="role"><span id="role-trung"></span></p>
-
-            <div class="badges">
-                <span class="badge">Lãnh đạo</span>
-                <span class="badge">Chiến thuật</span>
-                <span class="badge">Tuyển quân</span>
-            </div>
+    <div id="tf-ai-body" aria-live="polite"></div>
+    <div style="padding:0 12px 12px;">
+        <div id="tf-help">Gõ "help" để xem chủ đề — Bot trả lời theo nội dung Quân Đoàn TF.</div>
+        <div id="tf-ai-input-wrap">
+            <input id="tf-ai-input" placeholder="Bạn muốn hỏi điều gì về TF? (ví dụ: luật, đăng ký, hỗ trợ)" />
+            <button id="tf-ai-send">Gửi</button>
         </div>
+    </div>
+</div>
 
-        <div class="card">
-            <div class="card-border-glow"></div>
-            <div class="avatar" style="background-image:url('huy.jpg')"></div>
-            <h2><span id="name-tv2" class="crown-effect"></span></h2>
-            <p class="role"><span id="role-tv2"></span></p>
 
-            <div class="badges">
-                <span class="badge">Lãnh đạo</span>
-                <span class="badge">Chiến thuật</span>
-                <span class="badge">Tuyển quân</span>
-            </div>
-        </div>
 
-    </section>
 
-    <a id="backButton" href="index.html">Quay lại trang chủ</a>
-</main>
 
 <script>
-const textToType = "Quản Trị Quân Đoàn";
-
-const memberData = [
-    { id: "name-trung", text: "(TF.Kuronami )", speed: 80 },
-    { id: "role-trung", text: "Chỉ huy N2", speed: 60 }, 
-    { id: "name-tv2", text: " (TF.Huy )", speed: 80 },
-    { id: "role-tv2", text: "Chỉ huy N1", speed: 60 }, 
-];
-
-function typeWriterEffect(id, text, speed) {
-    return new Promise(resolve => {
-        const el = document.getElementById(id);
-        el.classList.add("typing-member");
-        let i = 0;
-        el.textContent = "";
-        function type() {
-            if (i < text.length) {
-                el.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                el.classList.remove("typing-member");
-                el.classList.add("typing-done");
-                resolve();
-            }
-        }
-        type();
-    });
-}
-
-async function runMemberLoop() {
-    while (true) {
-        for (const m of memberData) {
-            await typeWriterEffect(m.id, m.text, m.speed);
-        }
-        await new Promise(r => setTimeout(r, 5000));
-        memberData.forEach(m => document.getElementById(m.id).textContent = "");
-    }
-}
-
-function animateCards() {
-    document.querySelectorAll(".card").forEach((c, i) => {
-        c.style.animationDelay = `${i * 0.15 + 0.5}s`;
-        c.classList.add("card-enter");
-    });
-}
-
-const stars = [];
-function initStarfall() {
-    const container = document.getElementById("starfall-container");
-    const numStars = 60;
-    for (let i = 0; i < numStars; i++) {
-        const s = document.createElement("div");
-        s.classList.add("falling-star");
-        const size = Math.random() * 4 + 2;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.transform = `translate(${x}px, ${y}px)`;
-        container.appendChild(s);
-        stars.push({ element: s, x, y, speed: Math.random() * 1 + 0.5, drift: (Math.random()-0.5)*0.3, size });
-    }
-}
-
-function updateStarfall() {
-    stars.forEach(s => {
-        s.y += s.speed;
-        s.x += s.drift;
-        if (s.y > window.innerHeight) {
-            s.y = -s.size;
-            s.x = Math.random() * window.innerWidth;
-        }
-        s.element.style.transform = `translate(${s.x}px, ${s.y}px)`;
-    });
-    requestAnimationFrame(updateStarfall);
-}
-
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
-document.addEventListener("keydown", e => { if(e.key==="F12") e.preventDefault(); });
-
-window.onload = async function () {
-    await typeWriterEffect("typing-title", textToType, 100);
-    runMemberLoop();
-    initStarfall();
-    updateStarfall();
-    animateCards();
+// ====== DỮ LIỆU TF (CHATBOT) ĐÃ CẬP NHẬT ======
+const TF_DATA = {
+    gioiThieu: {
+        moTa: "Quân Đoàn TF (TitanForce) có 2 nhánh hoạt động: Sinh Tồn và Tử Chiến (Headshot). Có 3 box chat: 1 box tổng + 2 box theo nhánh.",
+        yeuCauChung: [
+            "Tôn trọng mọi người, biết trên biết dưới.",
+            "Tinh thần đồng đội, hỗ trợ nhau, không toxic.",
+            "Độ tuổi ưu tiên K9 trở lên (trên lớp 12).",
+            "Có tương tác box chat, rời QD phải báo chủ QD.",
+            "Off 7 ngày sẽ bị kick, nếu có lý do phải báo.",
+            "Không va chạm, không chê bai, giỡn nhưng không quá trớn.",
+            "Tìm người có trình mobile, PC không tuyển hack.",
+            "Đổi tên tùy ý, khuyến khích TF.Tên."
+        ]
+    },
+    luat: {
+        nhanh: ["Nhánh 1: Sinh tồn (Survival)", "Nhánh 2: Headshot / Kai"],
+        rulesList: [
+            "Tôn trọng mọi người trong QD, biết trên biết dưới.",
+            "Tinh thần đồng đội: giúp đỡ, không toxic.",
+            "Độ tuổi: ưu tiên K9 trở lên.",
+            "Off 7 ngày sẽ bị kick nếu không báo.",
+            "Không va chạm dưới mọi hình thức.",
+            "Có 2 nhánh: Sinh tồn và Tử chiến (Headshot).",
+            "Có 3 box QD (1 tổng, 2 nhánh)."
+        ]
+    },
+    testChiTiet: {
+        nam: {
+            "Nam": "Nam bắn 3/7",
+            "Kai 2": "Đánh giá kỹ năng solo, phản xạ nhanh, sinh tồn cơ bản.",
+            "Kai 5": "Đánh giá phối hợp nhóm, kỹ năng chiến đấu nâng cao.",
+            "Kai 2 HS": "Đánh giá kỹ năng headshot, tốc độ phản xạ 1vs1 và 4vs4.",
+            "Kai 5 HS": "Đánh giá headshot 1vs1 và 4vs4."
+        },
+        nu: {
+            "Nữ": "Nữ bắn 3/7",
+            "Kai 2": "Đánh giá cơ bản, khả năng hỗ trợ nhóm.",
+            "Kai 5": "Đánh giá phối hợp và kỹ năng sinh tồn.",
+            "Kai 2 HS": "Khả năng headshot 1vs1 và 4vs4.",
+            "Kai 5 HS": "Khả năng headshot 1vs1 và 4vs4."
+        }
+    },
+    quyTrinhTest: { 
+        steps: [
+            "Đăng ký qua form hoặc liên hệ Admin.",
+            "Admin xem xét thông tin và liên hệ bạn qua Facebook.",
+            "Tiến hành Test kỹ năng theo nhánh (Sinh tồn/Tử chiến).",
+            "Đánh giá và thông báo kết quả. Nếu đạt, bạn sẽ được thêm vào các box chat chính thức.",
+            "Thời gian chờ đợi (từ lúc đăng ký đến lúc test): Khoảng 24-48 giờ."
+        ]
+    },
+    thanhTich: { 
+        trietLy: "Tốc độ, Phối hợp và Kỷ luật là ba yếu tố làm nên TitanForce.",
+        noiBat: [
+            "Đạt Top Server Rank Sinh Tồn mùa gần nhất (thay bằng con số cụ thể nếu có).",
+            "Thường xuyên tổ chức giải đấu nội bộ Headshot/Solo với phần thưởng hấp dẫn.",
+            "Xây dựng môi trường giao lưu chuyên nghiệp, hỗ trợ tối đa kỹ năng cá nhân."
+        ]
+    },
+    gameInfo: { // <--- MỤC MỚI: THÔNG TIN GAME
+        game: "Free Fire (Garena Free Fire)",
+        server: "Việt Nam",
+        nhanhChinh: "Sinh Tồn (Battle Royale), Tử Chiến (Clash Squad)"
+    },
+    adminInfo: { // <--- MỤC MỚI: BAN QUẢN TRỊ
+        leader: [
+            { ten: "T.F • Huy", vaiTro: "Chủ Quân Đoàn Nhánh 1" },
+            { ten: "T.F • Trung", vaiTro: "Chủ Quân Đoàn Nhánh 2" },
+            { ten: "T.F • Huy", vaiTro: "Phó Quân Đoàn - Quản lý Nhánh Sinh Tồn" },
+            { ten: "T.F • Trung", vaiTro: "Phó Quân Đoàn - Quản lý Nhánh Tử Chiến/Headshot" }
+        ],
+        lienHe: "Vui lòng liên hệ qua Facebook chính thức hoặc box chat Tổng QD."
+    },
+    tuongTac: { // <--- MỤC MỚI: TƯƠNG TÁC BOX CHAT
+        mucTieu: "Đảm bảo môi trường kết nối và hỗ trợ đồng đội tốt nhất.",
+        yeuCau: [
+            "Tương tác box chat chính (Box Tổng) ít nhất 3 lần/tuần.",
+            "Tham gia hoạt động Rank/Training cùng QD ít nhất 5 trận/tuần.",
+            "Không spam tin nhắn vô nghĩa, không gửi nội dung 18+/chính trị.",
+            "Tuyệt đối không toxic, không gây hấn với các QD khác."
+        ]
+    },
+    lichRank: { // <--- MỤC MỚI: LỊCH HOẠT ĐỘNG
+        ngayThuong: "19:00 - 23:00 (Ưu tiên đấu Rank Sinh Tồn/Tử Chiến)",
+        cuoiTuan: "10:00 - 23:00 (Hoạt động tự do, tổ chức các giải đấu/training nội bộ)",
+        ghiChu: "Đây là khung giờ hoạt động mạnh nhất, thành viên có thể chơi tự do ngoài khung giờ này."
+    },
+    dangKy: {
+        nhom: ["Sinh Tồn", "Solo Tử Chiến"],
+        rank: ["Đồng","Bạc","Vàng","Bạch Kim","Kim Cương","Huyền Thoại","Cao Thủ","Đại Cao Thủ","Top Sever"],
+        vaiTroSinhTon: ["Rush","Cover","Sniper","Hỗ trợ"],
+        vaiTroSolo: ["Kai 2","Kai 5","Headshot Kai 2","Headshot Kai 5"],
+        tuoi: "14–30",
+        yeuCauFB: "Bắt buộc cung cấp tên và link Facebook",
+        gioSolo: "19-23h"
+    },
+    hotro: {
+        gioHoTro: ["Thứ 2–6: 7:00 – 21:00","Thứ 7–CN: 7:00 – 23:30"],
+        canhBao: [
+            "Chỉ liên hệ qua link Facebook chính thức.",
+            "Không cung cấp mật khẩu hoặc mã OTP.",
+            "Đội ngũ có thể trả lời chậm, vui lòng thông cảm."
+        ],
+        nhanSu: [
+            { ten: "Dương", vaiTro: "Hỗ trợ lỗi — TitanForce", loi: ["Chưa được gửi kết bạn","Chưa được duyệt","Chưa được test"] },
+            { ten: "Trung", vaiTro: "Hỗ trợ kỹ thuật — Web FF", loi: ["Lỗi đăng ký tài khoản","Lỗi kết nối server"] },
+            { ten: "Huy", vaiTro: "Hỗ trợ lỗi — TitanForce", loi: ["Chưa được gửi kết bạn","Chưa được duyệt","Chưa được test"] }
+        ]
+    },
+    facebook: { 
+        link: "https://www.facebook.com/TF.TitanForce/", 
+        ten: "TitanForce Esports",
+        chuY: "Đây là trang Facebook chính thức và duy nhất của Quân Đoàn TF. Mọi liên hệ ngoài trang này đều không được công nhận."
+    },
+    qr: {
+        link: "qr.png", 
+        moTa: "Quét mã QR để tham gia Quân Đoàn TF nhanh chóng!"
+    },
+    qrZalo: {
+        link: "qrzl.jpg", 
+        moTa: "Quét mã QR Zalo để tham gia nhóm Quân Đoàn TF nhanh chóng!"
+    },
+    tiktok: {
+        link: "https://www.tiktok.com/@lio.vn", 
+        ten: "@lio.vn",
+        moTa: "Theo dõi TikTok để cập nhật nhanh các hoạt động Quân Đoàn TF!"
+    },
+    botInfo: {
+        ten: "TF Assistant 🤖",
+        moTa: "Mình là TF Assistant, trợ lý thân thiện của Quân Đoàn TF. Mình hỗ trợ trả lời các câu hỏi về luật, đăng ký, rank, test thành viên, giờ hỗ trợ, nhánh hoạt động và có thể hướng dẫn bạn quét QR để tham gia nhanh chóng.",
+        huongDan: "Gõ 'help' để xem danh sách chủ đề mình có thể hỗ trợ."
+    }
 };
+
+const TF_BLOCKED_WORDS = ["tục tĩu1","tục tĩu2","xxx","sex","đ**","cl","cc","vl"];
+
+
+// Thêm biến toàn cục để lưu tên người dùng
+let userName = null; // <--- BIẾN MỚI
+
+// ===== UI Bindings (CHATBOT) =====
+const btn = document.getElementById('tf-ai-btn');
+const box = document.getElementById('tf-ai-box');
+const closeBtn = document.getElementById('tf-ai-close');
+const sendBtn = document.getElementById('tf-ai-send');
+const input = document.getElementById('tf-ai-input');
+const body = document.getElementById('tf-ai-body');
+
+btn.addEventListener('click', ()=> box.classList.add('show'));
+closeBtn.addEventListener('click', ()=> box.classList.remove('show'));
+sendBtn.addEventListener('click', handleSend);
+input.addEventListener('keydown', e => { if(e.key==='Enter') handleSend(); });
+
+// greeting
+appendBot("Chào bạn! Mình là TF Assistant — vui vẻ, thân thiện 😄. Gõ 'help' để xem chủ đề nhé!");
+
+function appendUser(text){
+    const el = document.createElement('div'); el.className='tf-msg user'; el.textContent = text;
+    el.style.animationDelay = '0.05s'; 
+    body.appendChild(el);
+    body.scrollTop = body.scrollHeight;
+}
+function appendBot(html){
+    const el = document.createElement('div'); el.className='tf-msg bot'; el.innerHTML = html;
+    el.style.animationDelay = '0.05s'; 
+    body.appendChild(el);
+    body.scrollTop = body.scrollHeight;
+}
+
+// Thêm chỉ báo "Đang nhập..." (Cần có CSS cho #typing-indicator và .dot)
+function showTypingIndicator() {
+    const existing = document.getElementById('typing-indicator');
+    if(existing) existing.remove();
+    
+    const indicator = document.createElement('div');
+    indicator.id = 'typing-indicator';
+    indicator.className = 'tf-msg bot';
+    indicator.innerHTML = 'Đang nhập<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
+    body.appendChild(indicator);
+    body.scrollTop = body.scrollHeight;
+}
+
+// Xóa chỉ báo "Đang nhập..."
+function removeTypingIndicator() {
+    const indicator = document.getElementById('typing-indicator');
+    if (indicator) {
+        indicator.remove();
+    }
+}
+
+// Hàm lấy tên người dùng đã lưu (MỚI)
+function getBotGreeting() {
+    // Nếu có tên, trả về lời chào có tên và khoảng trắng, nếu không, trả về chuỗi rỗng
+    return userName ? `Chào **${userName}**! ` : ''; 
+}
+
+// ===== Bot logic (ĐÃ CẬP NHẬT) =====
+function handleSend(){
+    const q = input.value.trim();
+    if(!q) return;
+
+    const low = q.toLowerCase();
+
+    // 1. === KIỂM TRA TỪ CẤM ===
+    for(const word of TF_BLOCKED_WORDS){
+        if(low.includes(word)){
+            appendUser(q);
+            setTimeout(() => {
+                appendBot("⚠️ Nội dung bạn vừa nhập chứa từ ngữ không phù hợp. Vui lòng nhập lịch sự!");
+            }, 500);
+            input.value = '';
+            return;
+        }
+    }
+
+    // 2. Xử lý tin nhắn hợp lệ
+    appendUser(q);
+    input.value = '';
+    
+    // HIỂN THỊ CHỈ BÁO ĐANG NHẬP
+    showTypingIndicator(); 
+    
+    // TẠO ĐỘ TRỄ cho câu trả lời của bot (800ms)
+    setTimeout(() => {
+        removeTypingIndicator(); // XÓA CHỈ BÁO
+
+        // === BẮT ĐẦU LOGIC TRẢ LỜI CỦA BOT ===
+
+        // **LOGIC MỚI:** PHÁT HIỆN VÀ LƯU TÊN NGƯỜI DÙNG
+        const nameMatch = low.match(/^(tên tôi là|tôi là|mình là|tên em là|em là|tên tôi|tôi tên)\s+([a-zA-Z0-9\s]+)\s*$/i) ||
+                          low.match(/^(tôi tên|mình tên|em tên)\s+([a-zA-Z0-9\s]+)\s*$/i);
+                          
+        if (nameMatch && !userName) {
+            // Lấy tên từ nhóm 2 của match, loại bỏ khoảng trắng dư thừa
+            userName = nameMatch[2].trim().replace(/\b\w/g, c => c.toUpperCase()); // Viết hoa chữ cái đầu mỗi từ
+            appendBot(`Rất vui được làm quen, **${userName}** 👋! Mình là TF Assistant. Bạn cần hỗ trợ gì về Quân Đoàn TF?`);
+            return;
+        }
+        
+        // Lấy lời chào đã cá nhân hóa
+        const greeting = getBotGreeting();
+        
+        // **LOGIC MỚI:** CÂU HỎI VỀ ĐIỀU KIỆN
+        if(low.includes('điều kiện') || low.includes('dk vào qd') || low.includes('bao nhiêu tuổi')){
+            const yeuCau = TF_DATA.gioiThieu.yeuCauChung.map(x=>`<li>${x}</li>`).join('');
+            const tuoi = `<li>**Độ tuổi:** ${TF_DATA.dangKy.tuoi} (Ưu tiên K9/trên lớp 12)</li>`;
+            const rank = `<li>**Rank:** Cần có rank tối thiểu ${TF_DATA.dangKy.rank.slice(0, 3).join('/')} trở lên.</li>`;
+            
+            appendBot(`${greeting}<b>📝 Điều kiện tham gia Quân Đoàn TF:</b>
+                <ul>
+                    ${tuoi}
+                    ${rank}
+                    ${yeuCau}
+                </ul>
+                <small>Để đăng ký, bạn có thể gõ 'đăng ký'.</small>
+            `);
+            return;
+        }
+
+        // **LOGIC MỚI:** CÂU HỎI VỀ NGUỒN GỐC FREE FIRE
+        if(low.includes('free fire của nước nào') || low.includes('ff của nước nào') || low.includes('ai phát triển ff')){
+            appendBot(`${greeting}Thông tin về Free Fire:
+                <ul>
+                    <li>Game Free Fire ban đầu được phát triển bởi **111 Dots Studio** (một studio tại **Việt Nam**).</li>
+                    <li>Sau đó được **Garena** mua lại và phát hành toàn cầu, hiện đang hoạt động trên Server **Việt Nam**.</li>
+                </ul>
+            `);
+            return;
+        }
+        
+        // **LOGIC MỚI:** CÂU HỎI VỀ HACKER/GIAN LẬN
+        if(low.includes('hack') || low.includes('gian lận') || low.includes('hacker')){
+            const yeuCauQD = TF_DATA.gioiThieu.yeuCauChung.find(y => y.includes('hack'));
+            appendBot(`${greeting}Quân Đoàn TF có quan điểm rõ ràng về vấn đề này:
+                <ul>
+                    <li>**Tuyệt đối không tuyển hacker/gian lận:** ${yeuCauQD || 'Tìm người có trình mobile, PC không tuyển hack.'}</li>
+                    <li>Chúng tôi khuyến khích môi trường chơi game công bằng. Nếu phát hiện, hãy báo cáo ngay cho BQT.</li>
+                </ul>
+            `);
+            return;
+        }
+
+        if(low==='help'||low==='h'||low==='menu'){
+            appendBot(`${greeting}<b>Những chủ đề bạn có thể hỏi:</b>
+                <ul>
+                    <li>luật / luật qd / rules</li>
+                    <li>điều kiện / dk vào qd</li>
+                    <li>test thành viên / luật test</li>
+                    <li>quy trình test</li>
+                    <li>thành tích / triết lý / chiến tích</li>
+                    <li>đăng ký / đăng ký clan</li>
+                    <li>rank / xếp hạng</li>
+                    <li>hỗ trợ / giờ hỗ trợ / liên hệ</li>
+                    <li>giới thiệu quân đoàn</li>
+                    <li>QR quân đoàn</li>
+                    <li>QR Zalo</li>
+                    <li>Facebook TF</li>
+                    <li>Ten Tik Tok</li>
+                    <li>Game chính / FF của nước nào</li>
+                    <li>Admin</li>
+                    <li>tương tác box chat </li>
+                    <li>Lịch rank</li>
+                </ul>`);
+            return;
+        }
+
+        // Greetings
+        if(/^(hi|hello|chào|hay|xin chào|alo)\b/i.test(low)){
+            appendBot(`${greeting}Xin chào! Bạn cần hỗ trợ gì về Quân Đoàn TF? (gõ 'help' để xem chủ đề). 😎`); 
+            return;
+        }
+        
+        // **NỘI DUNG MỚI:** ADMIN / BQT
+        if(low.includes('admin') || low.includes('bqt') || low.includes('leader')){
+            const leaders = TF_DATA.adminInfo.leader.map(p => `<li><b>${p.ten}</b> - ${p.vaiTro}</li>`).join('');
+            appendBot(`${greeting}<b>👤 Ban Quản Trị (BQT) Quân Đoàn TF:</b>
+                <ul>${leaders}</ul>
+                <small>${TF_DATA.adminInfo.lienHe}</small>`);
+            return;
+        }
+
+        // **NỘI DUNG MỚI:** LỊCH RANK / GIỜ HOẠT ĐỘNG
+        if(low.includes('lịch rank') || low.includes('gio hoat dong') || low.includes('khung giờ')){
+            const lichRank = TF_DATA.lichRank;
+            appendBot(`${greeting}<b>⏰ Lịch Hoạt Động & Đấu Rank Chính:</b>
+                <ul>
+                    <li><b>Ngày thường (T2-T6):</b> ${lichRank.ngayThuong}</li>
+                    <li><b>Cuối tuần (T7-CN):</b> ${lichRank.cuoiTuan}</li>
+                </ul>
+                <small><i>Lưu ý:</i> ${lichRank.ghiChu}</small>`);
+            return;
+        }
+
+        // **NỘI DUNG MỚI:** TƯƠNG TÁC BOX CHAT
+        if(low.includes('tương tác') || low.includes('tuong tac box chat')){
+            const yeuCau = TF_DATA.tuongTac.yeuCau.map(y => `<li>${y}</li>`).join('');
+            appendBot(`${greeting}<b>💬 Quy Định Tương Tác Box Chat:</b>
+                <p><b>Mục tiêu:</b> ${TF_DATA.tuongTac.mucTieu}</p>
+                <b>Các yêu cầu chính:</b>
+                <ul>${yeuCau}</ul>`);
+            return;
+        }
+
+        // **NỘI DUNG MỚI:** THÔNG TIN GAME
+        if(low.includes('game chính') || low.includes('game qd')){
+            appendBot(`${greeting}<b>🎮 Thông Tin Game Chính:</b>
+                <ul>
+                    <li><b>Game:</b> ${TF_DATA.gameInfo.game}</li>
+                    <li><b>Server:</b> ${TF_DATA.gameInfo.server}</li>
+                    <li><b>Nhánh chính:</b> ${TF_DATA.gameInfo.nhanhChinh}</li>
+                </ul>`);
+            return;
+        }
+
+        // THÀNH TÍCH / TRIẾT LÝ / CHIẾN TÍCH
+        if(low.includes('thành tích') || low.includes('triết lý') || low.includes('chien tich')){
+            const noiBat = TF_DATA.thanhTich.noiBat.map(s => `<li>${s}</li>`).join('');
+            appendBot(`${greeting}<b>🏆 Thành Tích và Triết Lý của TitanForce (TF):</b>
+                <p><b>Triết lý:</b> ${TF_DATA.thanhTich.trietLy}</p>
+                <b>Chiến tích & Mục tiêu nổi bật:</b>
+                <ul>
+                    ${noiBat}
+                </ul>`);
+            return;
+        }
+
+
+        // FACEBOOK CHÍNH THỨC
+        if(low.includes('facebook') || low.includes('fb chính thức')){
+            appendBot(`${greeting}<b>Trang Facebook Chính thức của TF:</b>
+                <a href="${TF_DATA.facebook.link}" target="_blank">${TF_DATA.facebook.ten}</a>
+                <small style="display:block; margin-top:5px;">${TF_DATA.facebook.chuY}</small>`);
+            return;
+        }
+
+        // QUY TRÌNH TEST
+        if(low.includes('quy trình test') || low.includes('quy trinh test')){
+            const steps = TF_DATA.quyTrinhTest.steps.map(s => `<li>${s}</li>`).join('');
+            appendBot(`${greeting}<b>✅ Quy trình Test Thành viên TF:</b>
+                <ol>
+                    ${steps}
+                </ol>
+                <small>Thời gian chờ: 24-48 giờ.</small>`);
+            return;
+        }
+        
+        // ZALO QR
+        if(low.includes('zalo')) {
+            appendBot(`<b>Mã QR Zalo Quân Đoàn TF:</b><br>
+                <img src="${TF_DATA.qrZalo.link}" alt="QR Zalo TF" style="width:150px; height:150px; margin-top:8px; display:block; margin-left:auto; margin-right:auto;"><br>
+                <div style="margin-top:6px; text-align:center;">${TF_DATA.qrZalo.moTa}</div>`);
+            return;
+        }
+
+        // TIKTOK
+        if(low.includes('tik tok')) {
+            appendBot(`${greeting}<b>Tài khoản TikTok Quân Đoàn TF:</b><br>
+                <a href="${TF_DATA.tiktok.link}" target="_blank">${TF_DATA.tiktok.ten}</a><br>
+                <small>${TF_DATA.tiktok.moTa}</small>`);
+            return;
+        }
+
+        // LUẬT QUÂN ĐOÀN (chỉ luật, không test)
+        if(low.includes('luật quân đoàn') || low.includes('luat') || low.includes('rule')) {
+            const rules = TF_DATA.luat.rulesList.map(r => `<li>${r}</li>`).join('');
+            appendBot(`${greeting}<b>Luật Quân Đoàn TF:</b><ul>${rules}</ul>`);
+            return;
+        }
+
+        // TEST THÀNH VIÊN (riêng)
+        if(low.includes('test') || low.includes('thành viên') || low.includes('thanh vien')) {
+            const namTest = Object.entries(TF_DATA.testChiTiet.nam)
+                                    .map(([k,v]) => `<b>${k}:</b> ${v}`)
+                                    .join('<br>');
+            const nuTest = Object.entries(TF_DATA.testChiTiet.nu)
+                                    .map(([k,v]) => `<b>${k}:</b> ${v}`)
+                                    .join('<br>');
+            appendBot(`${greeting}<b>Chi tiết test thành viên:</b><br><b>Nam:</b><br>${namTest}<br><b>Nữ:</b><br>${nuTest}`);
+            return;
+        }
+
+        // QR CODE (Chung)
+        if(low.includes('qr') || low.includes('mã qr') || low.includes('ma qr')) {
+            appendBot(`${greeting}<b>Mã QR Quân Đoàn TF:</b><br>
+                <img src="${TF_DATA.qr.link}" alt="QR Code TF" style="width:150px; height:150px; margin-top:8px; display:block; margin-left:auto; margin-right:auto;"><br>
+                <div style="margin-top:6px; text-align:center;">${TF_DATA.qr.moTa}</div>`);
+            return;
+        }
+
+        // GIỚI THIỆU BOT
+        if(low.includes('bạn là ai') || low.includes('bot là gì') || low.includes('assistant')) {
+            appendBot(`<b>${TF_DATA.botInfo.ten}</b><br>
+                ${TF_DATA.botInfo.moTa}<br>
+                <i>${TF_DATA.botInfo.huongDan}</i>`);
+            return;
+        }
+
+        // GIỚI THIỆU QUÂN ĐOÀN
+        if(low.includes('giới thiệu') || low.includes('gioi thieu') || low.includes('mô tả')){
+            appendBot(`${greeting}<b>Giới thiệu:</b> ${TF_DATA.gioiThieu.moTa}<br>
+                <b>Yêu cầu chung:</b>
+                <ul>${TF_DATA.gioiThieu.yeuCauChung.map(x=>`<li>${x}</li>`).join('')}</ul>`);
+            return;
+        }
+
+        // ĐĂNG KÝ
+        if(low.includes('đăng ký') || low.includes('dang ky') || low.includes('đăng kí')) {
+            // Nếu đăng ký nhánh Solo / Tử Chiến
+            if(low.includes('solo') || low.includes('slo') || low.includes('tử chiến') || low.includes('headshot')) {
+                const vaiTroSolo = TF_DATA.dangKy.vaiTroSolo.join(' • ');
+                appendBot(`${greeting}<b>Hướng dẫn đăng ký nhánh Solo / Tử Chiến (Headshot):</b>
+                    <ul>
+                        <li><b>Vai trò:</b> ${vaiTroSolo}</li>
+                        <li><b>Tuổi tham gia:</b> ${TF_DATA.dangKy.tuoi} tuổi</li>
+                        <li><b>Yêu cầu Facebook:</b> ${TF_DATA.dangKy.yeuCauFB}</li>
+                        <li><b>Giờ đăng ký:</b> ${TF_DATA.dangKy.gioSolo}</li>
+                    </ul>
+                    <b>Lưu ý:</b> Chọn vai trò phù hợp với kỹ năng và rank của bạn. Điền đầy đủ thông tin khi đăng ký để được xét duyệt nhanh.`);
+                return;
+            }
+
+            // Đăng ký chung (Sinh Tồn)
+            const nhomOptions = TF_DATA.dangKy.nhom.map(n => `<li>${n}</li>`).join('');
+            const rankOptions = TF_DATA.dangKy.rank.join(' • ');
+            const vaiTroSinhTon = TF_DATA.dangKy.vaiTroSinhTon.join(' • ');
+            const vaiTroSolo = TF_DATA.dangKy.vaiTroSolo.join(' • ');
+            appendBot(`${greeting}<b>Hướng dẫn đăng ký Quân Đoàn TF:</b>
+                <ul>
+                    <li><b>Nhóm tham gia:</b><ul>${nhomOptions}</ul></li>
+                    <li><b>Rank hiện có:</b> ${rankOptions}</li>
+                    <li><b>Vai trò (Nhánh Sinh Tồn):</b> ${vaiTroSinhTon}</li>
+                    <li><b>Vai trò (Nhánh Solo/Tử Chiến):</b> ${vaiTroSolo}</li>
+                    <li><b>Tuổi tham gia:</b> ${TF_DATA.dangKy.tuoi} tuổi</li>
+                    <li><b>Yêu cầu Facebook:</b> ${TF_DATA.dangKy.yeuCauFB}</li>
+                </ul>
+                <b>Lưu ý:</b> Điền đầy đủ thông tin để quá trình xét duyệt nhanh chóng.`);
+            return;
+        }
+
+// CÂU HỎI: BẠN CÓ THỂ GIÚP GÌ CHO TÔI?
+if (low.includes('bạn có thể giúp gì') || low.includes('giúp tôi') || low.includes('bạn làm được gì')) {
+    appendBot(`${greeting}Mình là **TF Assistant** 🤖, trợ lý AI của Quân Đoàn TF!
+
+    Mình có thể giúp bạn trả lời các câu hỏi về:
+    
+    * **📝 Điều kiện & Luật:** Điều kiện vào Quân đoàn, luật, quy định Off/Đổi tên, yêu cầu tương tác box chat.
+    * **✅ Tuyển dụng:** Quy trình Test, chi tiết test theo nhánh (Sinh tồn/Tử chiến), rank yêu cầu.
+    * **🏆 Thông tin:** Thành tích, triết lý, lịch Rank/hoạt động, Ban Quản Trị (Admin).
+    * **🔗 Liên hệ:** Link Facebook chính thức, Mã QR tham gia, giờ hỗ trợ.
+    
+    Hãy gõ **'help'** để xem danh sách đầy đủ các chủ đề bạn có thể hỏi nhé!`);
+    return;
+}
+
+
+
+// ... (Đặt ở khoảng giữa phần xử lý Tên và CÂU HỎI VỀ ĐIỀU KIỆN)
+
+// **LOGIC MỚI:** CÂU HỎI VỀ LỪA ĐẢO / UY TÍN
+if (low.includes('lừa đảo') || low.includes('lua dao') || low.includes('uy tín') || low.includes('uy tin') || low.includes('tin tưởng') || low.includes('web này có an toàn')) {
+    appendBot(`${greeting}Chúng tôi hiểu rõ mối quan tâm của bạn về tính minh bạch và an toàn trên mạng.
+
+    **Quân Đoàn TF cam kết:**
+    * **Uy tín và Lịch sử:** TF là Quân Đoàn hoạt động công khai, minh bạch, có lịch sử và thành tích hoạt động rõ ràng trong cộng đồng Free Fire Việt Nam.
+    * **Thông tin công khai:** Mọi thông tin về **luật, quy trình test, Admin** đều được công bố đầy đủ và bạn có thể xác minh qua **trang Facebook chính thức** của chúng tôi.
+    * **Tuyệt đối không:** Yêu cầu bạn cung cấp mật khẩu, mã OTP, hay bất kỳ thông tin cá nhân nhạy cảm nào ngoài thông tin cơ bản để đăng ký.
+    
+    Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ trực tiếp qua link **Facebook TF** đã được cung cấp để được Admin xác nhận. Bạn có thể gõ **'Facebook TF'** để lấy link.`);
+    return;
+}
+
+// **LOGIC MỚI:** CÂU HỎI VỀ ĐIỀU KIỆN
+// ...
+
+// ... (Đặt ở khoảng giữa phần LỪA ĐẢO/UY TÍN và ĐIỀU KIỆN)
+
+// **LOGIC MỚI:** CÂU HỎI VỀ ĐỊA ĐIỂM/PHƯƠNG THỨC ĐĂNG KÝ
+if (low.includes('đăng ký ở đâu') || low.includes('dang ky o dau') || low.includes('phương thức đăng ký') || low.includes('cách đăng ký')) {
+    appendBot(`${greeting}Bạn có 2 cách chính để đăng ký tham gia Quân Đoàn TF:
+    
+    1. **📍 Liên hệ qua Facebook (Ưu tiên):**
+       * Cách nhanh nhất là liên hệ trực tiếp qua **Trang Facebook Chính thức** của Quân Đoàn TF. Admin sẽ hỗ trợ bạn điền form và hẹn lịch test.
+       * Gõ **'Facebook TF'** để nhận link.
+       
+    2. **📱 Liên hệ Zalo:**
+       * Bạn có thể quét **Mã QR Zalo** để tham gia nhóm chờ xét duyệt.
+       * Gõ **'QR Zalo'** để nhận mã.
+
+    Sau khi đăng ký, bạn sẽ được hướng dẫn qua **Quy trình Test** để chính thức trở thành thành viên. (Gõ 'quy trình test' để xem chi tiết).`);
+    return;
+}
+// ...
+        // RANK
+        if(low.includes('rank') || low.includes('xếp hạng')){
+            appendBot(`${greeting}<b>Các bậc Rank hiện có:</b> ${TF_DATA.dangKy.rank.join(' • ')}`);
+            return;
+        }
+
+        // NHÁNH HOẠT ĐỘNG
+        if(low.includes('sinh tồn') || low.includes('solo') || low.includes('tử chiến') || low.includes('headshot')){
+            appendBot(`${greeting}<b>Nhánh hoạt động:</b> ${TF_DATA.luat.nhanh.join(' • ')}`);
+            return;
+        }
+
+        // HỖ TRỢ
+        if(low.includes('hỗ trợ') || low.includes('ho tro') || low.includes('liên hệ') || low.includes('lien he')){
+            const times = TF_DATA.hotro.gioHoTro.join(' — ');
+            const warns = TF_DATA.hotro.canhBao.map(w=>`• ${w}`).join('<br>');
+            const staff = TF_DATA.hotro.nhanSu.map(s=>`<b>${s.ten}</b> — ${s.vaiTro}`).join('<br>');
+            appendBot(`${greeting}<b>Giờ hỗ trợ:</b> ${times}<br><b>Lưu ý:</b><br>${warns}<br><b>Nhân sự:</b><br>${staff}`);
+            return;
+        }
+
+        // HỎI VỀ NHÂN SỰ
+        const matchOpen = low.match(/(dương|trung|huy)/);
+        if(matchOpen){
+            const name = matchOpen[0].charAt(0).toUpperCase()+matchOpen[0].slice(1);
+            const person = TF_DATA.hotro.nhanSu.find(p=>p.ten.toLowerCase()===name.toLowerCase());
+            if(person){
+                appendBot(`${greeting}<b>${person.ten}</b> — ${person.vaiTro}. Vấn đề: ${person.loi.join(', ')}`);
+            } else { appendBot("Không tìm thấy người đó."); }
+            return;
+        }
+
+        // FALLBACK
+        appendBot(`${greeting}Mình chưa hiểu câu hỏi đó 😅. Thử gõ: <b>help</b>, <b>luật</b>, <b>đăng ký</b>, <b>hỗ trợ</b>, <b>giới thiệu</b>.`);
+
+    }, 800); // Độ trễ 800ms
+}
+
+
+// ==== KÉO DI CHUYỂN HỘP CHAT ====
+const dragBox = document.getElementById("tf-ai-box");
+const dragHeader = document.getElementById("tf-ai-header");
+
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+dragHeader.style.cursor = "move"; // hiển thị dấu kéo
+
+dragHeader.addEventListener("mousedown", (e) => {
+    if (!dragBox.classList.contains('show')) return; 
+
+    isDragging = true;
+    dragBox.style.position = "fixed"; 
+    const rect = dragBox.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+    
+    e.preventDefault(); 
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    
+    let newX = e.clientX - offsetX;
+    let newY = e.clientY - offsetY;
+
+    const maxX = window.innerWidth - dragBox.offsetWidth;
+    const maxY = window.innerHeight - dragBox.offsetHeight;
+
+    newX = Math.max(0, Math.min(newX, maxX));
+    newY = Math.max(0, Math.min(newY, maxY));
+
+    dragBox.style.left = newX + "px";
+    dragBox.style.top = newY + "px";
+    
+    dragBox.style.right = 'auto';
+    dragBox.style.bottom = 'auto';
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+
+
 </script>
 
+
+
+
+
+
+
+
+
+
+<nav>
+    <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
+    <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
+    <div class="nav-links" id="nav-links">
+        <a href="gioithieu.html">📜 Quản Trị quân đoàn</a>
+        <a href="thanhvien1.html">👥 Giới thiệu thành viên 1</a>
+        <a href="thanhvien2.html">👥 Giới thiệu thành viên 2</a>
+        <a href="ranktv.html">💎 Mức rank thành viên</a>
+        <a href="luat.html">⚔️ Luật quân đoàn</a>
+        <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
+        <a href="tuyenthanhvien.html">👥 Tuyển Thành viên</a>
+        <a href="slo.html">⚔️ Giao lưu quân đoàn</a>
+        <a href="hotro.html">👥 Hỗ trợ</a>
+    </div>
+</nav>
+
+<div id="welcome-popup">
+  <div class="popup-content">
+    <img src="logo2.jpg" alt="Logo TF" class="popup-logo">
+    <h2>🎉 Chào mừng đến quân đoàn TitanForce! 🛡️</h2>
+    <p>Đây là trang web chính thức TitanForce!</p>
+    <p>Quân đoàn TF kính chào bạn — Hãy cùng nhau tạo nên sức mạnh TitanForce!</p>
+    <p>Hiện tại chúng tôi đang phát triển và nếu có sai xót xin hãy bỏ qua.</p>
+    <p>⚠️ Lưu ý những trang web khác đều là giả hoặc ăn cắp, mong mọi người chú ý. ❌</p>
+    <button class="popup-btn" id="close-popup">OK 👍</button>
+  </div>
+</div>
+
+<main class="titanforce-main">
+    <header class="tf-header">
+      <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
+      <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
+  </header>
+
+  <!-- Nội dung các section giữ nguyên -->
+   <section class="tf-introduction">
+    <h2>💡 Triết lý TitanForce</h2>
+    <p>
+        TF là nơi rèn luyện <strong>kỹ năng – kỷ luật – tinh thần đồng đội</strong>, biến đam mê thành tư duy chuyên nghiệp.
+    </p>
+</section>
+
+<hr>
+
+<section class="tf-core-values">
+    <h2>✨ Sứ mệnh</h2>
+    <p>
+        Xây dựng cộng đồng <strong>chuyên nghiệp – văn minh</strong>, giúp thành viên phát triển kỹ năng và bản sắc TitanForce.
+    </p>
+
+    <h2>🔥 Giá trị Cốt lõi 🔥</h2>
+    <div class="tf-value-list">
+        <ul>
+            <li><strong>Đoàn kết:</strong> Tôn trọng và hỗ trợ nhau.</li>
+            <li><strong>Kỷ luật:</strong> Luyện tập nghiêm túc, hành động chiến thuật.</li>
+            <li><strong>Chiến binh:</strong> Luôn học hỏi, không bỏ cuộc.</li>
+        </ul>
+    </div>
+</section>
+
+<hr>
+
+<section class="tf-activities">
+    <h2>⚡ Huấn luyện</h2>
+    <ul>
+        <li><strong>Chiến thuật:</strong> Phân tích meta, xây dựng chiến thuật.</li>
+        <li><strong>Luyện tập:</strong> 4v4 – 1v1 – 2v2 rèn phản xạ.</li>
+        <li><strong>Giải đấu:</strong> Thi đấu nội bộ để cọ xát.</li>
+        <li><strong>Review:</strong> Phân tích replay để cải thiện kỹ năng.</li>
+    </ul>
+</section>
+
+<hr>
+
+<section class="tf-recruitment-requirements">
+    <h2>🎯 Tiêu chuẩn</h2>
+    <div class="tf-requirements-list">
+        <ul>
+            <li><strong>Tinh thần học hỏi</strong> và thái độ tốt.</li>
+            <li><strong>Chuyên nghiệp</strong>, có trách nhiệm.</li>
+            <li><strong>Cam kết</strong> tham gia 3 buổi/tuần.</li>
+        </ul>
+    </div>
+</section>
+
+  <footer class="tf-footer-cta">
+    <p><strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!</p>
+    <div class="cta-buttons-group">
+        <a href="https://www.tiktok.com/@lio.vn" class="icon-social"><img src="tiktok.png" alt="TikTok"></a>
+        <a href="https://www.facebook.com/profile.php?id=61583586631135" class="icon-social"><img src="fbicon.png" alt="Facebook"></a>
+        <a href="https://zalo.me/g/yupyif524" class="icon-social"><img src="zalo.png" alt="Zalo"></a>
+        <a href="https://discord.gg/YVez9ZthF" class="icon-social"><img src="ds.png" alt="Discord"></a>
+    </div>
+  </footer>
+</main>
+
+<footer class="main-footer">
+    <p>Trang web được code và thiết kế bởi <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. © 2025 Quân đoàn TF.</p>
+</footer>
+
+<script>
+// TYPEWRITER
+function typeWriter(text,i,fnCallback){
+    const element=document.getElementById("typed-slogan");
+    if(!element) return;
+    if(i<text.length){
+        element.innerHTML=text.substring(0,i+1);
+        setTimeout(()=>typeWriter(text,i+1,fnCallback),80);
+    } else if(typeof fnCallback=='function') fnCallback();
+}
+
+window.onload=function(){
+    document.body.classList.add('fade-in');
+
+    // Navbar toggle
+    const menuToggle=document.getElementById('mobile-menu');
+    const navLinks=document.getElementById('nav-links');
+    menuToggle.addEventListener('click',()=>navLinks.classList.toggle('active'));
+    window.addEventListener('resize',()=>{ if(window.innerWidth>=1025 && navLinks.classList.contains('active')) navLinks.classList.remove('active'); });
+
+    // Typewriter slogan
+    const sloganText="TitanForce: Chiến Thắng Kĩ Năng và Rèn Luyện";
+    setTimeout(()=>{ typeWriter(sloganText,0,()=>{ const e=document.getElementById("typed-slogan"); if(e) e.style.borderRight='none'; }); },500);
+
+    // Sakura
+    function createSakura(){
+        const sakura=document.createElement("div");
+        sakura.classList.add("sakura");
+        sakura.textContent="🌸";
+        sakura.style.left=Math.random()*100+"vw";
+        sakura.style.fontSize=(Math.random()*14+10)+"px";
+        const duration=Math.random()*6+6;
+        sakura.style.animationDuration=duration+"s";
+        document.body.appendChild(sakura);
+        setTimeout(()=>sakura.remove(),duration*1000);
+    }
+    setInterval(createSakura,700);
+
+    // Popup
+    const popup=document.getElementById("welcome-popup");
+    const closeBtn=document.getElementById("close-popup");
+    setTimeout(()=>popup.classList.add("show"),800);
+    closeBtn.addEventListener("click",()=>popup.classList.remove("show"));
+    setTimeout(()=>popup.classList.remove("show"),8000);
+
+    // CHỐNG COPY
+    document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy bị chặn!"); });
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', function(e) {
+        if(e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
+        if(e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+        if(e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+    });
+    window.oncopy = window.oncut = window.onpaste = function(e){ e.preventDefault(); alert("⚠️ Không được phép sao chép nội dung trang!"); return false; };
+    document.addEventListener('mousedown', function(e){ if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); } });
+};
+</script>
 </body>
 </html>
+
+
