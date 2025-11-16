@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Đăng ký Clan TF</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -19,7 +19,11 @@
         * {
             box-sizing: border-box;
             margin: 0;
-            padding: 0
+            padding: 0;
+            /* Ngăn chọn văn bản ngẫu nhiên trên mobile (vẫn cho phép trong input) */
+            -webkit-user-select: none; 
+            -moz-user-select: none;
+            user-select: none;
         }
 
         /* BASE STYLES */
@@ -27,8 +31,14 @@
         body {
             width: 100%;
             height: 100%;
-            /* Đảm bảo font được sử dụng */
-            font-family: 'Montserrat', sans-serif; 
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden; 
+        }
+        
+        /* Cho phép chọn văn bản trong input */
+        input, select, textarea {
+            -webkit-user-select: auto; 
+            user-select: auto;
         }
 
         body {
@@ -69,7 +79,7 @@
             animation: fadeIn 0.8s ease-out forwards;
             opacity: 0;
             animation-delay: 0.3s;
-            z-index: 1; /* Quan trọng: Đặt z-index để nội dung nằm trên overlay */
+            z-index: 1; /* Đảm bảo nội dung nằm trên canvas */
         }
 
         /* NEON GLOW HEADING */
@@ -117,16 +127,16 @@
             font-size: 0.9rem;
             cursor: pointer;
             transition: 0.3s;
-            text-transform: uppercase; /* Thêm để phù hợp với phong cách game */
+            text-transform: uppercase; 
         }
 
         button.group-btn:hover {
             background: #ff1744;
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(255, 61, 0, 0.5); /* Thêm box-shadow */
+            box-shadow: 0 4px 15px rgba(255, 61, 0, 0.5); 
         }
 
-        /* HIỆU ỨNG NHẤN CHO MOBILE */
+        /* HIỆU ỨNG NHẤN CHO MOBILE (iOS/Android) */
         button.group-btn:active {
             transform: scale(0.98);
             filter: brightness(1.2);
@@ -141,14 +151,13 @@
         form {
             width: 100%;
             max-width: 400px;
-            /* Đảm bảo độ mờ vừa phải để thấy ảnh nền */
             background: rgba(22, 30, 47, 0.75); 
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); 
             padding: 20px;
             border-radius: 12px;
             border: 2px solid var(--accent);
-            box-shadow: 0 0 15px rgba(255, 61, 0, 0.6); /* Tăng độ sáng shadow */
+            box-shadow: 0 0 15px rgba(255, 61, 0, 0.6); 
             text-align: left;
             display: none;
             z-index: 1
@@ -179,21 +188,32 @@
         textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px; /* Tăng khoảng cách dưới input */
-            /* Thay đổi màu border thành màu tối hơn để dễ đọc */
+            margin-bottom: 15px; 
             border: 2px solid #333; 
             border-radius: 6px;
             font-size: 0.9rem;
-            background-color: #1e293b; /* Nền tối cho input */
+            background-color: #1e293b; 
             color: var(--text);
+            -webkit-appearance: none; 
+            -moz-appearance: none;
+            appearance: none;
             transition: all 0.3s ease
+        }
+        
+        /* Loại bỏ mũi tên mặc định trên Chrome/Safari cho input type number */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
         }
 
         input:focus,
         select:focus,
         textarea:focus {
             outline: none;
-            /* Đảm bảo border-color được thiết lập ngay khi focus */
             border-color: red; 
             animation: rainbowBorder 1.5s linear infinite;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
@@ -221,7 +241,7 @@
             box-shadow: 0 0 20px rgba(255, 61, 0, 0.8);
         }
 
-        /* HIỆU ỨNG NHẤN CHO MOBILE */
+        /* HIỆU ỨNG NHẤN CHO MOBILE (iOS/Android) */
         button.submit-btn:active {
             background: #ff1744;
             transform: scale(0.98);
@@ -232,7 +252,7 @@
         /* MESSAGE STYLES */
         .message {
             text-align: center;
-            margin: 5px 0 10px 0; /* Điều chỉnh margin */
+            margin: 5px 0 10px 0; 
             min-height: 24px;
             font-weight: bold;
             font-size: 0.95rem;
@@ -280,7 +300,7 @@
 
             42% {
                 border-color: lime
-            } /* Chỉnh sửa màu xanh lá sáng hơn */
+            } 
 
             57% {
                 border-color: cyan
@@ -292,7 +312,7 @@
 
             85% {
                 border-color: magenta
-            } /* Chỉnh sửa màu tím sáng hơn */
+            } 
 
             100% {
                 border-color: red
@@ -338,7 +358,7 @@
             }
 
             h1 {
-                font-size: 1.8rem /* Chỉnh size lớn hơn một chút cho mobile */
+                font-size: 1.8rem 
             }
 
             p {
@@ -349,7 +369,8 @@
             select,
             textarea {
                 font-size: 0.85rem;
-                padding: 8px
+                padding: 8px;
+                margin-bottom: 12px;
             }
 
             button.group-btn,
@@ -384,7 +405,8 @@
             <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
             <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
             <button class="group-btn" onclick="window.location.href='index.html'">🔙 Trang Chủ</button>
-            <button class="group-btn" onclick="window.location.href='hotro.html'">❓ Hỗ Trợ</button> </div>
+            <button class="group-btn" onclick="window.location.href='hotro.html'">❓ Hỗ Trợ</button> 
+        </div>
         
         <form id="sinhTonForm">
             <h2>🔥 Nhóm Sinh Tồn</h2>
@@ -519,11 +541,10 @@
         let W = canvas.width = window.innerWidth;
         let H = canvas.height = window.innerHeight;
 
-        const PETAL_COUNT_DESKTOP = 30; // Số lượng mặc định cho PC
-        const PETAL_COUNT_MOBILE = 15; // Số lượng giảm cho di động
+        const PETAL_COUNT_DESKTOP = 30;
+        const PETAL_COUNT_MOBILE = 15;
         let PETAL_COUNT = PETAL_COUNT_DESKTOP;
         
-        // KIỂM TRA ĐỂ GIẢM HIỆU SUẤT TRÊN MOBILE
         if (window.innerWidth <= 768) {
             PETAL_COUNT = PETAL_COUNT_MOBILE;
         }
@@ -557,7 +578,6 @@
 
                 p.y += p.d;
                 
-                // THÊM HIỆU ỨNG GIÓ NHẸ (COSINE)
                 const wind = Math.cos(p.y * 0.01) * 0.5; 
                 p.x += Math.sin(p.swing) * 2 + wind; 
                 p.swing += p.swingSpeed;
@@ -575,7 +595,6 @@
         window.addEventListener('resize', () => {
             W = canvas.width = window.innerWidth;
             H = canvas.height = window.innerHeight;
-            // Cập nhật lại số lượng cánh hoa khi resize trên mobile/desktop nếu cần
             PETAL_COUNT = window.innerWidth <= 768 ? PETAL_COUNT_MOBILE : PETAL_COUNT_DESKTOP;
             petals = [];
             initPetals();
@@ -584,13 +603,12 @@
         initPetals();
         draw();
 
-        const showForm = (id) => {
+        window.showForm = (id) => {
             document.getElementById('sinhTonForm').classList.remove('active');
             document.getElementById('soloForm').classList.remove('active');
             document.getElementById(id).classList.add('active');
         };
 
-        // Hàm xử lý việc gửi form đến Google Apps Script
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJuXOPSHsYShEUUq7yosVYKzxC6UnBu_G_TkxPqEtXvk8d9s2/exec";
         
         ['sinhTonForm', 'soloForm'].forEach(f => {
@@ -602,15 +620,13 @@
                 const data = new FormData(form);
                 const age = Number(data.get("entry.age"));
                 
-                // Kiểm tra ràng buộc tuổi
                 if (isNaN(age) || age < 14 || age > 30) {
                     msg.innerHTML = "<p class='error'>❌ Tuổi phải là số từ 14 đến 30!</p>";
                     return;
                 }
                 
-                // Hiển thị trạng thái loading
                 msg.innerHTML = '<span class="loading">⏳ Đang gửi dữ liệu...</span>';
-                form.querySelector('.submit-btn').disabled = true; // Tắt nút submit
+                form.querySelector('.submit-btn').disabled = true;
                 
                 try {
                     await fetch(WEB_APP_URL, {
@@ -619,31 +635,53 @@
                         mode: "no-cors"
                     });
                     
-                    // Hiển thị thông báo thành công
                     msg.innerHTML = "<p class='success'>✅ Đăng kí thành công!<br>⚡ Thông tin của bạn đang được xét duyệt 😎</p>";
-                    form.reset(); // Đặt lại form sau khi gửi thành công
+                    form.reset();
                 } catch (err) {
                     console.error("Lỗi khi gửi form:", err);
                     msg.innerHTML = "<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>";
                 } finally {
-                    form.querySelector('.submit-btn').disabled = false; // Bật lại nút submit
+                    form.querySelector('.submit-btn').disabled = false;
                 }
             });
         });
 
-        // Tự động cuộn đến form khi focus vào input trên thiết bị di động
+        /*
+        * LOGIC TỐI ƯU CUỘN TRÁNH BÀN PHÍM CHE KHUNG NHẬP
+        */
         document.querySelectorAll('input,select,textarea').forEach(el => {
             el.addEventListener('focus', () => {
-                const rect = el.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const top = rect.top + scrollTop - 100;
-                
-                // Chỉ cuộn nếu viewport là mobile (hoặc tùy chỉnh ngưỡng)
-                if (window.innerWidth < 768) {
-                    window.scrollTo({
-                        top: top,
-                        behavior: 'smooth'
-                    });
+                // Chỉ áp dụng cho thiết bị di động (chiều rộng nhỏ)
+                if (window.innerWidth < 768) { 
+                    // Dùng setTimeout để chờ bàn phím ảo xuất hiện hoàn toàn
+                    setTimeout(() => {
+                        const elementRect = el.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+                        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                        
+                        // Vị trí y của phần tử TÍNH TỪ ĐẦU TRANG (scroll position + top)
+                        const elementAbsoluteTop = elementRect.top + scrollPosition;
+                        
+                        // Chiều cao của khung nhìn sau khi bàn phím ảo xuất hiện
+                        // Trên iOS, window.innerHeight thường bị giảm khi bàn phím xuất hiện
+                        // Trên Android, có thể phức tạp hơn, nhưng logic này vẫn giúp ích
+                        
+                        // Chúng ta muốn phần tử nằm ở khoảng 20% từ trên xuống (hoặc khoảng cách an toàn 50px từ trên)
+                        const desiredOffset = viewportHeight * 0.15; // 15% từ trên
+                        const paddingFromTop = 50; // Khoảng đệm an toàn 50px
+                        
+                        let targetScrollTop = elementAbsoluteTop - Math.max(desiredOffset, paddingFromTop);
+                        
+                        // Đảm bảo không cuộn lên trên đỉnh trang (vị trí 0)
+                        if (targetScrollTop < 0) {
+                            targetScrollTop = 0;
+                        }
+
+                        window.scrollTo({
+                            top: targetScrollTop,
+                            behavior: 'smooth'
+                        });
+                    }, 100); // Tăng delay lên 100ms để đảm bảo bàn phím đã bật
                 }
             });
         });
