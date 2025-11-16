@@ -140,7 +140,6 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
 <form id="sinhTonForm">
   <h2>🔥 Nhóm Sinh Tồn</h2>
   <input type="hidden" name="entry.group" value="Sinh Tồn">
-
   <div class="input-group"><input type="text" name="entry.name" required placeholder=" "><label>Tên trong game:</label></div>
   <div class="input-group"><input type="text" name="entry.uid" required placeholder=" "><label>UID:</label></div>
   <div class="input-group"><select name="entry.rank" required>
@@ -173,7 +172,6 @@ button.submit-btn:hover{ background:#ff1744; transform:scale(1.02); }
 <form id="soloForm">
   <h2>⚡ Nhóm Solo Tử Chiến</h2>
   <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-
   <div class="input-group"><input type="text" name="entry.name" required placeholder=" "><label>Tên trong game:</label></div>
   <div class="input-group"><input type="text" name="entry.uid" required placeholder=" "><label>UID:</label></div>
   <div class="input-group"><select name="entry.rank" required>
@@ -259,14 +257,17 @@ const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJu
   });
 });
 
-// Scroll to input on focus
+// Scroll to input when focus, input or change
 document.querySelectorAll('input, select, textarea').forEach(el=>{
-  el.addEventListener('focus', ()=>{
+  const scrollToEl=()=>{
     const rect=el.getBoundingClientRect();
     const scrollTop=window.pageYOffset||document.documentElement.scrollTop;
     const top=rect.top+scrollTop-100;
-    window.scrollTo({top, behavior:'smooth'});
-  });
+    window.scrollTo({top,behavior:'smooth'});
+  };
+  el.addEventListener('focus',scrollToEl);
+  el.addEventListener('input',scrollToEl);
+  el.addEventListener('change',scrollToEl);
 });
 
 // Highlight buttons
