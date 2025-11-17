@@ -14,105 +14,135 @@
   --text-muted:#b3bcc8;
 }
 
-/* RESET */
-* { box-sizing:border-box; margin:0; padding:0; -webkit-user-select:none; -moz-user-select:none; user-select:none; }
+* { box-sizing:border-box; margin:0; padding:0; -webkit-user-select:none; user-select:none; }
 input, select, textarea { -webkit-user-select:auto; user-select:auto; }
 
-/* BASE */
-html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; overflow-x:hidden; }
+html, body { height:100dvh; height:100%; }
+
 body {
   display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  min-height:100vh; padding:20px;
+  padding:20px;
   background-image:url('logo.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
   color:var(--text); position:relative;
+  overflow-x:hidden;
 }
 body::before {
   content:""; position:fixed; top:0; left:0; right:0; bottom:0;
   background:rgba(0,0,0,0.4); z-index:0;
 }
 
-/* PAGE CONTENT */
-.page-content { width:100%; max-width:420px; display:flex; flex-direction:column; align-items:center; opacity:0; animation:fadeIn 0.8s ease-out 0.3s forwards; z-index:1; }
-h1 { font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase; margin-bottom:10px; font-size:2rem; text-align:center; z-index:1;
-     text-shadow:0 0 5px var(--accent),0 0 10px var(--accent),0 0 20px rgba(255,61,0,0.6); transition:text-shadow 0.3s ease; }
-h1:hover { text-shadow:0 0 8px #fff,0 0 15px var(--accent),0 0 30px rgba(255,61,0,0.8),0 0 40px var(--accent); }
-p { color:var(--text-muted); margin-bottom:20px; font-size:1rem; text-align:center; z-index:1; }
+.page-content {
+  width:100%; max-width:420px;
+  display:flex; flex-direction:column; align-items:center;
+  opacity:0; animation:fadeIn 0.8s ease-out 0.3s forwards;
+  z-index:1;
+}
 
-/* BUTTONS */
-.buttons { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; z-index:1; }
+h1 {
+  font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase;
+  margin-bottom:10px; font-size:2rem; text-align:center;
+  text-shadow:0 0 5px var(--accent),0 0 10px var(--accent),0 0 20px rgba(255,61,0,0.6);
+  transition:text-shadow 0.3s ease;
+}
+h1:hover {
+  text-shadow:0 0 8px #fff,0 0 15px var(--accent),0 0 30px rgba(255,61,0,0.8);
+}
+
+p { color:var(--text-muted); margin-bottom:20px; text-align:center; }
+
+.buttons {
+  display:flex; justify-content:center; flex-wrap:wrap;
+  gap:12px; margin-bottom:20px;
+}
 button.group-btn {
-  background:var(--accent); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-weight:700; font-size:0.9rem; cursor:pointer; transition:0.3s; text-transform:uppercase;
+  background:var(--accent); color:#fff; border:none; border-radius:8px;
+  padding:10px 18px; font-weight:700; font-size:0.9rem;
+  cursor:pointer; text-transform:uppercase; transition:0.3s;
 }
 button.group-btn:hover { background:#ff1744; transform:scale(1.05); box-shadow:0 4px 15px rgba(255,61,0,0.5); }
-button.group-btn:active { transform:scale(0.98); filter:brightness(1.2); transition:none; }
+button.group-btn:active { transform:scale(0.97); }
 button.group-btn.highlight { animation:pulseGlow 1.5s ease-in-out infinite; }
 
-/* FORM */
 form {
-  width:100%; max-width:400px; background:rgba(22,30,47,0.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-  padding:20px; border-radius:12px; border:2px solid var(--accent); box-shadow:0 0 15px rgba(255,61,0,0.6);
-  text-align:left; position:relative;
-  display:none; opacity:0; visibility:hidden; transition:opacity 0.3s ease, visibility 0.3s ease;
-  z-index:1;
+  width:100%; max-width:400px;
+  background:rgba(22,30,47,0.75);
+  backdrop-filter:blur(8px);
+  padding:20px; border-radius:12px;
+  border:2px solid var(--accent);
+  box-shadow:0 0 15px rgba(255,61,0,0.6);
+  margin-bottom:20px;
+  display:none; opacity:0; visibility:hidden;
+  transition:opacity 0.3s ease, visibility 0.3s ease;
 }
 form.active { display:block; opacity:1; visibility:visible; }
 
-form h2 { color:var(--accent); text-align:center; margin-bottom:15px; text-shadow:0 0 3px var(--accent); position:relative; }
-label { display:block; margin-bottom:6px; color:#fff; font-weight:600; font-size:0.9rem; }
+form h2 {
+  color:var(--accent); text-align:center;
+  margin-bottom:15px; text-shadow:0 0 3px var(--accent);
+}
+
+label { font-weight:600; margin-bottom:6px; display:block; }
 input, select, textarea {
-  width:100%; padding:10px; margin-bottom:15px; border:2px solid #333; border-radius:6px; font-size:0.9rem;
-  background-color:#1e293b; color:var(--text); -webkit-appearance:none; -moz-appearance:none; appearance:none; transition:all 0.3s ease;
+  width:100%; padding:10px; margin-bottom:15px;
+  border:2px solid #333; border-radius:6px;
+  background:#1e293b; color:var(--text);
+  transition:0.3s;
+  scroll-margin-top: 20px;
 }
-input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
-input[type="number"] { -moz-appearance:textfield; }
-input:focus, select:focus, textarea:focus {
-  outline:none; border-color:red; animation:rainbowBorder 1.5s linear infinite; box-shadow:0 0 10px rgba(255,255,255,0.7); transform:scale(1.02);
+input:focus, select:focus {
+  border-color:red;
+  animation:rainbowBorder 1.5s linear infinite;
+  box-shadow:0 0 10px rgba(255,255,255,0.7);
+  transform:scale(1.02);
 }
 
-/* SUBMIT */
 button.submit-btn {
-  background:var(--accent); color:#fff; border:none; border-radius:8px; padding:12px 20px; font-weight:700; cursor:pointer; width:100%; font-size:1rem; transition:0.3s; text-transform:uppercase;
+  background:var(--accent); color:#fff;
+  border:none; border-radius:8px;
+  padding:12px 20px; font-weight:700; font-size:1rem;
+  cursor:pointer; width:100%; text-transform:uppercase;
 }
-button.submit-btn:hover { background:#ff1744; transform:scale(1.03); box-shadow:0 0 20px rgba(255,61,0,0.8); }
-button.submit-btn:active { transform:scale(0.98); filter:brightness(1.2); transition:none; }
+button.submit-btn:hover { background:#ff1744; }
 
-/* CLOSE BUTTON */
-button.close-btn { background:none; border:none; color:var(--text); font-size:1.2rem; cursor:pointer; position:absolute; top:10px; right:10px; transition:color 0.2s ease; user-select:none; }
-button.close-btn:hover { color:#f44336; }
+button.close-btn {
+  background:none; border:none; font-size:1.2rem; cursor:pointer;
+  position:absolute; right:10px; top:10px; color:white;
+}
+button.close-btn:hover { color:red; }
 
-/* MESSAGES */
-.message { text-align:center; margin:5px 0 10px 0; min-height:24px; font-weight:bold; font-size:0.95rem; z-index:1; }
+.message { min-height:24px; margin-bottom:10px; font-weight:bold; text-align:center; }
 .success { color:#4CAF50; }
 .error { color:#f44336; }
 .loading { color:#ffeb3b; animation:blink 1s infinite; }
 
-/* KEYFRAMES */
-@keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1;} }
 @keyframes rainbowBorder {
-  0%{border-color:red;} 14%{border-color:orange;} 28%{border-color:yellow;} 42%{border-color:lime;} 57%{border-color:cyan;} 71%{border-color:blue;} 85%{border-color:magenta;} 100%{border-color:red;}
+  0%{border-color:red;} 14%{border-color:orange;} 28%{border-color:yellow;}
+  42%{border-color:lime;} 57%{border-color:cyan;} 71%{border-color:blue;}
+  85%{border-color:magenta;} 100%{border-color:red;}
 }
-@keyframes blink {0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;}}
-@keyframes pulseGlow {0%{box-shadow:0 0 0px var(--accent);}50%{box-shadow:0 0 10px var(--accent),0 0 20px rgba(255,61,0,0.5);}100%{box-shadow:0 0 0px var(--accent);}}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+@keyframes pulseGlow {0%{box-shadow:0 0 0px var(--accent);}50%{box-shadow:0 0 10px var(--accent);}100%{box-shadow:0 0 0px var(--accent);} }
 
-@media(max-width:768px){ .page-content form{ padding-bottom:250px; } }
 @media(max-width:480px){
-  .page-content { max-width:360px; }
-  form { padding:15px; }
-  h1 { font-size:1.8rem; }
-  p { font-size:0.9rem; }
-  input, select, textarea { font-size:0.85rem; padding:8px; margin-bottom:12px; }
-  button.group-btn, button.submit-btn { font-size:0.85rem; padding:8px 12px; }
-  .buttons { gap:8px; }
+  .page-content{ max-width:360px; }
+  form{ padding:15px; }
+  h1{ font-size:1.8rem; }
+  input, select{ padding:8px; font-size:0.85rem; }
 }
 
-/* SAKURA */
-#sakuraCanvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+#sakuraCanvas{
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  pointer-events:none; z-index:0;
+}
 </style>
 </head>
+
 <body>
 <div class="page-content">
 <h1>Đăng ký Clan TF</h1>
 <p>Chọn nhóm muốn gia nhập và điền thông tin!</p>
+
 <div class="buttons">
   <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
   <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
@@ -120,82 +150,108 @@ button.close-btn:hover { color:#f44336; }
   <button class="group-btn" onclick="window.location.href='hotro.html'">❓ Hỗ Trợ</button>
 </div>
 
-<!-- FORM SỐNG TỒN -->
 <form id="sinhTonForm">
-  <h2>🔥 Nhóm Sinh Tồn <button type="button" class="close-btn" onclick="hideForms()">❌</button></h2>
+  <h2>🔥 Nhóm Sinh Tồn <button class="close-btn" onclick="hideForms()">❌</button></h2>
+
   <input type="hidden" name="entry.group" value="Sinh Tồn">
-  <label for="st_name">Tên trong game:</label>
-  <input type="text" id="st_name" name="entry.name" required>
-  <label for="st_uid">UID:</label>
-  <input type="text" id="st_uid" name="entry.uid" required>
-  <label for="st_rank">Rank hiện tại:</label>
-  <select id="st_rank" name="entry.rank" required>
+
+  <label>Tên trong game:</label>
+  <input type="text" name="entry.name" required>
+
+  <label>UID:</label>
+  <input type="text" name="entry.uid" required>
+
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
     <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option><option>Bạch Kim</option>
-    <option>Kim Cương</option><option>Huyền Thoại</option><option>Cao Thủ</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option>
+    <option>Huyền Thoại</option><option>Cao Thủ</option>
     <option>Đại Cao Thủ</option><option>Top Sever</option>
   </select>
-  <label for="st_role">Vai trò mong muốn:</label>
-  <select id="st_role" name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option><option>Rush</option><option>Cover</option>
+
+  <label>Vai trò mong muốn:</label>
+  <select name="entry.role" required>
+    <option value="">-- Chọn Vai Trò --</option>
+    <option>Rush</option><option>Cover</option>
     <option>Sniper</option><option>Hỗ trợ</option>
   </select>
-  <label for="st_age">Tuổi:</label>
-  <input type="number" id="st_age" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
-  <label for="st_gender">Giới tính:</label>
-  <select id="st_gender" name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option><option>Nam</option><option>Nữ</option><option>Khác</option>
+
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="30" required>
+
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option><option>Nữ</option><option>Khác</option>
   </select>
-  <label for="st_fb_name">Tên Facebook (Bắt Buộc):</label>
-  <input type="text" id="st_fb_name" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label for="st_facebook">Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" id="st_facebook" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <label for="st_time">Khung thời gian:</label>
-  <select id="st_time" name="entry.time" required>
+
+  <label>Tên Facebook:</label>
+  <input type="text" name="entry.fb_name" required>
+
+  <label>Link Facebook:</label>
+  <input type="url" name="entry.facebook" required>
+
+  <label>Khung giờ:</label>
+  <select name="entry.time" required>
     <option value="">-- Chọn khung giờ --</option>
     <option>18h – 20h</option><option>19h – 21h</option>
     <option>20h – 22h</option><option>21h – 23h</option><option>Cả ngày</option>
   </select>
+
   <div class="message" id="msg-sinhTonForm"></div>
   <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
 
-<!-- FORM SOLO -->
 <form id="soloForm">
-  <h2>⚡ Nhóm Solo Tử Chiến <button type="button" class="close-btn" onclick="hideForms()">❌</button></h2>
+  <h2>⚡ Solo Tử Chiến <button class="close-btn" onclick="hideForms()">❌</button></h2>
+
   <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-  <label for="solo_name">Tên trong game:</label>
-  <input type="text" id="solo_name" name="entry.name" required>
-  <label for="solo_uid">UID:</label>
-  <input type="text" id="solo_uid" name="entry.uid" required>
-  <label for="solo_rank">Rank hiện tại:</label>
-  <select id="solo_rank" name="entry.rank" required>
+
+  <label>Tên trong game:</label>
+  <input type="text" name="entry.name" required>
+
+  <label>UID:</label>
+  <input type="text" name="entry.uid" required>
+
+  <label>Rank hiện tại:</label>
+  <select name="entry.rank" required>
     <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option><option>Bạch Kim</option>
-    <option>Kim Cương</option><option>Huyền Thoại</option><option>Cao Thủ</option>
+    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
+    <option>Bạch Kim</option><option>Kim Cương</option>
+    <option>Huyền Thoại</option><option>Cao Thủ</option>
     <option>Đại Cao Thủ</option><option>Top Sever</option>
   </select>
-  <label for="solo_role">Vai trò mong muốn:</label>
-  <select id="solo_role" name="entry.role" required>
+
+  <label>Vai trò:</label>
+  <select name="entry.role" required>
     <option value="">-- Chọn Vai Trò --</option>
-    <option>Kai 2</option><option>Kai 5</option><option>Headshot Kai 2</option><option>Headshot Kai 5</option>
+    <option>Kai 2</option><option>Kai 5</option>
+    <option>Headshot Kai 2</option><option>Headshot Kai 5</option>
   </select>
-  <label for="solo_age">Tuổi:</label>
-  <input type="number" id="solo_age" name="entry.age" min="14" max="30" placeholder="Nhập tuổi" required>
-  <label for="solo_gender">Giới tính:</label>
-  <select id="solo_gender" name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option><option>Nam</option><option>Nữ</option><option>Khác</option>
+
+  <label>Tuổi:</label>
+  <input type="number" name="entry.age" min="14" max="30" required>
+
+  <label>Giới tính:</label>
+  <select name="entry.gender" required>
+    <option value="">-- Chọn Giới Tính --</option>
+    <option>Nam</option><option>Nữ</option><option>Khác</option>
   </select>
-  <label for="solo_fb_name">Tên Facebook (Bắt Buộc):</label>
-  <input type="text" id="solo_fb_name" name="entry.fb_name" placeholder="Tên hiển thị trên Facebook" required>
-  <label for="solo_facebook">Liên kết Facebook (Bắt Buộc):</label>
-  <input type="url" id="solo_facebook" name="entry.facebook" placeholder="https://facebook.com/username" required>
-  <label for="solo_time">Khung thời gian:</label>
-  <select id="solo_time" name="entry.time" required>
+
+  <label>Tên Facebook:</label>
+  <input type="text" name="entry.fb_name" required>
+
+  <label>Link Facebook:</label>
+  <input type="url" name="entry.facebook" required>
+
+  <label>Khung giờ:</label>
+  <select name="entry.time" required>
     <option value="">-- Chọn khung giờ --</option>
     <option>18h – 20h</option><option>19h – 21h</option>
     <option>20h – 22h</option><option>21h – 23h</option><option>Cả ngày</option>
   </select>
+
   <div class="message" id="msg-soloForm"></div>
   <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
 </form>
@@ -204,26 +260,22 @@ button.close-btn:hover { color:#f44336; }
 </div>
 
 <script>
-const canvas = document.getElementById('sakuraCanvas');
-const ctx = canvas.getContext('2d');
-let W = canvas.width = window.innerWidth;
-let H = canvas.height = window.innerHeight;
+const canvas=document.getElementById('sakuraCanvas');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=innerWidth;
+let H=canvas.height=innerHeight;
+let PETAL_COUNT=innerWidth<=768?10:30;
+let petals=[];
+const random=(a,b)=>Math.random()*(b-a)+a;
 
-let PETAL_COUNT = window.innerWidth <= 768 ? 10 : 30;
-let petals = [];
-const random = (min,max)=>Math.random()*(max-min)+min;
-
-function initPetals(){
-  petals = [];
+function init(){
+  petals=[];
   for(let i=0;i<PETAL_COUNT;i++){
     petals.push({
-      x:random(0,W),
-      y:random(0,H),
-      r:random(5,12),
-      d:random(1,3),
-      swing:random(0,2*Math.PI),
-      swingSpeed:random(0.01,0.03),
-      color:'rgba(255,182,193,0.8)'
+      x:random(0,W), y:random(0,H),
+      r:random(5,12), d:random(1,3),
+      swing:random(0,2*Math.PI), s:random(0.01,0.03),
+      color:"rgba(255,182,193,0.8)"
     });
   }
 }
@@ -231,71 +283,78 @@ function initPetals(){
 function draw(){
   ctx.clearRect(0,0,W,H);
   petals.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-    ctx.fillStyle = p.color;
-    ctx.fill();
-    p.y += p.d;
-    const wind = Math.cos(p.y*0.01)*0.5;
-    p.x += Math.sin(p.swing)*2+wind;
-    p.swing+=p.swingSpeed;
-    if(p.y>H){p.y=-10;p.x=random(0,W);}
-    if(p.x>W)p.x=0;
-    if(p.x<0)p.x=W;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.color; ctx.fill();
+    p.y+=p.d; p.x+=Math.sin(p.swing)*2; p.swing+=p.s;
+    if(p.y>H)p.y=-10,p.x=random(0,W);
   });
   requestAnimationFrame(draw);
 }
 
-window.addEventListener('resize',()=>{
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-  PETAL_COUNT = window.innerWidth <=768?10:30;
-  initPetals();
-});
-initPetals();
-draw();
+onresize=()=>{ W=canvas.width=innerWidth; H=canvas.height=innerHeight; init(); };
+init(); draw();
 
-window.hideForms=()=>{document.getElementById('sinhTonForm').classList.remove('active');document.getElementById('soloForm').classList.remove('active');};
-window.showForm=id=>{window.hideForms();document.getElementById(id).classList.add('active');};
-
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJuXOPSHsYShEUUq7yosVYKzxC6UnBu_G_TkxPqEtXvk8d9s2/exec";
-const isValidUrl=url=>{
-  try{const u=new URL(url); return u.protocol==="http:"||u.protocol==="https:";}catch(e){return false;}
+window.hideForms=()=>{
+  sinhTonForm.classList.remove("active");
+  soloForm.classList.remove("active");
+};
+window.showForm=id=>{
+  hideForms();
+  document.getElementById(id).classList.add("active");
 };
 
-function scrollToInput(el){setTimeout(()=>{el.scrollIntoView({behavior:'smooth',block:'center'});},500);}
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJuXOPSHsYShEUUq7yosVYKzxC6UnBu_G_TkxPqEtXvk8d9s2/exec";
 
-function attachInputScroll(form){
-  form.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('focus',()=>scrollToInput(el)));
+function validURL(u){
+  try{
+    let x=new URL(u);
+    return x.protocol==="http:"||x.protocol==="https:";
+  }catch{ return false; }
 }
 
-['sinhTonForm','soloForm'].forEach(id=>attachInputScroll(document.getElementById(id)));
-
-function handleSubmit(formId){
+function submitForm(formId){
   const form=document.getElementById(formId);
-  form.addEventListener('submit',e=>{
+  form.addEventListener("submit",e=>{
     e.preventDefault();
-    const msgEl=document.getElementById('msg-'+formId);
-    const formData=new FormData(form);
-    const age=parseInt(formData.get('entry.age'));
-    const fb=formData.get('entry.facebook').trim();
-    if(isNaN(age)||age<14||age>30){msgEl.textContent="Tuổi phải từ 14 đến 30"; msgEl.className='message error'; return;}
-    if(!isValidUrl(fb)){msgEl.textContent="URL Facebook không hợp lệ"; msgEl.className='message error'; return;}
-    msgEl.textContent="Đang gửi..."; msgEl.className='message loading';
-    fetch(WEB_APP_URL,{method:'POST',mode:'no-cors',body:formData})
-      .then(()=>{msgEl.textContent="Đăng ký thành công!"; msgEl.className='message success'; form.reset();})
-      .catch(()=>{msgEl.textContent="Gửi thất bại. Thử lại."; msgEl.className='message error';});
+    const msg=document.getElementById("msg-"+formId);
+    const fd=new FormData(form);
+    const age=+fd.get("entry.age");
+    const fb=fd.get("entry.facebook");
+
+    if(age<14||age>30){ msg.textContent="Tuổi 14 - 30"; msg.className="message error"; return; }
+    if(!validURL(fb)){ msg.textContent="Link Facebook không hợp lệ"; msg.className="message error"; return; }
+
+    msg.textContent="Đang gửi..."; msg.className="message loading";
+
+    fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:fd})
+    .then(()=>{ msg.textContent="Đăng ký thành công!"; msg.className="message success"; form.reset(); })
+    .catch(()=>{ msg.textContent="Gửi thất bại!"; msg.className="message error"; });
   });
 }
-handleSubmit('sinhTonForm');
-handleSubmit('soloForm');
 
-window.addEventListener('load',()=>{
-  const sinhTonBtn=document.querySelector("button[onclick*='sinhTonForm']");
-  const soloBtn=document.querySelector("button[onclick*='soloForm']");
-  [sinhTonBtn,soloBtn].forEach(btn=>btn?.classList.add('highlight'));
-  setTimeout(()=>{[sinhTonBtn,soloBtn].forEach(btn=>btn?.classList.remove('highlight'));},3000);
-});
+submitForm("sinhTonForm");
+submitForm("soloForm");
+
+onload=()=>{
+  let btns=document.querySelectorAll(".group-btn");
+  btns.forEach(b=>b.classList.add("highlight"));
+  setTimeout(()=>btns.forEach(b=>b.classList.remove("highlight")),3000);
+};
+
+function focusHandler(e) {
+  const element = e.target;
+  if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
+    setTimeout(() => {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      window.scrollBy(0, -20);
+    }, 350);
+  }
+}
+
+document.body.addEventListener('focus', focusHandler, true);
 </script>
 </body>
 </html>
