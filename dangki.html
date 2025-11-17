@@ -355,6 +355,34 @@ function focusHandler(e) {
 }
 
 document.body.addEventListener('focus', focusHandler, true);
+
+
+document.body.addEventListener('focus', focusHandler, true);
+
+/* ------------------------------
+   TỰ ĐẨY FORM LÊN KHI NGƯỜI DÙNG NHẬP
+   HOẠT ĐỘNG CHUẨN ANDROID + IOS
+--------------------------------*/
+function raiseFormOnFocus() {
+  const inputs = document.querySelectorAll("input, select, textarea");
+
+  inputs.forEach(el => {
+    el.addEventListener("focus", () => {
+      setTimeout(() => {
+        const rect = el.getBoundingClientRect();
+        const offset = rect.top + window.scrollY - 100; // chỉnh 100 để tránh bàn phím
+
+        window.scrollTo({
+          top: offset,
+          behavior: "smooth"
+        });
+      }, 220); // delay giúp iPhone nhận bàn phím chính xác
+    });
+  });
+}
+
+raiseFormOnFocus();
+
 </script>
 </body>
 </html>
