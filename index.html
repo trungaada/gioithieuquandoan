@@ -13,10 +13,13 @@
     -webkit-tap-highlight-color: transparent; 
     -webkit-overflow-scrolling: touch; 
 }
+
 body { 
     font-family: Arial, sans-serif; 
-    background: url("logo.jpg") no-repeat center center fixed; 
-    background-size: cover; 
+    background: url("logo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    background-color: rgba(0,0,0,0.5); /* overlay để chữ dễ đọc */
+    background-blend-mode: overlay;
     color: #fff; 
     font-size: 16px; 
     line-height: 1.75;
@@ -26,7 +29,11 @@ body {
 }
 
 /* === MAIN FADE-IN === */
-@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { 
+    from { opacity:0; transform:translateY(20px); } 
+    to { opacity:1; transform:translateY(0); } 
+}
+
 main { 
     opacity:0; 
     text-align:center; 
@@ -40,6 +47,7 @@ main {
     -webkit-backdrop-filter: blur(5px); 
     transition: all 0.4s ease-in-out;
 }
+
 body.fade-in main { 
     opacity:1; 
     animation: fadeIn 1.2s ease-out forwards; 
@@ -56,23 +64,85 @@ nav {
     z-index:100; 
     background-image: linear-gradient(to right, #ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3); 
     background-size:400% 100%; 
-    animation:rainbow-gradient 15s ease infinite; 
+    animation: rainbow-gradient 15s ease infinite; 
     box-shadow:0 2px 8px rgba(204,0,0,0.7);
 }
-@keyframes rainbow-gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-.logo { height:35px; max-width:60px; border-radius:50%; box-shadow:0 0 8px rgba(255,60,0,0.8); transition:0.3s ease; }
-.logo:hover { transform:scale(1.1); box-shadow:0 0 12px #FFCC00; }
+
+@keyframes rainbow-gradient { 
+    0%{background-position:0% 50%} 
+    50%{background-position:100% 50%} 
+    100%{background-position:0% 50%} 
+}
+
+/* --- LOGO --- */
+/* --- LOGO HÌNH TRÒN --- */
+.logo {
+    width: 50px;
+    height: 50px; /* ép vuông */
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+.logo:hover {
+    transform: scale(1.1);
+    border-color: #FF3C00; /* chỉ đổi màu viền thôi */
+    box-shadow: 0 0 15px #FFCC00, 0 0 25px rgba(255, 60, 0, 0.8);
+}
+
+
+/* --- MENU --- */
 .menu-toggle { display:flex; flex-direction:column; justify-content: space-around; width:28px; height:25px; cursor:pointer; }
 .menu-toggle span { display:block; height:3px; background-color:#fff; border-radius:2px; transition:all 0.3s ease; }
-.nav-links { position:absolute; top:45px; right:12px; background-color: rgba(0,0,0,0.85); flex-direction:column; width:200px; gap:0; display:none; border-radius:0 0 8px 8px; box-shadow:0 0 10px rgba(255,60,0,0.8); }
+
+.nav-links { 
+    position:absolute; 
+    top:45px; right:12px; 
+    background-color: rgba(0,0,0,0.85); 
+    flex-direction:column; 
+    width:200px; 
+    gap:0; 
+    display:none; 
+    border-radius:0 0 8px 8px; 
+    box-shadow:0 0 10px rgba(255,60,0,0.8); 
+}
 .nav-links.active { display:flex; }
-.nav-links a { padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:14px; font-weight:bold; text-decoration:none; color:white; background:linear-gradient(135deg,#CC0000,#400000); transition:all 0.3s ease; }
-.nav-links a:hover { background:linear-gradient(135deg,#FF3C00,#FF7F00); transform:scale(1.03); box-shadow:0 0 10px #FF3C00; }
+.nav-links a { 
+    padding:10px; 
+    border-bottom:1px solid rgba(255,255,255,0.1); 
+    font-size:14px; 
+    font-weight:bold; 
+    text-decoration:none; 
+    color:white; 
+    background:linear-gradient(135deg,#CC0000,#400000); 
+    transition:all 0.3s ease; 
+}
+.nav-links a:hover { 
+    background:linear-gradient(135deg,#FF3C00,#FF7F00); 
+    transform:scale(1.03); 
+    box-shadow:0 0 10px #FF3C00; 
+}
 @media (min-width: 1025px) { .nav-links { right:12px; width:250px; } }
 
 /* === HEADER / TITLES === */
-h1 { font-size: 32px; color: #FF3C00; margin-bottom: 25px; text-align: center; text-shadow: 0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); }
-h2 { font-size: 22px; color: #FFCC00; margin: 25px 0 15px; border-bottom:2px solid #FFCC00; display:inline-block; padding-bottom:5px; text-align:center; }
+h1 { 
+    font-size: 32px; 
+    color: #FF3C00; 
+    margin-bottom: 25px; 
+    text-align: center; 
+    text-shadow: 0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); 
+}
+h2 { 
+    font-size: 22px; 
+    color: #FFCC00; 
+    margin: 25px 0 15px; 
+    border-bottom:2px solid #FFCC00; 
+    display:inline-block; 
+    padding-bottom:5px; 
+    text-align:center; 
+}
 
 /* === PARAGRAPHS & LIST === */
 p { font-size:16px; line-height:1.75; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:18px; }
@@ -87,9 +157,24 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 /* === CTA BUTTONS & ICON SOCIAL === */
 .cta-button, .popup-btn { font-size:16px; padding:12px 24px; border-radius:8px; }
 .cta-buttons-group { display:flex; justify-content:center; align-items:center; gap:15px; margin-top:25px; flex-wrap:wrap; }
-.icon-social { width:60px; height:60px; border-radius:50%; background: rgba(255,255,255,0.1); border:2px solid rgba(255,100,0,0.5); backdrop-filter: blur(4px); display:flex; justify-content:center; align-items:center; box-shadow:0 0 10px rgba(255,60,0,0.5); transition:all 0.25s ease-in-out; }
+
+.icon-social { 
+    width:60px; height:60px; 
+    border-radius:50%; 
+    background: rgba(255,255,255,0.1); 
+    border:2px solid rgba(255,100,0,0.5); 
+    backdrop-filter: blur(4px); 
+    display:flex; justify-content:center; align-items:center; 
+    box-shadow:0 0 10px rgba(255,60,0,0.5); 
+    transition:all 0.25s ease-in-out; 
+}
 .icon-social img { width:80%; height:80%; object-fit:contain; border-radius:10px; }
-.icon-social:hover { transform:translateY(-4px) scale(1.1); box-shadow:0 8px 20px rgba(255,80,0,0.9),0 0 30px rgba(255,160,0,0.7); border-color:#FFCC00; background: rgba(255,100,0,0.15); }
+.icon-social:hover { 
+    transform:translateY(-4px) scale(1.1); 
+    box-shadow:0 8px 20px rgba(255,80,0,0.9),0 0 30px rgba(255,160,0,0.7); 
+    border-color:#FFCC00; 
+    background: rgba(255,100,0,0.15); 
+}
 
 /* === FOOTER === */
 .tf-footer-cta p, .main-footer p { font-size:16px; line-height:1.6; text-align:center; }
@@ -109,21 +194,48 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 }
 
 /* === POPUP WELCOME === */
-#welcome-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; visibility:hidden; transition:0.5s; }
+#welcome-popup { 
+    position: fixed; top:0; left:0; width:100%; height:100%; 
+    background: rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; 
+    z-index:9999; opacity:0; visibility:hidden; transition:0.5s; 
+}
 #welcome-popup.show { opacity:1; visibility:visible; }
-.popup-content { background: rgba(15,15,15,0.95); padding:25px 30px; border-radius:15px; text-align:center; box-shadow:0 0 25px rgba(255,60,0,0.8); animation: popup-in 0.8s ease forwards; max-width:90%; width:380px; line-height:1.6; }
+.popup-content { 
+    background: rgba(15,15,15,0.95); 
+    padding:25px 30px; 
+    border-radius:15px; 
+    text-align:center; 
+    box-shadow:0 0 25px rgba(255,60,0,0.8); 
+    animation: popup-in 0.8s ease forwards; 
+    max-width:90%; width:380px; line-height:1.6; 
+}
 .popup-logo { width:70px; height:70px; margin-bottom:15px; border-radius:50%; box-shadow:0 0 12px #FF3C00; }
 .popup-content h2 { font-size:22px; line-height:1.4; color:#FF3C00; margin:10px 0 15px; text-shadow:0 0 8px #FF3C00; }
 .popup-content p { font-size:16px; line-height:1.6; color:#fff; margin:10px 0; text-align:center; word-wrap:break-word; }
-.popup-btn { background: linear-gradient(90deg,#FF3C00,#FFCC00); color:#fff; border:none; padding:10px 22px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:16px; transition: all 0.3s ease; box-shadow:0 0 10px rgba(255,60,0,0.8); margin-top:20px; }
+.popup-btn { 
+    background: linear-gradient(90deg,#FF3C00,#FFCC00); 
+    color:#fff; border:none; 
+    padding:10px 22px; border-radius:8px; 
+    cursor:pointer; font-weight:bold; font-size:16px; 
+    transition: all 0.3s ease; box-shadow:0 0 10px rgba(255,60,0,0.8); 
+    margin-top:20px; 
+}
 .popup-btn:hover { background: linear-gradient(90deg,#FFCC00,#FF3C00); transform:scale(1.05); }
+
 @keyframes popup-in { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
 
 /* === SAKURA === */
-.sakura { position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; animation:fall linear forwards; }
-@keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } }
+.sakura { 
+    position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; 
+    animation:fall 10s linear infinite; 
+}
+@keyframes fall { 
+    to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } 
+}
+
 </style>
 </head>
+
 <body>
 
 
@@ -136,7 +248,51 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
 
 
 
-    <!-- TF AI Assistant (Thân thiện - Vui vẻ) - Dán trước </body> -->
+    <!-- TF AI Assistant (Thân thiện - Vui vẻ) - Dán trước 
+<div id="loader">
+    <div class="loader-content">
+        <img src="logo2.jpg" class="load-logo">
+        <div class="load-text">Loading...</div>
+    </div>
+</div>
+
+<style>
+#loader {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 9999999;
+    transition: opacity 0.6s ease;
+}
+.loader-content { text-align:center; }
+.load-logo {
+    width:110px;
+    animation: spin 1.4s linear infinite;
+    filter: drop-shadow(0 0 12px #ff3c00);
+}
+@keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+.load-text {
+    margin-top:15px;font-size:20px;font-weight:bold;color:#ff7a00;
+    animation: glow 1s infinite;
+}
+@keyframes glow {0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
+</style>
+
+<script>
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        const ld=document.getElementById("loader");
+        ld.style.opacity = "0";
+        setTimeout(() => ld.remove(), 600);
+    }, 10000);
+});
+</script>
+
+</body> -->
 <style>
 /* --- UI nhỏ gọn, không xung đột --- */
 #tf-ai-btn {
@@ -439,7 +595,7 @@ function handleSend(){
             appendUser(q);
             setTimeout(() => {
                 appendBot("⚠️ Nội dung bạn vừa nhập chứa từ ngữ không phù hợp. Vui lòng nhập lịch sự!");
-            }, 500);
+            }, 10000);
             input.value = '';
             return;
         }
@@ -797,7 +953,7 @@ if (low.includes('đăng ký ở đâu') || low.includes('dang ky o dau') || low
         // FALLBACK
         appendBot(`${greeting}Mình chưa hiểu câu hỏi đó 😅. Thử gõ: <b>help</b>, <b>luật</b>, <b>đăng ký</b>, <b>hỗ trợ</b>, <b>giới thiệu</b>.`);
 
-    }, 800); // Độ trễ 800ms
+    }, 10000); // Độ trễ 800ms
 }
 
 
@@ -980,7 +1136,7 @@ window.onload=function(){
 
     // Typewriter slogan
     const sloganText="TitanForce: Chiến Thắng Kĩ Năng và Rèn Luyện";
-    setTimeout(()=>{ typeWriter(sloganText,0,()=>{ const e=document.getElementById("typed-slogan"); if(e) e.style.borderRight='none'; }); },500);
+    setTimeout(()=>{ typeWriter(sloganText,0,()=>{ const e=document.getElementById("typed-slogan"); if(e) e.style.borderRight='none'; }); }, 10000);
 
     // Sakura
     function createSakura(){
@@ -1015,7 +1171,71 @@ window.onload=function(){
     window.oncopy = window.oncut = window.onpaste = function(e){ e.preventDefault(); alert("⚠️ Không được phép sao chép nội dung trang!"); return false; };
     document.addEventListener('mousedown', function(e){ if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); } });
 };
+
+
 </script>
+
+
+
+
+
+
+
+<div id="loader">
+    <div class="loader-content">
+        <img src="logo2.jpg" class="load-logo">
+        <div class="load-text">Vui lòng đợi trong giây lát...</div>
+    </div>
+</div>
+
+<style>
+#loader {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 9999999;
+    transition: opacity 0.6s ease;
+}
+.loader-content { text-align:center; }
+.load-logo {
+    width:110px;
+    height:110px; /* thêm chiều cao để ép vuông */
+    border-radius:50%; /* tạo hình tròn */
+    animation: spin 1.4s linear infinite;
+    object-fit: cover; /* nếu ảnh bị méo */
+    filter: drop-shadow(0 0 12px #ff3c00);
+}
+
+@keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+.load-text {
+    margin-top:15px;font-size:20px;font-weight:bold;color:#ff7a00;
+    animation: glow 1s infinite;
+}
+@keyframes glow {0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
+</style>
+
+<script>
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        const ld=document.getElementById("loader");
+        ld.style.opacity = "0";
+        setTimeout(() => ld.remove(), 600);
+    }, 2000);
+});
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
 
