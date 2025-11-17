@@ -102,7 +102,12 @@ button.submit-btn {
   padding:12px 20px; font-weight:700; font-size:1rem;
   cursor:pointer; width:100%; text-transform:uppercase;
 }
-button.submit-btn:hover { background:#ff1744; }
+button.submit-btn:hover:not(:disabled) { background:#ff1744; }
+button.submit-btn:disabled {
+  background:#333;
+  cursor:not-allowed;
+  opacity:0.7;
+}
 
 button.close-btn {
   background:none; border:none; font-size:1.2rem; cursor:pointer;
@@ -317,18 +322,44 @@ function submitForm(formId){
   form.addEventListener("submit",e=>{
     e.preventDefault();
     const msg=document.getElementById("msg-"+formId);
+    const submitBtn = form.querySelector(".submit-btn");
     const fd=new FormData(form);
     const age=+fd.get("entry.age");
     const fb=fd.get("entry.facebook");
 
-    if(age<14||age>30){ msg.textContent="Tuổi 14 - 30"; msg.className="message error"; return; }
-    if(!validURL(fb)){ msg.textContent="Link Facebook không hợp lệ"; msg.className="message error"; return; }
+    if(age<14||age>30){
+      msg.textContent="Tuổi phải trong khoảng 14 - 30";
+      msg.className="message error";
+      return;
+    }
+    if(!validURL(fb)){
+      msg.textContent="Link Facebook không hợp lệ";
+      msg.className="message error";
+      return;
+    }
 
-    msg.textContent="Đang gửi..."; msg.className="message loading";
+    msg.textContent="Đang gửi đăng ký... Vui lòng chờ!";
+    msg.className="message loading";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "⏳ Đang xử lý...";
+    submitBtn.style.opacity = '0.7';
 
     fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:fd})
-    .then(()=>{ msg.textContent="Đăng ký thành công!"; msg.className="message success"; form.reset(); })
-    .catch(()=>{ msg.textContent="Gửi thất bại!"; msg.className="message error"; });
+    .then(()=>{
+      msg.textContent="Đăng ký thành công! Chờ phản hồi từ quân đoàn nhé!";
+      msg.className="message success";
+      form.reset();
+      submitBtn.textContent = "🚀 Gửi đăng ký";
+    })
+    .catch(()=>{
+      msg.textContent="❌ Gửi thất bại! Vui lòng kiểm tra và thử lại.";
+      msg.className="message error";
+      submitBtn.textContent = "🚀 Gửi đăng ký";
+    })
+    .finally(()=>{
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+    });
   });
 }
 
@@ -356,28 +387,22 @@ function focusHandler(e) {
 
 document.body.addEventListener('focus', focusHandler, true);
 
-
-/* ----------------------------------------
-   ĐẨY NGUYÊN TRANG LÊN KHI BẤM VÀO Ô NHẬP
------------------------------------------*/
 function pageLiftOnFocus() {
   const fields = document.querySelectorAll("input, select, textarea");
 
   fields.forEach(el => {
     el.addEventListener("focus", () => {
-      document.body.style.transform = "translateY(-120px)"; // đẩy trang lên 120px
+      document.body.style.transform = "translateY(-120px)";
       document.body.style.transition = "0.3s ease";
     });
 
     el.addEventListener("blur", () => {
-      document.body.style.transform = "translateY(0)"; // trả về vị trí bình thường
+      document.body.style.transform = "translateY(0)";
     });
   });
 }
 
 pageLiftOnFocus();
-
-
 </script>
 </body>
 </html>
