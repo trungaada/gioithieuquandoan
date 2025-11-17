@@ -346,7 +346,7 @@ function submitForm(formId){
 
     fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:fd})
     .then(()=>{
-      msg.textContent="Đăng ký thành công! Chờ phản hồi từ quân đoàn nhé!";
+      msg.textContent="Đăng ký thành công! Chờ phản hồi từ quân nhé!";
       msg.className="message success";
       form.reset();
       submitBtn.textContent = "🚀 Gửi đăng ký";
