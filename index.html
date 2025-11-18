@@ -1179,121 +1179,75 @@ window.onload=function(){
 
 
 
-
 <div id="loader">
     <div class="loader-content">
-        <div class="load-text">Vui lòng đợi trong giây lát...</div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+        <div class="load-text">Vui lòng đợi...</div>
     </div>
 </div>
 
 <style>
-/* Loader full screen */
 #loader {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    
+    width: 100vw; height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999999;
-    overflow: hidden;
-    transition: opacity 0.6s ease;
-
-    /* Background responsive */
-    background-repeat: no-repeat;
-    background-position: center center;
+    background-color: #000;
+    background-image: url('ff1.jpg');
     background-size: cover;
-    background-color: #000; /* fallback nếu ảnh chậm load */
+    background-position: center center;
+    background-attachment: scroll;
+    transition: opacity 0.6s ease;
 }
 
-/* Background cố định trên PC */
+/* Cố định background trên PC */
 @media (min-width: 768px) {
-    #loader {
-        background-attachment: fixed;
-    }
+    #loader { background-attachment: fixed; }
 }
 
-/* Loader content */
 .loader-content {
     text-align: center;
-    width: 80%; /* chiều rộng tự co theo màn hình */
-    max-width: 400px;
+    width: 90%;
+    max-width: 500px;
 }
 
-/* Text loading */
 .load-text {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #ff7a00;
-    margin-bottom: 15px;
-    animation: glow 1s infinite;
+    animation: glow 1.2s infinite alternate;
 }
 
 @keyframes glow {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; }
-    100% { opacity: 0.4; }
+    0% { opacity: 0.4; text-shadow: 0 0 5px #ff7a00; }
+    50% { opacity: 1; text-shadow: 0 0 20px #ff7a00, 0 0 30px #ff3c00; }
+    100% { opacity: 0.4; text-shadow: 0 0 5px #ff7a00; }
 }
 
-/* Progress bar */
-.progress-bar {
-    width: 100%;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    width: 0%;
+/* Fix iOS Safari */
+html, body {
     height: 100%;
-    background: linear-gradient(90deg, #ff3c00, #ff7a00);
-    border-radius: 5px;
-    transition: width 0.1s linear;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 </style>
 
 <script>
-/**
- * Hàm khởi chạy loader
- * - Tăng thanh progress từ 0 → 100%
- * - Ẩn loader sau 2s (hoặc bất cứ thời gian nào)
- */
-function startLoader(imageUrl, duration = 3000) {
+window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
-    const fill = document.querySelector('.progress-fill');
-    
-    // Thay background bất kỳ
-    loader.style.backgroundImage = `url('${imageUrl}')`;
-
-    let width = 0;
-    const interval = 20; // ms
-    const step = interval / duration * 100;
-
-    const progress = setInterval(() => {
-        width += step;
-        if (width >= 100) {
-            width = 100;
-            clearInterval(progress);
-            // ẩn loader
-            setTimeout(() => {
-                loader.style.opacity = 0;
-                setTimeout(() => loader.remove(), 600);
-            }, 300);
-        }
-        fill.style.width = width + "%";
-    }, interval);
-}
-
-// Ví dụ: gọi loader với bất kỳ hình ảnh nào
-window.addEventListener("load", () => {
-    startLoader('https://image.dienthoaivui.com.vn/x,webp,q90/https://dashboard.dienthoaivui.com.vn/uploads/dashboard/editor_upload/anh-ff-24.jpg');
+    // Thời gian hiển thị loader (3 giây)
+    setTimeout(() => {
+        loader.style.opacity = 0;
+        // Thời gian chờ cho hiệu ứng opacity hoàn tất (500ms = 0.5s)
+        setTimeout(() => loader.remove(), 500); 
+    }, 3000); 
 });
 </script>
+
+
 
 </script>
 
