@@ -1182,119 +1182,92 @@ window.onload=function(){
 
 <div id="loader">
     <div class="loader-content">
-        <div class="load-text">Vui lòng đợi trong giây lát...</div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+        <img src="logo2.jpg" alt="Logo" class="loader-logo">
+        <div class="load-text" id="load-text">Vui lòng đợi trong giây lát...</div>
     </div>
 </div>
 
 <style>
-/* Loader full screen */
 #loader {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999999;
-    overflow: hidden;
-    transition: opacity 0.6s ease;
-
-    /* Background responsive */
+    background-color: #000;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-color: #000; /* fallback nếu ảnh chậm load */
+    transition: opacity 0.6s ease;
 }
 
-/* Background cố định trên PC */
 @media (min-width: 768px) {
-    #loader {
-        background-attachment: fixed;
-    }
+    #loader { background-attachment: fixed; }
 }
 
-/* Loader content */
 .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     text-align: center;
-    width: 80%; /* chiều rộng tự co theo màn hình */
-    max-width: 400px;
 }
 
-/* Text loading */
-.load-text {
-    font-size: 20px;
+.loader-logo {
+    width: 60px; height: 60px;
+    margin-bottom: 20px;
+    animation: spin 2s linear infinite;
+    border-radius: 50%;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- Text per-letter animation --- */
+.load-text span {
+    display: inline-block;
+    font-size: 22px;
     font-weight: bold;
     color: #ff7a00;
-    margin-bottom: 15px;
-    animation: glow 1s infinite;
+    text-shadow: 0 0 10px #ff7a00, 0 0 20px #ff3c00;
+    animation: jump 1s ease infinite;
+    margin-right: 4px; /* Khoảng cách giữa các chữ */
 }
 
-@keyframes glow {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; }
-    100% { opacity: 0.4; }
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); } /* tăng chiều cao nhảy */
 }
 
-/* Progress bar */
-.progress-bar {
-    width: 100%;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #ff3c00, #ff7a00);
-    border-radius: 5px;
-    transition: width 0.1s linear;
-}
 </style>
 
 <script>
-/**
- * Hàm khởi chạy loader
- * - Tăng thanh progress từ 0 → 100%
- * - Ẩn loader sau 2s (hoặc bất cứ thời gian nào)
- */
-function startLoader(imageUrl, duration = 3000) {
+// Chia từng chữ ra span và thêm delay để nhảy lần lượt
+const loadText = document.getElementById('load-text');
+const text = loadText.textContent;
+loadText.textContent = '';
+
+text.split('').forEach((char, i) => {
+    const span = document.createElement('span');
+    span.textContent = char;
+    span.style.animationDelay = `${i * 0.1}s`; // delay 0.1s mỗi chữ
+    loadText.appendChild(span);
+});
+
+// Loader background & ẩn sau 2s
+function startLoader(imageUrl, duration = 3500) {
     const loader = document.getElementById('loader');
-    const fill = document.querySelector('.progress-fill');
-    
-    // Thay background bất kỳ
     loader.style.backgroundImage = `url('${imageUrl}')`;
-
-    let width = 0;
-    const interval = 20; // ms
-    const step = interval / duration * 100;
-
-    const progress = setInterval(() => {
-        width += step;
-        if (width >= 100) {
-            width = 100;
-            clearInterval(progress);
-            // ẩn loader
-            setTimeout(() => {
-                loader.style.opacity = 0;
-                setTimeout(() => loader.remove(), 600);
-            }, 300);
-        }
-        fill.style.width = width + "%";
-    }, interval);
+    setTimeout(() => {
+        loader.style.opacity = 0;
+        setTimeout(() => loader.remove(), 600);
+    }, duration);
 }
 
-// Ví dụ: gọi loader với bất kỳ hình ảnh nào
-window.addEventListener("load", () => {
-    startLoader('ff1.jpg');
-});
-</script>
-
+window.addEventListener("load", () => startLoader('ff1.jpg'));
 </script>
 
 
@@ -1304,6 +1277,7 @@ window.addEventListener("load", () => {
 
 
 
+</script>
 </body>
 </html>
 
