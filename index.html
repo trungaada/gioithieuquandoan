@@ -108,7 +108,7 @@ button#submitButton:disabled { background:#666; cursor:not-allowed; transform:no
             <input type="number" id="captchaInput" placeholder="= ?">
         </div>
         <p class="captcha-error" id="captchaError">Oops~ Sai rồi, thử lại nha ❤️</p>
-        <button type="submit" id="submitButton" disabled>Vào trang chủ thôi! 💜</button>
+        <button type="submit" id="submitButton" disabled>Vào trang chủ thôi!</button>
     </form>
     <div id="result" style="margin-top:10px;color:#ffb3d1;"></div>
 </div>
@@ -214,7 +214,7 @@ form.addEventListener('submit', async e=>{
     const fd=new FormData();
     fd.append('entry.name',document.getElementById('nameInput').value.trim());
 
-    submitBtn.disabled=true; submitBtn.innerText='⏳ ĐANG GỬI...';
+    submitBtn.disabled=true; submitBtn.innerText=' Đang gửi yêu cầu...';
     try{
         const response=await fetch('https://script.google.com/macros/s/AKfycbx5PxQWi78Y6xO4m4_TR4awwOar0xenchvz4BoMT_pN2wtm0dipPX3qJdFE6usXK8Uu/exec',{method:'POST',body:fd});
         const res=await response.json();
