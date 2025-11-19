@@ -2,228 +2,450 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Quản Trị Quân Đoàn — TitanForce²</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Giới thiệu thành viên — Quân đoàn TF</title>
+<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
-    --primary: #00e6e6;
-    --accent: #00ffaa;
-    --red: #ff2e63;
-    --gold: #ffd166;
-    --glass: rgba(10, 15, 28, 0.92);
+    --bg: #030a18;
+    --card: #0f1724;
+    --accent: #6ee7b7;
+    --accent-shadow: rgba(110, 231, 183, 0.5);
+    --muted: #9aa4b2;
+    --glass: rgba(255, 255, 255, 0.06);
     --radius: 18px;
+    --color-primary: #00FFFF;
+    --color-secondary: #3b82f6;
+    --neon-blue-shadow: rgba(0, 255, 255, 0.8);
+    --member-name-color: #FF0000;
+    --member-name-shadow: rgba(255, 0, 0, 0.8);
+    --member-role-color: #FFD700;
+    --crown-color: gold; 
+    font-family: 'Poppins', system-ui, sans-serif;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body { height: 100%; overflow-x: hidden; }
-body {
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
     min-height: 100vh;
-    background: #0a0f1c;
+    background: url('logo.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #e6eef6;
-    font-family: 'Poppins', sans-serif;
-    padding: 20px 15px;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding: 60px 20px 80px;
+    overflow-x: hidden;
 }
 
-/* ===================== BACKGROUND ĐẸP MAX + KHÔNG LAG TRÊN MOBILE ===================== */
-/* Desktop & tablet: full hiệu ứng | Mobile: nhẹ hơn nhưng vẫn đẹp */
-.bg-animation {
-    position: fixed; inset: 0; z-index: -3;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(0,230,230,0.18), transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0,255,170,0.18), transparent 50%),
-        linear-gradient(45deg, #0a0f1c 25%, transparent 25%),
-        linear-gradient(-45deg, #0a0f1c 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #0f1a2c 75%),
-        linear-gradient(-45deg, transparent 75%, #0f1a2c 75%);
-    background-size: 60px 60px;
-    will-change: transform;
-}
-
-/* Chỉ bật animation trên màn hình lớn hoặc máy mạnh */
-@media (min-width: 768px) {
-    .bg-animation {
-        animation: waveMove 45s linear infinite;
-    }
-}
-@keyframes waveMove {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(60px, 60px) rotate(1deg); }
-}
-
-/* Particle chỉ bật trên màn hình lớn */
-.particles span {
+body::before {
+    content: '';
     position: fixed;
-    background: var(--primary);
+    inset: 0;
+    background-image:
+        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
+    background-size: 30px 30px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.2s forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+main {
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+header { margin-bottom: 30px; }
+
+.logo-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#main-logo {
+    width: clamp(100px, 15vw, 150px);
     border-radius: 50%;
-    pointer-events: none;
-    will-change: transform;
-    opacity: 0;
-    z-index: -2;
-}
-@media (min-width: 768px) {
-    .particles.active span { animation: floatParticle linear infinite; }
-}
-@keyframes floatParticle {
-    0%   { transform: translateY(110vh) scale(0); opacity: 0; }
-    10%  { opacity: 0.7; }
-    90%  { opacity: 0.7; }
-    100% { transform: translateY(-120px) scale(1); opacity: 0; }
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 15px var(--neon-blue-shadow);
+    transition: 0.4s ease-in-out;
 }
 
-/* Scanline chỉ hiện trên desktop/tablet */
-.scanline {
-    position: fixed;
-    top: -100px; left: 0; width: 100%; height: 3px;
-    background: linear-gradient(90deg, transparent, rgba(0,255,170,0.6), transparent);
-    box-shadow: 0 0 30px rgba(0,255,170,0.9);
-    will-change: transform;
-    opacity: 0;
-    pointer-events: none;
+#main-logo:hover {
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: 0 0 25px var(--neon-blue-shadow);
 }
-@media (min-width: 768px) {
-    .scanline.active {
-        opacity: 1;
-        animation: scan 18s linear infinite;
-    }
-}
-@keyframes scan { 0% { transform: translateY(-100px); } 100% { transform: translateY(110vh); } }
 
-/* Card siêu tối ưu */
+h1#typing-title {
+    font-size: clamp(28px, 6vw, 46px);
+    color: var(--color-primary);
+    text-shadow: 0 0 8px var(--neon-blue-shadow);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: none; /* bỏ con trỏ nhấp nháy */
+    animation: none;    /* bỏ animation */
+}
+
+
+@keyframes flicker {
+    0%,100% { text-shadow: 0 0 10px var(--neon-blue-shadow); }
+    50% { text-shadow: 0 0 5px var(--color-primary); }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--color-primary); }
+}
+
+p.lead {
+    color: var(--muted);
+    margin-top: 6px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.marquee-container {
+    width: 100%;
+    margin: 25px 0;
+    padding: 8px 0;
+    background: var(--glass);
+    border-top: 1px solid rgba(110,231,183,0.2);
+    border-bottom: 1px solid rgba(110,231,183,0.2);
+    backdrop-filter: blur(5px);
+}
+
+.marquee-text {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: 0 0 5px var(--accent-shadow);
+}
+
+.members {
+    display: grid;
+    width: 100%;
+    gap: 25px;
+    margin-top: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
 .card {
     background: var(--glass);
-    padding: 28px 20px;
+    padding: 25px;
     border-radius: var(--radius);
-    border: 1px solid rgba(0,230,230,0.2);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    transition: transform 0.4s ease;
-    content-visibility: auto;
-    contain-intrinsic-size: 340px 520px;
-}
-.card:hover { transform: translateY(-12px); }
-
-/* Tắt hover effect trên thiết bị cảm ứng */
-@media (hover: none) and (pointer: coarse) {
-    .card:hover { transform: none; }
-    .card:hover .avatar { transform: none !important; }
-    .card:hover .badge { transform: none !important; }
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: float 6s ease-in-out infinite;
+    perspective: 1000px;
+    overflow: hidden;
+    position: relative;
 }
 
-/* Phần còn lại giữ nguyên đẹp */
-.container { width: 100%; text-align: center; padding: 0 10px; }
-.logo-container img { width: clamp(80px, 20vw, 120px); height: clamp(80px, 20vw, 120px); border-radius: 50%; border: 3px solid var(--primary); box-shadow: 0 0 30px rgba(0,230,230,0.6); object-fit: cover; }
-h1#typing-title { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 16px 0 8px; letter-spacing: 3px; }
-.lead { font-size: clamp(1rem, 3.5vw, 1.3rem); color: #a0e0e0; margin-bottom: 50px; line-height: 1.6; }
-.members { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 780px; margin: 0 auto 60px; padding: 0 10px; }
-.avatar { width: 96px; height: 96px; margin: 0 auto 18px; border-radius: 50%; background-size: cover !important; background-position: center !important; border: 4px solid var(--red); box-shadow: 0 0 30px rgba(255,46,99,0.7); transition: transform 0.5s ease; }
-.card:hover .avatar { transform: scale(1.18); }
-h2 { font-size: 1.35rem; color: var(--red); text-shadow: 0 0 12px rgba(255,46,99,0.8); margin: 10px 0; }
-.role { font-size: 1.05rem; color: var(--gold); font-weight: 600; margin-bottom: 18px; }
-.badge { padding: 6px 16px; background: rgba(0,255,170,0.15); border: 1px solid var(--accent); color: var(--accent); border-radius: 25px; font-size: 0.82rem; margin: 4px; display: inline-block; transition: all 0.3s; }
-.card:hover .badge { background: var(--accent); color: #000; transform: scale(1.1); }
-#backButton { display: inline-block; padding: 12px 38px; background: rgba(0,230,230,0.15); border: 2px solid var(--primary); color: var(--primary); border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.4s ease; margin-top: 20px; }
-#backButton:hover { background: var(--primary); color: #000; transform: scale(1.1); box-shadow: 0 0 35px rgba(0,230,230,0.7); }
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
 
-/* Preloader đẹp nhưng nhanh */
-#preloader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1.2s ease 2.2s; }
-#preloader.remove { opacity: 0; pointer-events: none; }
-.preloader-logo { width: 120px; height: 120px; background: url('logo2.jpg') center/cover no-repeat; border-radius: 50%; border: 5px solid transparent; box-shadow: 0 0 40px rgba(0,230,230,0.8); animation: logoStart 3.6s ease-in-out; }
-@keyframes logoStart { 0% { transform: scale(0) rotate(0deg); } 50% { transform: scale(1.3) rotate(180deg); } 100% { transform: scale(1) rotate(360deg); } }
-.preloader-title { margin-top: 40px; font-size: 3rem; font-weight: 800; letter-spacing: 10px; color: #00e6e6; text-shadow: 0 0 30px #00e6e6; animation: glitch 3s linear forwards; opacity: 0; }
-@keyframes glitch { 0%{opacity:0;transform:translateY(50px)} 20%{opacity:1;transform:translateY(0)} 100%{opacity:1;text-shadow:0 0 60px #00ffaa} }
-.main-content { opacity: 0; transform: translateY(40px); transition: opacity 1.2s ease 2.8s, transform 1.2s ease 2.8s; width: 100%; max-width: 800px; margin: 0 auto; padding: 0 10px; }
-.main-content.show { opacity: 1; transform: translateY(0); }
+.card-enter {
+    animation: slideUpFadeIn .8s ease forwards;
+}
+
+@keyframes slideUpFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-border-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius);
+    background: linear-gradient(45deg, var(--color-primary), var(--accent), var(--member-name-color));
+    background-size: 200% 200%;
+    filter: blur(8px);
+    opacity: 0;
+    transition: 0.4s;
+    animation: rotate-border 6s linear infinite;
+}
+
+@keyframes rotate-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card:hover .card-border-glow {
+    opacity: 1;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgba(255,100,100,0.8);
+    box-shadow: 0 0 15px rgba(255,100,100,0.5);
+    transition: 0.35s;
+}
+
+h2 {
+    margin-bottom: 4px;
+    color: var(--member-name-color);
+    text-shadow: 0 0 8px var(--member-name-shadow);
+}
+
+p.role {
+    color: var(--member-role-color);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.crown-effect {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.crown-effect::before {
+    content: "👑";
+    font-size: 1.2em;
+    animation: pulse-glow 1.5s infinite alternate;
+    transform: translateY(-2px);
+}
+
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px var(--member-role-color));
+    }
+    100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 10px var(--member-role-color));
+    }
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    margin: 3px;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.card:hover .badge {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+#backButton {
+    margin-top: 35px;
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 2px solid var(--color-primary);
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    background: rgba(0,255,255,0.15);
+    animation: neon-flicker-btn 2.5s infinite alternate;
+    transition: .4s;
+}
+
+@keyframes neon-flicker-btn {
+    0%,100% { box-shadow: 0 0 10px var(--neon-blue-shadow); }
+    50% { box-shadow: 0 0 4px rgba(0,255,255,0.6); }
+}
+
+#backButton:hover {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    color: var(--bg);
+    box-shadow: 0 0 30px var(--neon-blue-shadow);
+}
+
+.falling-star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.8);
+    box-shadow: 0 0 5px rgba(255,255,255,.4);
+    pointer-events: none;
+}
 </style>
 </head>
+
 <body>
 
-<div id="preloader">
-    <div class="preloader-logo"></div>
-    <div class="preloader-title">TITANFORCE²</div>
-</div>
+<div id="starfall-container" style="position:fixed;inset:0;overflow:hidden;z-index:1"></div>
 
-<div class="bg-animation"></div>
-<div class="particles"></div>
-<div class="scanline"></div>
-
-<div class="main-content">
-    <div class="container">
-        <div class="logo-container"><img src="logo2.jpg" alt="Logo"></div>
+<main>
+    <header>
+        <div class="logo-container">
+            <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF">
+        </div>
         <h1 id="typing-title"></h1>
-        <p class="lead">Đội ngũ quản trị Quân Đoàn TitanForce²</p>
+        <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
+    </header>
 
-        <div class="members">
-            <div class="card">
-                <div class="avatar" style="background: url('trung.jpg') center/cover no-repeat;"></div>
-                <h2 id="name-trung"></h2>
-                <p class="role" id="role-trung"></p>
-                <div><span class="badge">Chỉ Huy Tối Cao</span><span class="badge">Founder</span></div>
-            </div>
-            <div class="card">
-                <div class="avatar" style="background: url('huy.jpg') center/cover no-repeat;"></div>
-                <h2 id="name-tv2"></h2>
-                <p class="role" id="role-tv2"></p>
-                <div><span class="badge">Phó Chỉ Huy</span><span class="badge">Quản Lý Nội Bộ</span></div>
+    <div class="marquee-container">
+        <marquee class="marquee-text" scrollamount="6">
+            ⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay!
+        </marquee>
+    </div>
+
+    <section class="members">
+
+        <div class="card">
+            <div class="card-border-glow"></div>
+            <div class="avatar" style="background-image:url('trung1.jpg')"></div>
+            <h2><span id="name-trung" class="crown-effect"></span></h2> 
+            <p class="role"><span id="role-trung"></span></p>
+
+            <div class="badges">
+                <span class="badge">Lãnh đạo</span>
+                <span class="badge">Chiến thuật</span>
+                <span class="badge">Tuyển quân</span>
             </div>
         </div>
 
-        <a href="index.html" id="backButton">← Quay Lại Trang Chủ</a>
-    </div>
-</div>
+        <div class="card">
+            <div class="card-border-glow"></div>
+            <div class="avatar" style="background-image:url('huy.jpg')"></div>
+            <h2><span id="name-tv2" class="crown-effect"></span></h2>
+            <p class="role"><span id="role-tv2"></span></p>
+
+            <div class="badges">
+                <span class="badge">Lãnh đạo</span>
+                <span class="badge">Chiến thuật</span>
+                <span class="badge">Tuyển quân</span>
+            </div>
+        </div>
+
+    </section>
+
+    <a id="backButton" href="trangchu.html">Quay lại trang chủ</a>
+</main>
 
 <script>
-// Preloader & show content
-setTimeout(() => {
-    document.getElementById('preloader').classList.add('remove');
-    document.querySelector('.main-content').classList.add('show');
-}, 3400);
+const textToType = "Quản Trị Quân Đoàn";
 
-// Typing title
-setTimeout(() => {
-    const title = "QUẢN TRỊ QUÂN ĐOÀN";
-    let i = 0;
-    const el = document.getElementById("typing-title");
-    const type = () => { if (i < title.length) { el.textContent += title.charAt(i++); setTimeout(type, 120); } };
-    type();
-}, 3600);
+const memberData = [
+    { id: "name-trung", text: "(TF.Kuronami )", speed: 80 },
+    { id: "role-trung", text: "Chỉ huy N2", speed: 60 }, 
+    { id: "name-tv2", text: " (TF.Huy )", speed: 80 },
+    { id: "role-tv2", text: "Chỉ huy N1", speed: 60 }, 
+];
 
-// Typing tên + role
-const data = [ {id:"name-trung", text:"(TF.Kuronami)"}, {id:"role-trung", text:"Chỉ huy N2"}, {id:"name-tv2", text:"(TF.Huy)"}, {id:"role-tv2", text:"Chỉ huy N1"} ];
-(async () => {
-    while(true) {
-        for (let item of data) {
-            let e = document.getElementById(item.id);
-            e.textContent = "";
-            for (let c of item.text) { e.textContent += c; await new Promise(r => setTimeout(r, 90)); }
-            await new Promise(r => setTimeout(r, 2200));
+function typeWriterEffect(id, text, speed) {
+    return new Promise(resolve => {
+        const el = document.getElementById(id);
+        el.classList.add("typing-member");
+        let i = 0;
+        el.textContent = "";
+        function type() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                el.classList.remove("typing-member");
+                el.classList.add("typing-done");
+                resolve();
+            }
+        }
+        type();
+    });
+}
+
+async function runMemberLoop() {
+    while (true) {
+        for (const m of memberData) {
+            await typeWriterEffect(m.id, m.text, m.speed);
         }
         await new Promise(r => setTimeout(r, 5000));
+        memberData.forEach(m => document.getElementById(m.id).textContent = "");
     }
-})();
-
-// Chỉ bật particle + scanline trên màn hình lớn (tự động detect)
-if (window.innerWidth >= 768) {
-    // Particle nhẹ (chỉ 22 cái)
-    for (let i = 0; i < 22; i++) {
-        const p = document.createElement('span');
-        const size = Math.random() * 4 + 2;
-        const duration = Math.random() * 25 + 25;
-        const delay = Math.random() * 15;
-        p.style.width = p.style.height = size + 'px';
-        p.style.left = Math.random() * 100 + 'vw';
-        p.style.animationDuration = duration + 's';
-        p.style.animationDelay = delay + 's';
-        p.style.opacity = Math.random() * 0.6 + 0.3;
-        document.querySelector('.particles').appendChild(p);
-    }
-    document.querySelector('.particles').classList.add('active');
-    document.querySelector('.scanline').classList.add('active');
 }
+
+function animateCards() {
+    document.querySelectorAll(".card").forEach((c, i) => {
+        c.style.animationDelay = `${i * 0.15 + 0.5}s`;
+        c.classList.add("card-enter");
+    });
+}
+
+const stars = [];
+function initStarfall() {
+    const container = document.getElementById("starfall-container");
+    const numStars = 60;
+    for (let i = 0; i < numStars; i++) {
+        const s = document.createElement("div");
+        s.classList.add("falling-star");
+        const size = Math.random() * 4 + 2;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        s.style.transform = `translate(${x}px, ${y}px)`;
+        container.appendChild(s);
+        stars.push({ element: s, x, y, speed: Math.random() * 1 + 0.5, drift: (Math.random()-0.5)*0.3, size });
+    }
+}
+
+function updateStarfall() {
+    stars.forEach(s => {
+        s.y += s.speed;
+        s.x += s.drift;
+        if (s.y > window.innerHeight) {
+            s.y = -s.size;
+            s.x = Math.random() * window.innerWidth;
+        }
+        s.element.style.transform = `translate(${s.x}px, ${s.y}px)`;
+    });
+    requestAnimationFrame(updateStarfall);
+}
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("keydown", e => { if(e.key==="F12") e.preventDefault(); });
+
+window.onload = async function () {
+    await typeWriterEffect("typing-title", textToType, 100);
+    runMemberLoop();
+    initStarfall();
+    updateStarfall();
+    animateCards();
+};
 </script>
+
 </body>
 </html>
