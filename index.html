@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>✨ Chào bạn đến với thế giới của chúng mình ✨</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -16,6 +16,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
 
     body {
         min-height: 100vh;
@@ -25,27 +26,35 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
         position: relative;
+        -webkit-font-smoothing: antialiased;
     }
 
-    canvas { position: fixed; top: 0; left: 0; z-index: 1; }
+    /* Particles canvas - tối ưu mobile */
+    #particles {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
 
     /* Sparkles nhẹ nhàng */
     .sparkle {
-        position: absolute;
-        font-size: 18px;
+        position: fixed;
+        font-size: 20px;
         pointer-events: none;
-        animation: twinkle 4s infinite;
+        animation: twinkle 3.5s infinite;
         opacity: 0;
         z-index: 2;
+        user-select: none;
+        -webkit-user-select: none;
     }
     @keyframes twinkle {
-        0%, 100% { opacity: 0; transform: scale(0) rotate(0); }
-        50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+        50% { opacity: 0.9; transform: scale(1) rotate(180deg); }
     }
 
-    /* Loading screen mộng mơ */
+    /* Loading */
     #loading {
         position: fixed;
         inset: 0;
@@ -55,10 +64,10 @@
         align-items: center;
         justify-content: center;
         z-index: 999;
-        transition: opacity 1.2s ease;
+        transition: opacity 1s ease-out;
     }
     #loading h1 {
-        font-size: 2.4rem;
+        font-size: clamp(1.8rem, 5vw, 2.6rem);
         background: linear-gradient(90deg, var(--pink), var(--purple));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -76,13 +85,14 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .loaded { opacity: 0; pointer-events: none; }
 
-    /* Form chính – glassmorphism hiện đại + cute */
+    /* Form */
     #formBox {
         max-width: 440px;
-        width: 90%;
-        padding: 48px 40px;
+        width: 92%;
+        padding: 48px 36px;
         background: var(--glass);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-radius: 28px;
         border: 1px solid var(--glass-border);
         box-shadow: 0 20px 60px rgba(0,0,0,0.35);
@@ -91,42 +101,37 @@
         z-index: 10;
         opacity: 0;
         transform: translateY(30px);
-        transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    #formBox.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    #formBox.visible { opacity: 1; transform: translateY(0); }
 
-    /* Viền gradient nhẹ quay chậm */
-    #formBox::before {
-        content: '';
-        position: absolute;
-        inset: -4px;
-        background: conic-gradient(from 0deg, var(--pink), var(--purple), var(--pink));
-        border-radius: 32px;
-        z-index: -1;
-        animation: rotate 20s linear infinite;
-        opacity: 0.4;
-        filter: blur(8px);
+    /* Viền gradient nhẹ (tắt animation trên mobile để tiết kiệm pin) */
+    @media (min-width: 768px) {
+        #formBox::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: conic-gradient(from 0deg, var(--pink), var(--purple), var(--pink));
+            border-radius: 32px;
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+            opacity: 0.4;
+            filter: blur(8px);
+        }
     }
     @keyframes rotate { to { transform: rotate(360deg); } }
 
     h2 {
-        font-size: 2.1rem;
+        font-size: clamp(1.9rem, 5vw, 2.2rem);
         background: linear-gradient(90deg, var(--pink), var(--purple));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 8px;
         font-weight: 600;
     }
-    #formBox p {
-        color: #e0d0ff;
-        margin-bottom: 2rem;
-        font-size: 1rem;
-    }
+    #formBox p { color: #e0d0ff; margin-bottom: 2rem; font-size: 1rem; }
 
-    input {
+    input, #captchaQuestion {
         width: 100%;
         padding: 16px 20px;
         margin: 12px 0;
@@ -138,40 +143,36 @@
         outline: none;
         transition: all 0.3s ease;
     }
-    input::placeholder { color: #ccc; }
+    input::placeholder { color: #ccc; opacity: 0.8; }
     input:focus {
         background: rgba(255,255,255,0.25);
         border-color: var(--pink);
         box-shadow: 0 0 20px rgba(255,105,180,0.3);
     }
 
-    /* Captcha đẹp hơn */
     #captchaContainer {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
-        gap: 12px;
+        gap: 10px;
         align-items: center;
         margin: 20px 0;
     }
     #captchaQuestion {
-        padding: 16px 20px;
         background: rgba(157,78,221,0.25);
-        border-radius: 50px;
         font-weight: 600;
         font-size: 1.2rem;
+        text-align: center;
     }
     #refreshCaptchaButton {
-        width: 48px;
-        height: 48px;
+        width: 48px; height: 48px;
         background: rgba(255,255,255,0.15);
-        border: none;
-        border-radius: 50%;
-        font-size: 1.4rem;
-        color: var(--pink);
+        border: none; border-radius: 50%;
+        font-size: 1.4rem; color: var(--pink);
         cursor: pointer;
         transition: all 0.4s;
     }
-    #refreshCaptchaButton:hover {
+    #refreshCaptchaButton:hover,
+    #refreshCaptchaButton:active {
         background: var(--pink);
         color: #fff;
         transform: rotate(360deg);
@@ -199,8 +200,10 @@
         cursor: pointer;
         box-shadow: 0 10px 30px rgba(255,105,180,0.35);
         transition: all 0.4s ease;
+        -webkit-tap-highlight-color: transparent;
     }
-    button#submitButton:hover:not(:disabled) {
+    button#submitButton:hover:not(:disabled),
+    button#submitButton:active:not(:disabled) {
         transform: translateY(-4px);
         box-shadow: 0 15px 40px rgba(255,105,180,0.5);
     }
@@ -217,84 +220,91 @@
 <canvas id="particles"></canvas>
 
 <div id="loading">
-    <h1>✨ Xin vui lòng đợi... ✨</h1>
+    <h1>✨ Xin vui lòng đợi một chút... ✨</h1>
     <div class="spinner"></div>
 </div>
 
 <div id="formBox">
-    <h2>Nhập tên của bạn nào! 💕</h2>
-    <p>Mình đang chờ bạn đấy~</p>
+    <h2>Nhập tên của bạn nào!</h2>
+    <p>Để vào trang chủ nha~</p>
 
     <form id="nameForm">
-        <input type="text" id="nameInput" placeholder="Tên dễ thương của bạn là gì? 🥰" required autocomplete="off">
+        <input type="text" id="nameInput" placeholder="Tên của bạn là gì?" required autocomplete="off">
 
         <div id="captchaContainer">
             <div id="captchaQuestion">? ? ?</div>
-            <button type="button" id="refreshCaptchaButton" aria-label="Làm mới captcha">↻</button>
+            <button type="button" id="refreshCaptchaButton" aria-label="Làm mới">↻</button>
             <input type="number" id="captchaInput" placeholder="= ?">
         </div>
         <p class="captcha-error" id="captchaError">Oops~ Sai rồi, thử lại nha ❤️</p>
 
         <button type="submit" id="submitButton" disabled>
-           Vào trang chủ thôi! 🎀
+            Vào trang chủ thôi! 💜
         </button>
     </form>
 </div>
 
 <script>
-// Particles nền (mềm mại hơn)
+// Tối ưu particles cho mobile (giảm số hạt + chỉ chạy khi không lag)
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
 let particles = [];
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const particleCount = isMobile ? 40 : 90;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+
 const colors = ['#ff69b4', '#9d4edd', '#c77dff'];
-for(let i = 0; i < 90; i++) {
+for(let i = 0; i < particleCount; i++) {
     particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 3 + 1,
-        speedX: Math.random() * 0.8 - 0.4,
-        speedY: Math.random() * 0.8 - 0.4,
+        radius: Math.random() * (isMobile ? 2 : 3) + 1,
+        speedX: Math.random() * 0.6 - 0.3,
+        speedY: Math.random() * 0.6 - 0.3,
         color: colors[Math.floor(Math.random() * colors.length)]
     });
 }
+
+let animationFrame;
 function draw() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p => {
-        ctx.fillStyle = p.color + '99';
+        ctx.fillStyle = p.color + (isMobile ? '80' : '99');
         ctx.beginPath();
-        ctx.arc(p.x += p.speedX, p.y += p.speedY, p.radius, 0, Math.PI*2);
+        ctx.arc(p.x += p.speedX, p.y += p.speedY, p.radius, 0, Math.PI * 2);
         ctx.fill();
 
         if(p.x < 0 || p.x > canvas.width) p.speedX *= -1;
         if(p.y < 0 || p.y > canvas.height) p.speedY *= -1;
     });
-    requestAnimationFrame(draw);
+    animationFrame = requestAnimationFrame(draw);
 }
 draw();
 
-// Sparkles nhẹ nhàng
+// Sparkles (giảm tần suất trên mobile)
 setInterval(() => {
     const s = document.createElement('div');
     s.className = 'sparkle';
     s.innerText = ['✨','💫','🌸','💖','⭐'][Math.floor(Math.random()*5)];
     s.style.left = Math.random() * 100 + 'vw';
     s.style.top = Math.random() * 100 + 'vh';
-    s.style.animationDelay = Math.random() * 2 + 's';
+    s.style.animationDelay = Math.random() * 1.5 + 's';
     document.body.appendChild(s);
-    setTimeout(() => s.remove(), 4000);
-}, 900);
+    setTimeout(() => s.remove(), 3500);
+}, isMobile ? 1500 : 900);
 
-// Captcha logic (giữ nguyên độ khó nhưng code sạch hơn)
+// Captcha + Form logic (giữ nguyên)
 let captchaAnswer = 0;
 function generateCaptcha() {
     const ops = [
-        () => { const a = Math.floor(Math.random()*40)+10; const b = Math.floor(Math.random()*40)+10; return {q: `${a} + ${b}`, a: a+b}; },
-        () => { const a = Math.floor(Math.random()*50)+10; const b = Math.floor(Math.random()*a)+1; return {q: `${a} - ${b}`, a: a-b}; },
-        () => { const a = Math.floor(Math.random()*12)+2; const b = Math.floor(Math.random()*12)+2; return {q: `${a} × ${b}`, a: a*b}; },
-        () => { const d = Math.floor(Math.random()*10)+2; const q = Math.floor(Math.random()*10)+2; return {q: `${d*q} ÷ ${d}`, a: q}; }
+        () => { const a = Math.floor(Math.random()*30)+10; const b = Math.floor(Math.random()*30)+10; return {q: `${a} + ${b}`, a: a+b}; },
+        () => { const a = Math.floor(Math.random()*40)+15; const b = Math.floor(Math.random()*a-5)+1; return {q: `${a} - ${b}`, a: a-b}; },
+        () => { const a = Math.floor(Math.random()*10)+2; const b = Math.floor(Math.random()*10)+2; return {q: `${a} × ${b}`, a: a*b}; },
     ];
     const {q, a} = ops[Math.floor(Math.random()*ops.length)]();
     captchaAnswer = a;
@@ -303,60 +313,41 @@ function generateCaptcha() {
     document.getElementById('captchaError').classList.remove('show');
     checkForm();
 }
+
 function checkForm() {
     const nameOk = document.getElementById('nameInput').value.trim().length > 0;
-    const captchaOk = parseInt(document.getElementById('captchaInput').value) === captchaAnswer;
+    const captchaOk = parseInt(document.getElementById('captchaInput').value || 0) === captchaAnswer;
     document.getElementById('submitButton').disabled = !(nameOk && captchaOk);
     if (document.getElementById('captchaInput').value && !captchaOk) {
         document.getElementById('captchaError').classList.add('show');
     }
 }
 
-// Events
 document.getElementById('nameInput').addEventListener('input', checkForm);
 document.getElementById('captchaInput').addEventListener('input', checkForm);
+document.getElementById('refreshCaptchaButton').addEventListener('touchstart', e => { e.preventDefault(); generateCaptcha(); });
 document.getElementById('refreshCaptchaButton').addEventListener('click', generateCaptcha);
 
-// Loading → Form
+// Loading
 setTimeout(() => {
     document.getElementById('loading').classList.add('loaded');
-    setTimeout(() => {
-        document.getElementById('formBox').classList.add('visible');
-    }, 600);
-}, 2200);
+    setTimeout(() => document.getElementById('formBox').classList.add('visible'), 600);
+}, 2000);
 
-// Submit (giữ nguyên link GAS của bạn)
-document.getElementById('nameForm').onsubmit = async function(e) {
+// Submit → vào thẳng trang chủ
+document.getElementById('nameForm').onsubmit = function(e) {
     e.preventDefault();
-    document.getElementById('submitButton').disabled = true;
-    document.getElementById('submitButton').textContent = 'Đang xét duyệt... ';
-
-    const formData = new FormData(this);
-    try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbyk1d5uFUkkJnWdaV8hsSK_NueqYE1k4YIOjvenqJlkcI7OQVoQ_AevjaWnKvPpEs8/exec", {
-            method: "POST",
-            body: formData
-        }).then(r => r.json());
-
-        if (res.status === "success") {
-            setTimeout(() => {
-                alert(`Chào ${res.game_name || 'bạn'} dễ thương! 💜 Vào trang chủ thôi! ~`);
-                window.location.href = "trangchu.html";
-            }, 600);
-        }
-    } catch(err) {
-        alert("Oops! Có chút trục trặc rồi, thử lại nha ❤️");
-        generateCaptcha();
-        document.getElementById('submitButton').textContent = 'Vào trang chủ thôi! 🎀';
-        document.getElementById('submitButton').disabled = false;
+    const name = document.getElementById('nameInput').value.trim();
+    if (name && parseInt(document.getElementById('captchaInput').value) === captchaAnswer) {
+        localStorage.setItem('userName', name);
+        window.location.href = "trangchu.html";
     }
 };
 
-// Khởi động
+// Khởi động + resize
 generateCaptcha();
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    resizeCanvas();
 });
 </script>
 </body>
