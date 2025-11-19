@@ -195,7 +195,7 @@ form.addEventListener('submit', async e=>{
 
     submitBtn.disabled=true; submitBtn.innerText='⏳ ĐANG GỬI...';
     try{
-        const response=await fetch('https://script.google.com/macros/s/AKfycbyk1d5uFUkkJnWdaV8hsSK_NueqYE1k4YIOjvenqJlkcI7OQVoQ_AevjaWnKvPpEs8/exec',{method:'POST',body:fd});
+        const response=await fetch('https://script.google.com/macros/s/AKfycbx5PxQWi78Y6xO4m4_TR4awwOar0xenchvz4BoMT_pN2wtm0dipPX3qJdFE6usXK8Uu/exec',{method:'POST',body:fd});
         const res=await response.json();
         submitBtn.disabled=false; submitBtn.innerText=originalText;
         console.log(res); // log debug
@@ -226,4 +226,3 @@ window.addEventListener('resize',resizeCanvas);
 
 </body>
 </html>
-
