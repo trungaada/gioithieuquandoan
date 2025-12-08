@@ -336,6 +336,48 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
   color: red;
   transform: scale(1.2);
 }
+#tf-chat-messages {
+  overflow-y: auto;     /* Bật scroll */
+  -webkit-overflow-scrolling: touch;  /* Cuộn mượt trên cảm ứng */
+  scroll-behavior: smooth;            /* Cuộn mượt trên web */
+}
+
+
+
+/* === LOADING BOT ĐANG GÕ === */
+.tf-typing {
+  color: #ffd700;
+  margin-bottom: 10px;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+}
+
+.tf-typing span {
+  height: 8px;
+  width: 8px;
+  margin: 0 2px;
+  background: #ffd700;
+  border-radius: 50%;
+  display: inline-block;
+  animation: typing 1.2s infinite ease-in-out;
+}
+
+.tf-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.tf-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-4px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.3; }
+}
+
+
 
 </style>
 </head>
@@ -539,99 +581,103 @@ window.onload=function(){
 };
 
 
-// ===== CHATBOT LOGIC =====
-const tfBtn = document.getElementById("tf-chat-btn");
-const tfBox = document.getElementById("tf-chat-box");
-const tfMessages = document.getElementById("tf-chat-messages");
+/// ===== CHATBOT LOGIC =====
+  const tfBtn = document.getElementById("tf-chat-btn");
+  const tfBox = document.getElementById("tf-chat-box");
+  const tfMessages = document.getElementById("tf-chat-messages");
 
-tfBtn.onclick = () => {
-  tfBox.style.display = tfBox.style.display === "flex" ? "none" : "flex";
-};
+  tfBtn.onclick = () => {
+    if (tfBox.classList.contains("show")) {
+      tfBox.classList.remove("show");
+      tfBox.style.display = "none";
+    } else {
+      tfBox.style.display = "flex";
+      tfBox.classList.add("show");
+      showWelcomeChat(); // ✅ hiện hướng dẫn trong khung chat
+    }
+  };
 
-async function tfSend() {
-  const input = document.getElementById("tf-input");
-  const text = input.value.trim();
-  if (!text) return;
+  async function tfSend() {
+    const input = document.getElementById("tf-input");
+    const text = input.value.trim();
+    if (!text) return;
 
-  tfMessages.innerHTML += `<div class="tf-user"><b>Bạn:</b> ${text}</div>`;
-  input.value = "";
-  tfMessages.scrollTop = tfMessages.scrollHeight;
-
-  try {
-    const res = await fetch("https://tfqd2.vercel.app/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text })
-    });
-
-    const data = await res.json();
-    tfMessages.innerHTML += `<div class="tf-bot"><b>TF:</b> ${data.reply}</div>`;
+    // Hiển thị tin nhắn người dùng
+    tfMessages.innerHTML += `<div class="tf-user"><b>Bạn:</b> ${text}</div>`;
+    input.value = "";
     tfMessages.scrollTop = tfMessages.scrollHeight;
 
-  } catch (e) {
-    tfMessages.innerHTML += `<div style="color:red">Lỗi kết nối server</div>`;
+    // ✅ Thêm loading
+    const loadingId = `loading-${Date.now()}`;
+    tfMessages.innerHTML += `<div class="tf-bot" id="${loadingId}"><b>TF:</b> <i>Đang suy nghĩ...</i></div>`;
+    tfMessages.scrollTop = tfMessages.scrollHeight;
+
+    try {
+      const res = await fetch("https://tfqd2.vercel.app/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await res.json();
+
+      // Xóa loading và thêm phản hồi thật
+      const loadingDiv = document.getElementById(loadingId);
+      if (loadingDiv) loadingDiv.remove();
+
+      tfMessages.innerHTML += `<div class="tf-bot"><b>TF:</b> ${data.reply}</div>`;
+      tfMessages.scrollTop = tfMessages.scrollHeight;
+
+    } catch (e) {
+      const loadingDiv = document.getElementById(loadingId);
+      if (loadingDiv) loadingDiv.remove();
+      tfMessages.innerHTML += `<div style="color:red">Lỗi kết nối server</div>`;
+    }
   }
-}
-// ✅ ENTER ĐỂ GỬI
-const tfInput = document.getElementById("tf-input");
-tfInput.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    tfSend();
+
+  // ✅ ENTER ĐỂ GỬI
+  const tfInput = document.getElementById("tf-input");
+  tfInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") tfSend();
+  });
+
+  // ✅ FULLSCREEN CHAT
+  const fullscreenBtn = document.getElementById("tf-fullscreen-btn");
+  fullscreenBtn.onclick = () => {
+    tfBox.classList.toggle("fullscreen");
+  };
+
+  // ===== LƯU Ý CHAT =====
+  const chatNote = document.getElementById("tf-chat-note");
+  const chatNoteClose = document.getElementById("tf-note-close");
+
+  chatNoteClose.onclick = () => {
+    chatNote.style.display = "none";
+    localStorage.setItem("tf_hide_note", "1");
+  };
+
+  if (localStorage.getItem("tf_hide_note") === "1") {
+    chatNote.style.display = "none";
   }
-});
 
-// ✅ FULLSCREEN CHAT
-const fullscreenBtn = document.getElementById("tf-fullscreen-btn");
+  // ===== XÓA NỘI DUNG CHAT =====
+  const clearChatBtn = document.getElementById("tf-clear-chat");
+  clearChatBtn.onclick = () => {
+    const confirmClear = confirm("⚠️ Bạn có chắc muốn xóa toàn bộ nội dung chat không?");
+    if (!confirmClear) return;
+    tfMessages.innerHTML = "";
+  };
 
-fullscreenBtn.onclick = () => {
-  tfBox.classList.toggle("fullscreen");
-};
-// ===== LƯU Ý CHAT =====
-const chatNote = document.getElementById("tf-chat-note");
-const chatNoteClose = document.getElementById("tf-note-close");
-
-// Tắt thủ công
-chatNoteClose.onclick = () => {
-  chatNote.style.display = "none";
-  localStorage.setItem("tf_hide_note", "1");
-};
-
-// Nếu đã tắt trước đó thì không hiện lại
-if (localStorage.getItem("tf_hide_note") === "1") {
-  chatNote.style.display = "none";
-}
-// ===== XÓA NỘI DUNG CHAT =====
-const clearChatBtn = document.getElementById("tf-clear-chat");
-
-clearChatBtn.onclick = () => {
-  const confirmClear = confirm("⚠️ Bạn có chắc muốn xóa toàn bộ nội dung chat không?");
-  if (!confirmClear) return;
-
-  tfMessages.innerHTML = "";
-};
-// ✅ Tin nhắn hướng dẫn mặc định khi mở chat
-function showWelcomeChat() {
-  if (tfMessages.innerHTML.trim() === "") {
-    tfMessages.innerHTML = `
-      <div class="tf-bot">
-        <b>TF:</b> 💬 Bạn có thể <b>gõ T.Việt</b> để chat Tiếng Việt!<br>
-      </div>
-    `;
+  // ✅ Tin nhắn hướng dẫn mặc định khi mở chat
+  function showWelcomeChat() {
+    if (tfMessages.innerHTML.trim() === "") {
+      tfMessages.innerHTML = `
+        <div class="tf-bot">
+          <b>TF:</b> 💬 Bạn có thể <b>gõ T.Việt</b> để chat Tiếng Việt!<br>
+        </div>
+      `;
+    }
   }
-}
-
-// Gọi khi mở chat
-tfBtn.onclick = () => {
-  if (tfBox.classList.contains("show")) {
-    tfBox.classList.remove("show");
-    tfBox.style.display = "none";
-  } else {
-    tfBox.style.display = "flex";
-    tfBox.classList.add("show");
-    showWelcomeChat(); // ✅ hiện hướng dẫn trong khung chat
-  }
-};
-
 </script>
 </script>
 </body>
