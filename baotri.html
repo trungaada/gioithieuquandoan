@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Trang Web Đang Bảo Trì</title>
+
+<style>
+:root{
+    --main:#00d4ff;
+    --dark:#071a2f;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* BODY */
+body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    color:#fff;
+    background:
+        linear-gradient(rgba(0,0,40,.65),rgba(0,0,40,.65)),
+        url('https://static.vecteezy.com/system/resources/previews/023/417/435/non_2x/digital-technology-and-engineering-concept-with-gears-and-electronic-circuit-board-and-glowing-particle-on-dark-blue-background-illustration-vector.jpg');
+    background-size:cover;
+    background-position:center;
+}
+
+/* CONTAINER */
+.container{
+    width:100%;
+    max-width:720px;
+    padding:clamp(30px,5vw,60px);
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+
+/* ===== GEARS ===== */
+.gears{
+    position:relative;
+    height:220px;
+    margin-bottom:30px;
+}
+
+/* GEAR CHUNG */
+.gear{
+    --size:120px;
+    width:var(--size);
+    height:var(--size);
+    position:absolute;
+    border-radius:50%;
+
+    /* RĂNG */
+    background:
+        radial-gradient(circle at center, var(--dark) 30%, transparent 31%),
+        repeating-conic-gradient(
+            #00eaff 0deg 12deg,
+            #007fa8 12deg 24deg
+        );
+
+    /* VIỀN NGOÀI */
+    outline:4px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.7),
+        inset 0 0 6px rgba(255,255,255,.3),
+        0 0 35px rgba(0,212,255,.6);
+
+    animation:spin 6s linear infinite;
+}
+
+/* TRỤ GIỮA */
+.gear::after{
+    content:'';
+    position:absolute;
+    inset:42%;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,#2c5f9e,#071a2f);
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,.9),
+        0 0 8px rgba(255,255,255,.35);
+}
+
+/* VỊ TRÍ */
+.g1{
+    left:50%;
+    top:70px;
+    transform:translateX(-50%);
+}
+.g2{
+    --size:90px;
+    left:calc(50% - 125px);
+    top:20px;
+    animation:spin-reverse 6s linear infinite;
+}
+.g3{
+    --size:70px;
+    left:calc(50% + 70px);
+    top:120px;
+    animation:spin-reverse 6s linear infinite;
+}
+
+/* ANIMATION */
+@keyframes spin{
+    to{transform:translateX(-50%) rotate(360deg)}
+}
+@keyframes spin-reverse{
+    to{transform:rotate(-360deg)}
+}
+
+/* TEXT */
+h1{
+    font-size:clamp(28px,5vw,44px);
+    margin-bottom:18px;
+    color:var(--main);
+    text-shadow:0 0 14px rgba(0,212,255,.7);
+}
+p{
+    font-size:clamp(16px,2.8vw,20px);
+    line-height:1.7;
+    margin-bottom:14px;
+    opacity:.95;
+}
+
+/* BUTTON */
+.btn-home{
+    display:inline-block;
+    margin-top:26px;
+    padding:14px 34px;
+    border-radius:50px;
+    background:linear-gradient(45deg,var(--main),#0099cc);
+    color:#fff;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 10px 25px rgba(0,212,255,.45);
+    transition:.3s;
+}
+.btn-home:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(0,212,255,.7);
+}
+
+/* FOOTER */
+footer{
+    margin-top:24px;
+    font-size:14px;
+    opacity:.7;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .gears{height:170px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="gears">
+        <div class="gear g1"></div>
+        <div class="gear g2"></div>
+        <div class="gear g3"></div>
+    </div>
+
+    <h1>Trang Đang Bảo Trì</h1>
+    <p>Chúng tôi đang nâng cấp hệ thống để mang đến trải nghiệm tốt hơn.</p>
+    <p>Vui lòng quay lại sau khi bảo trì xong.</p>
+    <p>Cảm ơn sự thông cảm của bạn!</p>
+
+    <a href="trangchu.html" class="btn-home">Quay về Trang Chủ</a>
+
+    <footer>© 2025 - Quân Đoàn TitanForce</footer>
+
+</div>
+
+</body>
+</html>
