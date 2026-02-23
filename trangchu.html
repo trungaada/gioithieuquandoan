@@ -410,13 +410,16 @@ ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
   </div>
 
   <!-- KHUNG CHAT -->
-  <div id="tf-chat-messages"></div>
+ <div id="tf-chat-messages">
+  <div class="tf-bot">
+    <b>TF:</b> 🚧 Chatbot hiện đang <b>BẢO TRÌ</b>.<br>
+    ⏳ Vui lòng quay lại sau nhé!
+  </div>
+</div>
 
   <!-- Ô NHẬP -->
-  <div id="tf-chat-input">
-    <input id="tf-input" placeholder="Nhập tin nhắn..." />
-    <button onclick="tfSend()">Gửi</button>
-  </div>
+  <input id="tf-input" placeholder="Chatbot đang bảo trì..." disabled />
+<button disabled>Gửi</button>
 
 </div>
 
@@ -698,6 +701,4 @@ window.onload=function(){
 
  
     
-
-
 
