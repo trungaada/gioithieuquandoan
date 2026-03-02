@@ -51,13 +51,37 @@ h1:hover {
 p { color:var(--text-muted); margin-bottom:20px; text-align:center; }
 
 .buttons {
-  display:flex; justify-content:center; flex-wrap:wrap;
-  gap:12px; margin-bottom:20px;
+  position: sticky;
+  top: 10px;
+  z-index: 5;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  background: rgba(22,30,47,0.85);
+  backdrop-filter: blur(6px);
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 10px rgba(255,61,0,0.4);
+
+  margin-bottom: 20px;
 }
 button.group-btn {
-  background:var(--accent); color:#fff; border:none; border-radius:8px;
-  padding:10px 18px; font-weight:700; font-size:0.9rem;
-  cursor:pointer; text-transform:uppercase; transition:0.3s;
+  flex: 1;
+  min-width: 120px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 8px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
 }
 button.group-btn:hover { background:#ff1744; transform:scale(1.05); box-shadow:0 4px 15px rgba(255,61,0,0.5); }
 button.group-btn:active { transform:scale(0.97); }
