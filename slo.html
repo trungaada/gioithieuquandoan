@@ -1,133 +1,293 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng ký SLO Free Fire</title>
-<style>
-:root {
-  --accent:#ff3d00;
-  --bg:#0f1724;
-  --card:#161e2f;
-  --text:#e6eef8;
-  --text-muted:#b3bcc8;
-}
-* { box-sizing:border-box; margin:0; padding:0; }
-html, body { width:100%; height:100%; font-family:'Montserrat',sans-serif; }
-body{
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  min-height:100vh; padding:20px;
-  background-image:url('logo.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
-  color:var(--text); position:relative;
-}
-body::before{ content:""; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:0; }
-.page-content{ width:100%; max-width:420px; display:flex; flex-direction:column; align-items:center; animation:fadeIn 0.8s ease-out forwards; opacity:0; animation-delay:0.3s; }
-h1{ font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase; margin-bottom:10px; font-size:2rem; text-align:center; z-index:1; }
-p{ color:var(--text-muted); margin-bottom:20px; font-size:1rem; text-align:center; z-index:1; }
-.buttons{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; z-index:1; }
-button.group-btn{ background:var(--accent); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-weight:700; font-size:0.9rem; cursor:pointer; transition:0.3s; }
-button.group-btn:hover{ background:#ff1744; transform:scale(1.05); }
-form{ width:100%; max-width:400px; background:rgba(22,30,47,0.85); padding:20px; border-radius:12px; border:2px solid var(--accent); box-shadow:0 0 15px rgba(255,61,0,0.4); text-align:left; display:none; z-index:1; }
-form.active{ display:block; }
-label{ display:block; margin-bottom:6px; color:#fff; font-weight:600; font-size:0.9rem; }
-input, select, textarea{ width:100%; padding:10px; margin-bottom:12px; border:2px solid #fff; border-radius:6px; font-size:0.9rem; transition: all 0.3s ease; }
-input:focus, select:focus, textarea:focus{ outline:none; animation: rainbowBorder 1.5s linear infinite; box-shadow:0 0 10px rgba(255,255,255,0.7); transform:scale(1.02); }
-button.submit-btn{ background:var(--accent); color:#fff; border:none; border-radius:8px; padding:12px 20px; font-weight:700; cursor:pointer; width:100%; font-size:1rem; transition:0.3s; }
-button.submit-btn:hover{ background:#ff1744; transform:scale(1.03); }
-.message{ text-align:center; margin-top:5px; min-height:24px; font-weight:bold; font-size:0.95rem; z-index:1; }
-.success{ color:#4CAF50; }
-.error{ color:#f44336; }
-.loading{ color:#ffeb3b; animation:blink 1s infinite; }
-@keyframes fadeIn{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-@keyframes rainbowBorder{ 0%{border-color:red;} 14%{border-color:orange;} 28%{border-color:yellow;} 42%{border-color:green;} 57%{border-color:cyan;} 71%{border-color:blue;} 85%{border-color:violet;} 100%{border-color:red;} }
-@keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;} }
-@media(max-width:480px){ .page-content{ max-width:360px; } form{ padding:15px; } h1{ font-size:1.5rem; } p{ font-size:0.95rem; } input, select, textarea{ font-size:0.85rem; padding:8px; } button.group-btn, button.submit-btn{ font-size:0.85rem; padding:8px 12px; } .buttons{ gap:8px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký SLO Free Fire | Gaming Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff3d00;
+            --secondary: #00e5ff;
+            --bg-dark: #0a0e17;
+            --card-bg: rgba(22, 30, 47, 0.8);
+            --text-main: #ffffff;
+            --text-dim: #b3bcc8;
+            --gradient: linear-gradient(135deg, #ff3d00 0%, #ff1744 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-dark) url('logo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Lớp phủ làm mờ nền */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, rgba(10,14,23,0.4) 0%, rgba(10,14,23,0.9) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 450px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        header { text-align: center; margin-bottom: 30px; }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 61, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .subtitle { color: var(--text-dim); font-size: 0.9rem; }
+
+        /* Nhóm nút bấm */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: var(--gradient);
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(255, 61, 0, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .nav-btn.active {
+            background: var(--gradient);
+            border-color: transparent;
+        }
+
+        /* Form Style */
+        form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            display: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        form.active { display: block; }
+
+        h2 { margin-bottom: 20px; font-size: 1.2rem; color: var(--secondary); text-align: center; }
+
+        .input-box { margin-bottom: 15px; }
+
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-dim); }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            filter: brightness(1.2);
+            letter-spacing: 1px;
+        }
+
+        /* Thông báo */
+        .message { margin-top: 15px; text-align: center; font-size: 0.9rem; min-height: 40px; }
+        .success { color: #00ff88; }
+        .error { color: #ff4444; }
+        .loading { color: var(--secondary); animation: pulse 1s infinite; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Mobile tối ưu */
+        @media (max-width: 400px) {
+            h1 { font-size: 1.7rem; }
+            form { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
-<div class="page-content">
-<h1>Đăng ký SLO Free Fire</h1>
-<p>Chọn nhóm muốn tham gia và điền thông tin!</p>
-<div class="buttons">
-  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Tử Chiến Kai</button>
-  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Tử Chiến Headshot</button>
-  <button class="group-btn" onclick="window.location.href='trangchu.html'">🔙 Trang Chủ</button>
-  <button class="group-btn" onclick="window.location.href='hotro.html'">🔙 Hỗ Trợ</button>
-</div>
 
-<form id="sinhTonForm">
-  <h2>🔥 Nhóm Tử Chiến Kai </h2>
-  <input type="hidden" name="entry.group" value="Sinh Tồn">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>Chế độ SLO:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn chế độ SLO --</option>
-    <option>Kai 2</option>
-    <option>Kai 5</option>
-  </select>
-  <label>Tên Facebook:</label><input type="text" name="entry.fb_name" required>
-  <label>Liên kết Facebook:</label><input type="url" name="entry.fb_link" placeholder="https://facebook.com/username" required>
-  <label>Khung thời gian:</label><input type="text" name="entry.time" placeholder="Ví dụ: 19h–22h" required>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
-  <div class="message"></div>
-</form>
+<div class="container">
+    <header>
+        <h1>SLO FREE FIRE</h1>
+        <p class="subtitle">Hệ thống đăng ký giải đấu chuyên nghiệp</p>
+    </header>
 
-<form id="soloForm">
-  <h2>⚡ Nhóm Tử Chiến Headshot</h2>
-  <input type="hidden" name="entry.group" value="Tử Chiến">
-  <label>Tên trong game:</label><input type="text" name="entry.name" required>
-  <label>Chế độ SLO:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn chế độ SLO --</option>
-    <option>Headshot Kai 2</option>
-    <option>Headshot Kai 5</option>
-  </select>
-  <label>Tên Facebook:</label><input type="text" name="entry.fb_name" required>
-  <label>Liên kết Facebook:</label><input type="url" name="entry.fb_link" placeholder="https://facebook.com/username" required>
-  <label>Khung thời gian:</label><input type="text" name="entry.time" placeholder="Ví dụ: 19h–22h" required>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
-  <div class="message"></div>
-  
-</form>
+    <div class="btn-group">
+        <button class="nav-btn" id="btn1" onclick="showForm('sinhTonForm', 'btn1')">TỬ CHIẾN KAI</button>
+        <button class="nav-btn" id="btn2" onclick="showForm('soloForm', 'btn2')">HEADSHOT</button>
+        <button class="nav-btn" onclick="window.location.href='trangchu.html'">TRANG CHỦ</button>
+        <button class="nav-btn" onclick="window.location.href='hotro.html'">HỖ TRỢ</button>
+    </div>
 
+    <form id="sinhTonForm">
+        <h2>🔥 TỬ CHIẾN KAI</h2>
+        <input type="hidden" name="entry.group" value="Sinh Tồn">
+        
+        <div class="input-box">
+            <label>Tên trong game</label>
+            <input type="text" name="entry.name" placeholder="Nhập tên nhân vật..." required>
+        </div>
+
+        <div class="input-box">
+            <label>Chế độ SLO</label>
+            <select name="entry.role" required>
+                <option value="" disabled selected>Chọn chế độ...</option>
+                <option>Kai 2</option>
+                <option>Kai 5</option>
+            </select>
+        </div>
+
+        <div class="input-box">
+            <label>Link Facebook cá nhân</label>
+            <input type="url" name="entry.fb_link" placeholder="https://facebook.com/..." required>
+        </div>
+
+        <div class="input-box">
+            <label>Khung giờ chơi (Ví dụ: 19h-22h)</label>
+            <input type="text" name="entry.time" placeholder="Thời gian bạn rảnh..." required>
+        </div>
+
+        <button type="submit" class="submit-btn">XÁC NHẬN ĐĂNG KÝ</button>
+        <div class="message"></div>
+    </form>
+
+    <form id="soloForm">
+        <h2>⚡ TỬ CHIẾN HEADSHOT</h2>
+        <input type="hidden" name="entry.group" value="Tử Chiến">
+        
+        <div class="input-box">
+            <label>Tên trong game</label>
+            <input type="text" name="entry.name" placeholder="Nhập tên nhân vật..." required>
+        </div>
+
+        <div class="input-box">
+            <label>Chế độ SLO</label>
+            <select name="entry.role" required>
+                <option value="" disabled selected>Chọn chế độ...</option>
+                <option>Headshot Kai 2</option>
+                <option>Headshot Kai 5</option>
+            </select>
+        </div>
+
+        <div class="input-box">
+            <label>Link Facebook cá nhân</label>
+            <input type="url" name="entry.fb_link" placeholder="https://facebook.com/..." required>
+        </div>
+
+        <div class="input-box">
+            <label>Khung giờ chơi</label>
+            <input type="text" name="entry.time" placeholder="Ví dụ: 20h - 23h" required>
+        </div>
+
+        <button type="submit" class="submit-btn">XÁC NHẬN ĐĂNG KÝ</button>
+        <div class="message"></div>
+    </form>
 </div>
 
 <script>
-function showForm(id){
-  document.getElementById('sinhTonForm').classList.remove('active');
-  document.getElementById('soloForm').classList.remove('active');
-  document.getElementById(id).classList.add('active');
-}
+    function showForm(id, btnId){
+        // Ẩn tất cả form
+        document.getElementById('sinhTonForm').classList.remove('active');
+        document.getElementById('soloForm').classList.remove('active');
+        
+        // Hiện form được chọn
+        document.getElementById(id).classList.add('active');
 
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzqzOtK752iSmqsHs45StEhOia-TTqaDjOTKIY6uKY0j0v0QB0TziRz8nqKhyrI77NzpQ/exec";
-
-['sinhTonForm','soloForm'].forEach(f => {
-  const form = document.getElementById(f);
-  const msg = form.querySelector('.message'); // Lấy message riêng cho từng form
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const data = new FormData(form);
-    msg.innerHTML = `<span class="loading">⏳ Đang gửi dữ liệu...</span>`;
-    try {
-      await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
-      msg.innerHTML = `<p class='success'>✅ Đăng kí thành công!<br>⚡ Thông tin của bạn đang được xét duyệt 😎</p>`;
-      form.reset();
-    } catch(err) {
-      console.error(err);
-      msg.innerHTML = `<p class='error'>❌ Gửi thất bại! Hãy thử lại.</p>`;
+        // Reset active buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        if(btnId) document.getElementById(btnId).classList.add('active');
     }
-  });
-});
 
-document.querySelectorAll('input, select').forEach(el => {
-  el.addEventListener('focus', () => {
-    const rect = el.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const top = rect.top + scrollTop - 100; 
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  });
-});
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzqzOtK752iSmqsHs45StEhOia-TTqaDjOTKIY6uKY0j0v0QB0TziRz8nqKhyrI77NzpQ/exec";
+
+    ['sinhTonForm','soloForm'].forEach(f => {
+        const form = document.getElementById(f);
+        const msg = form.querySelector('.message');
+        
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            const data = new FormData(form);
+            msg.innerHTML = `<span class="loading">⌛ Đang kết nối máy chủ...</span>`;
+            
+            try {
+                await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
+                msg.innerHTML = `<div class="success">✅ ĐĂNG KÝ THÀNH CÔNG!<br><small>Thông tin của bạn đã được ghi lại.</small></div>`;
+                form.reset();
+            } catch(err) {
+                msg.innerHTML = `<span class="error">❌ Lỗi kết nối! Vui lòng thử lại.</span>`;
+            }
+        });
+    });
 </script>
+
 </body>
 </html>
-
