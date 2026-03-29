@@ -1,704 +1,274 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Trang chủ Quân đoàn TF</title>
-<style>
-/* === RESET & BODY === */
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    -webkit-tap-highlight-color: transparent; 
-    -webkit-overflow-scrolling: touch; 
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TitanForce - Chiến Binh Thực Thụ</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF3C00;
+            --primary-light: #FF7F00;
+            --accent: #FFCC00;
+            --bg-dark: #0f0f0f;
+            --card-bg: rgba(30, 30, 30, 0.6);
+            --text-main: #f5f5f5;
+        }
 
-body { 
-    font-family: Arial, sans-serif; 
-    background: url("logo.jpg") no-repeat center center fixed;
-    background-size: cover;
-    background-color: rgba(0,0,0,0.5); /* overlay để chữ dễ đọc */
-    background-blend-mode: overlay;
-    color: #fff; 
-    font-size: 16px; 
-    line-height: 1.75;
-    min-height: 100vh; 
-    overflow-x: hidden;
-    text-align: justify;
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', sans-serif; scroll-behavior: smooth; }
 
-/* === MAIN FADE-IN === */
-@keyframes fadeIn { 
-    from { opacity:0; transform:translateY(20px); } 
-    to { opacity:1; transform:translateY(0); } 
-}
+        body {
+            background-image: 
+                radial-gradient(circle at center, rgba(30, 15, 10, 0.85) 0%, rgba(0, 0, 0, 0.98) 100%),
+                url("logo.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-main { 
-    opacity:0; 
-    text-align:center; 
-    padding:25px 20px; 
-    margin:70px auto 40px auto; 
-    max-width:650px; 
-    background-color: rgba(10,10,10,0.8); 
-    border-radius:10px; 
-    box-shadow:0 0 20px rgba(255,60,0,0.8); 
-    backdrop-filter: blur(5px); 
-    -webkit-backdrop-filter: blur(5px); 
-    transition: all 0.4s ease-in-out;
-}
+        /* Navbar với hiệu ứng chuyển màu khi cuộn */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 10px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 60, 0, 0.2);
+            transition: 0.4s ease;
+        }
+        nav.scrolled {
+            padding: 8px 5%;
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid var(--primary);
+        }
 
-body.fade-in main { 
-    opacity:1; 
-    animation: fadeIn 1.2s ease-out forwards; 
-}
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; font-weight: 500; position: relative; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--primary); transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
 
-/* === NAVBAR === */
-nav { 
-    position:fixed; 
-    top:0; left:0; width:100%; 
-    display:flex; 
-    align-items:center; 
-    justify-content:space-between; 
-    padding:5px 12px; 
-    z-index:100; 
-    background-image: linear-gradient(to right, #ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3); 
-    background-size:400% 100%; 
-    animation: rainbow-gradient 15s ease infinite; 
-    box-shadow:0 2px 8px rgba(204,0,0,0.7);
-}
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px; margin-top: 60px;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            background: linear-gradient(to right, #fff, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
 
-@keyframes rainbow-gradient { 
-    0%{background-position:0% 50%} 
-    50%{background-position:100% 50%} 
-    100%{background-position:0% 50%} 
-}
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-/* --- LOGO --- */
-/* --- LOGO HÌNH TRÒN --- */
-.logo {
-    width: 50px;
-    height: 50px; /* ép vuông */
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-}
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { font-size: 2.2rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        .section-title p { color: #aaa; margin-top: 5px; }
 
+        /* Statistics */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin-bottom: 80px; text-align: center;
+        }
+        .stat-item { 
+            background: var(--card-bg); padding: 30px; border-radius: 15px; 
+            border: 1px solid rgba(255,60,0,0.1); transition: 0.3s;
+        }
+        .stat-item:hover { border-color: var(--primary); background: rgba(255,60,0,0.05); }
+        .stat-item h3 { font-size: 2.8rem; color: var(--accent); margin-bottom: 5px; }
 
+        /* Grid Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 80px; }
+        .card {
+            background: var(--card-bg); padding: 35px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); transition: 0.4s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card h2 { color: var(--accent); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
 
-.logo:hover {
-    transform: scale(1.1);
-    border-color: #FF3C00; /* chỉ đổi màu viền thôi */
-    box-shadow: 0 0 15px #FFCC00, 0 0 25px rgba(255, 60, 0, 0.8);
-}
+        /* Image Gallery */
+        .gallery {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-bottom: 80px;
+        }
+        .gallery-item {
+            height: 250px; border-radius: 15px; overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1); position: relative;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .gallery-item:hover img { transform: scale(1.15) rotate(2deg); }
+        .gallery-item .caption {
+            position: absolute; bottom: 0; width: 100%; padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+            font-size: 0.9rem; text-align: center; transform: translateY(100%); transition: 0.3s;
+        }
+        .gallery-item:hover .caption { transform: translateY(0); }
 
+        /* Buttons */
+        .btn-join {
+            padding: 15px 45px; background: var(--primary); color: white;
+            text-decoration: none; border-radius: 50px; font-weight: bold; 
+            transition: 0.3s; display: inline-block; border: none; cursor: pointer;
+        }
+        .btn-join:hover { 
+            background: var(--primary-light); 
+            box-shadow: 0 0 25px rgba(255, 60, 0, 0.6);
+            transform: scale(1.05);
+        }
 
-/* --- MENU --- */
-.menu-toggle { display:flex; flex-direction:column; justify-content: space-around; width:28px; height:25px; cursor:pointer; }
-.menu-toggle span { display:block; height:3px; background-color:#fff; border-radius:2px; transition:all 0.3s ease; }
+        /* Footer */
+        footer { text-align: center; padding: 60px 20px; background: #050505; border-top: 1px solid rgba(255,60,0,0.1); }
+        .social-icons { display: flex; justify-content: center; gap: 25px; margin: 25px 0; }
+        .social-icons img { width: 40px; transition: 0.3s; filter: grayscale(0.5); }
+        .social-icons img:hover { transform: translateY(-8px) scale(1.2); filter: grayscale(0); }
 
-.nav-links { 
-    position:absolute; 
-    top:45px; right:12px; 
-    background-color: rgba(0,0,0,0.85); 
-    flex-direction:column; 
-    width:200px; 
-    gap:0; 
-    display:none; 
-    border-radius:0 0 8px 8px; 
-    box-shadow:0 0 10px rgba(255,60,0,0.8); 
-}
-.nav-links.active { display:flex; }
-.nav-links a { 
-    padding:10px; 
-    border-bottom:1px solid rgba(255,255,255,0.1); 
-    font-size:14px; 
-    font-weight:bold; 
-    text-decoration:none; 
-    color:white; 
-    background:linear-gradient(135deg,#CC0000,#400000); 
-    transition:all 0.3s ease; 
-}
-.nav-links a:hover { 
-    background:linear-gradient(135deg,#FF3C00,#FF7F00); 
-    transform:scale(1.03); 
-    box-shadow:0 0 10px #FF3C00; 
-}
-@media (min-width: 1025px) { .nav-links { right:12px; width:250px; } }
+        #chat-trigger {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px; background: var(--primary);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 1001; font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 60, 0, 0.3);
+            transition: 0.3s;
+        }
+        #chat-trigger:hover { transform: scale(1.1) rotate(15deg); }
 
-/* === HEADER / TITLES === */
-h1 { 
-    font-size: 32px; 
-    color: #FF3C00; 
-    margin-bottom: 25px; 
-    text-align: center; 
-    text-shadow: 0 0 8px #FF3C00,0 0 15px rgba(255,60,0,0.5); 
-}
-h2 { 
-    font-size: 22px; 
-    color: #FFCC00; 
-    margin: 25px 0 15px; 
-    border-bottom:2px solid #FFCC00; 
-    display:inline-block; 
-    padding-bottom:5px; 
-    text-align:center; 
-}
-
-/* === PARAGRAPHS & LIST === */
-p { font-size:16px; line-height:1.75; text-shadow:1px 1px 2px rgba(0,0,0,0.8); margin-bottom:18px; }
-ul { list-style:none; padding:0; text-align:left; max-width:500px; margin:15px auto; }
-ul li { padding:10px 0; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); font-size:16px; color:#fff; line-height:1.6; }
-ul li::before { content:"🚀"; margin-right:8px; color:#FF3C00; }
-
-/* === SLOGAN / TYPING TEXT === */
-.slogan { font-size:18px; margin:10px 0 25px 0; text-align:center; }
-.typing-text { border-right:3px solid #FFCC00; font-weight:bold; display:inline-block; white-space:nowrap; overflow:hidden; padding-right:5px; }
-
-/* === CTA BUTTONS & ICON SOCIAL === */
-.cta-button, .popup-btn { font-size:16px; padding:12px 24px; border-radius:8px; }
-.cta-buttons-group { display:flex; justify-content:center; align-items:center; gap:15px; margin-top:25px; flex-wrap:wrap; }
-
-.icon-social { 
-    width:60px; height:60px; 
-    border-radius:50%; 
-    background: rgba(255,255,255,0.1); 
-    border:2px solid rgba(255,100,0,0.5); 
-    backdrop-filter: blur(4px); 
-    display:flex; justify-content:center; align-items:center; 
-    box-shadow:0 0 10px rgba(255,60,0,0.5); 
-    transition:all 0.25s ease-in-out; 
-}
-.icon-social img { width:80%; height:80%; object-fit:contain; border-radius:10px; }
-.icon-social:hover { 
-    transform:translateY(-4px) scale(1.1); 
-    box-shadow:0 8px 20px rgba(255,80,0,0.9),0 0 30px rgba(255,160,0,0.7); 
-    border-color:#FFCC00; 
-    background: rgba(255,100,0,0.15); 
-}
-
-/* === FOOTER === */
-.tf-footer-cta p, .main-footer p { font-size:16px; line-height:1.6; text-align:center; }
-
-/* === NEON GLOW TF.KURONAMI === */
-.pulsating-author {
-    font-weight: bold;
-    font-size: 18px;
-    color: #FFCC00;
-    text-transform: uppercase;
-    animation: neon-glow 1.8s ease-in-out infinite alternate;
-}
-@keyframes neon-glow {
-    0% { text-shadow: 0 0 5px #FFCC00, 0 0 10px #FF9900; color:#FFCC00; }
-    50% { text-shadow: 0 0 15px #FFCC00, 0 0 25px #FF6600, 0 0 40px #FF3300; color:#FFD700; }
-    100% { text-shadow: 0 0 5px #FFCC00, 0 0 10px #FF9900; color:#FFCC00; }
-}
-
-/* === POPUP WELCOME === */
-#welcome-popup { 
-    position: fixed; top:0; left:0; width:100%; height:100%; 
-    background: rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; 
-    z-index:9999; opacity:0; visibility:hidden; transition:0.5s; 
-}
-#welcome-popup.show { opacity:1; visibility:visible; }
-.popup-content { 
-    background: rgba(15,15,15,0.95); 
-    padding:25px 30px; 
-    border-radius:15px; 
-    text-align:center; 
-    box-shadow:0 0 25px rgba(255,60,0,0.8); 
-    animation: popup-in 0.8s ease forwards; 
-    max-width:90%; width:380px; line-height:1.6; 
-}
-.popup-logo { width:70px; height:70px; margin-bottom:15px; border-radius:50%; box-shadow:0 0 12px #FF3C00; }
-.popup-content h2 { font-size:22px; line-height:1.4; color:#FF3C00; margin:10px 0 15px; text-shadow:0 0 8px #FF3C00; }
-.popup-content p { font-size:16px; line-height:1.6; color:#fff; margin:10px 0; text-align:center; word-wrap:break-word; }
-.popup-btn { 
-    background: linear-gradient(90deg,#FF3C00,#FFCC00); 
-    color:#fff; border:none; 
-    padding:10px 22px; border-radius:8px; 
-    cursor:pointer; font-weight:bold; font-size:16px; 
-    transition: all 0.3s ease; box-shadow:0 0 10px rgba(255,60,0,0.8); 
-    margin-top:20px; 
-}
-.popup-btn:hover { background: linear-gradient(90deg,#FFCC00,#FF3C00); transform:scale(1.05); }
-
-@keyframes popup-in { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
-
-/* === SAKURA === */
-.sakura { 
-    position:fixed; top:-10px; z-index:10; pointer-events:none; color:pink; opacity:0.9; 
-    animation:fall 10s linear infinite; 
-}
-@keyframes fall { 
-    to { transform:translateY(110vh) rotate(360deg); opacity:0.6; } 
-}
-
-
-
-
-/* ===== CHATBOT NÚT GÓC DƯỚI ===== */
-#tf-chat-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff3c00, #ffcc00);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 0 15px rgba(255,60,0,0.8);
-}
-
-#tf-chat-box {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  width: 320px;
-  height: 420px;
-  background: rgba(10,10,10,0.95);
-  border-radius: 12px;
-  display: none;
-  flex-direction: column;
-  z-index: 9999;
-  box-shadow: 0 0 20px rgba(255,60,0,0.8);
-  overflow: hidden;
-}
-
-#tf-chat-header {
-  background: linear-gradient(135deg,#ff3c00,#ffcc00);
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-}
-
-#tf-chat-messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  font-size: 14px;
-}
-
-.tf-user { color: #4ea1ff; margin-bottom: 6px; }
-.tf-bot { color: #ffd700; margin-bottom: 10px; }
-
-#tf-chat-input {
-  display: flex;
-  border-top: 1px solid #333;
-}
-
-#tf-chat-input input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-}
-
-#tf-chat-input button {
-  padding: 10px 15px;
-  border: none;
-  background: #ff3c00;
-  color: #fff;
-  cursor: pointer;
-}
-/* === FULLSCREEN CHAT === */
-#tf-chat-box.fullscreen {
-  width: 100vw !important;
-  height: 100vh !important;
-  bottom: 0 !important;
-  right: 0 !important;
-  border-radius: 0 !important;
-}
-/* === LƯU Ý CHAT === */
-#tf-chat-note {
-  background: linear-gradient(90deg, #ffcc00, #ff3c00);
-  color: #000;
-  font-size: 13px;
-  padding: 6px 10px;
-  text-align: center;
-  position: relative;
-}
-
-#tf-note-close {
-  position: absolute;
-  right: 8px;
-  top: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* === NÚT XÓA CHAT === */
-#tf-clear-chat:hover {
-  color: red;
-  transform: scale(1.2);
-}
-#tf-chat-messages {
-  overflow-y: auto;     /* Bật scroll */
-  -webkit-overflow-scrolling: touch;  /* Cuộn mượt trên cảm ứng */
-  scroll-behavior: smooth;            /* Cuộn mượt trên web */
-}
-
-
-
-/* === LOADING BOT ĐANG GÕ === */
-.tf-typing {
-  color: #ffd700;
-  margin-bottom: 10px;
-  font-style: italic;
-  display: flex;
-  align-items: center;
-}
-
-.tf-typing span {
-  height: 8px;
-  width: 8px;
-  margin: 0 2px;
-  background: #ffd700;
-  border-radius: 50%;
-  display: inline-block;
-  animation: typing 1.2s infinite ease-in-out;
-}
-
-.tf-typing span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.tf-typing span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes typing {
-  0% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(-4px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 0.3; }
-}
-
-
-
-</style>
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
-
 <body>
 
-
-    <!-- NÚT MỞ CHAT -->
-<div id="tf-chat-btn">🤖</div>
-
-<!-- BOX CHAT -->
-<div id="tf-chat-box">
-
-  <!-- HEADER -->
-  <div id="tf-chat-header">
-    <span id="tab-chat" class="tf-tab active">💬 Chat TitanForce </span>
-    
-
-    <!-- NÚT XÓA CHAT -->
-    <span id="tf-clear-chat" style="float:right;margin-right:10px;cursor:pointer;">🗑️</span>
-
-    <!-- NÚT FULL MÀN HÌNH -->
-    <span id="tf-fullscreen-btn" style="float:right;cursor:pointer;">⛶</span>
-  </div>
-
-  <!-- ✅ LƯU Ý -->
-  <div id="tf-chat-note">
-    📢 Bạn có thể trò chuyện bằng <b>Tiếng Việt</b> hoặc <b>Tiếng Anh</b> nhé!
-    <span id="tf-note-close">✖</span>
-  </div>
-
-  <!-- KHUNG CHAT -->
- <div id="tf-chat-messages">
-  <div class="tf-bot">
-    <b>TF:</b> 🚧 Chatbot hiện đang <b>BẢO TRÌ</b>.<br>
-    ⏳ Vui lòng quay lại sau nhé!
-  </div>
-</div>
-
-  <!-- Ô NHẬP -->
-  <input id="tf-input" placeholder="Chatbot đang bảo trì..." disabled />
-<button disabled>Gửi</button>
-
-</div>
-
-
-
-<nav>
-    <img src="logo2.jpg" alt="Logo Quân đoàn TF" class="logo">
-    <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
-    <div class="nav-links" id="nav-links">
-        <a href="gioithieu.html">📜 Quản Trị quân đoàn</a>
-        <a href="baotri.html">👥 Giới thiệu thành viên 1</a>
-        <a href="baotri.html">👥 Giới thiệu thành viên 2</a>
-        <a href="ranktv.html">💎 Mức rank thành viên</a>
-        <a href="luat.html">⚔️ Luật quân đoàn</a>
-        <a href="sukien.html">🗓️ Thông báo quân đoàn</a>
-        <a href="tuyenthanhvien.html">👥 Tuyển Thành viên</a>
-        <a href="slo.html">⚔️ Giao lưu quân đoàn</a>
-        <a href="hotro.html">👥 Hỗ trợ</a>
+<nav id="navbar">
+    <div class="logo-container">
+        <img src="logo2.jpg" class="logo" alt="TF">
+        <span style="font-weight: bold; letter-spacing: 2px; color: #fff;">TITANFORCE</span>
+    </div>
+    <div class="nav-links">
+        <a href="#">Trang chủ</a>
+        <a href="luat.html">Nội quy</a>
+        <a href="ranktv.html">Bảng xếp hạng</a>
+        <a href="tuyenthanhvien.html">Gia nhập</a>
+        <a href="slo.html">Giao lưu</a>
     </div>
 </nav>
 
-<div id="welcome-popup">
-  <div class="popup-content">
-    <img src="logo2.jpg" alt="Logo TF" class="popup-logo">
-    <h2>🎉 Chào mừng đến quân đoàn TitanForce! 🛡️</h2>
-    <p>Đây là trang web chính thức TitanForce!</p>
-    <p>Quân đoàn TF kính chào bạn — Hãy cùng nhau tạo nên sức mạnh TitanForce!</p>
-    <p>Hiện tại chúng tôi đang phát triển và nếu có sai xót xin hãy bỏ qua.</p>
-    <p>⚠️ Lưu ý những trang web khác đều là giả hoặc ăn cắp, mong mọi người chú ý. ❌</p>
-    <button class="popup-btn" id="close-popup">OK 👍</button>
-  </div>
+<header class="hero" data-aos="zoom-out" data-aos-duration="1500">
+    <p style="color: var(--accent); font-weight: 600; letter-spacing: 4px; margin-bottom: 10px;">WE ARE FAMILY</p>
+    <h1>TITANFORCE CLAN</h1>
+    <p style="max-width: 650px; color: #bbb; margin-bottom: 35px; font-size: 1.1rem;">Nơi những chiến binh hội tụ, viết nên huyền thoại bằng lòng quả cảm và tinh thần đồng đội bất diệt.</p>
+    <a href="tuyenthanhvien.html" class="btn-join">BẮT ĐẦU HÀNH TRÌNH ⚔️</a>
+</header>
+
+<div class="container">
+    
+    <div class="stats-grid">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100"><h3>100+</h3><p>Thành viên</p></div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200"><h3>Lv.4</h3><p>Cấp độ Quân đoàn</p></div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300"><h3>2025</h3><p>Năm thành lập</p></div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="400"><h3>Top</h3><p>BXH Miền</p></div>
+    </div>
+
+    <div class="section-title" data-aos="fade-up">
+        <h2>Về Chúng Tôi</h2>
+        <p>Gần gũi - Kết nối - Cùng nhau đi lên</p>
+    </div>
+
+    <div class="grid">
+        <div class="card" data-aos="fade-right">
+            <h2>💡 Bạn nhận được gì?</h2>
+            <p>Tại TitanForce, bạn không bao giờ phải leo rank một mình. Chúng mình luôn có những "chiến thần" sẵn sàng kéo team, chia sẻ bí kíp bắn và những buổi trò chuyện tâm sự đêm khuya cực vui.</p>
+        </div>
+        <div class="card" data-aos="fade-left">
+            <h2>🔥 Tinh thần anh em</h2>
+            <p>Kỹ năng có thể luyện, nhưng tính cách là điều quan trọng nhất. TF ưu tiên những anh em sống đẹp, không toxic, biết lắng nghe và tôn trọng lẫn nhau trong mọi hoàn cảnh.</p>
+        </div>
+    </div>
+
+    <div class="section-title" data-aos="fade-up">
+        <h2>Khoảnh khắc Quân đoàn</h2>
+        <p>Những hình ảnh đáng nhớ từ các trận đấu và sự kiện</p>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item" data-aos="flip-left" data-aos-delay="100">
+            <img src="anh1.jpg" alt="Team TF">
+            <div class="caption">Đội hình thi đấu giải tháng 5</div>
+        </div>
+        <div class="gallery-item" data-aos="flip-left" data-aos-delay="200">
+            <img src="anh2.jpg" alt="Offline TF">
+            <div class="caption">Buổi Offline trà chanh anh em</div>
+        </div>
+        <div class="gallery-item" data-aos="flip-left" data-aos-delay="300">
+            <img src="anh3.jpg" alt="Top 1">
+            <div class="caption">Khoảnh khắc Top 1 đầy cảm xúc</div>
+        </div>
+        <div class="gallery-item" data-aos="flip-left" data-aos-delay="400">
+            <img src="anh4.jpg" alt="Sự kiện">
+            <div class="caption">Giao lưu cùng quân đoàn bạn</div>
+        </div>
+    </div>
+
+    <div style="text-align: center; background: linear-gradient(45deg, rgba(255,60,0,0.1), rgba(255,204,0,0.05)); padding: 60px; border-radius: 30px; border: 1px dashed var(--primary);" data-aos="zoom-in">
+        <h3 style="font-size: 1.8rem; color: #fff;">Sẵn sàng trở thành một phần của TF?</h3>
+        <p style="margin: 20px 0; color: #ccc; font-size: 1.1rem;">Cánh cửa TitanForce luôn rộng mở đón chờ những mảnh ghép phù hợp.</p>
+        <a href="tuyenthanhvien.html" class="btn-join">ĐĂNG KÝ VÀO QUÂN ĐOÀN</a>
+    </div>
+
 </div>
 
-<main class="titanforce-main">
-    <header class="tf-header">
-      <h1>🛡️ Quân đoàn TF — TitanForce ⚔️</h1>
-      <p class="slogan"><span id="typed-slogan" class="typing-text">Sức mạnh tập thể kiến tạo nên Vinh quang TitanForce.</span></p>
-  </header>
-
-  <!-- Nội dung các section giữ nguyên -->
-   <section class="tf-introduction">
-    <h2>💡 Triết lý TitanForce</h2>
-    <p>
-        TF là nơi rèn luyện <strong>kỹ năng – kỷ luật – tinh thần đồng đội</strong>, biến đam mê thành tư duy chuyên nghiệp.
+<footer>
+    <p>Theo dõi các hoạt động của TitanForce tại</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=61583586631135"><img src="fbicon.png" alt="Facebook"></a>
+        <a href="https://www.tiktok.com/@lio.vn"><img src="tiktok.png" alt="Tiktok"></a>
+        <a href="https://zalo.me/g/yupyif524"><img src="zalo.png" alt="Zalo"></a>
+        <a href="https://discord.gg/YVez9ZthF"><img src="ds.png" alt="Discord"></a>
+    </div>
+    <p style="font-size: 0.85rem; color: #555; margin-top: 15px;">
+        Thiết kế bởi <span style="color: var(--primary); font-weight: bold;">TF.Kuronami</span> &copy; 2026
     </p>
-</section>
-
-<hr>
-
-<section class="tf-core-values">
-    <h2>✨ Sứ mệnh</h2>
-    <p>
-        Xây dựng cộng đồng <strong>chuyên nghiệp – văn minh</strong>, giúp thành viên phát triển kỹ năng và bản sắc TitanForce.
-    </p>
-
-    <h2>🔥 Giá trị Cốt lõi 🔥</h2>
-    <div class="tf-value-list">
-        <ul>
-            <li><strong>Đoàn kết:</strong> Tôn trọng và hỗ trợ nhau.</li>
-            <li><strong>Kỷ luật:</strong> Luyện tập nghiêm túc, hành động chiến thuật.</li>
-            <li><strong>Chiến binh:</strong> Luôn học hỏi, không bỏ cuộc.</li>
-        </ul>
-    </div>
-</section>
-
-<hr>
-
-<section class="tf-activities">
-    <h2>⚡ Huấn luyện</h2>
-    <ul>
-        <li><strong>Chiến thuật:</strong> Phân tích meta, xây dựng chiến thuật.</li>
-        <li><strong>Luyện tập:</strong> 4v4 – 1v1 – 2v2 rèn phản xạ.</li>
-        <li><strong>Giải đấu:</strong> Thi đấu nội bộ để cọ xát.</li>
-        <li><strong>Review:</strong> Phân tích replay để cải thiện kỹ năng.</li>
-    </ul>
-</section>
-
-<hr>
-
-<section class="tf-recruitment-requirements">
-    <h2>🎯 Tiêu chuẩn</h2>
-    <div class="tf-requirements-list">
-        <ul>
-            <li><strong>Tinh thần học hỏi</strong> và thái độ tốt.</li>
-            <li><strong>Chuyên nghiệp</strong>, có trách nhiệm.</li>
-            <li><strong>Cam kết</strong> tham gia 3 buổi/tuần.</li>
-        </ul>
-    </div>
-</section>
-
-  <footer class="tf-footer-cta">
-    <p><strong>Vinh quang đang chờ đợi!</strong> Đây là cơ hội để bạn không chỉ chơi game, mà là trở thành một Chiến binh!</p>
-    <div class="cta-buttons-group">
-        <a href="https://www.tiktok.com/@lio.vn" class="icon-social"><img src="tiktok.png" alt="TikTok"></a>
-        <a href="https://www.facebook.com/profile.php?id=61583586631135" class="icon-social"><img src="fbicon.png" alt="Facebook"></a>
-        <a href="https://zalo.me/g/yupyif524" class="icon-social"><img src="zalo.png" alt="Zalo"></a>
-        <a href="https://discord.gg/YVez9ZthF" class="icon-social"><img src="ds.png" alt="Discord"></a>
-    </div>
-  </footer>
-</main>
-
-<footer class="main-footer">
-    <p>Trang web được code và thiết kế bởi <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. © 2025 Quân đoàn TF.</p>
 </footer>
 
+<div id="chat-trigger">💬</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-// TYPEWRITER
-function typeWriter(text,i,fnCallback){
-    const element=document.getElementById("typed-slogan");
-    if(!element) return;
-    if(i<text.length){
-        element.innerHTML=text.substring(0,i+1);
-        setTimeout(()=>typeWriter(text,i+1,fnCallback),80);
-    } else if(typeof fnCallback=='function') fnCallback();
-}
-
-window.onload=function(){
-    document.body.classList.add('fade-in');
-
-    // Navbar toggle
-    const menuToggle=document.getElementById('mobile-menu');
-    const navLinks=document.getElementById('nav-links');
-    menuToggle.addEventListener('click',()=>navLinks.classList.toggle('active'));
-    window.addEventListener('resize',()=>{ if(window.innerWidth>=1025 && navLinks.classList.contains('active')) navLinks.classList.remove('active'); });
-
-    // Typewriter slogan
-    const sloganText="TitanForce: Chiến Thắng Kĩ Năng và Rèn Luyện";
-    setTimeout(()=>{ typeWriter(sloganText,0,()=>{ const e=document.getElementById("typed-slogan"); if(e) e.style.borderRight='none'; }); }, 10000);
-
-    // Sakura
-    function createSakura(){
-        const sakura=document.createElement("div");
-        sakura.classList.add("sakura");
-        sakura.textContent="🌸";
-        sakura.style.left=Math.random()*100+"vw";
-        sakura.style.fontSize=(Math.random()*14+10)+"px";
-        const duration=Math.random()*6+6;
-        sakura.style.animationDuration=duration+"s";
-        document.body.appendChild(sakura);
-        setTimeout(()=>sakura.remove(),duration*1000);
-    }
-    setInterval(createSakura,700);
-
-    // Popup
-    const popup=document.getElementById("welcome-popup");
-    const closeBtn=document.getElementById("close-popup");
-    setTimeout(()=>popup.classList.add("show"),800);
-    closeBtn.addEventListener("click",()=>popup.classList.remove("show"));
-    setTimeout(()=>popup.classList.remove("show"),8000);
-
-    // CHỐNG COPY
-    document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy bị chặn!"); });
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', function(e) {
-        if(e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
-        if(e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-        if(e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
+    // Khởi tạo AOS
+    AOS.init({
+        duration: 1000,
+        once: false, // Để hiệu ứng lặp lại khi cuộn lên xuống cho sinh động
+        mirror: false
     });
-    window.oncopy = window.oncut = window.onpaste = function(e){ e.preventDefault(); alert("⚠️ Không được phép sao chép nội dung trang!"); return false; };
-    document.addEventListener('mousedown', function(e){ if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); } });
-};
 
-
-/// ===== CHATBOT LOGIC =====
-  const tfBtn = document.getElementById("tf-chat-btn");
-  const tfBox = document.getElementById("tf-chat-box");
-  const tfMessages = document.getElementById("tf-chat-messages");
-
-  tfBtn.onclick = () => {
-    if (tfBox.classList.contains("show")) {
-      tfBox.classList.remove("show");
-      tfBox.style.display = "none";
-    } else {
-      tfBox.style.display = "flex";
-      tfBox.classList.add("show");
-      showWelcomeChat(); // ✅ hiện hướng dẫn trong khung chat
-    }
-  };
-
-  async function tfSend() {
-    const input = document.getElementById("tf-input");
-    const text = input.value.trim();
-    if (!text) return;
-
-    // Hiển thị tin nhắn người dùng
-    tfMessages.innerHTML += `<div class="tf-user"><b>Bạn:</b> ${text}</div>`;
-    input.value = "";
-    tfMessages.scrollTop = tfMessages.scrollHeight;
-
-    // ✅ Thêm loading
-    const loadingId = `loading-${Date.now()}`;
-    tfMessages.innerHTML += `<div class="tf-bot" id="${loadingId}"><b>TF:</b> <i>Đang suy nghĩ...</i></div>`;
-    tfMessages.scrollTop = tfMessages.scrollHeight;
-
-    try {
-      const res = await fetch("https://tfqd2.vercel.app/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text })
-      });
-
-      const data = await res.json();
-
-      // Xóa loading và thêm phản hồi thật
-      const loadingDiv = document.getElementById(loadingId);
-      if (loadingDiv) loadingDiv.remove();
-
-      tfMessages.innerHTML += `<div class="tf-bot"><b>TF:</b> ${data.reply}</div>`;
-      tfMessages.scrollTop = tfMessages.scrollHeight;
-
-    } catch (e) {
-      const loadingDiv = document.getElementById(loadingId);
-      if (loadingDiv) loadingDiv.remove();
-      tfMessages.innerHTML += `<div style="color:red">Lỗi kết nối server</div>`;
-    }
-  }
-
-  // ✅ ENTER ĐỂ GỬI
-  const tfInput = document.getElementById("tf-input");
-  tfInput.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") tfSend();
-  });
-
-  // ✅ FULLSCREEN CHAT
-  const fullscreenBtn = document.getElementById("tf-fullscreen-btn");
-  fullscreenBtn.onclick = () => {
-    tfBox.classList.toggle("fullscreen");
-  };
-
-  // ===== LƯU Ý CHAT =====
-  const chatNote = document.getElementById("tf-chat-note");
-  const chatNoteClose = document.getElementById("tf-note-close");
-
-  chatNoteClose.onclick = () => {
-    chatNote.style.display = "none";
-    localStorage.setItem("tf_hide_note", "1");
-  };
-
-  if (localStorage.getItem("tf_hide_note") === "1") {
-    chatNote.style.display = "none";
-  }
-
-  // ===== XÓA NỘI DUNG CHAT =====
-  const clearChatBtn = document.getElementById("tf-clear-chat");
-  clearChatBtn.onclick = () => {
-    const confirmClear = confirm("⚠️ Bạn có chắc muốn xóa toàn bộ nội dung chat không?");
-    if (!confirmClear) return;
-    tfMessages.innerHTML = "";
-  };
-
-  // ✅ Tin nhắn hướng dẫn mặc định khi mở chat
-  function showWelcomeChat() {
-    if (tfMessages.innerHTML.trim() === "") {
-      tfMessages.innerHTML = `
-        <div class="tf-bot">
-          <b>TF:</b> 💬 Bạn có thể <b>gõ T.Việt</b> để chat Tiếng Việt!<br>
-        </div>
-      `;
-    }
-  }
+    // Hiệu ứng thanh Navbar khi cuộn
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
 </script>
-</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    
-
