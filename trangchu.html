@@ -57,21 +57,23 @@
             user-select: none;
         }
 
-        /* Modal Bản Quyền Hiển Thị Ngay Khi Vào Trang */
+        /* ========================================================= */
+        /* KHUNG BẢN QUYỀN MỚI (COPYRIGHT MODAL) - PREMIUM DESIGN     */
+        /* ========================================================= */
         .copyright-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 4, 6, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 999999; /* Luôn nổi lên trên cùng */
+            background: rgba(4, 4, 7, 0.88);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 999999;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             opacity: 1;
             visibility: visible;
-            transition: all 0.4s ease;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
         .copyright-overlay.hidden {
@@ -81,97 +83,141 @@
         }
 
         .copyright-modal {
-            background: linear-gradient(135deg, rgba(28, 28, 36, 0.98), rgba(14, 14, 18, 0.98));
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 50px rgba(255, 60, 0, 0.45), inset 0 0 20px rgba(255, 60, 0, 0.15);
+            background: linear-gradient(160deg, rgba(24, 22, 32, 0.95), rgba(10, 10, 14, 0.98));
+            border: 1px solid rgba(255, 60, 0, 0.4);
+            box-shadow: 0 0 60px rgba(255, 60, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15);
             border-radius: 28px;
             max-width: 480px;
             width: 100%;
-            padding: 40px 30px 30px;
+            padding: 42px 32px 32px;
             text-align: center;
             position: relative;
-            transform: scale(1);
+            transform: translateY(0);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
         }
 
-        /* Nút X Đóng Ngay */
+        .copyright-overlay.hidden .copyright-modal {
+            transform: translateY(20px) scale(0.95);
+        }
+
+        /* Nút Đóng X */
         .close-btn {
             position: absolute;
-            top: 15px;
+            top: 18px;
             right: 18px;
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-muted);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 10;
         }
 
         .close-btn:hover {
             background: var(--primary);
             border-color: var(--primary);
-            box-shadow: 0 0 15px var(--glow);
-            transform: rotate(90deg);
+            color: #fff;
+            box-shadow: 0 0 20px var(--glow);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Shield Animated Icon */
+        .shield-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 60, 0, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse-shield 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-shield {
+            0%, 100% { transform: scale(0.85); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.9; }
         }
 
         .copyright-icon {
             font-size: 3.2rem;
-            margin-bottom: 8px;
-            display: inline-block;
-            filter: drop-shadow(0 0 15px var(--primary));
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 4px 15px rgba(255, 60, 0, 0.6));
         }
 
         .copyright-modal h3 {
             font-family: 'Teko', sans-serif;
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             color: #fff;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             line-height: 1;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        .copyright-modal h3 span { color: var(--primary); }
+        .copyright-modal h3 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
         .copyright-modal p {
             color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+        }
+
+        .copyright-modal p b {
+            color: #fff;
         }
 
         .copyright-badge {
-            background: rgba(255, 60, 0, 0.12);
-            border: 1px dashed var(--primary);
+            background: rgba(255, 60, 0, 0.08);
+            border: 1px dashed rgba(255, 60, 0, 0.4);
             color: var(--accent);
-            padding: 8px 16px;
-            border-radius: 12px;
+            padding: 10px 18px;
+            border-radius: 14px;
             font-size: 0.88rem;
             font-weight: 600;
             margin-bottom: 25px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
         }
 
-        /* Nút Bấm Đếm Ngược */
+        /* Nút Chấp Nhận & Đếm Ngược */
         .btn-accept {
             width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.08);
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
             color: rgba(255, 255, 255, 0.4);
             font-weight: 700;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 0.98rem;
             cursor: not-allowed;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
             position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
         }
 
         .btn-accept.ready {
@@ -179,23 +225,30 @@
             color: #fff;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 60, 0, 0.5);
+            box-shadow: 0 8px 30px rgba(255, 60, 0, 0.5);
         }
 
         .btn-accept.ready:hover {
             background: linear-gradient(135deg, var(--primary-light), var(--accent));
             color: #000;
-            box-shadow: 0 12px 30px rgba(255, 60, 0, 0.7);
+            box-shadow: 0 12px 35px rgba(255, 60, 0, 0.75);
             transform: translateY(-2px);
         }
 
-        .timer-progress {
+        /* Progress Bar Smooth */
+        .timer-progress-track {
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
             width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .timer-progress-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             transition: width 1s linear;
         }
 
@@ -634,20 +687,31 @@
 </head>
 <body>
 
-<!-- Popup Thông báo Bản quyền với Đếm ngược 10s & Nút X -->
+<!-- KHUNG BẢN QUYỀN MỚI CỰC CHẤT DÀNH CHO TITANFORCE -->
 <div class="copyright-overlay" id="copyrightModal">
     <div class="copyright-modal">
-        <button class="close-btn" id="closeXBtn" title="Đóng">✕</button>
-        <div class="copyright-icon">🛡</div>
-        <h3>THÔNG BÁO <span>BẢN QUYỀN</span></h3>
-        <p>Toàn bộ nội dung, giao diện và hình ảnh trên trang web này thuộc sở hữu trí tuệ chính thức của <b>TitanForce Clan</b>.</p>
-        <div class="copyright-badge">
-            © 2026 Designed & Developed by TF.Kuronami
+        <button class="close-btn" id="closeXBtn" title="Đóng ngay">✕</button>
+        
+        <div class="shield-wrapper">
+            <div class="shield-bg"></div>
+            <div class="copyright-icon">🛡️</div>
         </div>
+
+        <h3>BẢO VỆ <span>BẢN QUYỀN</span></h3>
+        <p>Giao diện, mã nguồn và nội dung độc quyền thuộc quyền sở hữu trí tuệ chính thức của <b>TitanForce Clan</b>. Mọi hành vi sao chép không xin phép đều bị nghiêm cấm.</p>
+        
+        <div class="copyright-badge">
+            <span>© 2026 Designed & Developed by</span>
+            <strong style="color: #fff;">TF.Kuronami</strong>
+        </div>
+
         <button class="btn-accept" id="acceptBtn" disabled>
             ĐÃ HIỂU & ĐỒNG Ý (<span id="timerText">10</span>s)
         </button>
-        <div class="timer-progress" id="timerProgress"></div>
+
+        <div class="timer-progress-track">
+            <div class="timer-progress-bar" id="timerProgress"></div>
+        </div>
     </div>
 </div>
 
@@ -767,7 +831,7 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Xử lý đếm ngược 10 giây & Nút X đóng
+    // Logic đếm ngược & đóng Modal Bản quyền nâng cấp
     document.addEventListener("DOMContentLoaded", function() {
         const modal = document.getElementById("copyrightModal");
         const acceptBtn = document.getElementById("acceptBtn");
@@ -775,37 +839,38 @@
         const timerText = document.getElementById("timerText");
         const timerProgress = document.getElementById("timerProgress");
 
-        let timeLeft = 10;
+        let totalTime = 10;
+        let timeLeft = totalTime;
         let countdownTimer = null;
 
-        // Hàm ẩn popup
+        // Hàm đóng popup với animation mượt
         function closeModal() {
             modal.classList.add("hidden");
             if (countdownTimer) clearInterval(countdownTimer);
         }
 
-        // Đếm ngược trực tiếp ngay khi vừa tải trang
+        // Chạy đếm ngược
         countdownTimer = setInterval(() => {
             timeLeft--;
             if (timerText) timerText.textContent = timeLeft;
-            if (timerProgress) timerProgress.style.width = (timeLeft * 10) + "%";
+            if (timerProgress) timerProgress.style.width = ((timeLeft / totalTime) * 100) + "%";
 
             if (timeLeft <= 0) {
                 clearInterval(countdownTimer);
                 acceptBtn.disabled = false;
                 acceptBtn.classList.add("ready");
-                acceptBtn.innerHTML = "ĐÃ HIỂU & ĐỒNG Ý ➔";
+                acceptBtn.innerHTML = "ĐÃ HIỂU & BẮT ĐẦU ➔";
             }
         }, 1000);
 
-        // Nút ĐỒNG Ý khi đếm ngược xong
+        // Nút ĐỒNG Ý
         acceptBtn.addEventListener("click", function() {
             if (!acceptBtn.disabled) {
                 closeModal();
             }
         });
 
-        // Nút X đóng ngay lập tức
+        // Nút X đóng ngay
         closeXBtn.addEventListener("click", closeModal);
     });
 
