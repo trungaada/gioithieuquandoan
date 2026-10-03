@@ -4,22 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký SLO Free Fire | Gaming Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #ff3d00;
+            --primary-glow: rgba(255, 61, 0, 0.5);
             --secondary: #00e5ff;
-            --bg-dark: #0a0e17;
-            --card-bg: rgba(22, 30, 47, 0.8);
+            --secondary-glow: rgba(0, 229, 255, 0.5);
+            --bg-dark: #050811;
+            --card-bg: rgba(13, 20, 36, 0.8);
+            --input-bg: rgba(6, 11, 24, 0.7);
             --text-main: #ffffff;
-            --text-dim: #b3bcc8;
-            --gradient: linear-gradient(135deg, #ff3d00 0%, #ff1744 100%);
+            --text-dim: #94a3b8;
+            --gradient-fire: linear-gradient(135deg, #ff3d00 0%, #ff0055 100%);
+            --gradient-cyan: linear-gradient(135deg, #00e5ff 0%, #0072ff 100%);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             background: var(--bg-dark) url('logo.jpg') no-repeat center center fixed;
             background-size: cover;
             color: var(--text-main);
@@ -27,149 +38,322 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px 12px;
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* Lớp phủ làm mờ nền */
+        /* Ambient Glow Backdrop */
         body::before {
             content: "";
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle, rgba(10,14,23,0.4) 0%, rgba(10,14,23,0.9) 100%);
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 61, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 229, 255, 0.12) 0%, transparent 50%),
+                rgba(5, 8, 17, 0.85);
+            backdrop-filter: blur(10px);
             z-index: -1;
         }
 
         .container {
-            width: 95%;
-            max-width: 450px;
-            padding: 20px;
+            width: 100%;
+            max-width: 460px;
             z-index: 1;
         }
 
-        header { text-align: center; margin-bottom: 30px; }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            letter-spacing: 2px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 61, 0, 0.3);
-            margin-bottom: 10px;
-        }
-
-        .subtitle { color: var(--text-dim); font-size: 0.9rem; }
-
-        /* Nhóm nút bấm */
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        /* Header Styling */
+        header {
+            text-align: center;
             margin-bottom: 25px;
         }
 
+        .tag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            background: rgba(255, 61, 0, 0.12);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: var(--gradient-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px var(--primary-glow);
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        /* Navigation Buttons */
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 12px 5px;
-            border-radius: 10px;
+            color: var(--text-dim);
+            padding: 12px 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.75rem;
-            transition: 0.3s;
-            backdrop-filter: blur(5px);
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-transform: uppercase;
         }
 
         .nav-btn:hover {
-            background: var(--gradient);
-            border-color: transparent;
-            box-shadow: 0 0 15px rgba(255, 61, 0, 0.5);
-            transform: translateY(-3px);
+            color: #fff;
+            border-color: rgba(255, 61, 0, 0.5);
+            background: rgba(255, 61, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 61, 0, 0.2);
         }
 
         .nav-btn.active {
-            background: var(--gradient);
+            background: var(--gradient-fire);
+            color: white;
             border-color: transparent;
+            box-shadow: 0 0 20px var(--primary-glow);
         }
 
-        /* Form Style */
+        /* Form Card */
         form {
             background: var(--card-bg);
-            padding: 30px;
+            padding: 28px 24px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             display: none;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: slideUp 0.5s ease-out;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
         }
 
-        form.active { display: block; }
-
-        h2 { margin-bottom: 20px; font-size: 1.2rem; color: var(--secondary); text-align: center; }
-
-        .input-box { margin-bottom: 15px; }
-
-        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-dim); }
-
-        input, select {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            outline: none;
-            transition: 0.3s;
+        form::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-fire);
         }
 
-        input:focus, select:focus {
-            border-color: var(--secondary);
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-            background: rgba(0, 0, 0, 0.4);
+        #soloForm::before {
+            background: var(--gradient-cyan);
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            margin-top: 10px;
-            background: var(--gradient);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
+        form.active {
+            display: block;
+            animation: formAppear 0.4s ease-out forwards;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .form-title h2 {
             font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .submit-btn:hover {
-            filter: brightness(1.2);
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             letter-spacing: 1px;
         }
 
-        /* Thông báo */
-        .message { margin-top: 15px; text-align: center; font-size: 0.9rem; min-height: 40px; }
-        .success { color: #00ff88; }
-        .error { color: #ff4444; }
-        .loading { color: var(--secondary); animation: pulse 1s infinite; }
+        #sinhTonForm .form-title h2 { color: #ff5252; }
+        #soloForm .form-title h2 { color: var(--secondary); }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Form Controls */
+        .input-box {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
+
+        label i {
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+
+        #soloForm label i {
+            color: var(--secondary);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px 15px;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        select option {
+            background: #0d1424;
+            color: #fff;
+        }
+
+        input::placeholder {
+            color: #475569;
+            font-weight: 500;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            background: rgba(10, 16, 30, 0.9);
+        }
+
+        #soloForm input:focus, #soloForm select:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 15px var(--secondary-glow);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 8px;
+            background: var(--gradient-fire);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #soloForm .submit-btn {
+            background: var(--gradient-cyan);
+            box-shadow: 0 10px 20px -5px var(--secondary-glow);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+            letter-spacing: 2px;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Messages */
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.95rem;
+            min-height: 24px;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #00ffaa;
+            background: rgba(0, 255, 170, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .error {
+            color: #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+        }
+
+        .loading {
+            color: var(--secondary);
+            animation: pulse 1s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Animations */
+        @keyframes formAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.4; }
         }
 
-        /* Mobile tối ưu */
+        /* Responsive Breakpoints */
         @media (max-width: 400px) {
-            h1 { font-size: 1.7rem; }
-            form { padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            form { padding: 20px 16px; }
+            .btn-group { gap: 6px; }
+            .nav-btn { font-size: 0.68rem; padding: 10px 4px; }
         }
     </style>
 </head>
@@ -177,84 +361,105 @@
 
 <div class="container">
     <header>
+        <div class="tag-badge"><i class="fa-solid fa-trophy"></i> Tournament Registration</div>
         <h1>SLO FREE FIRE</h1>
         <p class="subtitle">Hệ thống đăng ký giải đấu chuyên nghiệp</p>
     </header>
 
     <div class="btn-group">
-        <button class="nav-btn" id="btn1" onclick="showForm('sinhTonForm', 'btn1')">TỬ CHIẾN KAI</button>
-        <button class="nav-btn" id="btn2" onclick="showForm('soloForm', 'btn2')">HEADSHOT</button>
-        <button class="nav-btn" onclick="window.location.href='trangchu.html'">TRANG CHỦ</button>
-        <button class="nav-btn" onclick="window.location.href='hotro.html'">HỖ TRỢ</button>
+        <button class="nav-btn" id="btn1" onclick="showForm('sinhTonForm', 'btn1')">
+            <i class="fa-solid fa-fire"></i> Tử Chiến Kai
+        </button>
+        <button class="nav-btn" id="btn2" onclick="showForm('soloForm', 'btn2')">
+            <i class="fa-solid fa-crosshairs"></i> Headshot
+        </button>
+        <button class="nav-btn" onclick="window.location.href='trangchu.html'">
+            <i class="fa-solid fa-house"></i> Trang Chủ
+        </button>
+        <button class="nav-btn" onclick="window.location.href='hotro.html'">
+            <i class="fa-solid fa-headset"></i> Hỗ Trợ
+        </button>
     </div>
 
+    <!-- Form 1: Tử Chiến Kai -->
     <form id="sinhTonForm">
-        <h2>🔥 TỬ CHIẾN KAI</h2>
+        <div class="form-title">
+            <h2><i class="fa-solid fa-fire-flame-curved"></i> ĐĂNG KÝ TỬ CHIẾN KAI</h2>
+        </div>
+        
         <input type="hidden" name="entry.group" value="Sinh Tồn">
         
         <div class="input-box">
-            <label>Tên trong game</label>
+            <label><i class="fa-solid fa-user"></i> Tên trong game</label>
             <input type="text" name="entry.name" placeholder="Nhập tên nhân vật..." required>
         </div>
 
         <div class="input-box">
-            <label>Chế độ SLO</label>
+            <label><i class="fa-solid fa-gamepad"></i> Chế độ SLO</label>
             <select name="entry.role" required>
                 <option value="" disabled selected>Chọn chế độ...</option>
-                <option>Kai 2</option>
-                <option>Kai 5</option>
+                <option value="Kai 2">Kai 2</option>
+                <option value="Kai 5">Kai 5</option>
             </select>
         </div>
 
         <div class="input-box">
-            <label>Link Facebook cá nhân</label>
+            <label><i class="fa-brands fa-facebook"></i> Link Facebook cá nhân</label>
             <input type="url" name="entry.fb_link" placeholder="https://facebook.com/..." required>
         </div>
 
         <div class="input-box">
-            <label>Khung giờ chơi (Ví dụ: 19h-22h)</label>
-            <input type="text" name="entry.time" placeholder="Thời gian bạn rảnh..." required>
+            <label><i class="fa-regular fa-clock"></i> Khung giờ chơi</label>
+            <input type="text" name="entry.time" placeholder="Ví dụ: 19h - 22h" required>
         </div>
 
-        <button type="submit" class="submit-btn">XÁC NHẬN ĐĂNG KÝ</button>
+        <button type="submit" class="submit-btn">
+            XÁC NHẬN ĐĂNG KÝ <i class="fa-solid fa-paper-plane"></i>
+        </button>
         <div class="message"></div>
     </form>
 
+    <!-- Form 2: Headshot -->
     <form id="soloForm">
-        <h2>⚡ TỬ CHIẾN HEADSHOT</h2>
+        <div class="form-title">
+            <h2><i class="fa-solid fa-bullseye"></i> TỬ CHIẾN HEADSHOT</h2>
+        </div>
+
         <input type="hidden" name="entry.group" value="Tử Chiến">
         
         <div class="input-box">
-            <label>Tên trong game</label>
+            <label><i class="fa-solid fa-user"></i> Tên trong game</label>
             <input type="text" name="entry.name" placeholder="Nhập tên nhân vật..." required>
         </div>
 
         <div class="input-box">
-            <label>Chế độ SLO</label>
+            <label><i class="fa-solid fa-gamepad"></i> Chế độ SLO</label>
             <select name="entry.role" required>
                 <option value="" disabled selected>Chọn chế độ...</option>
-                <option>Headshot Kai 2</option>
-                <option>Headshot Kai 5</option>
+                <option value="Headshot Kai 2">Headshot Kai 2</option>
+                <option value="Headshot Kai 5">Headshot Kai 5</option>
             </select>
         </div>
 
         <div class="input-box">
-            <label>Link Facebook cá nhân</label>
+            <label><i class="fa-brands fa-facebook"></i> Link Facebook cá nhân</label>
             <input type="url" name="entry.fb_link" placeholder="https://facebook.com/..." required>
         </div>
 
         <div class="input-box">
-            <label>Khung giờ chơi</label>
+            <label><i class="fa-regular fa-clock"></i> Khung giờ chơi</label>
             <input type="text" name="entry.time" placeholder="Ví dụ: 20h - 23h" required>
         </div>
 
-        <button type="submit" class="submit-btn">XÁC NHẬN ĐĂNG KÝ</button>
+        <button type="submit" class="submit-btn">
+            XÁC NHẬN ĐĂNG KÝ <i class="fa-solid fa-paper-plane"></i>
+        </button>
         <div class="message"></div>
     </form>
 </div>
 
 <script>
-    function showForm(id, btnId){
+    function showForm(id, btnId) {
         // Ẩn tất cả form
         document.getElementById('sinhTonForm').classList.remove('active');
         document.getElementById('soloForm').classList.remove('active');
@@ -262,28 +467,33 @@
         // Hiện form được chọn
         document.getElementById(id).classList.add('active');
 
-        // Reset active buttons
+        // Reset & active button
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-        if(btnId) document.getElementById(btnId).classList.add('active');
+        if (btnId) document.getElementById(btnId).classList.add('active');
     }
+
+    // Hiển thị mặc định form đầu tiên khi vừa tải trang
+    document.addEventListener("DOMContentLoaded", () => {
+        showForm('sinhTonForm', 'btn1');
+    });
 
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzqzOtK752iSmqsHs45StEhOia-TTqaDjOTKIY6uKY0j0v0QB0TziRz8nqKhyrI77NzpQ/exec";
 
-    ['sinhTonForm','soloForm'].forEach(f => {
+    ['sinhTonForm', 'soloForm'].forEach(f => {
         const form = document.getElementById(f);
         const msg = form.querySelector('.message');
         
         form.addEventListener("submit", async e => {
             e.preventDefault();
             const data = new FormData(form);
-            msg.innerHTML = `<span class="loading">⌛ Đang kết nối máy chủ...</span>`;
+            msg.innerHTML = `<span class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Đang kết nối máy chủ...</span>`;
             
             try {
                 await fetch(WEB_APP_URL, { method: "POST", body: data, mode: "no-cors" });
-                msg.innerHTML = `<div class="success">✅ ĐĂNG KÝ THÀNH CÔNG!<br><small>Thông tin của bạn đã được ghi lại.</small></div>`;
+                msg.innerHTML = `<div class="success"><i class="fa-solid fa-circle-check"></i> ĐĂNG KÝ THÀNH CÔNG!<br><small style="font-weight:500; opacity: 0.9">Thông tin của bạn đã được ghi lại.</small></div>`;
                 form.reset();
             } catch(err) {
-                msg.innerHTML = `<span class="error">❌ Lỗi kết nối! Vui lòng thử lại.</span>`;
+                msg.innerHTML = `<span class="error"><i class="fa-solid fa-triangle-exclamation"></i> Lỗi kết nối! Vui lòng thử lại.</span>`;
             }
         });
     });
