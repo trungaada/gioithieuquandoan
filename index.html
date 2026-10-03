@@ -188,7 +188,7 @@ button#submitButton:disabled { background: rgba(255, 255, 255, 0.05); color: rgb
             <button type="button" id="refreshCaptchaButton" title="Đổi câu hỏi">↻</button>
             <input type="number" id="captchaInput" placeholder="= ?" autocomplete="off">
         </div>
-        <p class="captcha-error" id="captchaError"> Sai rồi, thử lại nha ❤️</p>
+        <p class="captcha-error" id="captchaError"> Sai rồi, thử lại nha ❤️️</p>
         <button type="submit" id="submitButton" disabled>Vào trang chủ thôi!</button>
     </form>
     <div id="result" style="margin-top: 14px; font-size: 0.9rem; color: #ff8fab;"></div>
@@ -333,14 +333,17 @@ form.addEventListener('submit', async e => {
     submitBtn.disabled = true;
     submitBtn.innerText = 'Đang gửi yêu cầu...';
 
+    // Tạo URLSearchParams với key "entry.name" để khớp chính xác với Apps Script
+    const formData = new URLSearchParams();
+    formData.append('entry.name', nameVal);
+
     try {
-        // Tối ưu hóa gửi request tránh lỗi CORS bằng text/plain hoặc urlencoded phù hợp với Apps Script
-        const response = await fetch('https://script.google.com/macros/s/AKfycbx5PxQWi78Y6xO4m4_TR4awwOar0xenchvz4BoMT_pN2wtm0dipPX3qJdFE6usXK8Uu/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbx26LkWCV7GXmfl8x2L_M5QCH1KCckAIoVV-uSSW2x6CsXWQ-TFnUU_KDoQR85MqHRy/exec', {
             method: 'POST',
-            body: JSON.stringify({ name: nameVal }),
             headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
-            }
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            body: formData.toString()
         });
         
         const res = await response.json();
