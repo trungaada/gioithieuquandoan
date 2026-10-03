@@ -1,432 +1,635 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Đăng ký Clan TF</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --accent:#ff3d00;
-  --bg:#0f1724;
-  --card:#161e2f;
-  --text:#e6eef8;
-  --text-muted:#b3bcc8;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Đăng ký Clan TitanForce</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
 
-* { box-sizing:border-box; margin:0; padding:0; -webkit-user-select:none; user-select:none; }
-input, select, textarea { -webkit-user-select:auto; user-select:auto; }
+    <style>
+        :root {
+            --primary: #ff3d00;
+            --primary-hover: #ff1744;
+            --accent: #ffcc00;
+            --bg-dark: #0a0e17;
+            --card-bg: rgba(18, 26, 43, 0.85);
+            --input-bg: rgba(10, 15, 26, 0.9);
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(255, 61, 0, 0.4);
+        }
 
-html, body { height:100dvh; height:100%; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-body {
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  padding:20px;
-  background-image:url('logo.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;
-  color:var(--text); position:relative;
-  overflow-x:hidden;
-}
-body::before {
-  content:""; position:fixed; top:0; left:0; right:0; bottom:0;
-  background:rgba(0,0,0,0.4); z-index:0;
-}
+        input, select, textarea {
+            -webkit-user-select: auto;
+            user-select: auto;
+        }
 
-.page-content {
-  width:100%; max-width:420px;
-  display:flex; flex-direction:column; align-items:center;
-  opacity:0; animation:fadeIn 0.8s ease-out 0.3s forwards;
-  z-index:1;
-}
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 61, 0, 0.25) 0%, transparent 75%),
+                linear-gradient(to bottom, rgba(10, 14, 23, 0.8), rgba(10, 14, 23, 0.95)),
+                url('logo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-h1 {
-  font-family:'Orbitron',sans-serif; color:var(--accent); text-transform:uppercase;
-  margin-bottom:10px; font-size:2rem; text-align:center;
-  text-shadow:0 0 5px var(--accent),0 0 10px var(--accent),0 0 20px rgba(255,61,0,0.6);
-  transition:text-shadow 0.3s ease;
-}
-h1:hover {
-  text-shadow:0 0 8px #fff,0 0 15px var(--accent),0 0 30px rgba(255,61,0,0.8);
-}
+        #sakuraCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-p { color:var(--text-muted); margin-bottom:20px; text-align:center; }
+        .container {
+            width: 100%;
+            max-width: 460px;
+            z-index: 2;
+            position: relative;
+        }
 
-.buttons {
-  position: sticky;
-  top: 10px;
-  z-index: 5;
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 61, 0, 0.5);
+            margin-bottom: 6px;
+        }
 
-  background: rgba(22,30,47,0.85);
-  backdrop-filter: blur(6px);
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid var(--accent);
-  box-shadow: 0 0 10px rgba(255,61,0,0.4);
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
 
-  margin-bottom: 20px;
-}
-button.group-btn {
-  flex: 1;
-  min-width: 120px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 8px;
-  font-weight: 700;
-  font-size: 0.8rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: 0.3s;
-}
-button.group-btn:hover { background:#ff1744; transform:scale(1.05); box-shadow:0 4px 15px rgba(255,61,0,0.5); }
-button.group-btn:active { transform:scale(0.97); }
-button.group-btn.highlight { animation:pulseGlow 1.5s ease-in-out infinite; }
+        /* Top Navigation Bar */
+        .nav-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-form {
-  width:100%; max-width:400px;
-  background:rgba(22,30,47,0.75);
-  backdrop-filter:blur(8px);
-  padding:20px; border-radius:12px;
-  border:2px solid var(--accent);
-  box-shadow:0 0 15px rgba(255,61,0,0.6);
-  margin-bottom:20px;
-  display:none; opacity:0; visibility:hidden;
-  transition:opacity 0.3s ease, visibility 0.3s ease;
-}
-form.active { display:block; opacity:1; visibility:visible; }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
 
-form h2 {
-  color:var(--accent); text-align:center;
-  margin-bottom:15px; text-shadow:0 0 3px var(--accent);
-}
+        .nav-btn:hover {
+            background: rgba(255, 61, 0, 0.2);
+            border-color: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
 
-label { font-weight:600; margin-bottom:6px; display:block; }
-input, select, textarea {
-  width:100%; padding:10px; margin-bottom:15px;
-  border:2px solid #333; border-radius:6px;
-  background:#1e293b; color:var(--text);
-  transition:0.3s;
-  scroll-margin-top: 20px;
-}
-input:focus, select:focus {
-  border-color:red;
-  animation:rainbowBorder 1.5s linear infinite;
-  box-shadow:0 0 10px rgba(255,255,255,0.7);
-  transform:scale(1.02);
-}
+        /* Group Selection Tabs */
+        .tab-selector {
+            display: flex;
+            background: rgba(10, 15, 26, 0.8);
+            padding: 5px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 61, 0, 0.3);
+            margin-bottom: 20px;
+            gap: 5px;
+        }
 
-button.submit-btn {
-  background:var(--accent); color:#fff;
-  border:none; border-radius:8px;
-  padding:12px 20px; font-weight:700; font-size:1rem;
-  cursor:pointer; width:100%; text-transform:uppercase;
-}
-button.submit-btn:hover:not(:disabled) { background:#ff1744; }
-button.submit-btn:disabled {
-  background:#333;
-  cursor:not-allowed;
-  opacity:0.7;
-}
+        .tab-btn {
+            flex: 1;
+            padding: 12px 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
 
-button.close-btn {
-  background:none; border:none; font-size:1.2rem; cursor:pointer;
-  position:absolute; right:10px; top:10px; color:white;
-}
-button.close-btn:hover { color:red; }
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 61, 0, 0.4);
+        }
 
-.message { min-height:24px; margin-bottom:10px; font-weight:bold; text-align:center; }
-.success { color:#4CAF50; }
-.error { color:#f44336; }
-.loading { color:#ffeb3b; animation:blink 1s infinite; }
+        /* Form Card */
+        .form-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 61, 0, 0.1);
+        }
 
-@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1;} }
-@keyframes rainbowBorder {
-  0%{border-color:red;} 14%{border-color:orange;} 28%{border-color:yellow;}
-  42%{border-color:lime;} 57%{border-color:cyan;} 71%{border-color:blue;}
-  85%{border-color:magenta;} 100%{border-color:red;}
-}
-@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-@keyframes pulseGlow {0%{box-shadow:0 0 0px var(--accent);}50%{box-shadow:0 0 10px var(--accent);}100%{box-shadow:0 0 0px var(--accent);} }
+        .form-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
 
-@media(max-width:480px){
-  .page-content{ max-width:360px; }
-  form{ padding:15px; }
-  h1{ font-size:1.8rem; }
-  input, select{ padding:8px; font-size:0.85rem; }
-}
+        .form-section.active {
+            display: block;
+        }
 
-#sakuraCanvas{
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  pointer-events:none; z-index:0;
-}
-</style>
+        .form-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--input-bg);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #5a6e85;
+        }
+
+        select option {
+            background: #121a2b;
+            color: #fff;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(255, 61, 0, 0.4);
+            background: rgba(15, 23, 38, 0.95);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 61, 0, 0.4);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 61, 0, 0.6);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #2a3447;
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Notification Message */
+        .message {
+            min-height: 20px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 8px;
+            padding: 8px;
+            display: none;
+        }
+
+        .message.show { display: block; }
+        .message.success { background: rgba(76, 175, 80, 0.15); color: #4CAF50; border: 1px solid #4CAF50; }
+        .message.error { background: rgba(244, 67, 54, 0.15); color: #f44336; border: 1px solid #f44336; }
+        .message.loading { background: rgba(255, 235, 59, 0.15); color: #ffeb3b; border: 1px solid #ffeb3b; animation: blink 1s infinite; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 480px) {
+            .form-card { padding: 20px 16px; }
+            input, select { padding: 10px 12px; font-size: 0.85rem; }
+        }
+    </style>
 </head>
-
 <body>
-<div class="page-content">
-<h1>Đăng ký Clan TF</h1>
-<p>Chọn nhóm muốn gia nhập và điền thông tin!</p>
-
-<div class="buttons">
-  <button class="group-btn" onclick="showForm('sinhTonForm')">1️⃣ Sinh Tồn</button>
-  <button class="group-btn" onclick="showForm('soloForm')">2️⃣ Solo Tử Chiến</button>
-  <button class="group-btn" onclick="window.location.href='trangchu.html'">🔙 Trang Chủ</button>
-  <button class="group-btn" onclick="window.location.href='hotro.html'">❓ Hỗ Trợ</button>
-</div>
-
-<form id="sinhTonForm">
-  <h2>🔥 Nhóm Sinh Tồn <button class="close-btn" onclick="hideForms()">❌</button></h2>
-
-  <input type="hidden" name="entry.group" value="Sinh Tồn">
-
-  <label>Tên trong game:</label>
-  <input type="text" name="entry.name" required>
-
-  <label>UID:</label>
-  <input type="text" name="entry.uid" required>
-
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option>
-    <option>Huyền Thoại</option><option>Cao Thủ</option>
-    <option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-
-  <label>Vai trò mong muốn:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Rush</option><option>Cover</option>
-    <option>Sniper</option><option>Hỗ trợ</option>
-  </select>
-
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="30" required>
-
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option><option>Nữ</option><option>Khác</option>
-  </select>
-
-  <label>Tên Facebook:</label>
-  <input type="text" name="entry.fb_name" required>
-
-  <label>Link Facebook:</label>
-  <input type="url" name="entry.facebook" required>
-
-  <label>Khung giờ:</label>
-  <select name="entry.time" required>
-    <option value="">-- Chọn khung giờ --</option>
-    <option>18h – 20h</option><option>19h – 21h</option>
-    <option>20h – 22h</option><option>21h – 23h</option><option>Cả ngày</option>
-  </select>
-
-  <div class="message" id="msg-sinhTonForm"></div>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
-</form>
-
-<form id="soloForm">
-  <h2>⚡ Solo Tử Chiến <button class="close-btn" onclick="hideForms()">❌</button></h2>
-
-  <input type="hidden" name="entry.group" value="Solo Tử Chiến">
-
-  <label>Tên trong game:</label>
-  <input type="text" name="entry.name" required>
-
-  <label>UID:</label>
-  <input type="text" name="entry.uid" required>
-
-  <label>Rank hiện tại:</label>
-  <select name="entry.rank" required>
-    <option value="">-- Chọn Rank --</option>
-    <option>Đồng</option><option>Bạc</option><option>Vàng</option>
-    <option>Bạch Kim</option><option>Kim Cương</option>
-    <option>Huyền Thoại</option><option>Cao Thủ</option>
-    <option>Đại Cao Thủ</option><option>Top Sever</option>
-  </select>
-
-  <label>Vai trò:</label>
-  <select name="entry.role" required>
-    <option value="">-- Chọn Vai Trò --</option>
-    <option>Kai 2</option><option>Kai 5</option>
-    <option>Headshot Kai 2</option><option>Headshot Kai 5</option>
-  </select>
-
-  <label>Tuổi:</label>
-  <input type="number" name="entry.age" min="14" max="30" required>
-
-  <label>Giới tính:</label>
-  <select name="entry.gender" required>
-    <option value="">-- Chọn Giới Tính --</option>
-    <option>Nam</option><option>Nữ</option><option>Khác</option>
-  </select>
-
-  <label>Tên Facebook:</label>
-  <input type="text" name="entry.fb_name" required>
-
-  <label>Link Facebook:</label>
-  <input type="url" name="entry.facebook" required>
-
-  <label>Khung giờ:</label>
-  <select name="entry.time" required>
-    <option value="">-- Chọn khung giờ --</option>
-    <option>18h – 20h</option><option>19h – 21h</option>
-    <option>20h – 22h</option><option>21h – 23h</option><option>Cả ngày</option>
-  </select>
-
-  <div class="message" id="msg-soloForm"></div>
-  <button type="submit" class="submit-btn">🚀 Gửi đăng ký</button>
-</form>
 
 <canvas id="sakuraCanvas"></canvas>
+
+<div class="container">
+    <div class="header">
+        <h1>TitanForce Clan</h1>
+        <p>Chọn chế độ thi đấu & hoàn tất mẫu đăng ký</p>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-actions">
+        <a href="trangchu.html" class="nav-btn">🔙 Trang Chủ</a>
+        <a href="hotro.html" class="nav-btn">❓ Hỗ Trợ</a>
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div class="tab-selector">
+        <button class="tab-btn active" id="btn-sinhTon" onclick="switchTab('sinhTon')">🔥 Sinh Tồn</button>
+        <button class="tab-btn" id="btn-solo" onclick="switchTab('solo')">⚡ Solo Tử Chiến</button>
+    </div>
+
+    <div class="form-card">
+        <!-- FORM 1: SINH TỒN -->
+        <form id="sinhTonForm" class="form-section active">
+            <div class="form-title">🏆 Nhóm Sinh Tồn</div>
+            <input type="hidden" name="entry.group" value="Sinh Tồn">
+
+            <div class="form-group">
+                <label>Tên trong game (IGN):</label>
+                <input type="text" name="entry.name" placeholder="Ví dụ: TF.Kuronami" required>
+            </div>
+
+            <div class="form-group">
+                <label>UID Game:</label>
+                <input type="text" name="entry.uid" placeholder="Nhập ID nhân vật" required>
+            </div>
+
+            <div class="form-group">
+                <label>Rank hiện tại:</label>
+                <select name="entry.rank" required>
+                    <option value="">-- Chọn Rank --</option>
+                    <option>Đồng / Bạc / Vàng</option>
+                    <option>Bạch Kim</option>
+                    <option>Kim Cương</option>
+                    <option>Huyền Thoại</option>
+                    <option>Cao Thủ</option>
+                    <option>Đại Cao Thủ</option>
+                    <option>Top Server</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Vai trò sở trường:</label>
+                <select name="entry.role" required>
+                    <option value="">-- Chọn Vai Trò --</option>
+                    <option>Rush (Tiên phong)</option>
+                    <option>Cover (Bọc lót)</option>
+                    <option>Sniper (Bắn tỉa)</option>
+                    <option>Support (Hỗ trợ)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tuổi:</label>
+                <input type="number" name="entry.age" min="14" max="30" placeholder="14 - 30" required>
+            </div>
+
+            <div class="form-group">
+                <label>Giới tính:</label>
+                <select name="entry.gender" required>
+                    <option value="">-- Chọn Giới Tính --</option>
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                    <option>Khác</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tên Facebook:</label>
+                <input type="text" name="entry.fb_name" placeholder="Tên FB cá nhân" required>
+            </div>
+
+            <div class="form-group">
+                <label>Link Facebook:</label>
+                <input type="url" name="entry.facebook" placeholder="https://facebook.com/..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Khung giờ Online:</label>
+                <select name="entry.time" required>
+                    <option value="">-- Chọn khung giờ --</option>
+                    <option>18h – 20h</option>
+                    <option>19h – 21h</option>
+                    <option>20h – 22h</option>
+                    <option>21h – 23h</option>
+                    <option>Linh hoạt / Cả ngày</option>
+                </select>
+            </div>
+
+            <div class="message" id="msg-sinhTonForm"></div>
+            <button type="submit" class="submit-btn">🚀 Gửi Đăng Ký</button>
+        </form>
+
+        <!-- FORM 2: SOLO TỬ CHIẾN -->
+        <form id="soloForm" class="form-section">
+            <div class="form-title">⚔️ Solo Tử Chiến</div>
+            <input type="hidden" name="entry.group" value="Solo Tử Chiến">
+
+            <div class="form-group">
+                <label>Tên trong game (IGN):</label>
+                <input type="text" name="entry.name" placeholder="Ví dụ: TF.Kuronami" required>
+            </div>
+
+            <div class="form-group">
+                <label>UID Game:</label>
+                <input type="text" name="entry.uid" placeholder="Nhập ID nhân vật" required>
+            </div>
+
+            <div class="form-group">
+                <label>Rank hiện tại:</label>
+                <select name="entry.rank" required>
+                    <option value="">-- Chọn Rank --</option>
+                    <option>Đồng / Bạc / Vàng</option>
+                    <option>Bạch Kim</option>
+                    <option>Kim Cương</option>
+                    <option>Huyền Thoại</option>
+                    <option>Cao Thủ</option>
+                    <option>Đại Cao Thủ</option>
+                    <option>Top Server</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Thể loại Solo:</label>
+                <select name="entry.role" required>
+                    <option value="">-- Chọn Đột Phá / Kỹ Năng --</option>
+                    <option>Kai 2</option>
+                    <option>Kai 5</option>
+                    <option>Headshot Kai 2</option>
+                    <option>Headshot Kai 5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tuổi:</label>
+                <input type="number" name="entry.age" min="14" max="30" placeholder="14 - 30" required>
+            </div>
+
+            <div class="form-group">
+                <label>Giới tính:</label>
+                <select name="entry.gender" required>
+                    <option value="">-- Chọn Giới Tính --</option>
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                    <option>Khác</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tên Facebook:</label>
+                <input type="text" name="entry.fb_name" placeholder="Tên FB cá nhân" required>
+            </div>
+
+            <div class="form-group">
+                <label>Link Facebook:</label>
+                <input type="url" name="entry.facebook" placeholder="https://facebook.com/..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Khung giờ Online:</label>
+                <select name="entry.time" required>
+                    <option value="">-- Chọn khung giờ --</option>
+                    <option>18h – 20h</option>
+                    <option>19h – 21h</option>
+                    <option>20h – 22h</option>
+                    <option>21h – 23h</option>
+                    <option>Linh hoạt / Cả ngày</option>
+                </select>
+            </div>
+
+            <div class="message" id="msg-soloForm"></div>
+            <button type="submit" class="submit-btn">🚀 Gửi Đăng Ký</button>
+        </form>
+    </div>
 </div>
 
 <script>
-const canvas=document.getElementById('sakuraCanvas');
-const ctx=canvas.getContext('2d');
-let W=canvas.width=innerWidth;
-let H=canvas.height=innerHeight;
-let PETAL_COUNT=innerWidth<=768?10:30;
-let petals=[];
-const random=(a,b)=>Math.random()*(b-a)+a;
+// --- CHUYỂN TAB THÔNG MẠNH ---
+function switchTab(mode) {
+    const sinhTonForm = document.getElementById('sinhTonForm');
+    const soloForm = document.getElementById('soloForm');
+    const btnSinhTon = document.getElementById('btn-sinhTon');
+    const btnSolo = document.getElementById('btn-solo');
 
-function init(){
-  petals=[];
-  for(let i=0;i<PETAL_COUNT;i++){
-    petals.push({
-      x:random(0,W), y:random(0,H),
-      r:random(5,12), d:random(1,3),
-      swing:random(0,2*Math.PI), s:random(0.01,0.03),
-      color:"rgba(255,182,193,0.8)"
-    });
-  }
-}
-
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  petals.forEach(p=>{
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.color; ctx.fill();
-    p.y+=p.d; p.x+=Math.sin(p.swing)*2; p.swing+=p.s;
-    if(p.y>H)p.y=-10,p.x=random(0,W);
-  });
-  requestAnimationFrame(draw);
-}
-
-onresize=()=>{ W=canvas.width=innerWidth; H=canvas.height=innerHeight; init(); };
-init(); draw();
-
-window.hideForms=()=>{
-  sinhTonForm.classList.remove("active");
-  soloForm.classList.remove("active");
-};
-window.showForm=id=>{
-  hideForms();
-  document.getElementById(id).classList.add("active");
-};
-
-const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJuXOPSHsYShEUUq7yosVYKzxC6UnBu_G_TkxPqEtXvk8d9s2/exec";
-
-function validURL(u){
-  try{
-    let x=new URL(u);
-    return x.protocol==="http:"||x.protocol==="https:";
-  }catch{ return false; }
-}
-
-function submitForm(formId){
-  const form=document.getElementById(formId);
-  form.addEventListener("submit",e=>{
-    e.preventDefault();
-    const msg=document.getElementById("msg-"+formId);
-    const submitBtn = form.querySelector(".submit-btn");
-    const fd=new FormData(form);
-    const age=+fd.get("entry.age");
-    const fb=fd.get("entry.facebook");
-
-    if(age<14||age>30){
-      msg.textContent="Tuổi phải trong khoảng 14 - 30";
-      msg.className="message error";
-      return;
+    if (mode === 'sinhTon') {
+        sinhTonForm.classList.add('active');
+        soloForm.classList.remove('active');
+        btnSinhTon.classList.add('active');
+        btnSolo.classList.remove('active');
+    } else {
+        soloForm.classList.add('active');
+        sinhTonForm.classList.remove('active');
+        btnSolo.classList.add('active');
+        btnSinhTon.classList.remove('active');
     }
-    if(!validURL(fb)){
-      msg.textContent="Link Facebook không hợp lệ";
-      msg.className="message error";
-      return;
+}
+
+// --- HIỆU ỨNG ANIME SAKURA PETALS ---
+const canvas = document.getElementById('sakuraCanvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+let PETAL_COUNT = window.innerWidth <= 768 ? 12 : 25;
+let petals = [];
+
+const random = (a, b) => Math.random() * (b - a) + a;
+
+function initSakura() {
+    petals = [];
+    for (let i = 0; i < PETAL_COUNT; i++) {
+        petals.push({
+            x: random(0, W),
+            y: random(0, H),
+            r: random(4, 9),
+            d: random(0.8, 2.2),
+            swing: random(0, 2 * Math.PI),
+            s: random(0.01, 0.025),
+            color: "rgba(255, 182, 193, 0.75)"
+        });
     }
-
-    msg.textContent="Đang gửi đăng ký... Vui lòng chờ!";
-    msg.className="message loading";
-    submitBtn.disabled = true;
-    submitBtn.textContent = "⏳ Đang xử lý...";
-    submitBtn.style.opacity = '0.7';
-
-    fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:fd})
-    .then(()=>{
-      msg.textContent="Đăng ký thành công! Chờ phản hồi từ quân nhé!";
-      msg.className="message success";
-      form.reset();
-      submitBtn.textContent = "🚀 Gửi đăng ký";
-    })
-    .catch(()=>{
-      msg.textContent="❌ Gửi thất bại! Vui lòng kiểm tra và thử lại.";
-      msg.className="message error";
-      submitBtn.textContent = "🚀 Gửi đăng ký";
-    })
-    .finally(()=>{
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
-    });
-  });
 }
 
-submitForm("sinhTonForm");
-submitForm("soloForm");
+function drawSakura() {
+    ctx.clearRect(0, 0, W, H);
+    petals.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y += p.d;
+        p.x += Math.sin(p.swing) * 1.5;
+        p.swing += p.s;
+        if (p.y > H) {
+            p.y = -10;
+            p.x = random(0, W);
+        }
+    });
+    requestAnimationFrame(drawSakura);
+}
 
-onload=()=>{
-  let btns=document.querySelectorAll(".group-btn");
-  btns.forEach(b=>b.classList.add("highlight"));
-  setTimeout(()=>btns.forEach(b=>b.classList.remove("highlight")),3000);
+window.onresize = () => {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    initSakura();
 };
+initSakura();
+drawSakura();
 
-function focusHandler(e) {
-  const element = e.target;
-  if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
-    setTimeout(() => {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-      window.scrollBy(0, -20);
-    }, 350);
-  }
+// --- XỬ LÝ GỬI FORM ---
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzlLo4thOVaMP9tcEHfJuXOPSHsYShEUUq7yosVYKzxC6UnBu_G_TkxPqEtXvk8d9s2/exec";
+
+function validURL(str) {
+    try {
+        let u = new URL(str);
+        return u.protocol === "http:" || u.protocol === "https:";
+    } catch { 
+        return false; 
+    }
 }
 
-document.body.addEventListener('focus', focusHandler, true);
+function bindFormSubmit(formId) {
+    const form = document.getElementById(formId);
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        const msg = document.getElementById("msg-" + formId);
+        const submitBtn = form.querySelector(".submit-btn");
+        const fd = new FormData(form);
+        const age = +fd.get("entry.age");
+        const fb = fd.get("entry.facebook");
 
-function pageLiftOnFocus() {
-  const fields = document.querySelectorAll("input, select, textarea");
+        msg.classList.remove("success", "error", "loading");
+        msg.classList.add("show");
 
-  fields.forEach(el => {
-    el.addEventListener("focus", () => {
-      document.body.style.transform = "translateY(-120px)";
-      document.body.style.transition = "0.3s ease";
+        if (age < 14 || age > 30) {
+            msg.textContent = "⚠️ Độ tuổi đăng ký hợp lệ từ 14 - 30 tuổi!";
+            msg.classList.add("error");
+            return;
+        }
+
+        if (!validURL(fb)) {
+            msg.textContent = "⚠️ Vui lòng nhập đúng định dạng link Facebook!";
+            msg.classList.add("error");
+            return;
+        }
+
+        msg.textContent = "⏳ Đang gửi hồ sơ... Vui lòng chờ trong giây lát!";
+        msg.classList.add("loading");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "⏳ Đang Xử Lý...";
+
+        fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: fd })
+            .then(() => {
+                msg.textContent = "🎉 Đăng ký thành công! TitanForce sẽ liên hệ bạn sớm nhất!";
+                msg.classList.remove("loading");
+                msg.classList.add("success");
+                form.reset();
+                submitBtn.textContent = "🚀 Gửi Đăng Ký";
+            })
+            .catch(() => {
+                msg.textContent = "❌ Gửi thất bại! Vui lòng kiểm tra kết nối và thử lại.";
+                msg.classList.remove("loading");
+                msg.classList.add("error");
+                submitBtn.textContent = "🚀 Thử Gửi Lại";
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+            });
     });
-
-    el.addEventListener("blur", () => {
-      document.body.style.transform = "translateY(0)";
-    });
-  });
 }
 
-pageLiftOnFocus();
+bindFormSubmit("sinhTonForm");
+bindFormSubmit("soloForm");
+
+// --- TỐI ƯU FOCUS TRÊN THIẾT BỊ DI ĐỘNG ---
+document.body.addEventListener('focus', (e) => {
+    if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) {
+        setTimeout(() => {
+            e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    }
+}, true);
 </script>
+
 </body>
 </html>
