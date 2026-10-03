@@ -2,296 +2,549 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Danh sách hỗ trợ — TitanForce (FF)</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Trung Tâm Hỗ Trợ — TitanForce Gaming</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
-:root{
-    --bg:#070e1c;
-    --card:#0f1c2b;
-    --accent:#ff4500;
-    --accent-hover:#e03f00;
-    --text:#e6eef8;
-    --subtle-text:#9fb0c8;
-    --border-color:rgba(255,255,255,0.08);
-    --neon-glow: rgba(255, 69, 0, 0.7);
-    --role-color1: #ff6f00;  /* màu cam neon */
-    --role-color2: #00ff99;  /* màu xanh neon */
-    --issues-color1: #00e6ff; /* màu xanh dương neon */
-    --issues-color2: #ffcc00; /* màu vàng neon */
+:root {
+    --bg-dark: #030712;
+    --card-bg: rgba(13, 22, 41, 0.7);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --primary: #ff3366;
+    --primary-glow: rgba(255, 51, 102, 0.4);
+    --cyan: #00f2fe;
+    --cyan-glow: rgba(0, 242, 254, 0.35);
+    --gold: #ffb703;
+    --gold-glow: rgba(255, 183, 3, 0.3);
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
 }
-body{
-    font-family:'Montserrat',sans-serif;
-    background: url('logo2.jpg') center/cover fixed;
-    color:var(--text);
-    margin:0;
-    padding:24px;
-    min-height:100vh;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
 }
-.container{max-width:900px;margin:0 auto;}
-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:24px;
-    padding:20px;
-    border-radius:16px;
-    background: rgba(15,28,43,0.8);
-    border:2px solid var(--accent);
-    box-shadow:0 0 15px var(--neon-glow), 0 0 25px rgba(255,69,0,0.2);
-    animation: fadeInSlideUp 0.8s ease-out forwards;
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 51, 102, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.9) 0%, var(--bg-dark) 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
 }
-header h1{
-    font-size:28px;
-    font-weight:700;
-    color:white;
-    text-shadow:0 0 5px var(--accent),0 0 10px var(--accent-hover),0 0 20px rgba(255,69,0,0.5);
+
+.container {
+    width: 100%;
+    max-width: 880px;
+    position: relative;
+    z-index: 2;
 }
-header .subtitle{color:var(--subtle-text);}
-.card{
-    background:rgba(15,28,43,0.85);
-    border-radius:20px;
-    padding:25px;
-    border:2px solid var(--accent);
-    box-shadow:0 0 15px rgba(255,69,0,0.3),0 15px 30px rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
-    margin-bottom:24px;
-    animation: fadeInSlideUp 0.8s ease-out 0.3s forwards;
+
+/* Cyber Grid Background overlay */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px; right: -60px; bottom: -60px;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 36px 36px;
+    z-index: -1;
+    pointer-events: none;
+    mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%);
 }
-.list{display:grid; gap:16px; margin-top:16px;}
-.support{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:14px 18px;
-    border-radius:14px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    position:relative;
-    cursor:pointer;
-    opacity:0;
-    transform: translateY(10px);
+
+/* Header Section */
+header {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 28px 36px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
 }
-.support.animate{
-    animation: fadeInSlideUp 0.5s ease-out forwards;
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--primary), transparent);
+    animation: scanline 4s linear infinite;
 }
-.support:hover{
-    background:rgba(255,255,255,0.1);
-    transform:translateY(-4px);
-    box-shadow:0 0 20px rgba(255,69,0,0.5),0 0 40px rgba(255,69,0,0.3),0 0 60px rgba(255,140,0,0.2);
+
+@keyframes scanline {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
-.support:hover .role{
-    text-shadow: 0 0 5px rgba(255, 69, 0, 0.9), 0 0 10px rgba(255, 165, 0, 0.5);
-    transition: all 0.3s ease;
+
+.header-title h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.3));
 }
-.support:hover .issues{
-    text-shadow: 0 0 3px rgba(230, 238, 248, 0.5);
-    transition: all 0.3s ease;
+
+.header-title p {
+    font-size: 13.5px;
+    color: var(--text-sub);
+    margin-top: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.avatar{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    flex-shrink:0;
-    background:var(--accent);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    font-size:18px;
-    box-shadow:0 0 15px rgba(255,69,0,0.8), inset 0 0 6px rgba(255,255,255,0.5);
-    overflow:hidden;
-    border:2px solid white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.support .avatar:hover{
-    transform: scale(1.15) rotate(-3deg);
-    box-shadow:0 0 25px rgba(255,69,0,0.9), inset 0 0 10px rgba(255,255,255,0.5);
-}
-.avatar img{width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;}
-.meta{flex:1;}
-.meta .role{font-size:14px;font-weight:600; margin-bottom:4px;}
-.meta .role.role-support{color: var(--role-color1);}
-.meta .role.role-technical{color: var(--role-color2);}
-.issues{font-size:13px;margin-top:4px;line-height:1.4;}
-.issues.issues-warning{color: var(--issues-color2);}
-.issues.issues-technical{color: var(--issues-color1);}
-.actions{display:flex; gap:10px; flex-shrink:0;}
-.btn{border:0; padding:10px 14px; border-radius:8px; background:var(--accent); color:white; cursor:pointer; font-weight:600; transition:all 0.3s ease; position:relative; min-height:44px;}
-.btn.primary:hover{background:var(--accent-hover); animation: pulseBtn 1.2s infinite;}
-@keyframes pulseBtn{0% { box-shadow:0 0 5px var(--accent); }50% { box-shadow:0 0 15px var(--accent-hover); }100% { box-shadow:0 0 5px var(--accent); }}
-.btn.copy{background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1);}
-.btn.copy:hover{background:rgba(255,255,255,0.15); transform: scale(1.05);}
-.btn.back{background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); color:white; font-weight:600;}
-.btn.back:hover{background: rgba(255,69,0,0.9); border-color: var(--accent); transform: rotate(-3deg) scale(1.05);}
-footer{margin-top:24px;color:#7892a8;font-size:12px;text-align:center;}
-@media(max-width:600px){
-    body{padding:15px;}
-    header{flex-direction:column; align-items:stretch; gap:8px; margin-bottom:15px; padding:15px;}
-    .card{padding:15px; border-radius:12px;}
-    .support{flex-wrap:wrap; justify-content:space-between; padding:12px;}
-    .avatar{width:44px; height:44px; font-size:16px;}
-    .meta{min-width:65%;}
-    .actions{width:100%; justify-content:flex-end; margin-top:8px; gap:8px;}
-    .btn{padding:10px 12px; font-size:15px; border-radius:10px;}
-}
-.pulsating-author{animation: glow-pulse 3s infinite alternate;}
-@keyframes glow-pulse{0% { text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);}50% { text-shadow:0 0 10px rgba(255,204,0,0.9),0 0 20px rgba(255,100,0,0.7); transform:scale(1.05);}100% { text-shadow:0 0 5px rgba(255,204,0,0.7),0 0 10px rgba(255,204,0,0.5); transform:scale(1);}}
-@keyframes fadeInSlideUp{from {opacity: 0; transform: translateY(20px);}to {opacity: 1; transform: translateY(0);}}
-.time-info{
-    font-weight: 600;
-    color: var(--accent);
-    text-shadow: 0 0 5px rgba(255, 69, 0, 0.7), 0 0 10px rgba(255, 69, 0, 0.4);
-    animation: subtle-shake 4s ease-in-out 1s infinite alternate; 
-}
-@keyframes subtle-shake {
-    0% { transform: translateX(0px); }
-    10% { transform: translateX(-1px); }
-    20% { transform: translateX(1px); }
-    30% { transform: translateX(0px); }
-    100% { transform: translateX(0px); }
-}
-.warning-text{
-    color: #ffcc00;
-    text-shadow: 0 0 5px rgba(255, 204, 0, 0.7), 0 0 10px rgba(255, 204, 0, 0.4);
-}
-.icon {
-    margin-right: 8px;
-    font-size: 16px;
+
+.header-title p::before {
+    content: '';
     display: inline-block;
-    animation: neon-flicker 1.5s infinite alternate;
+    width: 6px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--cyan);
 }
-.time-info .icon { color: var(--accent); }
-.warning-text .icon { color: #ffcc00; }
-@keyframes neon-flicker {
-    0% { text-shadow: 0 0 3px rgba(255,255,255,0.5); }
-    25% { text-shadow: 0 0 6px rgba(255,204,0,0.7); }
-    50% { text-shadow: 0 0 10px rgba(255,204,0,1); }
-    75% { text-shadow: 0 0 6px rgba(255,204,0,0.7); }
-    100% { text-shadow: 0 0 3px rgba(255,255,255,0.5); }
+
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-home:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, #e01e5a 100%);
+    border-color: transparent;
+    box-shadow: 0 0 25px var(--primary-glow);
+    transform: translateY(-2px);
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.info-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+}
+
+.info-card.schedule:hover { border-color: rgba(0, 242, 254, 0.3); }
+.info-card.security:hover { border-color: rgba(255, 183, 3, 0.3); }
+
+.info-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.info-card.schedule .info-icon {
+    background: rgba(0, 242, 254, 0.1);
+    color: var(--cyan);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.15);
+}
+
+.info-card.security .info-icon {
+    background: rgba(255, 183, 3, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(255, 183, 3, 0.25);
+    box-shadow: inset 0 0 15px rgba(255, 183, 3, 0.15);
+}
+
+.info-text label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-sub);
+    font-weight: 800;
+    margin-bottom: 3px;
+}
+
+.info-text span {
+    font-size: 13px;
+    color: var(--text-main);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Support Staff Cards */
+.support-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.support-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.support-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(0, 242, 254, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.12), 0 0 20px rgba(0, 242, 254, 0.05);
+}
+
+.avatar-box {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+}
+
+.avatar-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
+}
+
+.support-card:hover .avatar-box img {
+    transform: scale(1.05);
+    border-color: var(--cyan);
+}
+
+.status-online {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 18px;
+    height: 18px;
+    background: #10b981;
+    border-radius: 50%;
+    border: 3px solid #0d1629;
+    box-shadow: 0 0 12px #10b981;
+    animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.details {
+    flex: 1;
+}
+
+.badge-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cyan);
+    background: rgba(0, 242, 254, 0.08);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    margin-bottom: 12px;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-item {
+    font-size: 12.5px;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.support-card:hover .tag-item {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.tag-item i {
+    font-size: 13px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-action {
+    padding: 12px 22px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-chat {
+    background: linear-gradient(135deg, var(--primary) 0%, #e01e5a 100%);
+    color: white;
+    box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.btn-chat:hover {
+    box-shadow: 0 8px 30px var(--primary-glow);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn-copy {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-copy:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-sub);
+}
+
+footer a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s;
+    position: relative;
+}
+
+footer a:hover {
+    text-shadow: 0 0 10px var(--cyan-glow);
+}
+
+/* Responsive Customization */
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    body { padding: 16px 10px; }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 22px 20px;
+    }
+
+    .btn-home {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .support-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 22px 20px;
+    }
+
+    .action-buttons {
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    .btn-action {
+        flex: 1;
+        justify-content: center;
+    }
 }
 </style>
 </head>
 <body>
-<div class="container">
-<header>
-<div>
-<h1>Hỗ trợ — Web FF</h1>
-<p class="subtitle">Danh sách liên hệ Facebook kèm tên hỗ trợ (click để chat trực tiếp).</p>
-</div>
-<button class="btn back" onclick="goIndex()">⬅️ Quay về trang chính</button>
-</header>
-<div class="card">
-  <div class="small" style="font-size:14px; line-height:1.6; padding-bottom:10px; margin-bottom:15px; border-bottom:1px dashed var(--border-color);">
-    <div class="time-info"><span class="icon">⏰</span> Giờ hỗ trợ T2 - T6 : 7:00 - 21:00 hàng ngày.</div>
-    <div class="time-info"><span class="icon">⏰</span> Giờ hỗ trợ T7 - Chủ nhật : 7:00 - 23:30 hàng ngày.</div>
-    <div class="warning-text"><span class="icon">⚠️</span> Chỉ liên hệ qua các link Facebook tại đây. Không cung cấp mật khẩu/mã OTP.</div>
-    <div class="warning-text"><span class="icon">⚠️</span> Nếu đội ngũ bên mình không trả lời tin nhắn kịp. Thông cảm cho bên đội ngũ của tôi.</div>
-  </div>
 
-    <div class="support" data-fb="https://www.facebook.com/share/1BgP2pED8P/" data-img="trung1.jpg">
-      <div class="avatar"></div>
-      <div class="meta">
-        <div class="role role-technical">Hỗ trợ kỹ thuật — Web FF</div>
-        <div class="issues issues-technical">🔹 Lỗi đăng ký tài khoản<br>🔹 Lỗi kết nối server</div>
-      </div>
-      <div class="actions">
-        <button class="btn primary" onclick="openFB(this)">Mở Facebook</button>
-        <button class="btn copy" onclick="copyLink(this)">Sao chép link</button>
-      </div>
+<div class="container">
+    <header>
+        <div class="header-title">
+            <h1>TITANFORCE SUPPORT</h1>
+            <p>Hệ thống hỗ trợ trực tuyến kỹ thuật & tài khoản 24/7</p>
+        </div>
+        <button class="btn-home" onclick="goIndex()">
+            <i class="fa-solid fa-house-user"></i> Trang Chủ
+        </button>
+    </header>
+
+    <div class="info-grid">
+        <div class="info-card schedule">
+            <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
+            <div class="info-text">
+                <label>Thời Gian Làm Việc</label>
+                <span>T2-T6: 07:00-21:00 | T7-CN: 07:00-23:30</span>
+            </div>
+        </div>
+        
+        <div class="info-card security">
+            <div class="info-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="info-text">
+                <label>Bảo Mật An Toàn</label>
+                <span>Tuyệt đối không cấp Mật khẩu & Mã OTP</span>
+            </div>
+        </div>
     </div>
 
-<footer><p>Trang web được code và thiết kế bởi <a target="_blank" href="gioithieu.html" class="pulsating-author">TF.Kuronami</a>. © 2025 Quân đoàn TF.</p></footer>
+    <div class="support-wrapper">
+        <!-- Support Card 1 -->
+        <div class="support-card" data-fb="https://www.facebook.com/share/1BgP2pED8P/">
+            <div class="avatar-box">
+                <img src="trung1.jpg" alt="Avatar Hỗ Trợ" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=TitanSupport'">
+                <div class="status-online"></div>
+            </div>
+
+            <div class="details">
+                <div class="badge-role"><i class="fa-solid fa-headset"></i> Hỗ Trợ Kỹ Thuật Web</div>
+                <div class="tags-container">
+                    <span class="tag-item"><i class="fa-solid fa-circle-exclamation" style="color:var(--primary)"></i> Lỗi đăng ký tài khoản</span>
+                    <span class="tag-item"><i class="fa-solid fa-wifi" style="color:var(--cyan)"></i> Lỗi kết nối Server</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-action btn-chat" onclick="openFB(this)">
+                    <i class="fa-brands fa-facebook-messenger"></i> Nhắn Tin
+                </button>
+                <button class="btn-action btn-copy" onclick="copyLink(this)">
+                    <i class="fa-regular fa-copy"></i> Sao Chép
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Thiết kế bởi <a href="gioithieu.html" target="_blank">TF.Kuronami</a> • © 2025 Quân đoàn TitanForce</p>
+    </footer>
 </div>
 
 <script>
-function goIndex(){window.location.href='trangchu.html';}
-function openFB(btn){
-    const item = btn.closest('.support');
-    const url = item.getAttribute('data-fb') || '';
-    if(url) window.open(url,'_blank');
+function goIndex() {
+    window.location.href = 'trangchu.html';
 }
-function copyLink(btn){
-    const item = btn.closest('.support');
-    const url = item.getAttribute('data-fb') || '';
-    if(url){
-        navigator.clipboard.writeText(url).then(()=>{
-            btn.textContent='Đã sao chép ✓';
-            setTimeout(()=>btn.textContent='Sao chép link',1200);
-        }).catch(()=>{alert('Trình duyệt không cho phép sao chép link')});
+
+function openFB(btn) {
+    const item = btn.closest('.support-card');
+    const url = item.getAttribute('data-fb');
+    if (url) window.open(url, '_blank');
+}
+
+function copyLink(btn) {
+    const item = btn.closest('.support-card');
+    const url = item.getAttribute('data-fb');
+    if (url) {
+        navigator.clipboard.writeText(url).then(() => {
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check" style="color:#10b981"></i> Đã Chép';
+            setTimeout(() => btn.innerHTML = originalHTML, 1500);
+        }).catch(() => {
+            alert('Không thể sao chép liên kết!');
+        });
     }
 }
-function initAvatarAndAnimation(){
-    document.querySelectorAll('.support').forEach(s=>{
-        const av = s.querySelector('.avatar');
-        const img = s.getAttribute('data-img');
-        if(img){
-            const image = document.createElement('img');
-            image.src = img;
-            av.innerHTML='';
-            av.appendChild(image);
-        }
-    });
-    document.querySelectorAll('.support').forEach(s=>{
-        s.addEventListener('click', e=>{
-            if(!e.target.closest('.btn')){
-                const url = s.getAttribute('data-fb');
-                if(url) window.open(url,'_blank');
-            }
-        });
-    });
-    const supportItems = document.querySelectorAll('.support');
-    supportItems.forEach((item, index) => {
-        const delay = 0.6 + (index * 0.15);
-        item.style.animationDelay = `${delay}s`;
-        item.classList.add('animate');
-    });
-}
-document.addEventListener('DOMContentLoaded', initAvatarAndAnimation);
- document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à,cút ngay cho bố"); });
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
 
-    document.addEventListener('keydown', function(e) {
-        // Chặn phím Ctrl + [C,X,V,S,U,A]
-        if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
-        // Chặn Ctrl + Shift + [I,J,C]
-        if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-        // Chặn F12
-        if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-    });
-
-    // Chặn mở DevTools console (thủ thuật cơ bản)
-    setInterval(function(){
-        if(window.devtools && window.devtools.open) {
-            alert("⚠️ DevTools đang mở! Vui lòng đóng để tiếp tục.");
-            window.devtools.open = false;
-        }
-    }, 1000);
-
-    // Chặn copy bằng chuột và bàn phím
-    window.oncopy = window.oncut = window.onpaste = function(e){
+// Chống click chuột phải & phím tắt soi code cơ bản
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase()))) {
         e.preventDefault();
-        alert("⚠️ Không được phép sao chép nội dung trang!");
-        return false;
-    };
-
-    // Chặn click giữa (scroll wheel) mở menu DevTools
-    document.addEventListener('mousedown', function(e){
-        if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
-    });
-
-    // Thêm “bẫy” Ctrl+Shift+I theo cách nâng cao
-    document.addEventListener('keyup', function(e){
-        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i'){ 
-            e.preventDefault(); 
-            alert("⚠️ DevTools bị chặn!");
-        }
-    });
-
+    }
+});
 </script>
+
 </body>
 </html>
