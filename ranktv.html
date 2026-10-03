@@ -1,391 +1,791 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bảng Xếp Loại Rank — Quân đoàn TF</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-<style>
-/* ---------------------------------------------------- */
-/* CÁC STYLE CƠ BẢN VÀ HIỆU ỨNG NEON/CYBERPUNK */
-/* ---------------------------------------------------- */
-body {
-    background: url('logo2.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    padding: 20px 5px;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    filter: brightness(1.05);
-    position: relative;
-    overflow-x: hidden;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF Esports — Bảng Xếp Loại Rank Quân Đoàn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --cyan: #00f3ff;
+            --pink: #ff0055;
+            --purple: #7000ff;
+            --gold: #ffb700;
+            --silver: #e2e8f0;
+            --bronze: #d97706;
+            --bg-dark: #030712;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(0, 243, 255, 0.25);
+        }
 
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(to right, rgba(0, 234, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 234, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    z-index: -1;
-    opacity: 0.8;
-    pointer-events: none;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
 
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.2em;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-    color: #00eaff;
-    text-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff, 0 0 40px rgba(0, 234, 255, 0.5);
-    animation: glitch 3s infinite alternate;
-    display: inline-block;
-}
+        body {
+            background: var(--bg-dark) url('logo2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 12px;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-@keyframes glitch {
-    0% { transform: translate(1px, 1px) skewX(0); }
-    5% { transform: translate(-1px, -1px) skewX(-2deg); }
-    10% { transform: translate(1px, 2px) skewX(0); }
-    15% { transform: translate(-2px, 1px) skewX(2deg); }
-    20% { transform: translate(2px, -1px) skewX(-1deg); }
-    25% { transform: translate(-1px, -2px) skewX(1deg); }
-    30%, 100% { transform: translate(0, 0) skewX(0); }
-}
+        /* Ambient Glow & Grid Layer */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 15% 15%, rgba(0, 243, 255, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(255, 0, 85, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.1) 0%, transparent 60%),
+                linear-gradient(to bottom, rgba(3, 7, 18, 0.85), rgba(3, 7, 18, 0.95));
+            z-index: -2;
+            pointer-events: none;
+        }
 
-/* Thanh menu */
-.controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
+        #cyberCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-select,
-button {
-    min-width: 90px;
-    max-width: 180px;
-    font-size: 0.95em;
-    padding: 9px 18px;
-    border-radius: 25px;
-    font-weight: 700;
-    background: linear-gradient(145deg, #00bfff, #00eaff);
-    color: #0f2027;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 10px rgba(0, 234, 255, 0.8),
-                0 0 20px rgba(0, 234, 255, 0.4);
-}
+        .main-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            z-index: 2;
+        }
 
-select:hover,
-button:hover {
-    background: linear-gradient(145deg, #00eaff, #00bfff);
-    transform: translateY(-3px);
-    box-shadow: 0 0 18px rgba(0, 191, 255, 1);
-}
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-/* Bảng */
-.table-container {
-    max-width: 900px;
-    margin: auto;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 234, 255, 0.9),
-                0 0 60px rgba(0, 234, 255, 0.4);
-    background: rgba(0, 10, 15, 0.85);
-    border: 3px solid #00eaff;
-    padding: 5px;
-}
+        .guild-badge {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            letter-spacing: 6px;
+            color: var(--pink);
+            text-transform: uppercase;
+            font-weight: 800;
+            text-shadow: 0 0 12px rgba(255, 0, 85, 0.8);
+            margin-bottom: 6px;
+            padding: 4px 16px;
+            background: rgba(255, 0, 85, 0.1);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 20px;
+        }
 
-thead {
-    background: linear-gradient(90deg, #00bfff, #00eaff, #00bfff);
-    color: #0f2027;
-    text-transform: uppercase;
-}
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.6em;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(180deg, #ffffff 20%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+            text-transform: uppercase;
+        }
 
-th, td {
-    padding: 8px 6px;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    text-align: center;
-    font-size: 0.85em;
-}
+        /* DASHBOARD STATS */
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-tbody tr:hover {
-    background: rgba(0, 234, 255, 0.25);
-    box-shadow: inset 0 0 8px rgba(0, 234, 255, 0.5);
-    cursor: pointer;
-}
+        .stat-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 243, 255, 0.05);
+            transition: all 0.3s ease;
+        }
 
-.rank-img {
-    height: 25px;
-    vertical-align: middle;
-}
+        .stat-box:hover {
+            border-color: var(--cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
 
-/* Hiệu ứng top 1,2,3 */
-tbody tr:first-child td:nth-child(1) {
-    color: gold;
-    font-weight: bold;
-    text-shadow: 0 0 5px gold;
-    font-size: 1.2em;
-}
-tbody tr:nth-child(1) td:nth-child(2) {
-    color: #ffd700;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffea00;
-}
-tbody tr:nth-child(2) td {
-    color: silver;
-    font-weight: bold;
-}
-tbody tr:nth-child(3) td {
-    color: #cd7f32;
-    font-weight: bold;
-}
+        .stat-box i {
+            font-size: 1.4em;
+            color: var(--cyan);
+            margin-bottom: 6px;
+        }
 
-footer {
-    margin-top: 20px;
-    font-size: 0.8em;
-    color: #00eaff;
-    text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
-}
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            font-weight: 800;
+            color: #fff;
+        }
 
-/* =================================== */
-/* HIỆU ỨNG HOA ANH ĐÀO RƠI (SAKURA)  */
-/* =================================== */
-.sakura {
-    position: fixed;
-    top: -10px;
-    width: 12px;
-    height: 12px;
-    background-image: url('sakura.png');
-    background-size: cover;
-    pointer-events: none;
-    opacity: 0.8;
-    z-index: 9999;
-    animation: sakuraFall linear infinite;
-}
+        .stat-title {
+            font-size: 0.85em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
 
-@keyframes sakuraFall {
-    0% { transform: translateX(0) rotate(0deg); opacity: 1; }
-    50% { transform: translateX(20px) rotate(180deg); opacity: 0.9; }
-    100% { transform: translateY(100vh) translateX(-20px) rotate(360deg); opacity: 0; }
-}
-</style>
+        /* HALL OF FAME PODIUM */
+        .podium-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 16px;
+            margin-bottom: 40px;
+            padding: 10px;
+        }
+
+        .podium-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px 12px 15px;
+            text-align: center;
+            flex: 1;
+            max-width: 230px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .podium-card.rank-1 {
+            order: 2;
+            border-color: var(--gold);
+            transform: translateY(-20px);
+            background: linear-gradient(180deg, rgba(255, 183, 0, 0.15) 0%, var(--card-bg) 100%);
+            box-shadow: 0 0 35px rgba(255, 183, 0, 0.35);
+        }
+
+        .podium-card.rank-2 {
+            order: 1;
+            border-color: var(--silver);
+            box-shadow: 0 0 25px rgba(226, 232, 240, 0.2);
+        }
+
+        .podium-card.rank-3 {
+            order: 3;
+            border-color: var(--bronze);
+            box-shadow: 0 0 25px rgba(217, 119, 6, 0.2);
+        }
+
+        .crown-icon {
+            font-size: 2em;
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rank-1 .crown-icon { color: var(--gold); filter: drop-shadow(0 0 12px var(--gold)); }
+        .rank-2 .crown-icon { color: var(--silver); filter: drop-shadow(0 0 10px var(--silver)); }
+        .rank-3 .crown-icon { color: var(--bronze); filter: drop-shadow(0 0 10px var(--bronze)); }
+
+        .podium-username {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 1.05em;
+            margin: 12px 0 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .podium-rank-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .podium-rank-icons img {
+            height: 32px;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+        }
+
+        /* CONTROL PANEL */
+        .controls-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 16px 24px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-field {
+            position: relative;
+            flex: 1 1 240px;
+        }
+
+        .search-field i {
+            position: absolute;
+            left: 16px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--cyan);
+        }
+
+        .search-field input {
+            width: 100%;
+            padding: 11px 16px 11px 45px;
+            background: rgba(3, 7, 18, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 30px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.05em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-field input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 18px rgba(0, 243, 255, 0.4);
+        }
+
+        .action-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        select, button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.82em;
+            font-weight: 700;
+            padding: 11px 18px;
+            border-radius: 30px;
+            border: 1px solid var(--cyan);
+            background: rgba(0, 243, 255, 0.12);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            outline: none;
+        }
+
+        select {
+            background: rgba(3, 7, 18, 0.9);
+            color: var(--cyan);
+        }
+
+        button:hover, select:hover {
+            background: var(--cyan);
+            color: #000;
+            box-shadow: 0 0 22px var(--cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn-home {
+            border-color: var(--pink);
+            background: rgba(255, 0, 85, 0.15);
+        }
+
+        .btn-home:hover {
+            background: var(--pink);
+            color: #fff;
+            box-shadow: 0 0 22px var(--pink);
+        }
+
+        /* LEADERBOARD LIST */
+        .board-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .board-header {
+            display: grid;
+            grid-template-columns: 75px 1fr 100px 110px 110px;
+            padding: 14px 24px;
+            background: rgba(0, 243, 255, 0.12);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.82em;
+            color: var(--cyan);
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .member-row {
+            display: grid;
+            grid-template-columns: 75px 1fr 100px 110px 110px;
+            align-items: center;
+            padding: 12px 24px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
+            text-align: center;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .member-row:hover {
+            border-color: var(--cyan);
+            transform: scale(1.01) translateX(4px);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.25);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .rank-position {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            font-weight: 900;
+            color: #64748b;
+        }
+
+        .rank-position.top-1 { color: var(--gold); text-shadow: 0 0 12px var(--gold); }
+        .rank-position.top-2 { color: var(--silver); text-shadow: 0 0 12px var(--silver); }
+        .rank-position.top-3 { color: var(--bronze); text-shadow: 0 0 12px var(--bronze); }
+
+        .member-name {
+            text-align: left;
+            padding-left: 10px;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* VIP BADGE STYLE */
+        .vip-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7em;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff007f, #7000ff);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+            letter-spacing: 1px;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .level-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #cbd5e1;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .rank-img {
+            height: 34px;
+            vertical-align: middle;
+            filter: drop-shadow(0 0 6px rgba(0,0,0,0.6));
+            transition: transform 0.2s;
+        }
+
+        .rank-img:hover {
+            transform: scale(1.25);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #64748b;
+            z-index: 2;
+        }
+
+        footer span {
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.9em; }
+            .board-header, .member-row {
+                grid-template-columns: 50px 1fr 65px 70px 70px;
+                padding: 10px 8px;
+            }
+            .member-name { font-size: 0.95em; padding-left: 4px; }
+            .rank-img { height: 28px; }
+            .level-tag { padding: 2px 8px; font-size: 0.75em; }
+            .podium-section { gap: 8px; }
+            .podium-card { padding: 12px 6px; }
+            .podium-username { font-size: 0.85em; }
+            .stats-dashboard { grid-template-columns: 1fr; gap: 10px; }
+            .vip-badge { font-size: 0.6em; padding: 1px 5px; }
+        }
+    </style>
 </head>
 <body>
 
-<h1>BẢNG XẾP LOẠI RANK — Quân đoàn TF</h1>
+<canvas id="cyberCanvas"></canvas>
 
-<div class="controls">
-    <select id="mode">
-        <option value="st">Sắp theo Rank Sinh Tồn</option>
-        <option value="tc">Sắp theo Rank Tử Chiến</option>
-    </select>
-    <button onclick="sortRank('asc')">⬆️ Từ thấp → cao</button>
-    <button onclick="sortRank('desc')">⬇️️ Từ cao → thấp</button>
-    <button onclick="window.location.href='trangchu.html'">🏠 Trang chủ</button>
+<div class="main-wrapper">
+    <header>
+        <div class="guild-badge">TITAN FORCE ESPORTS</div>
+        <h1><i class="fa-solid fa-trophy"></i> BẢNG XẾP LOẠI RANK</h1>
+    </header>
+
+    <!-- STATS DASHBOARD -->
+    <div class="stats-dashboard">
+        <div class="stat-box">
+            <i class="fa-solid fa-users"></i>
+            <div class="stat-number" id="totalMembers">0</div>
+            <div class="stat-title">Tổng Thành Viên</div>
+        </div>
+        <div class="stat-box">
+            <i class="fa-solid fa-bolt"></i>
+            <div class="stat-number" id="avgLevel">0</div>
+            <div class="stat-title">Cấp Độ Trung Bình</div>
+        </div>
+        <div class="stat-box">
+            <i class="fa-solid fa-crown"></i>
+            <div class="stat-number" id="topRankers">0</div>
+            <div class="stat-title">Huyền Thoại / Thách Đấu</div>
+        </div>
+    </div>
+
+    <!-- HALL OF FAME PODIUM -->
+    <div class="podium-section" id="podiumArea">
+        <!-- TOP 2 -->
+        <div class="podium-card rank-2">
+            <i class="fa-solid fa-crown crown-icon"></i>
+            <div class="level-tag" id="p2-lv">Lv.0</div>
+            <div class="podium-username" id="p2-name">--</div>
+            <div class="podium-rank-icons">
+                <span id="p2-st"></span>
+                <span id="p2-tc"></span>
+            </div>
+        </div>
+        <!-- TOP 1 -->
+        <div class="podium-card rank-1">
+            <i class="fa-solid fa-crown crown-icon"></i>
+            <div class="level-tag" id="p1-lv">Lv.0</div>
+            <div class="podium-username" id="p1-name">--</div>
+            <div class="podium-rank-icons">
+                <span id="p1-st"></span>
+                <span id="p1-tc"></span>
+            </div>
+        </div>
+        <!-- TOP 3 -->
+        <div class="podium-card rank-3">
+            <i class="fa-solid fa-crown crown-icon"></i>
+            <div class="level-tag" id="p3-lv">Lv.0</div>
+            <div class="podium-username" id="p3-name">--</div>
+            <div class="podium-rank-icons">
+                <span id="p3-st"></span>
+                <span id="p3-tc"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLS CARD -->
+    <div class="controls-card">
+        <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Tìm tên thành viên..." oninput="filterAndRender()">
+        </div>
+
+        <div class="action-btns">
+            <select id="mode">
+                <option value="tc">Rank Tử Chiến</option>
+                <option value="st">Rank Sinh Tồn</option>
+            </select>
+            <button onclick="sortRank('desc')"><i class="fa-solid fa-arrow-down-wide-short"></i> Cao → Thấp</button>
+            <button onclick="sortRank('asc')"><i class="fa-solid fa-arrow-up-wide-short"></i> Thấp → Cao</button>
+            <button class="btn-home" onclick="window.location.href='trangchu.html'"><i class="fa-solid fa-house"></i> Trang Chủ</button>
+        </div>
+    </div>
+
+    <!-- BOARD LIST -->
+    <div class="board-header">
+        <div>HẠNG</div>
+        <div style="text-align: left; padding-left: 10px;">THÀNH VIÊN</div>
+        <div>CẤP ĐỘ</div>
+        <div>SINH TỒN</div>
+        <div>TỬ CHIẾN</div>
+    </div>
+
+    <div class="board-list" id="rankBody">
+        <!-- Members render here dynamically -->
+    </div>
+
+    <footer>© 2026 <span>Quân đoàn TitanForce²</span> — Cập nhật hệ thống realtime</footer>
 </div>
-
-<div class="table-container">
-    <table id="rankTable">
-        <thead>
-            <tr>
-                <th>Hạng</th>
-                <th>Tên Thành Viên</th>
-                <th>LV</th>
-                <th>Rank Sinh Tồn</th>
-                <th>Rank Tử Chiến</th>
-            </tr>
-        </thead>
-        <tbody id="rankBody"></tbody>
-    </table>
-</div>
-
-<footer>© 2025 Quân đoàn TitanForce² — Cập nhật 09/11/2025</footer>
 
 <script>
 /* ----------------------------------------------- */
-/* LOGIC RANK */
+/* LOGIC RANK & DỮ LIỆU THÀNH VIÊN */
 /* ----------------------------------------------- */
-
 const rankValue = { 
-    "d":0,"b":1,"v":2,"bk":3,"bkt":4,"kc":5,"kct":6,"ht":7,"htc":8,"ct":9,
-    "ct1":10,"dct":11,"tv":12,"bkc":3
+    "d":0, "b":1, "v":2, "bk":3, "bkc":3, "bkt":4, 
+    "kc":5, "kct":6, "ht":7, "htc":8, "ct":9, "ct1":10, "dct":11, "tv":12
 };
 
 const rankImages = {
-    "d": "1.png","b": "2.png","v": "3.png","bk": "9.jpg",
-    "kc": "5.png","ht": "6.png","ct": "7.jpg","tv": "8.jpg",
-    "ct1": "10.jpg","dct": "11.jpg","htc": "12.jpg",
-    "bkt": "13.jpg","kct": "14.jpg","bkc":"9.jpg"
+    "d": "1.png", "b": "2.png", "v": "3.png", "bk": "9.jpg", "bkc": "9.jpg",
+    "kc": "5.png", "ht": "6.png", "ct": "7.jpg", "tv": "8.jpg",
+    "ct1": "10.jpg", "dct": "11.jpg", "htc": "12.jpg", "bkt": "13.jpg", "kct": "14.jpg"
 };
 
-function getRankImage(code){
+function getRankImage(code) {
     code = code ? code.trim() : "d";
     const src = rankImages[code] || "1.png";
-    return `<img src="${src}" class="rank-img">`;
+    return `<img src="${src}" class="rank-img" alt="${code}">`;
 }
 
-const members = [
-["ム𝙏𝙁.𝙆𝙪𝙪Đẩ𝙪𝙪亗",51,"bk","bkt"],
-["TF.Late'love...",58,"bk","ct1"],
-["TF.MASTER",58,"v","ct1"],
-["TF. Huy²",66,"ht","dct"],
-["TF.Tyeu la gì",64,"kc","dct"],
-["TF.SK-Thànhtit",51,"ht","bkt"],
-["TF.Mạnh Cường",58,"kc","htc"],
-["TF.ebe dug khoc",70,"kc","htc"],
-["TF.Tidasick",58,"kc","htc"],
-["TF.số1bắnngu",66,"bk","ct1"],
-["TF.boilowkeyy",61,"bk","htc"],
-["TF.LioPc",56,"v","tv"],
-["TF.Kuronami",60,"v","bkt"],
-["TF.Huy",61,"ht","ct1"],
-["TF.kaizokid99",49,"kc","htc"],
-["TF.Mikasa",30,"kc","bkt"],
-["TF.MinhThu",48,"kc","htc"],
-["TF.Bávl",60,"bk","htc"],
-["TF.LongChóĐiên",57,"bk","htc"],
-["TF.HoàngVũ",58,"ht","bkt"],
-["TF.GiaHuy",45,"bk","htc"],
-["TF.Hưng",59,"v","htc"],
-["TF.DươngNgọc",61,"ht","htc"],
-["TF.Somsmza",52,"v","bkt"],
-["TF.iu PhLinhh",59,"ht","kct"],
-["TF.BoykaNèđây",61,"kc","htc"],
-["TF.Dũng",45,"bk","htc"],
-["TF.no1xsm18.4",61,"bk","bkt"],
-["TF.Nhật",63,"ht","kct"],
-["TF.Ly",58,"kc","bkt"],
-["TF.N0.1_Mobile",70,"kc","kct"],
-["TF.Shinjun",73,"ht","ct1"],
-["TF.macodo?",71,"ht","htc"],
-["TF.Cường",57,"kc","ct1"],
-["TF.PhucDuy",61,"ht","htc"],
-["TF.tduycte08",69,"bk","bkt"],
-["TF.lina Gril",64,"ht","dct"],
-["TF.DƯƠNG NGỌC",61,"ht","htc"],
-["TF.no1xsn18.4",61,"bk","bkt"],
-["TF.im me di?",61,"ht","htc"],
-["TF.adu em nọc",73,"kc","htc"],
-["TF.PhưnLynhh:33",59,"kc","bkt"],
-["TF.cte lvmax",61,"ht","ct1"],
-["TF.Ks01",66,"ht","ct1"],
-["TF.KTD",61,"ht","htc"],
-["TF.BoykaNèĐây",62,"ht","htc"],
-["TF.Anlorexe?",55,"ht","htc"],
-["TF.NgToanPc",58,"ht","kct"],
-["TF.S C A T T E R",61,"ht","ct1"],
-
+const rawMembers = [
+    ["ム𝙏𝙁.𝙆𝙪𝙪Đẩ𝙪𝙪亗",51,"bk","bkt"],
+    ["TF.Late'love...",58,"bk","ct1"],
+    ["TF.MASTER",58,"v","ct1"],
+    ["TF. Huy²",66,"ht","dct"],
+    ["TF.Tyeu la gì",64,"kc","dct"],
+    ["TF.SK-Thànhtit",51,"ht","bkt"],
+    ["TF.Mạnh Cường",58,"kc","htc"],
+    ["TF.ebe dug khoc",70,"kc","htc"],
+    ["TF.Tidasick",58,"kc","htc"],
+    ["TF.số1bắnngu",66,"bk","ct1"],
+    ["TF.boilowkeyy",61,"bk","htc"],
+    ["TF.LioPc",56,"v","tv"],
+    ["TF.Kuronami",60,"v","bkt"],
+    ["TF.Huy",61,"ht","ct1"],
+    ["TF.kaizokid99",49,"kc","htc"],
+    ["TF.Mikasa",30,"kc","bkt"],
+    ["TF.MinhThu",48,"kc","htc"],
+    ["TF.Bávl",60,"bk","htc"],
+    ["TF.LongChóĐiên",57,"bk","htc"],
+    ["TF.HoàngVũ",58,"ht","bkt"],
+    ["TF.GiaHuy",45,"bk","htc"],
+    ["TF.Hưng",59,"v","htc"],
+    ["TF.DươngNgọc",61,"ht","htc"],
+    ["TF.Somsmza",52,"v","bkt"],
+    ["TF.iu PhLinhh",59,"ht","kct"],
+    ["TF.BoykaNèđây",61,"kc","htc"],
+    ["TF.Dũng",45,"bk","htc"],
+    ["TF.no1xsm18.4",61,"bk","bkt"],
+    ["TF.Nhật",63,"ht","kct"],
+    ["TF.Ly",58,"kc","bkt"],
+    ["TF.N0.1_Mobile",70,"kc","kct"],
+    ["TF.Shinjun",73,"ht","ct1"],
+    ["TF.macodo?",71,"ht","htc"],
+    ["TF.Cường",57,"kc","ct1"],
+    ["TF.PhucDuy",61,"ht","htc"],
+    ["TF.tduycte08",69,"bk","bkt"],
+    ["TF.lina Gril",64,"ht","dct"],
+    ["TF.DƯƠNG NGỌC",61,"ht","htc"],
+    ["TF.no1xsn18.4",61,"bk","bkt"],
+    ["TF.im me di?",61,"ht","htc"],
+    ["TF.adu em nọc",73,"kc","htc"],
+    ["TF.PhưnLynhh:33",59,"kc","bkt"],
+    ["TF.cte lvmax",61,"ht","ct1"],
+    ["TF.Ks01",66,"ht","ct1"],
+    ["TF.KTD",61,"ht","htc"],
+    ["TF.BoykaNèĐây",62,"ht","htc"],
+    ["TF.Anlorexe?",55,"ht","htc"],
+    ["TF.NgToanPc",58,"ht","kct"],
+    ["TF.S C A T T E R",61,"ht","ct1"]
 ];
 
-function renderTable(data){
-    const tbody = document.getElementById("rankBody");
-    tbody.innerHTML = "";
-    data.forEach((m, i) => {
-        let rankDisplay = `${i+1}`;
-        let memberName = m[0];
+// Gán VIP ngẫu nhiên từ VIP 1 đến VIP 8 cho mỗi thành viên
+const members = rawMembers.map(m => {
+    const vipLevel = Math.floor(Math.random() * 8) + 1;
+    return [...m, vipLevel]; // Cấu trúc mới: [Tên, Level, ST, TC, VIP]
+});
 
-        if(i===0){ rankDisplay='🥇'; memberName='👑 '+memberName; }
-        else if(i===1) rankDisplay='🥈';
-        else if(i===2) rankDisplay='🥉';
+let currentSortDir = 'desc';
 
-        tbody.innerHTML += `
-        <tr>
-            <td>${rankDisplay}</td>
-            <td>${memberName}</td>
-            <td>${m[1]}</td>
-            <td>${getRankImage(m[2])}</td>
-            <td>${getRankImage(m[3])}</td>
-        </tr>`;
-    });
+function updateStats() {
+    document.getElementById('totalMembers').innerText = members.length;
+    const totalLv = members.reduce((sum, m) => sum + m[1], 0);
+    document.getElementById('avgLevel').innerText = Math.round(totalLv / members.length);
+    const topRankCount = members.filter(m => ['ht', 'htc', 'ct', 'ct1', 'dct', 'tv'].includes(m[3])).length;
+    document.getElementById('topRankers').innerText = topRankCount;
 }
 
-function sortRank(direction){
-    const mode = document.getElementById("mode").value;
-    const index = (mode==="st") ? 2 : 3;
+function updatePodium(data) {
+    if (data.length >= 1) {
+        document.getElementById('p1-name').innerHTML = `<span>${data[0][0]}</span> <span class="vip-badge">VIP ${data[0][4]}</span>`;
+        document.getElementById('p1-lv').innerText = `Lv.${data[0][1]}`;
+        document.getElementById('p1-st').innerHTML = getRankImage(data[0][2]);
+        document.getElementById('p1-tc').innerHTML = getRankImage(data[0][3]);
+    }
+    if (data.length >= 2) {
+        document.getElementById('p2-name').innerHTML = `<span>${data[1][0]}</span> <span class="vip-badge">VIP ${data[1][4]}</span>`;
+        document.getElementById('p2-lv').innerText = `Lv.${data[1][1]}`;
+        document.getElementById('p2-st').innerHTML = getRankImage(data[1][2]);
+        document.getElementById('p2-tc').innerHTML = getRankImage(data[1][3]);
+    }
+    if (data.length >= 3) {
+        document.getElementById('p3-name').innerHTML = `<span>${data[2][0]}</span> <span class="vip-badge">VIP ${data[2][4]}</span>`;
+        document.getElementById('p3-lv').innerText = `Lv.${data[2][1]}`;
+        document.getElementById('p3-st').innerHTML = getRankImage(data[2][2]);
+        document.getElementById('p3-tc').innerHTML = getRankImage(data[2][3]);
+    }
+}
 
-    members.sort((a,b)=>{
+function sortRank(direction) {
+    if (direction) currentSortDir = direction;
+    const mode = document.getElementById("mode").value;
+    const index = (mode === "st") ? 2 : 3;
+
+    members.sort((a, b) => {
         const A = rankValue[a[index].trim()] || 0;
         const B = rankValue[b[index].trim()] || 0;
-        if(A===B) return b[1]-a[1];
-        return direction==="asc" ? A-B : B-A;
+        if (A === B) return b[1] - a[1];
+        return currentSortDir === "asc" ? A - B : B - A;
     });
-    renderTable(members);
+
+    if (currentSortDir === 'desc') {
+        updatePodium(members);
+    }
+    filterAndRender();
+}
+
+function filterAndRender() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
+    const filtered = members.filter(m => m[0].toLowerCase().includes(keyword));
+    renderTable(filtered);
+}
+
+function renderTable(data) {
+    const tbody = document.getElementById("rankBody");
+    tbody.innerHTML = "";
+
+    if (data.length === 0) {
+        tbody.innerHTML = `<div style="text-align:center; padding:35px; color:#64748b;">Không tìm thấy thành viên phù hợp!</div>`;
+        return;
+    }
+
+    data.forEach((m, i) => {
+        let rankClass = "rank-position";
+        if (i === 0) rankClass += " top-1";
+        else if (i === 1) rankClass += " top-2";
+        else if (i === 2) rankClass += " top-3";
+
+        tbody.innerHTML += `
+        <div class="member-row">
+            <div class="${rankClass}">#${i + 1}</div>
+            <div class="member-name">
+                <span>${m[0]}</span>
+                <span class="vip-badge">VIP ${m[4]}</span>
+            </div>
+            <div><span class="level-tag">Lv.${m[1]}</span></div>
+            <div>${getRankImage(m[2])}</div>
+            <div>${getRankImage(m[3])}</div>
+        </div>`;
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mode').value = 'tc';
+    updateStats();
     sortRank('desc');
 });
-document.getElementById('mode').addEventListener('change',()=>{sortRank('desc');});
+
+document.getElementById('mode').addEventListener('change', () => { sortRank('desc'); });
 
 /* ---------------------------------------------------- */
-/* HOA ANH ĐÀO RƠI */
+/* CYBER PARTICLES CANVAS ANIMATION */
 /* ---------------------------------------------------- */
-function createSakura() {
-    const s = document.createElement("div");
-    s.classList.add("sakura");
-    s.style.left = Math.random() * window.innerWidth + "px";
-    const duration = Math.random() * 4 + 4;
-    s.style.animationDuration = duration + "s";
-    const size = Math.random() * 10 + 10;
-    s.style.width = size + "px";
-    s.style.height = size + "px";
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), duration * 1000);
+const canvas = document.getElementById('cyberCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
-setInterval(createSakura, 300);
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class CyberParticle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.color = Math.random() > 0.5 ? '#00f3ff' : '#ff0055';
+        this.opacity = Math.random() * 0.5 + 0.2;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < 65; i++) particles.push(new CyberParticle());
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+}
+animate();
 
 /* ---------------------------------------------------- */
-/* CHỐNG COPY */
+/* BẢO VỆ TRANG (ANTI-COPY/INSPECT) */
 /* ---------------------------------------------------- */
-
-document.addEventListener('contextmenu', e => { e.preventDefault(); alert("⚠️ Copy cái lòn ko làm mà đòi có ăn à, cút ngay!"); });
+document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('selectstart', e => e.preventDefault());
 document.addEventListener('dragstart', e => e.preventDefault());
-
 document.addEventListener('keydown', e => {
-    if (e.ctrlKey && ['c','x','v','s','u','a'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ Phím tắt bị chặn!"); }
-    if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-    if (e.key === 'F12') { e.preventDefault(); alert("⚠️ DevTools bị chặn!"); }
-});
-
-setInterval(() => {
-    if(window.devtools && window.devtools.open){
-        alert("⚠️ DevTools đang mở! Tắt ngay!");
-        window.devtools.open = false;
-    }
-}, 1000);
-
-window.oncopy = window.oncut = window.onpaste = function(e){
-    e.preventDefault();
-    alert("⚠️ Không được phép sao chép!");
-    return false;
-};
-
-document.addEventListener('mousedown', e => {
-    if(e.button === 1){ e.preventDefault(); alert("⚠️ Chặn click giữa!"); }
-});
-
-document.addEventListener('keyup', e => {
-    if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='i'){
-        e.preventDefault(); 
-        alert("⚠️ DevTools bị chặn!");
+    if ((e.ctrlKey && ['c', 'x', 'v', 's', 'u', 'a'].includes(e.key.toLowerCase())) ||
+        (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase())) ||
+        e.key === 'F12') {
+        e.preventDefault();
     }
 });
 </script>
