@@ -70,14 +70,14 @@
         }
 
         /* ========================================================= */
-        /* MODAL BẢN QUYỀN - ULTIMATE GAMING STYLE                   */
+        /* MODAL BẢN QUYỀN - ĐÃ THIẾT KẾ LẠI SANG TRỌNG, ĐẸP MẮT      */
         /* ========================================================= */
         .copyright-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 3, 6, 0.92);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(2, 2, 5, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 999999;
             display: flex;
             justify-content: center;
@@ -95,13 +95,13 @@
         }
 
         .copyright-modal {
-            background: linear-gradient(160deg, rgba(25, 22, 35, 0.95), rgba(8, 8, 12, 0.98));
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 50px rgba(255, 60, 0, 0.4), inset 0 0 20px rgba(255, 60, 0, 0.15);
-            border-radius: 24px;
-            max-width: 460px;
+            background: linear-gradient(145deg, rgba(18, 16, 26, 0.95), rgba(8, 8, 12, 0.98));
+            border: 1px solid rgba(255, 60, 0, 0.4);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 60, 0, 0.25), inset 0 0 20px rgba(255, 60, 0, 0.05);
+            border-radius: 28px;
+            max-width: 440px;
             width: 100%;
-            padding: 40px 30px 30px;
+            padding: 35px 28px 28px;
             text-align: center;
             position: relative;
             transform: translateY(0) scale(1);
@@ -110,17 +110,32 @@
         }
 
         .copyright-overlay.hidden .copyright-modal {
-            transform: translateY(30px) scale(0.9);
+            transform: translateY(20px) scale(0.9);
+        }
+
+        .copyright-modal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light), var(--primary));
+            background-size: 300% auto;
+            animation: shimmer-border 4s linear infinite;
+        }
+
+        @keyframes shimmer-border {
+            0% { background-position: 0% center; }
+            100% { background-position: 300% center; }
         }
 
         .close-btn {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 36px;
-            height: 36px;
+            top: 15px;
+            right: 15px;
+            width: 34px;
+            height: 34px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: var(--text-muted);
             border-radius: 50%;
             display: flex;
@@ -136,95 +151,100 @@
             background: var(--primary);
             border-color: var(--primary);
             color: #fff;
-            box-shadow: 0 0 15px var(--glow);
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.1);
         }
 
-        .shield-wrapper {
+        .clan-logo-glow-wrapper {
             position: relative;
-            width: 85px;
-            height: 85px;
-            margin: 0 auto 15px;
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 16px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .shield-bg {
+        .clan-logo-glow-wrapper::before {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 60, 0, 0.35) 0%, transparent 70%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255, 60, 0, 0.4) 0%, transparent 75%);
             border-radius: 50%;
-            animation: pulse-shield 2s infinite ease-in-out;
+            animation: pulse-shield 2.5s infinite ease-in-out;
         }
 
         @keyframes pulse-shield {
-            0%, 100% { transform: scale(0.85); opacity: 0.6; }
-            50% { transform: scale(1.2); opacity: 1; }
+            0%, 100% { transform: scale(0.92); opacity: 0.6; }
+            50% { transform: scale(1.12); opacity: 1; }
         }
 
-        .copyright-icon {
-            font-size: 3rem;
+        .modal-clan-logo {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
             position: relative;
             z-index: 2;
-            color: var(--accent);
-            filter: drop-shadow(0 0 12px var(--primary));
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+            background: #111;
         }
 
         .copyright-modal h3 {
             font-family: 'Teko', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.3rem;
             color: #fff;
             letter-spacing: 2px;
             line-height: 1;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
         .copyright-modal h3 span {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            background: linear-gradient(135deg, var(--accent), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .copyright-modal p {
             color: var(--text-muted);
-            font-size: 0.92rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            margin-bottom: 16px;
+            padding: 0 10px;
         }
 
         .copyright-modal p b { color: #fff; }
 
         .copyright-badge {
-            background: rgba(255, 60, 0, 0.1);
-            border: 1px dashed rgba(255, 60, 0, 0.5);
+            background: rgba(255, 60, 0, 0.08);
+            border: 1px dashed rgba(255, 60, 0, 0.35);
             color: var(--accent);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 12px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn-accept {
             width: 100%;
-            padding: 15px;
+            padding: 13px;
             background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             font-weight: 700;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            font-size: 0.9rem;
             cursor: not-allowed;
             transition: all 0.35s ease;
             position: relative;
             overflow: hidden;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
 
         .btn-accept.ready {
@@ -232,13 +252,13 @@
             color: #fff;
             border: none;
             cursor: pointer;
-            box-shadow: 0 6px 25px rgba(255, 60, 0, 0.5);
+            box-shadow: 0 6px 22px rgba(255, 60, 0, 0.45);
         }
 
         .btn-accept.ready:hover {
             background: linear-gradient(135deg, var(--primary-light), var(--accent));
             color: #000;
-            box-shadow: 0 10px 30px rgba(255, 60, 0, 0.8);
+            box-shadow: 0 10px 30px rgba(255, 60, 0, 0.75);
             transform: translateY(-2px);
         }
 
@@ -247,8 +267,8 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.08);
+            height: 3px;
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .timer-progress-bar {
@@ -618,7 +638,7 @@
         }
 
         /* ========================================================= */
-        /* FOOTER & FLOATING CHAT                                   */
+        /* FOOTER & FLOATING WIDGET (TÍCH HỢP CHUYỂN TRANG HỖ TRỢ)     */
         /* ========================================================= */
         footer { 
             text-align: center; 
@@ -653,12 +673,13 @@
             color: #fff;
         }
 
+        /* Nút widget góc phải, bấm vào chuyển sang trang hỗ trợ / trò chuyện */
         #chat-trigger {
             position: fixed; 
             bottom: 30px; 
             right: 30px;
-            width: 60px; 
-            height: 60px; 
+            width: 62px; 
+            height: 62px; 
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border-radius: 50%; 
             display: flex; 
@@ -671,15 +692,45 @@
             box-shadow: 0 8px 25px rgba(255, 60, 0, 0.6);
             transition: all 0.3s ease;
             animation: pulse-glow 2s infinite;
+            text-decoration: none;
         }
 
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0.7); }
-            70% { shadow: 0 0 0 18px rgba(255, 60, 0, 0); }
+            70% { box-shadow: 0 0 0 18px rgba(255, 60, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0); }
         }
 
-        #chat-trigger:hover { transform: scale(1.1) rotate(10deg); }
+        #chat-trigger:hover { 
+            transform: scale(1.1) rotate(10deg); 
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: #000;
+        }
+
+        /* Tooltip khi rê chuột vào nút hỗ trợ */
+        #chat-trigger::after {
+            content: 'Đến trang Hỗ Trợ';
+            position: absolute;
+            right: 75px;
+            background: rgba(10, 10, 15, 0.95);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--card-border);
+            pointer-events: none;
+        }
+
+        #chat-trigger:hover::after {
+            opacity: 1;
+            visibility: visible;
+            right: 70px;
+        }
 
         /* ========================================================= */
         /* MOBILE RESPONSIVE TỐI ƯU                                 */
@@ -726,23 +777,22 @@
 <!-- Canvas Particles Trôi Nhẹ -->
 <canvas id="particles-canvas"></canvas>
 
-<!-- MODAL BẢN QUYỀN CAO CẤP -->
+<!-- MODAL BẢN QUYỀN ĐÃ ĐƯỢC THIẾT KẾ LẠI ĐẸP MẮT & SANG TRỌNG -->
 <div class="copyright-overlay" id="copyrightModal">
     <div class="copyright-modal">
         <button class="close-btn" id="closeXBtn" title="Đóng ngay">✕</button>
         
-        <div class="shield-wrapper">
-            <div class="shield-bg"></div>
-            <div class="copyright-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="clan-logo-glow-wrapper">
+            <img src="logo2.jpg" class="modal-clan-logo" alt="TitanForce Logo" onerror="this.src='https://via.placeholder.com/58/FF3C00/FFFFFF?text=TF'">
         </div>
 
         <h3>BẢO VỆ <span>BẢN QUYỀN</span></h3>
-        <p>Giao diện, mã nguồn và nội dung độc quyền thuộc quyền sở hữu trí tuệ chính thức của <b>TitanForce Clan</b>. Mọi hành vi sao chép không xin phép đều bị nghiêm cấm.</p>
+        <p>Giao diện và nội dung thuộc quyền sở hữu độc quyền của <b>TitanForce Clan</b>. Nghiêm cấm mọi hành vi sao chép dưới mọi hình thức.</p>
         
         <div class="copyright-badge">
             <i class="fa-solid fa-code"></i>
-            <span>© 2026 Developed by</span>
-            <strong style="color: #fff;">TF.Kuronami</strong>
+            <span>Developed by</span>
+            <strong style="color: #fff; margin-left: 3px;">TF.Kuronami</strong>
         </div>
 
         <button class="btn-accept" id="acceptBtn" disabled>
@@ -774,10 +824,9 @@
         <a href="ranktv.html"><i class="fa-solid fa-trophy"></i> Bảng xếp hạng</a>
         <a href="tuyenthanhvien.html"><i class="fa-solid fa-user-plus"></i> Gia nhập</a>
         <a href="slo.html"><i class="fa-solid fa-gamepad"></i> Giao lưu</a>
-            <a href="sukien.html"><i class="fa-solid fa-headset"></i> Sự kiện</a>
-                <a href="baotri.html"><i class="fa-solid fa-headset"></i> Thành viên</a>
-                  <a href="hotro.html"><i class="fa-solid fa-headset"></i> Hỗ Trợ</a>
-
+        <a href="sukien.html"><i class="fa-solid fa-calendar-days"></i> Sự kiện</a>
+        <a href="baotri.html"><i class="fa-solid fa-users"></i> Thành viên</a>
+        <a href="hotro.html"><i class="fa-solid fa-headset"></i> Hỗ Trợ</a>
     </div>
 </nav>
 
@@ -877,8 +926,10 @@
     </p>
 </footer>
 
-<!-- FLOATING CHAT BUTTON -->
-<div id="chat-trigger" title="Trò chuyện"><i class="fa-solid fa-comments"></i></div>
+<!-- FLOATING CHAT BUTTON CHUYỂN HƯỚNG SANG TRANG HỖ TRỢ (hotro.html) -->
+<a href="hotro.html" id="chat-trigger" title="Đến trang Hỗ Trợ & Trò chuyện">
+    <i class="fa-solid fa-headset"></i>
+</a>
 
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
