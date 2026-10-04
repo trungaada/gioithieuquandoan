@@ -1,439 +1,646 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Giới thiệu thành viên — Quân đoàn TF</title>
-<meta name="description" content="Trang giới thiệu các thành viên tiêu biểu của Quân đoàn TF — TitanForce²" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clan TF — Tuyển Thành Viên Free Fire Esports</title>
 
-<style>
-:root {
-    --bg: #030a18;
-    --card: #0f1724;
-    --accent: #6ee7b7;
-    --accent-shadow: rgba(110, 231, 183, 0.5);
-    --muted: #9aa4b2;
-    --glass: rgba(255, 255, 255, 0.06);
-    --radius: 18px;
-    --color-primary: #00FFFF;
-    --color-secondary: #3b82f6;
-    --neon-blue-shadow: rgba(0, 255, 255, 0.8);
-    --member-name-color: #FF0000;
-    --member-name-shadow: rgba(255, 0, 0, 0.8);
-    --member-role-color: #FFD700;
-    --crown-color: gold; 
-    font-family: 'Poppins', system-ui, sans-serif;
-}
+    <!-- Google Fonts: Đã cập nhật lại bộ phông chữ cực chất -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@700;800;900&family=Press+Start+2P&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
+    <style>
+        :root {
+            --primary: #ff3b00;
+            --primary-glow: rgba(255, 59, 0, 0.6);
+            --neon-blue: #00f0ff;
+            --neon-blue-glow: rgba(0, 240, 255, 0.5);
+            --gold: #ffb700;
+            --bg-dark: #04060a;
+            --bg-panel: rgba(10, 15, 26, 0.88);
+            --text-main: #f0f6fc;
+            --text-muted: #8092a7;
+        }
 
-html, body {
-    width: 100%;
-    min-height: 100vh;
-    background: url('logo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #e6eef6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 60px 20px 80px;
-    overflow-x: hidden;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(0deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%),
-        linear-gradient(90deg, transparent 95%, rgba(110, 231, 183, 0.08) 100%);
-    background-size: 30px 30px;
-    opacity: 0.25;
-    pointer-events: none;
-    z-index: 0;
-}
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            color: var(--text-main);
+            background: var(--bg-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-body {
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.2s forwards;
-}
+        /* Ambient Canvas & Scanline BG */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
 
-@keyframes fadeIn { to { opacity: 1; } }
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
 
-main {
-    z-index: 1;
-    width: 100%;
-    max-width: 1200px;
-    text-align: center;
-}
+        /* Cyberpunk Container Wrapper */
+        .hud-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
-header { margin-bottom: 30px; }
+        /* Header Style */
+        header {
+            text-align: center;
+            position: relative;
+            margin-bottom: 30px;
+        }
 
-.logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
+        .avatar-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+        }
 
-#main-logo {
-    width: clamp(100px, 15vw, 150px);
-    border-radius: 50%;
-    border: 3px solid var(--color-primary);
-    box-shadow: 0 0 15px var(--neon-blue-shadow);
-    transition: 0.4s ease-in-out;
-}
+        .avatar-hex {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 25px var(--primary-glow), inset 0 0 15px var(--neon-blue-glow);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-#main-logo:hover {
-    transform: rotate(5deg) scale(1.05);
-    box-shadow: 0 0 25px var(--neon-blue-shadow);
-}
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            border: 2px dashed var(--primary);
+            animation: rotateRing 12s linear infinite;
+        }
 
-h1#typing-title {
-    font-size: clamp(28px, 6vw, 46px);
-    color: var(--color-primary);
-    text-shadow: 0 0 8px var(--neon-blue-shadow);
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: none; /* bỏ con trỏ nhấp nháy */
-    animation: none;    /* bỏ animation */
-}
+        .avatar-container:hover .avatar-hex {
+            transform: scale(1.08) rotate(-5deg);
+            border-color: #fff;
+        }
 
+        /* TYPOGRAPHY NÂNG CẤP: Subtitle */
+        .clan-tag {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 7px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            text-shadow: 0 0 12px var(--neon-blue-glow);
+            display: block;
+            margin-bottom: 5px;
+        }
 
-@keyframes flicker {
-    0%,100% { text-shadow: 0 0 10px var(--neon-blue-shadow); }
-    50% { text-shadow: 0 0 5px var(--color-primary); }
-}
+        /* TYPOGRAPHY NÂNG CẤP: Title H1 cực ngầu */
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8rem;
+            line-height: 1.4;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 
+                3px 3px 0px var(--primary),
+                -1px -1px 0px #000,  
+                1px -1px 0px #000,
+                -1px 1px 0px #000,
+                1px 1px 0px #000,
+                0 0 20px var(--primary-glow);
+            margin: 10px 0 15px;
+        }
 
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--color-primary); }
-}
+        /* TYPOGRAPHY NÂNG CẤP: Slogan */
+        .slogan {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, #94a3b8, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-p.lead {
-    color: var(--muted);
-    margin-top: 6px;
-    font-size: 15px;
-    font-style: italic;
-}
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255, 59, 0, 0.1);
+            border: 1px solid var(--primary);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.3s ease;
+        }
 
-.marquee-container {
-    width: 100%;
-    margin: 25px 0;
-    padding: 8px 0;
-    background: var(--glass);
-    border-top: 1px solid rgba(110,231,183,0.2);
-    border-bottom: 1px solid rgba(110,231,183,0.2);
-    backdrop-filter: blur(5px);
-}
+        .btn-home:hover {
+            background: var(--primary);
+            box-shadow: 0 0 25px var(--primary-glow);
+            transform: translateY(-2px);
+        }
 
-.marquee-text {
-    color: var(--accent);
-    font-size: 14px;
-    font-weight: 600;
-    text-shadow: 0 0 5px var(--accent-shadow);
-}
+        /* Status & Stats Bar */
+        .hud-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-.members {
-    display: grid;
-    width: 100%;
-    gap: 25px;
-    margin-top: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
+        .stat-box {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px 10px;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            backdrop-filter: blur(10px);
+        }
 
-.card {
-    background: var(--glass);
-    padding: 25px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    transform: translateY(20px);
-    opacity: 0;
-    animation: float 6s ease-in-out infinite;
-    perspective: 1000px;
-    overflow: hidden;
-    position: relative;
-}
+        .stat-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
 
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
-}
+        .stat-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 1px;
+        }
 
-.card-enter {
-    animation: slideUpFadeIn .8s ease forwards;
-}
+        .stat-lbl {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2px;
+        }
 
-@keyframes slideUpFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        /* Controls / Tabs Navigation */
+        .tab-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-.card-border-glow {
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius);
-    background: linear-gradient(45deg, var(--color-primary), var(--accent), var(--member-name-color));
-    background-size: 200% 200%;
-    filter: blur(8px);
-    opacity: 0;
-    transition: 0.4s;
-    animation: rotate-border 6s linear infinite;
-}
+        .cyber-tab {
+            flex: 1;
+            padding: 18px;
+            background: var(--bg-panel);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
 
-@keyframes rotate-border {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        .cyber-tab i { font-size: 1.1rem; color: var(--text-muted); transition: 0.3s; }
 
-.card:hover .card-border-glow {
-    opacity: 1;
-}
+        .cyber-tab:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue-glow);
+        }
 
-.avatar {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    border: 3px solid rgba(255,100,100,0.8);
-    box-shadow: 0 0 15px rgba(255,100,100,0.5);
-    transition: 0.35s;
-}
+        .cyber-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, #a32200 100%);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
 
-h2 {
-    margin-bottom: 4px;
-    color: var(--member-name-color);
-    text-shadow: 0 0 8px var(--member-name-shadow);
-}
+        .cyber-tab.active i { color: #fff; }
 
-p.role {
-    color: var(--member-role-color);
-    font-weight: 700;
-    margin-bottom: 12px;
-}
+        /* Content Sections */
+        .content-panel {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 35px;
+            display: none;
+            position: relative;
+            backdrop-filter: blur(15px);
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+            animation: panelFade 0.4s ease-out forwards;
+        }
 
-.crown-effect {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
+        .content-panel.active { display: block; }
 
-.crown-effect::before {
-    content: "👑";
-    font-size: 1.2em;
-    animation: pulse-glow 1.5s infinite alternate;
-    transform: translateY(-2px);
-}
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-@keyframes pulse-glow {
-    0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 5px var(--member-role-color));
-    }
-    100% {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 10px var(--member-role-color));
-    }
-}
+        .panel-header i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
 
-.badge {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    margin: 3px;
-    font-size: 12px;
-    transition: .3s;
-}
+        .panel-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-.card:hover .badge {
-    background: var(--accent);
-    color: var(--bg);
-}
+        /* Requirement Cards & Modern Typography Rules */
+        .req-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-#backButton {
-    margin-top: 35px;
-    display: inline-block;
-    padding: 12px 20px;
-    border-radius: 12px;
-    border: 2px solid var(--color-primary);
-    font-weight: 700;
-    color: var(--color-primary);
-    text-decoration: none;
-    background: rgba(0,255,255,0.15);
-    animation: neon-flicker-btn 2.5s infinite alternate;
-    transition: .4s;
-}
+        .req-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
-@keyframes neon-flicker-btn {
-    0%,100% { box-shadow: 0 0 10px var(--neon-blue-shadow); }
-    50% { box-shadow: 0 0 4px rgba(0,255,255,0.6); }
-}
+        .req-item:hover {
+            border-color: var(--neon-blue);
+            background: rgba(0, 240, 255, 0.03);
+            transform: translateY(-2px);
+        }
 
-#backButton:hover {
-    transform: scale(1.1);
-    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-    color: var(--bg);
-    box-shadow: 0 0 30px var(--neon-blue-shadow);
-}
+        .req-lbl {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 6px;
+        }
 
-.falling-star {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,.8);
-    box-shadow: 0 0 5px rgba(255,255,255,.4);
-    pointer-events: none;
-}
-</style>
+        .req-val {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            line-height: 1.4;
+        }
+
+        /* Inline Highlight Tag cho chữ */
+        .highlight {
+            background: rgba(255, 59, 0, 0.2);
+            color: #ff7755;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 59, 0, 0.3);
+        }
+
+        .highlight-blue {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--neon-blue);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        /* Action Buttons */
+        .act-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .cyber-btn {
+            padding: 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .btn-apply {
+            background: linear-gradient(135deg, var(--primary) 0%, #d13000 100%);
+            color: #fff;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .btn-copy {
+            background: #1e293b;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .cyber-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+        }
+
+        .btn-copy:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue-glow);
+        }
+
+        /* Toast Popup */
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #090d16;
+            border: 1px solid var(--neon-blue);
+            color: #fff;
+            padding: 12px 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 0 25px var(--neon-blue-glow);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .toast-msg.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @keyframes rotateRing { 100% { transform: rotate(360deg); } }
+        @keyframes panelFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 650px) {
+            h1 { font-size: 1.2rem; }
+            .req-list, .act-group, .tab-controls { grid-template-columns: 1fr; flex-direction: column; }
+            .content-panel { padding: 25px 18px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<div id="starfall-container" style="position:fixed;inset:0;overflow:hidden;z-index:1"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="scanlines"></div>
 
-<main>
+<div class="hud-wrapper">
+
+    <!-- Header -->
     <header>
-        <div class="logo-container">
-            <img id="main-logo" src="logo2.jpg" alt="Logo Quân đoàn TF">
+        <div class="avatar-container">
+            <img src="logo2.jpg" alt="Clan TF Logo" class="avatar-hex">
         </div>
-        <h1 id="typing-title"></h1>
-        <p class="lead">Những người dẫn đầu và hỗ trợ duy trì TitanForce</p>
+        <span class="clan-tag">Welcome To</span>
+        <h1>CLAN TF GLOBAL</h1>
+        <p class="slogan">Bản Lĩnh Chiến Binh — Đẳng Cấp Huyền Thoại</p>
+        
+        <a href="trangchu.html" class="btn-home">
+            <i class="fa-solid fa-arrow-left"></i> TRANG CHỦ
+        </a>
     </header>
 
-    <div class="marquee-container">
-        <marquee class="marquee-text" scrollamount="6">
-            ⚡ CHÚNG TÔI LÀ TITANFORCE² - CHIẾN ĐẤU VÀ PHÁT TRIỂN CÙNG NHAU ⚡ | Đăng ký thành viên ngay hôm nay!
-        </marquee>
+    <!-- Stats Banner -->
+    <div class="hud-stats">
+        <div class="stat-box">
+            <div class="stat-val">LVL 6</div>
+            <div class="stat-lbl">Cấp Clan</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-val" style="color: var(--gold);">TOP 10</div>
+            <div class="stat-lbl">BXH Mùa</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-val" style="color: var(--neon-blue);">48/50</div>
+            <div class="stat-lbl">Thành Viên</div>
+        </div>
     </div>
 
-    <section class="members">
+    <!-- Mode Tabs -->
+    <div class="tab-controls">
+        <button class="cyber-tab active" onclick="switchTab(event, 'sinh-ton')">
+            <i class="fa-solid fa-crosshairs"></i> CHẾ ĐỘ SINH TỒN
+        </button>
+        <button class="cyber-tab" onclick="switchTab(event, 'solo')">
+            <i class="fa-solid fa-fire"></i> BẬC THẦY SOLO
+        </button>
+    </div>
 
-        <div class="card">
-            <div class="card-border-glow"></div>
-            <div class="avatar" style="background-image:url('trung1.jpg')"></div>
-            <h2><span id="name-trung" class="crown-effect"></span></h2> 
-            <p class="role"><span id="role-trung"></span></p>
+    <!-- Tab 1: Sinh Tồn -->
+    <div id="sinh-ton" class="content-panel active">
+        <div class="panel-header">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h2>TUYỂN QUÂN SINH TỒN</h2>
+        </div>
 
-            <div class="badges">
-                <span class="badge">Lãnh đạo</span>
-                <span class="badge">Chiến thuật</span>
-                <span class="badge">Tuyển quân</span>
+        <div class="req-list">
+            <div class="req-item">
+                <span class="req-lbl">Yêu Cầu Rank</span>
+                <div class="req-val"><span class="highlight">Kim cương</span> trở lên (Mùa hiện tại)</div>
+            </div>
+            <div class="req-item">
+                <span class="req-lbl">Chỉ Số Test</span>
+                <div class="req-val">Bắn ít nhất <span class="highlight-blue">4 hoặc 5 Kills</span> trận phối hợp</div>
+            </div>
+            <div class="req-item">
+                <span class="req-lbl">Kỹ Năng Team</span>
+                <div class="req-val">Bật Mic giao tiếp tốt, tư duy di chuyển</div>
+            </div>
+            <div class="req-item">
+                <span class="req-lbl">Vai Trò Game</span>
+                <div class="req-val">Thành thạo Rush, Sniper hoặc Support</div>
             </div>
         </div>
 
-        
+        <div class="act-group">
+            <a href="dangki.html" class="cyber-btn btn-apply">
+                ỨNG TUYỂN NGAY <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <button class="cyber-btn btn-copy" onclick="copyGameID('69836174')">
+                <i class="fa-regular fa-copy"></i> SAO CHÉP ID GAME
+            </button>
+        </div>
+    </div>
 
-    </section>
+    <!-- Tab 2: Solo -->
+    <div id="solo" class="content-panel">
+        <div class="panel-header">
+            <i class="fa-solid fa-bolt"></i>
+            <h2>KỸ NĂNG SOLO (KAI 2.5 vs HS)</h2>
+        </div>
 
-    <a id="backButton" href="trangchu.html">Quay lại trang chủ</a>
-</main>
+        <div class="req-list">
+            <div class="req-item">
+                <span class="req-lbl">Tỷ Lệ KD Yêu Cầu</span>
+                <div class="req-val">Nam: <span class="highlight">> k11</span> (Test 5/7) | Nữ: <span class="highlight-blue">> k11</span> (Test 3/7)</div>
+            </div>
+            <div class="req-item">
+                <span class="req-lbl">Bộ Skill Kai</span>
+                <div class="req-val">Alok, Kelly, Hayato <span class="highlight">(Cấm Kairot & Skin)</span></div>
+            </div>
+            <div class="req-item">
+                <span class="req-lbl">Solo Headshot</span>
+                <div class="req-val">Phòng 500 Máu — Ưu tiên kéo tâm chuẩn</div>
+            </div>
+            <div class="req-item">
+                <span class="req-lbl">Đánh Giá Test</span>
+                <div class="req-val"><span class="highlight">Cực gắt & nghiêm túc</span></div>
+            </div>
+        </div>
+
+        <div class="act-group">
+            <a href="dangki.html" class="cyber-btn btn-apply">
+                VÀO PHÒNG TEST <i class="fa-solid fa-gamepad"></i>
+            </a>
+            <button class="cyber-btn btn-copy" onclick="copyGameID('69836174')">
+                <i class="fa-regular fa-copy"></i> SAO CHÉP ID GAME
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1.5px; font-family: 'Rajdhani', sans-serif; font-weight: 700;">
+        &copy; <span id="year"></span> <strong style="color: #fff;">CLAN TF</strong> — TRÌNH ĐỘ LÀ VĨNH CỬU.
+    </footer>
+
+</div>
+
+<!-- Toast UI -->
+<div id="toast" class="toast-msg">Đã sao chép ID Game thành công!</div>
 
 <script>
-const textToType = "Quản Trị Quân Đoàn";
+// Switch Tabs
+function switchTab(evt, tabName) {
+    const panels = document.querySelectorAll('.content-panel');
+    panels.forEach(p => {
+        p.style.display = 'none';
+        p.classList.remove('active');
+    });
 
-const memberData = [
-    { id: "name-trung", text: "(TF.Kuronami )", speed: 80 },
-    { id: "role-trung", text: "Chủ Quân Đoàn", speed: 60 }, 
-    { id: "name-tv2", text: " (TF.Huy )", speed: 80 },
-    { id: "role-tv2", text: "Chỉ huy N1", speed: 60 }, 
-];
+    const tabs = document.querySelectorAll('.cyber-tab');
+    tabs.forEach(t => t.classList.remove('active'));
 
-function typeWriterEffect(id, text, speed) {
-    return new Promise(resolve => {
-        const el = document.getElementById(id);
-        el.classList.add("typing-member");
-        let i = 0;
-        el.textContent = "";
-        function type() {
-            if (i < text.length) {
-                el.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                el.classList.remove("typing-member");
-                el.classList.add("typing-done");
-                resolve();
-            }
-        }
-        type();
+    const targetPanel = document.getElementById(tabName);
+    targetPanel.style.display = 'block';
+    targetPanel.classList.add('active');
+    
+    evt.currentTarget.classList.add('active');
+}
+
+// Copy ID Toast
+function copyGameID(id) {
+    navigator.clipboard.writeText(id).then(() => {
+        const toast = document.getElementById('toast');
+        toast.textContent = "ĐÃ SAO CHÉP ID CLAN: " + id;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
     });
 }
 
-async function runMemberLoop() {
-    while (true) {
-        for (const m of memberData) {
-            await typeWriterEffect(m.id, m.text, m.speed);
-        }
-        await new Promise(r => setTimeout(r, 5000));
-        memberData.forEach(m => document.getElementById(m.id).textContent = "");
+// Set Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Ambient Canvas Animation
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let w, h, particles = [];
+
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.size = Math.random() * 2 + 1;
+        this.speedY = -(Math.random() * 0.8 + 0.2);
+        this.color = Math.random() > 0.5 ? 'rgba(255, 59, 0, ' : 'rgba(0, 240, 255, ';
+        this.alpha = Math.random() * 0.6 + 0.1;
+    }
+    update() {
+        this.y += this.speedY;
+        if (this.y < 0) this.reset();
+    }
+    draw() {
+        ctx.fillStyle = this.color + this.alpha + ')';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
     }
 }
 
-function animateCards() {
-    document.querySelectorAll(".card").forEach((c, i) => {
-        c.style.animationDelay = `${i * 0.15 + 0.5}s`;
-        c.classList.add("card-enter");
-    });
+for(let i = 0; i < 45; i++) particles.push(new Particle());
+
+function render() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(render);
 }
-
-const stars = [];
-function initStarfall() {
-    const container = document.getElementById("starfall-container");
-    const numStars = 60;
-    for (let i = 0; i < numStars; i++) {
-        const s = document.createElement("div");
-        s.classList.add("falling-star");
-        const size = Math.random() * 4 + 2;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.transform = `translate(${x}px, ${y}px)`;
-        container.appendChild(s);
-        stars.push({ element: s, x, y, speed: Math.random() * 1 + 0.5, drift: (Math.random()-0.5)*0.3, size });
-    }
-}
-
-function updateStarfall() {
-    stars.forEach(s => {
-        s.y += s.speed;
-        s.x += s.drift;
-        if (s.y > window.innerHeight) {
-            s.y = -s.size;
-            s.x = Math.random() * window.innerWidth;
-        }
-        s.element.style.transform = `translate(${s.x}px, ${s.y}px)`;
-    });
-    requestAnimationFrame(updateStarfall);
-}
-
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
-document.addEventListener("keydown", e => { if(e.key==="F12") e.preventDefault(); });
-
-window.onload = async function () {
-    await typeWriterEffect("typing-title", textToType, 100);
-    runMemberLoop();
-    initStarfall();
-    updateStarfall();
-    animateCards();
-};
+render();
 </script>
 
 </body>
